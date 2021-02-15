@@ -1,0 +1,1 @@
+Fly2gether is a platform of flight sharing aiming to bring together non professional pilots as well as customers willing to go somewhere.

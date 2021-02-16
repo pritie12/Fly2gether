@@ -4,7 +4,7 @@ public class Aircraft {
 	int id;
 	String name;
 	String model;
-	int flyingOurs;
+	int flyingHours;
 	Date constructionDate;
 	String constructorCompany;
 	

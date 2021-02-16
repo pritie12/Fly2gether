@@ -6,4 +6,5 @@ public abstract class User {
 	String surname;
 	Date dateOfBirth;
 	String email;
+	String phoneNumber;
 }

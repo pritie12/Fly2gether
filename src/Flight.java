@@ -4,8 +4,8 @@ import java.util.List;
 public class Flight {
 	int id;
 	
-	Date appointementDateTime;
-	String appointementAirport;
+	Date appointmentDateTime;
+	String appointmentAirport;
 	
 	Date departureDateTime;
 	String departureAirport;
@@ -17,8 +17,7 @@ public class Flight {
 	double price; // by seats
 	List<Reservation> bookingList;
 	Pilote pilot;
-	Aircraft aircraf;
-	
-	
+	Aircraft aircraft;
+		
 	
 }

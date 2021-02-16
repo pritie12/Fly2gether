@@ -1,7 +1,6 @@
-import java.util.Date;
+
+import java.util.List;
 
 public class Passenger {
-	String name;
-	String surname;
-	Date dateOfBirth;
+	List<Reservation> bookingList;
 }

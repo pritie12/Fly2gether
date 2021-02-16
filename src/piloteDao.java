@@ -10,6 +10,6 @@ public interface piloteDao {
 	 */
 	List<Pilote> getPilotes(Duration experience);
 	
-	void addPilot();
-	void deletePilot();
+	void addPilot(int usr_id);
+	void deletePilot(int usr_id);
 }

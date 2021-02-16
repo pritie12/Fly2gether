@@ -14,4 +14,7 @@ public interface flightDao {
 	
 	//display flights that still have the number of seats desired 
 	List<Flight> getFlights(int availableSeats);
+	
+	void addFlight(	int id);
+	void deleteFlight(	int id);
 }

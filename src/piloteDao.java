@@ -9,4 +9,7 @@ public interface piloteDao {
 	 * @return this list of pilots whose experience exceeds the duration in the parameters
 	 */
 	List<Pilote> getPilotes(Duration experience);
+	
+	void addPilot();
+	void deletePilot();
 }

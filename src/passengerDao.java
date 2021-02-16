@@ -9,5 +9,8 @@ public interface passengerDao {
 	List<Passenger> getPassengers(Flight flight);
 	
 	//get the list of passengers of a certain date and a certain airport
-	List<Passenger> getPassengers(Date Time, String Airport);	
+	List<Passenger> getPassengers(Date Time, String Airport);
+	
+	void addPassenger();
+	void deletePassenger();
 }

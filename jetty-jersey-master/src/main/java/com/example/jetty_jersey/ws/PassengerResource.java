@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,7 +24,7 @@ public class PassengerResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public List<Object> getDetailsofpassenger(Passenger passenger,Flight flight) {
+	public List<Object> getDetailsofpassenger(Passenger passenger,Flight flight,@PathParam("id") String id) {
 		List<Object> passengers= new ArrayList<Object>();
 		passengers.add(daopassenger.getPassengerId(passenger));
 		passengers.add(daopassenger.getname(passenger));
@@ -47,7 +48,7 @@ public class PassengerResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response retrieveDetailpassenger (Passenger passenger, Flight flight) { 
+	public Response retrieveDetailpassenger (Passenger passenger, Flight flight,@PathParam("id") String id) { 
 		List<Object> passengers= new ArrayList<Object>();
 		passengers.add(daopassenger.getPassengerId(passenger));
 		passengers.add(daopassenger.getname(passenger));

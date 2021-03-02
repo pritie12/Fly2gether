@@ -2,7 +2,7 @@ package com.example.jetty_jersey.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.example.jetty_jersey.dao.Aircraft;
+
 
 public class Flight {
 	

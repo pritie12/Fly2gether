@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,7 +24,7 @@ public class PiloteResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public List<Object> getDetailsofPilot(Pilote pilot,Flight flight) {
+	public List<Object> getDetailsofPilot(Pilote pilot,Flight flight,@PathParam("id") String id) {
 		List<Object> pilots= new ArrayList<Object>();
 		pilots.add(daopilot.getPilotId(pilot));
 		pilots.add(daopilot.getname(pilot));
@@ -39,7 +40,7 @@ public class PiloteResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/Pilot")
+	@Path("/Pilote")
 	public Response retrievePilot(Pilote pilot) {
 		System.out.println(daopilot.getPilotId(pilot));
 		return Response.ok().build();
@@ -48,7 +49,7 @@ public class PiloteResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response retrieveDetailPilot (Pilote pilot, Flight flight) { 
+	public Response retrieveDetailPilot (Pilote pilot, Flight flight,@PathParam("id") String id) { 
 		List<Object> pilots= new ArrayList<Object>();
 		pilots.add(daopilot.getPilotId(pilot));
 		pilots.add(daopilot.getname(pilot));

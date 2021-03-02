@@ -1,3 +1,4 @@
+package com.example.jetty_jersey.dao;
 import java.util.List;
 
 public interface reservationDao {

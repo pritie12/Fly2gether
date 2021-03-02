@@ -1,9 +1,10 @@
+package com.example.jetty_jersey.dao;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+import com.example.jetty_jersey.dao.Aircraft;
 
 public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	
@@ -12,17 +13,14 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	List<Passenger> totalPassengers;
 	List<Pilote> totalPilotes;
 	
-	@Override
 	public List<Passenger> getPassengers() {		
 		return totalPassengers;
 	}
 
-	@Override
 	public List<Passenger> getPassengers(Flight flight) {
 		return flight.passengers;
 	}
 
-	@Override
 	public List<Passenger> getPassengers(Date Time, String Airport) {
 		List<Passenger> pass=new ArrayList<Passenger>();
 		for(Flight f:flightList) {
@@ -34,7 +32,6 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		return pass;
 	}
 
-	@Override
 	public void addPassenger(Passenger passenger, Flight flight) {
 		for (Flight f : flightList){
 			if(f.equals(flight)) {
@@ -43,7 +40,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		}
 	}
 
-	@Override
+	 
 	public void deletePassenger(Passenger passenger, Flight flight) {
 		for (Flight f : flightList){
 			if(f.equals(flight)) {
@@ -52,12 +49,12 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		}
 	}
 
-	@Override
+	 
 	public List<Pilote> getPilotes() {		
 		return totalPilotes;
 	}
 
-	@Override
+	 
 	public List<Pilote> getPilotes(Duration experience) {
 		List<Pilote> pil=new ArrayList<Pilote>();
 		for(Pilote p:totalPilotes) {
@@ -68,30 +65,30 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		return pil;
 	}
 
-	@Override
+	 
 	public void addPilot(Pilote pilot) {
 		totalPilotes.add(pilot);
 		
 	}
 
-	@Override
+	 
 	public void deletePilot(Pilote pilot) {
 		totalPilotes.remove(pilot);
 		
 	}
 
-	@Override
+	 
 	public List<Aircraft> getAircrafts() {
 		return fleet;
 	}
 
 
-	@Override
+	 
 	public List<Flight> getFlights() {
 		return flightList;
 	}
 
-	@Override
+	 
 	public List<Flight> getFlights(int minPrice, int maxPrice) {
 		List<Flight> fli=new ArrayList<Flight>();
 		for(Flight f:flightList) {
@@ -101,7 +98,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		return fli;
 	}
 
-	@Override
+	 
 	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport) {
 		List<Flight> fli=new ArrayList<Flight>();
 		for(Flight f:flightList) {
@@ -111,7 +108,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		return fli;
 	}
 
-	@Override
+	 
 	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport, Date ArrivalTime,
 			String ArrivalAirport) {
 		List<Flight> fli=new ArrayList<Flight>();
@@ -123,7 +120,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		return fli;
 	}
 
-	@Override
+	 
 	public List<Flight> getFlights(int availableSeats) {
 		List<Flight> fli=new ArrayList<Flight>();
 		for(Flight f:flightList) {
@@ -134,53 +131,157 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		return fli;
 	}
 
-	@Override
+	 
 	public void addFlight(Flight flight) {
 		flightList.add(flight);
 		
 	}
 
-	@Override
+	 
 	public void deleteFlight(Flight flight) {
 		flightList.remove(flight);
 		
 	}
 
-	@Override
-	public int getPilotId(Pilote pilot) {
+	 
+	public String getPilotId(Pilote pilot) {
 		return pilot.id;
 	}
 
-	@Override
+	 
 	public String getTailNumber(Aircraft aircraft) {
 		return aircraft.tailNumber;
 	}
 
-	@Override
+	 
 	public void addAircraft(Aircraft aircraft) {
 		fleet.add(aircraft);
 		
 	}
 
-	@Override
+	 
 	public void removeAircraft(Aircraft aircraft) {
 		fleet.remove(aircraft);
 		
 	}
 
-	@Override
+	 
 	public Pilote getPilot(Flight flight) {
 		return flight.pilot;
 	}
 
-	@Override
+	 
 	public double getPrice(Flight flight) {
 		return flight.price;
 	}
 
-	@Override
+	 
 	public int getAvailableSeats(Flight flight) {
 		return flight.availablesSeats;
+	}
+
+	public String getModel(Aircraft aircraft) {
+		return aircraft.model;
+	}
+
+	public int getFlyingHours(Aircraft aircraft) {
+		return aircraft.flyingHours;
+	}
+
+	public String getCompany(Aircraft aircraft) {
+		return aircraft.constructorCompany;
+	}
+
+	public int getNumberOfSeats(Aircraft aircraft) {
+		return aircraft.numberOfSeats;
+	}
+
+	public String getId(Flight flight) {
+		return flight.id;
+	}
+
+	public String getAppointmentDescription(Flight flight) {
+		return flight.appointmentDescription;
+	}
+
+	public Date getdepartureDateTime(Flight flight) {
+		return flight.departureDateTime;
+	}
+
+	public String getdepartureAirport(Flight flight) {
+		return flight.departureAirport;
+	}
+
+	public Date getarrivalDateTime(Flight flight) {
+
+		return flight.arrivalDateTime;
+	}
+
+	public String getarrivalAirport(Flight flight) {
+		return flight.arrivalAirport;
+	}
+
+	public Aircraft getAircraft(Flight flight) {
+		return flight.aircraft;
+	}
+
+	public String getname(Pilote pilot) {
+		
+		return pilot.name;
+	}
+
+	public String getsurname(Pilote pilot) {
+
+		return pilot.surname;
+	}
+
+	public Date getdateOfBirth(Pilote pilot) {
+		return pilot.dateOfBirth;
+	}
+
+	public String getemail(Pilote pilot) {
+		return pilot.email;
+	}
+
+	public String getphoneNumber(Pilote pilot) {
+		return pilot.phoneNumber;
+	}
+
+	public Date getstartingDate(Pilote pilot) {
+		return pilot.startingDate;
+	}
+
+	public Duration getexperience(Pilote pilot) {
+		return pilot.experience;
+	}
+
+	public String getPassengerId(Passenger passenger) {
+		return passenger.id;
+	}
+
+	public String getname(Passenger passenger) {
+		return passenger.name;
+	}
+
+	public String getsurname(Passenger passenger) {
+		return passenger.surname;
+	}
+
+	public Date getdateOfBirth(Passenger passenger) {
+		return passenger.dateOfBirth;
+	}
+
+	public String getemail(Passenger passenger) {
+		return passenger.email;
+	}
+
+	public String getphoneNumber(Passenger passenger) {
+
+		return passenger.phoneNumber;
+	}
+
+	public List<Reservation> getpassengerBookingList(Passenger passenger) {
+		return passenger.passengerBookingList;
 	}
 
 }

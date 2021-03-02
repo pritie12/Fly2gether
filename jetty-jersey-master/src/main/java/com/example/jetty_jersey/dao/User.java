@@ -1,7 +1,8 @@
+package com.example.jetty_jersey.dao;
 import java.util.Date;
 
 public abstract class User {
-	int id; // has to be unique
+	public String id; // has to be unique
 	String name;
 	String surname;
 	Date dateOfBirth;

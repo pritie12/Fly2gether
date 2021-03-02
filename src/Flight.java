@@ -15,7 +15,7 @@ public class Flight {
 	
 	int availablesSeats;
 	double price; // by seats
-	List<Reservation> bookingList;
+	List<Passenger> passengers;
 	Pilote pilot;
 	Aircraft aircraft;
 		

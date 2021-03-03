@@ -22,8 +22,8 @@ public class FlightResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public List<Object> getDetailsofflight(Flight flight, @PathParam("id") String id) {
+	@Path("/flight1")
+	public List<Object> getDetailsofflight(Flight flight) {
 		List<Object> fleet= new ArrayList<Object>();
 		fleet.add(daoflight.getAppointmentDescription(flight));
 		fleet.add(daoflight.getId(flight));
@@ -40,8 +40,8 @@ public class FlightResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public Response retrieveDetailflight (Flight flight, @PathParam("id") String id) { 
+	@Path("/flight2")
+	public Response retrieveDetailflight (Flight flight) { 
 		List<Object> fleet= new ArrayList<Object>();
 		fleet.add(daoflight.getAppointmentDescription(flight));
 		fleet.add(daoflight.getId(flight));
@@ -58,7 +58,7 @@ public class FlightResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/flight")
+	@Path("/flight3")
 	public Response retrieveflight(Flight flight) {
 		System.out.println(daoflight.getId(flight));
 		return Response.ok().build();
@@ -66,7 +66,7 @@ public class FlightResource {
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/flight")
+	@Path("/flight4")
 	public Response putflight(Flight flight) {
 		System.out.println(daoflight.getId(flight));
 		return Response.ok().build();
@@ -74,7 +74,7 @@ public class FlightResource {
 	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/flight")
+	@Path("/flight5")
 	public void deleteflight(Flight flight) {
 		flight.id="";
 		System.out.println("Flight deleted");

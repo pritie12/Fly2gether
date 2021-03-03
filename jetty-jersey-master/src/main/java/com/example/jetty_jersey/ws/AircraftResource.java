@@ -36,7 +36,7 @@ public class AircraftResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response retrieveDetailAircraft (Aircraft aircraft, @PathParam("id") String id) { 
+	public void retrieveDetailAircraft (Aircraft aircraft, @PathParam("id") String id) { 
 		List<Object> fleet= new ArrayList<Object>();
 		fleet.add(daoaircraft.getTailNumber(aircraft));
 		fleet.add(daoaircraft.getNumberOfSeats(aircraft));
@@ -44,23 +44,22 @@ public class AircraftResource {
 		fleet.add(daoaircraft.getCompany(aircraft));
 		fleet.add(daoaircraft.getFlyingHours(aircraft));
 		System.out.println(daoaircraft.getTailNumber(aircraft));
-		return Response.ok().build();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/aircraft")
-	public Response retrieveAircraft(Aircraft aircraft) {
+	public void retrieveAircraft(Aircraft aircraft) {
 		System.out.println(daoaircraft.getTailNumber(aircraft));
-		return Response.ok().build();
+
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/aircraft")
-	public Response putAircraft(Aircraft aircraft) {
+	public void putAircraft(Aircraft aircraft) {
 		System.out.println(daoaircraft.getTailNumber(aircraft));
-		return Response.ok().build();
+
 	}
 	
 	@DELETE 

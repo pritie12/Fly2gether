@@ -15,7 +15,6 @@ import javax.ws.rs.core.Response;
 import com.example.jetty_jersey.dao.*;
 
 
-
 @Path("/Pilote")
 public class PiloteResource {
 	DAO daopilot;
@@ -23,8 +22,8 @@ public class PiloteResource {
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public List<Object> getDetailsofPilot(Pilote pilot,Flight flight,@PathParam("id") String id) {
+	@Path("/pilot")
+	public List<Object> getDetailsofPilot(Pilote pilot) {
 		List<Object> pilots= new ArrayList<Object>();
 		pilots.add(daopilot.getPilotId(pilot));
 		pilots.add(daopilot.getname(pilot));
@@ -41,15 +40,15 @@ public class PiloteResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Pilote")
-	public Response retrievePilot(Pilote pilot) {
+	public void retrievePilot(Pilote pilot) {
 		System.out.println(daopilot.getPilotId(pilot));
-		return Response.ok().build();
+
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public Response retrieveDetailPilot (Pilote pilot, Flight flight,@PathParam("id") String id) { 
+	@Path("/Pilot")
+	public void retrieveDetailPilot (Pilote pilot) { 
 		List<Object> pilots= new ArrayList<Object>();
 		pilots.add(daopilot.getPilotId(pilot));
 		pilots.add(daopilot.getname(pilot));
@@ -59,15 +58,15 @@ public class PiloteResource {
 		pilots.add(daopilot.getphoneNumber(pilot));
 		pilots.add(daopilot.getemail(pilot));
 		pilots.add(daopilot.getstartingDate(pilot));
-		return Response.ok().build();
+
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/Pilot")
-	public Response putPilot(Pilote pilot) {
+	public void putPilot(Pilote pilot) {
 		System.out.println(daopilot.getPilotId(pilot));
-		return Response.ok().build();
+
 	}
 	
 	@DELETE 

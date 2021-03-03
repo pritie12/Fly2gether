@@ -23,8 +23,8 @@ public class PassengerResource {
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public List<Object> getDetailsofpassenger(Passenger passenger,Flight flight,@PathParam("id") String id) {
+	@Path("/passenger1")
+	public List<Object> getDetailsofpassenger(Passenger passenger) {
 		List<Object> passengers= new ArrayList<Object>();
 		passengers.add(daopassenger.getPassengerId(passenger));
 		passengers.add(daopassenger.getname(passenger));
@@ -39,16 +39,16 @@ public class PassengerResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/passenger")
-	public Response retrievepassenger(Passenger passenger) {
+	@Path("/passenger2")
+	public void retrievepassenger(Passenger passenger) {
 		System.out.println(daopassenger.getPassengerId(passenger));
-		return Response.ok().build();
+
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public Response retrieveDetailpassenger (Passenger passenger, Flight flight,@PathParam("id") String id) { 
+	@Path("/passenger3")
+	public void retrieveDetailpassenger (Passenger passenger) { 
 		List<Object> passengers= new ArrayList<Object>();
 		passengers.add(daopassenger.getPassengerId(passenger));
 		passengers.add(daopassenger.getname(passenger));
@@ -57,20 +57,19 @@ public class PassengerResource {
 		passengers.add(daopassenger.getphoneNumber(passenger));
 		passengers.add(daopassenger.getemail(passenger));
 		passengers.add(daopassenger.getpassengerBookingList(passenger));
-		return Response.ok().build();
+	
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/passenger")
-	public Response putpassenger(Passenger passenger) {
+	@Path("/passenger4")
+	public void putpassenger(Passenger passenger) {
 		System.out.println(daopassenger.getPassengerId(passenger));
-		return Response.ok().build();
 	}
 	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/passenger")
+	@Path("/passenger5")
 	public void deleteExample(Passenger passenger) {
 		passenger.id="";
 		System.out.println("Passenger deleted");

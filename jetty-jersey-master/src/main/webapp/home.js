@@ -17,7 +17,10 @@ function callDone(result){
 }
 
 $(function(){
-	$("#button").click(function(){
+	$("#buttonA").click(function(){
 		getServerData("ws/example/aircraft",callDone);
+	});
+	$("#buttonB").click(function(){
+		getServerData("ws/example/soupe",callDone);
 	});
 });

@@ -8,10 +8,10 @@ import java.util.List;
 
 public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	
-	List<Aircraft> fleet;
-	List<Flight> flightList;
-	List<Passenger> totalPassengers;
-	List<Pilote> totalPilotes;
+	public List<Aircraft> fleet;
+	public List<Flight> flightList;
+	public List<Passenger> totalPassengers;
+	public List<Pilote> totalPilotes;
 	
 	public List<Passenger> getPassengers() {		
 		return totalPassengers;
@@ -171,7 +171,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	}
 
 	 
-	public double getPrice(Flight flight) {
+	public int getPrice(Flight flight) {
 		return flight.price;
 	}
 

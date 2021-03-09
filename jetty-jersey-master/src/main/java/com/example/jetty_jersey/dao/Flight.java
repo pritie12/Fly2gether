@@ -6,21 +6,21 @@ import java.util.List;
 
 public class Flight {
 	
-	public String id;
+	 String id;
 	
-	public String appointmentDescription;
+	 String appointmentDescription;
 	
-	public Date departureDateTime;
-	public String departureAirport;
+	 Date departureDateTime;
+	 String departureAirport;
 	
-	public Date arrivalDateTime;
-	public String arrivalAirport;// Location 
+	 Date arrivalDateTime;
+	 String arrivalAirport;// Location 
 	
-	public int availablesSeats;
-	public double price; // by seats
-	public List<Passenger> passengers;
-	public Pilote pilot;
-	public Aircraft aircraft;
+	 int availablesSeats;
+	 int price; // by seats
+	 List<Passenger> passengers;
+	 Pilote pilot;
+	 Aircraft aircraft;
 		
 	
 }

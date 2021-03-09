@@ -11,7 +11,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import com.example.jetty_jersey.dao.*;
 
 
@@ -20,23 +19,78 @@ import com.example.jetty_jersey.dao.*;
 public class AircraftResource {
 	DAO daoaircraft;
 	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public List<Object> getDetailsofAircraft(Aircraft aircraft, @PathParam("id") String id) {
-		List<Object> fleet= new ArrayList<Object>();
-		fleet.add(daoaircraft.getTailNumber(aircraft));
-		fleet.add(daoaircraft.getNumberOfSeats(aircraft));
-		fleet.add(daoaircraft.getModel(aircraft));
-		fleet.add(daoaircraft.getCompany(aircraft));
-		fleet.add(daoaircraft.getFlyingHours(aircraft));
-		return fleet;
+	@Path("/getAircraft")
+	public Aircraft getAircraft( @PathParam("TailNumber")String TailNumber) {
+		for(Aircraft a:daoaircraft.fleet) {
+			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
+				return a;
+				}
+		}
+		return null;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getFleet")
+	public List<Aircraft> getFleet() {		
+		return daoaircraft.fleet;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getAircraftCompany")
+	public String getAircraftCompany( @PathParam("TailNumber")String TailNumber) {		
+		for(Aircraft a:daoaircraft.fleet) {
+			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
+				return daoaircraft.getCompany(a);
+				}
+		}
+		return null;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getNbSeats")
+	public int getNbSeats(@PathParam("TailNumber")String TailNumber) {		
+		for(Aircraft a:daoaircraft.fleet) {
+			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
+				return daoaircraft.getNumberOfSeats(a);
+				}
+		}
+		return 0;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getAircraftModel")
+	public String getAircraftModel(@PathParam("TailNumber")String TailNumber) {		
+		for(Aircraft a:daoaircraft.fleet) {
+			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
+				return daoaircraft.getModel(a);
+				}
+		}
+		return null;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getAircraftFlyingHours")
+	public int getAircraftFlyingHours(@PathParam("TailNumber")String TailNumber) {		
+		for(Aircraft a:daoaircraft.fleet) {
+			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
+				return daoaircraft.getFlyingHours(a);
+				}
+		}
+		return 0;
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public void retrieveDetailAircraft (Aircraft aircraft, @PathParam("id") String id) { 
+	@Path("/aircraft3")
+	public void retrieveDetailAircraft (Aircraft aircraft) { 
 		List<Object> fleet= new ArrayList<Object>();
 		fleet.add(daoaircraft.getTailNumber(aircraft));
 		fleet.add(daoaircraft.getNumberOfSeats(aircraft));
@@ -44,11 +98,12 @@ public class AircraftResource {
 		fleet.add(daoaircraft.getCompany(aircraft));
 		fleet.add(daoaircraft.getFlyingHours(aircraft));
 		System.out.println(daoaircraft.getTailNumber(aircraft));
+
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/aircraft")
+	@Path("/retrieveAircraft")
 	public void retrieveAircraft(Aircraft aircraft) {
 		System.out.println(daoaircraft.getTailNumber(aircraft));
 
@@ -56,7 +111,7 @@ public class AircraftResource {
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/aircraft")
+	@Path("/putAircraft")
 	public void putAircraft(Aircraft aircraft) {
 		System.out.println(daoaircraft.getTailNumber(aircraft));
 
@@ -64,10 +119,9 @@ public class AircraftResource {
 	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/aircraft")
+	@Path("/deleteAircraft")
 	public void deleteAircraft(Aircraft aircraft) {
-		aircraft.tailNumber="";
 		System.out.println("Aircraft deleted");
 	}
-	
+
 }

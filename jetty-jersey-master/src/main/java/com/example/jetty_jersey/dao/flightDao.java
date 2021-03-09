@@ -7,7 +7,7 @@ public interface flightDao {
 	
 	public Pilote getPilot(Flight flight);	
 	public Aircraft getAircraft(Flight flight);
-	public double getPrice(Flight flight);
+	public int getPrice(Flight flight);
 	public List<Passenger> getPassengers(Flight flight);
 	public int getAvailableSeats(Flight flight);
 	

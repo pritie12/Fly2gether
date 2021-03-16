@@ -19,18 +19,18 @@ public class Pilot extends User{
 	}
 	
 	/* GETTERS */
-	String getPilotId() {
+	public String getPilotId() {
 		return this.pilot_id;
 	}
-	int getFlyingHours() {
+	public int getFlyingHours() {
 		return this.flyingHours;
 	}
 	
 	/* SETTERS */
-	void setPilotId(String pilot_id) {
+	public void setPilotId(String pilot_id) {
 		this.pilot_id=pilot_id;
 	}
-	void setFlyingHours(int flyingHours) {
+	public void setFlyingHours(int flyingHours) {
 		this.flyingHours=flyingHours;
 	}
 }

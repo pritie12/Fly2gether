@@ -21,30 +21,30 @@ public class Aircraft {
         this.numberOfSeats = numberOfSeats;
     }	
 	 /* GETTERS */
-	String getTailNumber() {
+	public String getTailNumber() {
 		return this.tailNumber;
 	}
-	String getModel() {
+	public String getModel() {
 		return this.model;
 	}
-	String getConstructorCompany() {
+	public String getConstructorCompany() {
 		return this.constructorCompany;
 	}
-	int getNumberOfSeats() {
+	public int getNumberOfSeats() {
 		return this.numberOfSeats;
 	}
 	
 	/* SETTERS */
-	void setTailNumber(String tailNumber) {
+	public void setTailNumber(String tailNumber) {
 		this.tailNumber=tailNumber;
 	}
-	void setModel(String model) {
+	public void setModel(String model) {
 		this.model=model;
 	}
-	void setConstructorCompany(String Company) {
+	public void setConstructorCompany(String Company) {
 		this.constructorCompany=Company;
 	}
-	void setNumberOfSeats(int numberOfSeats) {
+	public void setNumberOfSeats(int numberOfSeats) {
 		this.numberOfSeats=numberOfSeats;
 	}
 	

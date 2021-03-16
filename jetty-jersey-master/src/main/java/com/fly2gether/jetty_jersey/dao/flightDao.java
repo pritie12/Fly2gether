@@ -1,39 +1,44 @@
 package com.fly2gether.jetty_jersey.dao;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 public interface flightDao {
 	
 	/* GET */
-	String getId();
-	Pilot getPilot(String id);	
-	Aircraft getAircraft(String id);
-	int getPrice(String id);
-	List<Passenger> getPassengers(String id);
-	int getAvailableSeats(String id);	
-	String getAppointmentDescription(String id);	
-	Date getdepartureDateTime(String id);
-	String getdepartureAirport(String id);	
-	Date getarrivalDateTime(String id);
-	String getarrivalAirport(String id);
+
+	public Pilot getPilot(String id);	
+	public Aircraft getAircraft(String id);
+	public int getPrice(String id);
+	public List<Passenger> getPassengers(String id);
+	public int getAvailableSeats(String id);	
+	public String getAppointmentDescription(String id);	
+	public Date getdepartureDate(String id);
+	public LocalDateTime getdepartureTime(String id);
+	public String getdepartureAirport(String id);	
+	public Date getarrivalDate(String id);
+	public LocalDateTime getarrivalTime(String id);
+	public String getarrivalAirport(String id);
+	public Duration getFlightDuration(String id);
 	
 	//filter the flights by price
-	List<Flight> getFlights(int minPrice,int maxPrice);
+	public List<Flight> getFlights(int minPrice,int maxPrice);
 	//one way trip
-	List<Flight> getFlights(Date DepartureTime, String DepartureAirport);	
+	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport);	
 	//round-trip
-	List<Flight> getFlights(Date DepartureTime, String DepartureAirport,Date ArrivalTime, String ArrivalAirport);	
+	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport,Date ArrivalTime, String ArrivalAirport);	
 	//display flights that still have the number of seats desired 
-	List<Flight> getFlights(int availableSeats);
+	public List<Flight> getFlights(int availableSeats);
 	
 	
-	/* ADD */
-	void addFlight();
+	/* PUT */
+	public void addFlight();
 	public void addPassenger(String passenger_id, String flight_id);
 	
 	
 	/* DELETE */
-	void deleteFlight(String id);
-	void removePassenger(String passenger_id);
+	public void deleteFlight(String id);
+	public void removePassenger(String passenger_id);
 	
 }

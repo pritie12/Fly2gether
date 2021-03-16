@@ -15,7 +15,7 @@ public interface reservationDao {
 	/* POST */
 	void changeNumberOfSeats(int seats);
 	
-	/* ADD */
+	/* PUT */
 	
 	/* DELETE */
 

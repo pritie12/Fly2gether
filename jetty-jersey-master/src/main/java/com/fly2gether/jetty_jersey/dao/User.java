@@ -27,37 +27,37 @@ public abstract class User {
 	
 	/* GETTERS */
 	
-	String getName() {
+	public String getName() {
 		return this.name;
 	}
-	String getSurname() {
+	public String getSurname() {
 		return this.surname;
 	}
-	String getEmail() {
+	public String getEmail() {
 		return this.email;
 	}
-	String getPhoneNumber() {
+	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
-	Date getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return this.dateOfBirth;
 	}
 	
 	/* SETTERS */
 	
-	void setName(String name) {
+	public void setName(String name) {
 		this.name=name;
 	}
-	void setSurname(String surname) {
+	public void setSurname(String surname) {
 		this.surname=surname;
 	}
-	void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email=email;
 	}
-	void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber=phoneNumber;
 	}
-	void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth=dateOfBirth;
 	}
 	

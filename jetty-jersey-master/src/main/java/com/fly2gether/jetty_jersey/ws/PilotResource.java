@@ -1,6 +1,4 @@
 package com.fly2gether.jetty_jersey.ws;
-import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,19 +13,79 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.*;
+import com.fly2gether.jetty_jersey.database.Database;
 
 
 @Path("/Pilote")
-public class PilotResource {
-	DAO daopilot;
+public class PilotResource implements pilotDao{
+	
+	List<Pilot> pilots=Database.getToTalPilots();
+	
+	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPilotName")
-	public String getPilotName(@PathParam("id")String id) {
-		for(Pilot p:daopilot.totalPilots) {
-			if(daopilot.getPilotId(p).equals(id)) {
-				return daopilot.getname(p);
+	@Path("/getPilots")
+	public List<Pilot> getPilots() {
+		return pilots;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getPilot")
+	public Pilot getPilot(@PathParam("id")String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getPilotName")
+	public String getname(@PathParam("id")String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				return p.getName();
+			}
+		}
+		return null;
+	}
+
+
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getPilotSurname")
+	public String getsurname(@PathParam("id")String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				return p.getSurname();
+			}
+		}
+		return null;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getPilotDateofBirth")
+	public Date getdateOfBirth(@PathParam("id")String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				return p.getDateOfBirth();
+			}
+		}
+		return null;
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getPilotEmail")
+	public String getemail(@PathParam("id")String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				return p.getEmail();
 			}
 		}
 		return null;
@@ -35,116 +93,49 @@ public class PilotResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPilotSurname")
-	public String getPassengerSurname(@PathParam("id")String id) {
-		for(Pilot p:daopilot.totalPilots) {
-			if(daopilot.getPilotId(p).equals(id)) {
-				return daopilot.getsurname(p);
+	@Path("/{id}/getPilotPhoneNumber")
+	public String getphoneNumber(@PathParam("id")String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				return p.getPhoneNumber();
 			}
 		}
 		return null;
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPassengerEmail")
-	public String getPassengerEmail(@PathParam("id")String id) {
-		for(Pilot p:daopilot.totalPilots) {
-			if(daopilot.getPilotId(p).equals(id)) {
-				return daopilot.getemail(p);
+	public int getFlyingHours(String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				return p.getFlyingHours();
 			}
 		}
-		return null;
+		return 0;
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPilotPhonenumber")
-	public String getPilotPhonenumber(@PathParam("id")String id) {
-		for(Pilot p:daopilot.totalPilots) {
-			if(daopilot.getPilotId(p).equals(id)) {
-				return daopilot.getphoneNumber(p);
-			}
-		}
-		return null;
-	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPilotDateofBirth")
-	public Date getPilotDateofBirth(@PathParam("id")String id) {
-		for(Pilot p:daopilot.totalPilots) {
-			if(daopilot.getPilotId(p).equals(id)) {
-				return daopilot.getdateOfBirth(p);
-			}
-		}
-		return null;
-	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPilotStartingDate")
-	public Date getPilotStartingDate(@PathParam("id")String id) {
-		for(Pilot p:daopilot.totalPilots) {
-			if(daopilot.getPilotId(p).equals(id)) {
-				return daopilot.getstartingDate(p);
-			}
-		}
-		return null;
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPilotExperience")
-	public Duration getPilotExperience(@PathParam("id")String id) {
-		for(Pilot p:daopilot.totalPilots) {
-			if(daopilot.getPilotId(p).equals(id)) {
-				return daopilot.getexperience(p);
-			}
-		}
-		return null;
-	}
-	
-	
-	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/Pilote2")
-	public void retrievePilot(Pilot pilot) {
-		System.out.println(daopilot.getPilotId(pilot));
-
-	}
-	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/Pilot3")
-	public void retrieveDetailPilot (Pilot pilot) { 
-		List<Object> pilots= new ArrayList<Object>();
-		pilots.add(daopilot.getPilotId(pilot));
-		pilots.add(daopilot.getname(pilot));
-		pilots.add(daopilot.getsurname(pilot));
-		pilots.add(daopilot.getdateOfBirth(pilot));
-		pilots.add(daopilot.getexperience(pilot));
-		pilots.add(daopilot.getphoneNumber(pilot));
-		pilots.add(daopilot.getemail(pilot));
-		pilots.add(daopilot.getstartingDate(pilot));
-
-	}
-	
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/Pilot4")
-	public void putPilot(Pilot pilot) {
-		System.out.println(daopilot.getPilotId(pilot));
-
-	}
 	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/Pilot5")
-	public void deleteExample(Pilot pilot) {
+	@Path("/deletePilot")
+	public void deletePilot(String id) {
+		for(Pilot p:pilots) {
+			if(p.getPilotId().equals(id)) {
+				pilots.remove(p);
+				System.out.println("Pilot deleted");
+			}
+		}
+		System.out.println("Pilot not found");
+	}
 
-		System.out.println("Pilot deleted");
+
+
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addPilot")
+	public void addPilot() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

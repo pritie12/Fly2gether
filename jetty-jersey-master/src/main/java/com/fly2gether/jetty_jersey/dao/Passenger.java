@@ -21,18 +21,18 @@ public class Passenger extends User {
 	}
 	
 	/* GETTERS */
-	String getPassengerId() {
+	public String getPassengerId() {
 		return this.passenger_id;
 	}
-	List<Reservation> getPassengerBookingList(){
+	public List<Reservation> getPassengerBookingList(){
 		return this.passengerBookingList;
 	}
 	
 	/* SETTERS */
-	void setPassengerId(String passenger_id) {
+	public void setPassengerId(String passenger_id) {
 		this.passenger_id=passenger_id;
 	}
-	void setPassengerBookingList(List<Reservation> passengerBookingList){
+	public void setPassengerBookingList(List<Reservation> passengerBookingList){
 		this.passengerBookingList=passengerBookingList;
 	}
 }

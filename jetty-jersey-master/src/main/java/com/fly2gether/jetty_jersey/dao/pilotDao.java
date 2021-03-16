@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.dao;
+package com.fly2gether.jetty_jersey.dao;
 import java.util.Date;
 
 

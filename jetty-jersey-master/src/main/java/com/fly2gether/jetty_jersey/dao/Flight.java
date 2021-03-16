@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.dao;
+package com.fly2gether.jetty_jersey.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +19,7 @@ public class Flight {
 	 private List<Passenger> passengers;
 	 private Pilot pilot;
 	 private Aircraft aircraft;
+	 
 	 
 	 public Flight() {
 		 this.appointmentDescription="";

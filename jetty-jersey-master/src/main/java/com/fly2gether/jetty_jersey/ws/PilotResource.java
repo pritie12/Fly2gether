@@ -1,4 +1,4 @@
-package com.example.jetty_jersey.ws;
+package com.fly2gether.jetty_jersey.ws;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +13,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import com.example.jetty_jersey.dao.*;
+
+import com.fly2gether.jetty_jersey.dao.*;
 
 
 @Path("/Pilote")

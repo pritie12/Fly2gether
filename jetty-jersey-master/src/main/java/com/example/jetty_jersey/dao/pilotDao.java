@@ -1,25 +1,24 @@
 package com.example.jetty_jersey.dao;
 import java.util.Date;
-import java.util.List;
 
-public interface passengerDao {
+
+public interface pilotDao {
 	
-
 	/* GET */
 	String getname(String id);
 	String getsurname(String id);
 	Date getdateOfBirth(String id);
 	String getemail(String id);
 	String getphoneNumber(String id);
-	List<Reservation> getpassengerBookingList(String id);
+	int getFlyingHours(String id);
 	
 	/* POST */
 	/* no post requests here */
 	
 	/* ADD */
-	void addPassenger();
-	void addReservation(String passenger_id,String resa_id);
+	void addPilot();
 	
-	/* DELETE*/ 
-	void removeReservation(String passenger_id,String resa_id);
+	/* DELETE */
+	/* no delete requests here */
+
 }

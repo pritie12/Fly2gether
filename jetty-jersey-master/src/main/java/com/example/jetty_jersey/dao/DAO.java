@@ -11,7 +11,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	public List<Aircraft> fleet;
 	public List<Flight> flightList;
 	public List<Passenger> totalPassengers;
-	public List<Pilote> totalPilotes;
+	public List<Pilot> totalPilots;
 	
 	public List<Passenger> getPassengers() {		
 		return totalPassengers;
@@ -50,14 +50,14 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	}
 
 	 
-	public List<Pilote> getPilotes() {		
-		return totalPilotes;
+	public List<Pilot> getPilots() {		
+		return totalPilots;
 	}
 
 	 
-	public List<Pilote> getPilotes(Duration experience) {
-		List<Pilote> pil=new ArrayList<Pilote>();
-		for(Pilote p:totalPilotes) {
+	public List<Pilot> getPilots(Duration experience) {
+		List<Pilot> pil=new ArrayList<Pilot>();
+		for(Pilot p:totalPilots) {
 			if(p.experience.compareTo(experience)>0) {
 				pil.add(p);
 			}
@@ -66,14 +66,14 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	}
 
 	 
-	public void addPilot(Pilote pilot) {
-		totalPilotes.add(pilot);
+	public void addPilot(Pilot pilot) {
+		totalPilots.add(pilot);
 		
 	}
 
 	 
-	public void deletePilot(Pilote pilot) {
-		totalPilotes.remove(pilot);
+	public void deletePilot(Pilot pilot) {
+		totalPilots.remove(pilot);
 		
 	}
 
@@ -144,7 +144,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	}
 
 	 
-	public String getPilotId(Pilote pilot) {
+	public String getPilotId(Pilot pilot) {
 		return pilot.id;
 	}
 
@@ -166,7 +166,7 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 	}
 
 	 
-	public Pilote getPilot(Flight flight) {
+	public Pilot getPilot(Flight flight) {
 		return flight.pilot;
 	}
 
@@ -225,33 +225,33 @@ public class DAO implements flightDao,aircraftDao,piloteDao,passengerDao{
 		return flight.aircraft;
 	}
 
-	public String getname(Pilote pilot) {
+	public String getname(Pilot pilot) {
 		
 		return pilot.name;
 	}
 
-	public String getsurname(Pilote pilot) {
+	public String getsurname(Pilot pilot) {
 
 		return pilot.surname;
 	}
 
-	public Date getdateOfBirth(Pilote pilot) {
+	public Date getdateOfBirth(Pilot pilot) {
 		return pilot.dateOfBirth;
 	}
 
-	public String getemail(Pilote pilot) {
+	public String getemail(Pilot pilot) {
 		return pilot.email;
 	}
 
-	public String getphoneNumber(Pilote pilot) {
+	public String getphoneNumber(Pilot pilot) {
 		return pilot.phoneNumber;
 	}
 
-	public Date getstartingDate(Pilote pilot) {
+	public Date getstartingDate(Pilot pilot) {
 		return pilot.startingDate;
 	}
 
-	public Duration getexperience(Pilote pilot) {
+	public Duration getexperience(Pilot pilot) {
 		return pilot.experience;
 	}
 

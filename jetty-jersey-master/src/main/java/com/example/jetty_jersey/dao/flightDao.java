@@ -3,35 +3,37 @@ import java.util.Date;
 import java.util.List;
 
 public interface flightDao {
-	List<Flight> getFlights();
 	
-	public Pilote getPilot(Flight flight);	
-	public Aircraft getAircraft(Flight flight);
-	public int getPrice(Flight flight);
-	public List<Passenger> getPassengers(Flight flight);
-	public int getAvailableSeats(Flight flight);
-	
-	public String getId(Flight flight);
-	
-	String getAppointmentDescription(Flight flight);
-	
-	Date getdepartureDateTime(Flight flight);
-	String getdepartureAirport(Flight flight);
-	
-	Date getarrivalDateTime(Flight flight);
-	String getarrivalAirport(Flight flight);// Location 
+	/* GET */
+	String getId();
+	Pilot getPilot(String id);	
+	Aircraft getAircraft(String id);
+	int getPrice(String id);
+	List<Passenger> getPassengers(String id);
+	int getAvailableSeats(String id);	
+	String getAppointmentDescription(String id);	
+	Date getdepartureDateTime(String id);
+	String getdepartureAirport(String id);	
+	Date getarrivalDateTime(String id);
+	String getarrivalAirport(String id);
 	
 	//filter the flights by price
 	List<Flight> getFlights(int minPrice,int maxPrice);
 	//one way trip
 	List<Flight> getFlights(Date DepartureTime, String DepartureAirport);	
 	//round-trip
-	List<Flight> getFlights(Date DepartureTime, String DepartureAirport,Date ArrivalTime, String ArrivalAirport);
-	
+	List<Flight> getFlights(Date DepartureTime, String DepartureAirport,Date ArrivalTime, String ArrivalAirport);	
 	//display flights that still have the number of seats desired 
 	List<Flight> getFlights(int availableSeats);
 	
-	void addFlight(	Flight flight);
-	void deleteFlight(	Flight flight);
+	
+	/* ADD */
+	void addFlight();
+	public void addPassenger(String passenger_id, String flight_id);
+	
+	
+	/* DELETE */
+	void deleteFlight(String id);
+	void removePassenger(String passenger_id);
 	
 }

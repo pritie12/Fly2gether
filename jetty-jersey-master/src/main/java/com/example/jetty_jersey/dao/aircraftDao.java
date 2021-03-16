@@ -1,19 +1,23 @@
 package com.example.jetty_jersey.dao;
-import java.util.List;
 
 
 
 public interface aircraftDao {
 	
-	List<Aircraft> getAircrafts();
 
-	
+
+	/* GET */
 	public String getTailNumber(Aircraft aircraft);
-	public String getModel(Aircraft aircraft);
-	public int getFlyingHours(Aircraft aircraft);
-	public String getCompany(Aircraft aircraft);
-	public int getNumberOfSeats(Aircraft aircraft);
+	public String getModel(String TailNumber);
+	public String getCompany(String TailNumber);
+	public int getNumberOfSeats(String TailNumber);
 	
-	void addAircraft(Aircraft aircraft);
-	void removeAircraft(Aircraft aircraft);
+	/* POST */
+	/* no post request here */
+	
+	/* ADD */
+	void addAircraft();
+	
+	/* DELETE */
+	/* no delete request here */
 }

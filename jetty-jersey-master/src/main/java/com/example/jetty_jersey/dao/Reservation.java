@@ -2,7 +2,10 @@ package com.example.jetty_jersey.dao;
 
 
 public class Reservation {
-	Passenger bookingUser;
-	int desiredSeats;
-	String paymentMethod;
+	
+	private String resa_id;
+	private Passenger bookingUser;
+	private Flight flight;
+	private int desiredSeats;
+	
 }

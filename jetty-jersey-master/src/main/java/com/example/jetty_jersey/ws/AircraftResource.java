@@ -19,11 +19,12 @@ import com.example.jetty_jersey.dao.*;
 public class AircraftResource {
 	DAO daoaircraft;
 	
-
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getAircraft")
+	@Path("/{TailNumber}/getAircraft")
 	public Aircraft getAircraft( @PathParam("TailNumber")String TailNumber) {
+		System.out.println("getAircraft");
 		for(Aircraft a:daoaircraft.fleet) {
 			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
 				return a;
@@ -41,8 +42,9 @@ public class AircraftResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getAircraftCompany")
-	public String getAircraftCompany( @PathParam("TailNumber")String TailNumber) {		
+	@Path("/{TailNumber}/getAircraftCompany")
+	public String getAircraftCompany( @PathParam("TailNumber")String TailNumber) {	
+		System.out.println("getAircraftCompany");
 		for(Aircraft a:daoaircraft.fleet) {
 			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
 				return daoaircraft.getCompany(a);
@@ -53,8 +55,9 @@ public class AircraftResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getNbSeats")
-	public int getNbSeats(@PathParam("TailNumber")String TailNumber) {		
+	@Path("/{TailNumber}/getNbSeats")
+	public int getNbSeats(@PathParam("TailNumber")String TailNumber) {	
+		System.out.println("getNbSeats");
 		for(Aircraft a:daoaircraft.fleet) {
 			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
 				return daoaircraft.getNumberOfSeats(a);
@@ -65,7 +68,7 @@ public class AircraftResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getAircraftModel")
+	@Path("/{TailNumber}/getAircraftModel")
 	public String getAircraftModel(@PathParam("TailNumber")String TailNumber) {		
 		for(Aircraft a:daoaircraft.fleet) {
 			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
@@ -77,7 +80,7 @@ public class AircraftResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getAircraftFlyingHours")
+	@Path("/{TailNumber}/getAircraftFlyingHours")
 	public int getAircraftFlyingHours(@PathParam("TailNumber")String TailNumber) {		
 		for(Aircraft a:daoaircraft.fleet) {
 			if(daoaircraft.getTailNumber(a).equals(TailNumber)) {
@@ -89,7 +92,7 @@ public class AircraftResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/aircraft3")
+	@Path("/retrieveDetailAircraft")
 	public void retrieveDetailAircraft (Aircraft aircraft) { 
 		List<Object> fleet= new ArrayList<Object>();
 		fleet.add(daoaircraft.getTailNumber(aircraft));
@@ -123,5 +126,6 @@ public class AircraftResource {
 	public void deleteAircraft(Aircraft aircraft) {
 		System.out.println("Aircraft deleted");
 	}
+
 
 }

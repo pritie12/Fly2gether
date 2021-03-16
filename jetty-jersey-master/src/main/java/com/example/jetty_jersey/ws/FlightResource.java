@@ -24,7 +24,7 @@ public class FlightResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightPilot")
-	public Pilote getFlightPilot(@PathParam("id")String id) {
+	public Pilot getFlightPilot(@PathParam("id")String id) {
 		for (Flight f:daoflight.flightList) {
 			if(daoflight.getId(f).equals(id)) {
 				return daoflight.getPilot(f);
@@ -36,7 +36,7 @@ public class FlightResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightAircraft")
-	public Pilote getFlightAircraft(@PathParam("id")String id) {
+	public Pilot getFlightAircraft(@PathParam("id")String id) {
 		for (Flight f:daoflight.flightList) {
 			if(daoflight.getId(f).equals(id)) {
 				return daoflight.getPilot(f);

@@ -44,5 +44,9 @@ $(function(){
 	$("#buttonA").click(function(){
 		getServerData("ws/example/aircraft",callDone);
 	});
+	$("#button").click(function(){
+		getServerData("ws/Pilote/getPilots",callDone);
+	});
+
 
 });

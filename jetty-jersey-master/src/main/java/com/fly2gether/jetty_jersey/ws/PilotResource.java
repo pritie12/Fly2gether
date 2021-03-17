@@ -19,8 +19,8 @@ import com.fly2gether.jetty_jersey.database.Database;
 @Path("/Pilote")
 public class PilotResource implements pilotDao{
 	
-	List<Pilot> pilots=Database.getToTalPilots();
-	
+	//List<Pilot> pilots=Database.getToTalPilots();
+	List<Pilot> pilots=new Database("test").getToTalPilots();
 	
 	
 	@GET

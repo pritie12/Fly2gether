@@ -3,10 +3,13 @@ package com.fly2gether.jetty_jersey.dao;
 
 public class Aircraft {
 	
+	private String id;
 	private String tailNumber;
 	private String model;
 	private String constructorCompany;
 	private int numberOfSeats;
+	
+	private static int nbAircraft=0;// permit to give an unique id
 	
 	/* CONSTRUCTORS */
 	public Aircraft (){
@@ -14,13 +17,21 @@ public class Aircraft {
         this.model = "";
         this.constructorCompany = "";
         this.numberOfSeats = 0;
+        nbAircraft++;
+        id="AI"+nbAircraft;
+        
     }
 	public Aircraft (String model, String constructorCompany,int numberOfSeats){
         this.model = model;
         this.constructorCompany = constructorCompany;
         this.numberOfSeats = numberOfSeats;
+        nbAircraft++;
+        id="AI"+nbAircraft;
     }	
 	 /* GETTERS */
+	public String getId() {
+		return this.id;
+	}
 	public String getTailNumber() {
 		return this.tailNumber;
 	}

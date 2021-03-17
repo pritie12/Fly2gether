@@ -6,18 +6,22 @@ import java.util.List;
 
 public class Passenger extends User {
 	private String passenger_id;
-	
 	private List<Reservation> passengerBookingList;
+	
+	private static int nbPassengers=0; // permits to give an unique id
 	
 	/* CONSTRUCTORS */
 	public Passenger() {
 		super();
-		this.passenger_id="";
+		nbPassengers++;
+		this.passenger_id="PA"+nbPassengers;
 		this.passengerBookingList=new ArrayList<Reservation>();
 	}
 	
 	public Passenger(String name, String surname, String email, String phoneNumber, Date DOfBirth) {
 		super(name,surname,email,phoneNumber,DOfBirth);
+		nbPassengers++;
+		this.passenger_id="PA"+nbPassengers;
 	}
 	
 	/* GETTERS */

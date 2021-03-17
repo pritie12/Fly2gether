@@ -1,5 +1,7 @@
 package com.fly2gether.jetty_jersey.database;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fly2gether.jetty_jersey.dao.Aircraft;
@@ -25,6 +27,25 @@ public class Database {
 		totalPassengers=new ArrayList<Passenger>();
 		totalPilots=new ArrayList<Pilot>();
 	}
+	public Database(String test) {
+		fleet=new ArrayList<Aircraft>();
+		flightList=new ArrayList<Flight>();
+		totalPassengers=new ArrayList<Passenger>();
+		totalPilots=new ArrayList<Pilot>();
+		
+		Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10);
+		Passenger passenger1=new Passenger("Hiba","SOUBER","hiba@mail.fr","06XXX",new Date(1999,06,12));
+		Pilot pilot1=new Pilot("Rayan","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
+		Pilot pilot2=new Pilot("Rayan2","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
+		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",20,pilot1,aircraft1);
+		
+		fleet.add(aircraft1);
+		totalPassengers.add(passenger1);
+		totalPilots.add(pilot1);
+		totalPilots.add(pilot2);
+		flightList.add(flight1);
+		
+	}
 	
 	public Database(List<Aircraft> Fleet,List<Passenger> TotalPassengers,List<Pilot> TotalPilots) {
 		fleet=Fleet;
@@ -40,7 +61,7 @@ public class Database {
 	public static List<Aircraft> getFleet() {		
 		return fleet;
 	}
-	public static List<Pilot> getToTalPilots(){
+	public List<Pilot> getToTalPilots(){
 		return totalPilots;
 	}
 	public static List<Flight> getFlightList(){

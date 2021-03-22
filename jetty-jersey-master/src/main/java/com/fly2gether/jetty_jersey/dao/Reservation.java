@@ -1,8 +1,14 @@
 package com.fly2gether.jetty_jersey.dao;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
-
+@PersistenceCapable
 public class Reservation {
 	
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
 	private String resa_id;
 	private Passenger bookingUser;
 	private Flight flight;

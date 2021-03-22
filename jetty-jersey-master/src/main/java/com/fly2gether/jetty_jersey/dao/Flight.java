@@ -5,11 +5,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 
-
+@PersistenceCapable
 public class Flight {
 	
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
 	 private String id;	
 	 private String appointmentDescription;	
 	 private Date departureDate;

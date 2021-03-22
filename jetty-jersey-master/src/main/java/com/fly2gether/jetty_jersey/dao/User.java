@@ -1,6 +1,10 @@
 package com.fly2gether.jetty_jersey.dao;
 import java.util.Date;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
+@PersistenceCapable
 public abstract class User {
 
 	private String name;

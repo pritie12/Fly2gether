@@ -4,7 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
 public class Passenger extends User {
+	
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
 	private String passenger_id;
 	private List<Reservation> passengerBookingList;
 	

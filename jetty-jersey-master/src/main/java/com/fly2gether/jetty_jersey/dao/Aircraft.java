@@ -1,8 +1,15 @@
 package com.fly2gether.jetty_jersey.dao;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
+@PersistenceCapable
 public class Aircraft {
 	
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
 	private String id;
 	private String tailNumber;
 	private String model;
@@ -18,7 +25,7 @@ public class Aircraft {
         this.constructorCompany = "";
         this.numberOfSeats = 0;
         nbAircraft++;
-        id="AI"+nbAircraft;
+       // id="AI"+nbAircraft;
         
     }
 	public Aircraft (String model, String constructorCompany,int numberOfSeats){

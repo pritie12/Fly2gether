@@ -3,6 +3,23 @@
 	<groupId>com.example</groupId>
 	<artifactId>jetty-jersey</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	    <sonar.language>java</sonar.language>
+    </properties>
+    
+	<repositories>
+		<repository>
+			<id>DN_M2_Repo</id>
+			<name>DataNucleus Repository</name>
+			<url>http://www.datanucleus.org/downloads/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<dependencies>
 

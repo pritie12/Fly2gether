@@ -6,12 +6,23 @@
 
     <!-- JDO tutorial "unit" -->
     <persistence-unit name="Tutorial">
-        <class>org.datanucleus.samples.jdo.tutorial.Inventory</class>
-        <class>org.datanucleus.samples.jdo.tutorial.Product</class>
-        <class>org.datanucleus.samples.jdo.tutorial.Book</class>
+        <class>com.fly2gether.jetty_jersey.dao.Aircraft</class>
+        <class>com.fly2gether.jetty_jersey.dao.Flight</class>
+        <class>com.fly2gether.jetty_jersey.dao.Passenger</class>
+        <class>com.fly2gether.jetty_jersey.dao.Pilot</class>
+        <class>com.fly2gether.jetty_jersey.dao.Reservation</class>
+        <class>com.fly2gether.jetty_jersey.dao.User</class>                  
         <exclude-unlisted-classes/>
         <properties>
-            <!-- Properties for runtime configuration will be added here later, see below -->
+            <property name="javax.jdo.option.ConnectionURL" value="jdbc:hsqldb:mem:example"/>
+            <property name="javax.jdo.option.ConnectionDriverName" value="org.hsqldb.jdbcDriver"></property>
+            <property name="datanucleus.schema.autoCreateAll" value="true"/>
+            <property name="datanucleus.schema.validateAll" value="false"/>
+            <property name="javax.jdo.option.ConnectionUserName" value="SA"/>
+            <property name="javax.jdo.option.ConnectionPassword" value=""/>
+            <property name="javax.jdo.option.Mapping" value="hsql"/>
+            <property name="datanucleus.metadata.defaultInheritanceStrategy" value="TABLE_PER_CLASS"/> 
+            <property name="datanucleus.maxFetchDepth" value="100"/>
         </properties>
     </persistence-unit>
 </persistence>

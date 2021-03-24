@@ -124,7 +124,7 @@ public class PassengerResource implements passengerDao {
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-
+			passengers.add(passenger);
 			pm.makePersistent(passenger);
 
 			tx.commit();

@@ -100,7 +100,7 @@ public class AircraftResource implements aircraftDao{
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-
+			aircrafts.add(aircraft);
 			pm.makePersistent(aircraft);
 
 			tx.commit();

@@ -248,6 +248,7 @@ public class FlightResource implements flightDao {
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
+			flights.add(flight);
 			pm.makePersistent(flight);
 			tx.commit();
 		} finally {

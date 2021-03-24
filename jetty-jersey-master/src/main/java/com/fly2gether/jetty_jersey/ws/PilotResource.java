@@ -143,7 +143,7 @@ public class PilotResource implements pilotDao{
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-
+			pilots.add(pilot);
 			pm.makePersistent(pilot);
 
 			tx.commit();

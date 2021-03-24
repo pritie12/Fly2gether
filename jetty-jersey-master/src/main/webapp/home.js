@@ -1,4 +1,4 @@
-
+/*
 function getServerData(url, success){
     $.ajax({
         dataType: "json",
@@ -25,9 +25,17 @@ function postServerData(url,success){
 		type: 'POST',
 		dataType: "json",
 	 }).done(success);
+}*/
+
+function pilotedata(pilote){
+
+	var templateExample = _.template($('#templateExample').html());
+	var nameHtml = templateExample( {"attribute":pilote.name	} );
+
+	$("#name").append(nameHtml);
+	$("#surname").append( templateExample( {"attribute":pilote.surname	} ) );
+
 }
-
-
 
 
 function callDone(result){
@@ -35,18 +43,51 @@ function callDone(result){
 
 	var html = templateExample({
 		"attribute":JSON.stringify(result)
-	});
 
+	});
+	
 	$("#result").append(html);
 }
 
+
+function fligth_list_display(list){
+	var t = _.template($('#templateShortFlightView').html());
+	var html="";
+	$("#result2").html("");
+	list.forEach(f => {
+		html=html+ t(f);
+
+		
+	});
+
+	$("#result2").append(html);
+}
+
+
 $(function(){
-	$("#buttonA").click(function(){
+	$("#button").click(function(){
 		getServerData("ws/example/aircraft",callDone);
 	});
-	$("#button").click(function(){
-		getServerData("ws/Pilote/getPilots",callDone);
+	$("#buttonA").click(function(){
+		getServerData("ws/Pilote",callDone);
 	});
+
+	$("#buttonB").click(function(){
+		getServerData("ws/Pilote/PI1",pilotedata);
+	});
+	$("#buttonC").click(function(){
+		pilotedata("hello");
+	});
+
+	$("#buttonD").click(function(){
+		getServerData("ws/Flight/getFlightsByDeparture",callDone);
+	});
+
+	$("#getFlightList").click(function(){
+		getServerData("ws/Flight/getFlightsByDeparture",fligth_list_display);
+	});
+	
+
 
 
 });

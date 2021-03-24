@@ -23,7 +23,7 @@ import com.fly2gether.jetty_jersey.database.Database;
 
 @Path("/Flight")
 public class FlightResource implements flightDao {
-	List<Flight> flights=Database.getFlightList();
+	List<Flight> flights=Database.db.getFlightList();
 	
 
 
@@ -196,7 +196,7 @@ public class FlightResource implements flightDao {
 				if(f.getPrice()>=minprice&&f.getPrice()<=maxprice)
 					fli.add(f);
 		}
-		return fli;
+		return flights;
 	}
 	
 	@GET
@@ -208,7 +208,7 @@ public class FlightResource implements flightDao {
 				if(f.getDepartureDate().equals(DepartureTime)&&f.getDepartureAirport().equals(DepartureAirport))
 					fli.add(f);
 		}
-		return fli;
+		return flights;
 	}
 
 	@GET
@@ -235,7 +235,7 @@ public class FlightResource implements flightDao {
 				fli.add(f);
 			}
 		}
-		return fli;
+		return flights;
 	}
 
 	public void addFlight() {

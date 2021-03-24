@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<link rel="stylesheet" href="stylesheet.css" />
@@ -7,40 +7,60 @@
 	</head>
 	<body>
 
+		<script id="templateShortFlightView" type="text/template">
+		
+			<div class="flight_short_view">
+					<div class="fligth_div1">
+					 <p>Departure: <%=departureAirport%></p>
+					 <p>Arrival:<%=arrivalAirport%> </p>
+					</div>
+					<div class="fligth_div3">
+					<p>Aircraft: <%=flightAircraft.model%></p>
+					<p>Pilot <%=flightPilot.name%> <%=flightPilot.surname%></p>
+					</div>
+					<div class="fligth_div2">
+					<p><%=price%>price/seats</p>
+					<p><%=availableSeats%>seats available</p>
+					</div>
+					
+				</div>
+		</script>
 		<script id="templateExample" type="text/template">
 		
 			<div>
 				<%= attribute %>
 			</div>
 		</script>
-		
 		<div class="navBarre">
 			
 			<div class="nav_links">
 				<ul class="nav_ul" >
 				<li class="nav_li">Log in / Register</li>
 				<li class="nav_li">Propose a flight</li>
-				<li class="nav_li">Find a flight</li>
+				<li class="nav_li"><u>Find a flight</u></li>
 					
 					
 				</ul>
 			</div>
 			<div class="nav_title">
-				<h1>Fly2gether<h1>
+				 <h1><a href:"http://localhost:8080/home.html">Fly2gether</a><h1>
 			</div>
 		</div>
 		<div class="page_content">
 		<div class="welcomming_page">
-			<div><h1>Welcome! Find your Private flight!</h1></div>
+			<div><h1>Liste des vols disponibles</h1></div>
 		
-			<button id="buttonA"><h3>Let's fly!</h3></button>
-			<button id="buttonB"><h3>First Pilot </h3></button>
-			<button id="buttonC"><h3>Hello button </h3></button>	
-			<button id="buttonD"><h3>Next </h3></button>			
+			<button id="buttonD"><h3>Let's fly!</h3></button>
+			<button id="getFlightList"><h3>get flight</h3></button>
+			
+				
 			<div id="result">result list:</div>
-			<div id="profil_pilot"> 
-				<p id="name">name: </p>
-				<div id="surname">surname: </div>
+			
+				
+				<div id="result2">
+				
+				</div>
+				
 			</div>
 			
 		</div>

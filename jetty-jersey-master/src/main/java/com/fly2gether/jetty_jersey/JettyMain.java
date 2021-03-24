@@ -13,7 +13,10 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import com.fly2gether.jetty_jersey.database.Database;
+
 public class JettyMain {
+	
 
 	public static void main(String[] args) throws Exception {
 		// Initialize the server
@@ -42,7 +45,8 @@ public class JettyMain {
 		ResourceHandler handlerPortal = new ResourceHandler();
 		handlerPortal.setResourceBase("src/main/webapp");
 		handlerPortal.setDirectoriesListed(false);
-		handlerPortal.setWelcomeFiles(new String[] { "home.html" });
+		//handlerPortal.setWelcomeFiles(new String[] { "home.html" });
+		handlerPortal.setWelcomeFiles(new String[] { "find_flight.html" });
 		ContextHandler handlerPortalCtx = new ContextHandler();
 		handlerPortalCtx.setContextPath("/");
 		handlerPortalCtx.setHandler(handlerPortal);
@@ -51,6 +55,7 @@ public class JettyMain {
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
 		contexts.setHandlers(new Handler[] { handlerWebServices, handlerPortalCtx });
 		server.setHandler(contexts);
+		
 
 		// Start server
 		server.start();

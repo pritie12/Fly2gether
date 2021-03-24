@@ -20,7 +20,7 @@ import com.fly2gether.jetty_jersey.database.Database;
 public class PilotResource implements pilotDao{
 	
 	//List<Pilot> pilots=Database.getToTalPilots();
-	List<Pilot> pilots=new Database("test").getToTalPilots();
+	List<Pilot> pilots=Database.db.getToTalPilots();
 	
 	
 	@GET
@@ -32,14 +32,14 @@ public class PilotResource implements pilotDao{
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}/getPilot")
-	public Pilot getPilot(@PathParam("id")String id) {
+	@Path("/{id}")
+	public Pilot getPilot(@PathParam("{id}")String id) {
 		for(Pilot p:pilots) {
 			if(p.getPilotId().equals(id)) {
 				return p;
 			}
 		}
-		return null;
+		return new Pilot("RayanFail","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
 	}
 	
 	@GET

@@ -1,4 +1,45 @@
 
+/*find a flight*/
+
+
+
+.fligth_div1{
+    width: 50%;
+    display: inline-block;
+   
+
+}
+.fligth_div2{
+
+    width: 25%;
+    float: right;
+    display: inline-block;
+
+}
+.fligth_div3{
+
+    width: 25%;
+    float: right;
+    display: inline-block;
+}
+
+.flight_short_view{
+   /* border: 5px solid red;*/
+    background-color:white;
+    padding: 0.5% 5% 0.5%;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.result2{
+    /*border: 5px solid red;*/
+    background-color:white;
+    padding: 5px;
+}
+
+
+
+
 /*barre de navigation*/
 
 .navBarre{
@@ -23,8 +64,8 @@
     float: left;
     vertical-align: middle;
     color: #ebc04c;
-
 }
+
 .nav_links{
     height:100%;
     float: right;
@@ -65,6 +106,8 @@ body{
 }
 
 
+
+
 /*welcoming page*/
 .welcomming_page{
     
@@ -85,3 +128,6 @@ body{
 #result{
     background-color: #ffffff;
 }
+
+
+

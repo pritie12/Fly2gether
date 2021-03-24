@@ -16,7 +16,7 @@ public interface pilotDao {
 	/* no post requests here */
 	
 	/* PUT */
-	void addPilot();
+	void addPilot(Pilot pilot);
 	
 	/* DELETE */
 	/* no delete requests here */

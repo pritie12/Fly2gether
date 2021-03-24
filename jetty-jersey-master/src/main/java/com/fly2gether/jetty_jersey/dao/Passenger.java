@@ -11,7 +11,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class Passenger extends User {
 	
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
 	private String passenger_id;
 	private List<Reservation> passengerBookingList;
 	

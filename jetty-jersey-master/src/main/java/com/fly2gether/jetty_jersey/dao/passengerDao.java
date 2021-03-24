@@ -17,7 +17,7 @@ public interface passengerDao {
 	/* no post requests here */
 	
 	/* PUT */
-	void addPassenger();
+	void addPassenger(Passenger passenger);
 	void addReservation(String passenger_id,String resa_id);
 	
 	/* DELETE*/ 

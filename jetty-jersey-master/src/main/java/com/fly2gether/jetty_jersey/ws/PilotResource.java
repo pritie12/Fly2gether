@@ -2,6 +2,10 @@ package com.fly2gether.jetty_jersey.ws;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -133,9 +137,24 @@ public class PilotResource implements pilotDao{
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
-	public void addPilot() {
-		// TODO Auto-generated method stub
+	public void addPilot(Pilot pilot) {
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+
+			pm.makePersistent(pilot);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 		
 	}
 
-}
+

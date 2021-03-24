@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -238,8 +242,20 @@ public class FlightResource implements flightDao {
 		return fli;
 	}
 
-	public void addFlight() {
-		// TODO Auto-generated method stub
+	public void addFlight(Flight flight) {
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			pm.makePersistent(flight);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
 		
 	}
 

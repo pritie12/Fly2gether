@@ -15,7 +15,7 @@ public interface aircraftDao {
 	/* no post request here */
 	
 	/* PUT */
-	void addAircraft();
+	void addAircraft(Aircraft aircraft);
 	
 	/* DELETE */
 	/* no delete request here */

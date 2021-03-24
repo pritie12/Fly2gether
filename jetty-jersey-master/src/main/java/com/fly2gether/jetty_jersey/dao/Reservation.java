@@ -8,7 +8,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class Reservation {
 	
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
 	private String resa_id;
 	private Passenger bookingUser;
 	private Flight flight;
@@ -29,30 +29,30 @@ public class Reservation {
 	}
 	
 	/* GETTERS */
-	Passenger getBookingUser() {
+	public Passenger getBookingUser() {
 		return this.bookingUser;
 	}
-	String getReservationId() {
+	public String getReservationId() {
 		return this.resa_id;
 	}
-	Flight getFlight() {
+	public Flight getFlight() {
 		return this.flight;
 	}
-	int getDesiredSeats() {
+	public int getDesiredSeats() {
 		return this.desiredSeats;
 	}
 	
 	/* SETTERS */
-	void setBookingUser(Passenger bookingUser) {
+	public void setBookingUser(Passenger bookingUser) {
 		this.bookingUser=bookingUser;
 	}
-	void setReservationId(String resa_id) {
+	public void setReservationId(String resa_id) {
 		this.resa_id=resa_id;
 	}
-	void setFlight(Flight flight) {
+	public void setFlight(Flight flight) {
 		this.flight=flight;
 	}
-	void setDesiredSeats(int desiredSeats) {
+	public void setDesiredSeats(int desiredSeats) {
 		this.desiredSeats=desiredSeats;
 	}
 }

@@ -15,7 +15,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class Flight {
 	
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
 	 private String id;	
 	 private String appointmentDescription;	
 	 private Date departureDate;

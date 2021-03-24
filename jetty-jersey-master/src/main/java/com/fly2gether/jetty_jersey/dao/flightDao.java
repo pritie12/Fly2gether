@@ -33,7 +33,7 @@ public interface flightDao {
 	
 	
 	/* PUT */
-	public void addFlight();
+	public void addFlight(Flight flight);
 	public void addPassenger(String passenger_id, String flight_id);
 	
 	

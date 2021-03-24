@@ -8,7 +8,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 public class Pilot extends User{
 	@PrimaryKey
-	 @Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	 @Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
 	private String pilot_id;
 	private static int nbPilots=0;// permit to give an uniqui id for each pilots
 	private int flyingHours;

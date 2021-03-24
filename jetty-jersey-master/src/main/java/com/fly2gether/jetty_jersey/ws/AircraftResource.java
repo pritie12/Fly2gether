@@ -2,6 +2,10 @@ package com.fly2gether.jetty_jersey.ws;
 
 import java.util.List;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -87,11 +91,27 @@ public class AircraftResource implements aircraftDao{
 		return 0;
 	}
 	
+	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addAircraft() {
-		// TODO Auto-generated method stub	
+	public void addAircraft(Aircraft aircraft) {
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+
+			pm.makePersistent(aircraft);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
-
-
+	
 }
+
+

@@ -9,7 +9,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class Aircraft {
 	
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
 	private String id;
 	private String tailNumber;
 	private String model;

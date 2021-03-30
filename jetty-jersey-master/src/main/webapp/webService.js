@@ -5,11 +5,14 @@ function getServerData(url, success){
         url: url
     }).done(success);
 }
-function putServerData(url,success){
-	$.ajax({
-		url: url,
-		type: 'PUT',
-	 }).done(success);
+function putServerData(url, data, success) {
+    $.ajax({
+        type: 'PUT',
+        contentType: "application/json",
+        dataType: "json",
+        data: data,
+        url: url
+    }).done(success);
 }
 
 function deleteServerData(url,success){

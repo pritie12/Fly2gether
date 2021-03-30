@@ -99,6 +99,11 @@ body{
     margin: 0%;
 }
 
+a:link, a:visited {
+    color: black;
+    text-decoration-line: none;
+}
+
 /*page content*/
 
 .page_content{

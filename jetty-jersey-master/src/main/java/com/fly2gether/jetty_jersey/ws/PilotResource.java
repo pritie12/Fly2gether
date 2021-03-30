@@ -132,10 +132,19 @@ public class PilotResource implements pilotDao{
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addPilot1")
+	public void addPilot(Pilot data) {
+		System.out.println(" pilot");
+		pilots.add(data);
+		System.out.println(" pilot add");
+		
+	}
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
 	public void addPilot() {
 		// TODO Auto-generated method stub
-		
+		System.out.println(" nor here");
 	}
 
 }

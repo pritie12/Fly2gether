@@ -64,6 +64,9 @@ function fligth_list_display(list){
 }
 
 
+
+
+
 $(function(){
 	$("#button").click(function(){
 		getServerData("ws/example/aircraft",callDone);
@@ -86,6 +89,7 @@ $(function(){
 	$("#getFlightList").click(function(){
 		getServerData("ws/Flight/getFlightsByDeparture",fligth_list_display);
 	});
+
 	
 
 

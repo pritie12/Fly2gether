@@ -45,8 +45,8 @@ public class JettyMain {
 		ResourceHandler handlerPortal = new ResourceHandler();
 		handlerPortal.setResourceBase("src/main/webapp");
 		handlerPortal.setDirectoriesListed(false);
-		//handlerPortal.setWelcomeFiles(new String[] { "home.html" });
-		handlerPortal.setWelcomeFiles(new String[] { "find_flight.html" });
+		handlerPortal.setWelcomeFiles(new String[] { "home.html" });
+		//handlerPortal.setWelcomeFiles(new String[] { "find_flight.html" });
 		ContextHandler handlerPortalCtx = new ContextHandler();
 		handlerPortalCtx.setContextPath("/");
 		handlerPortalCtx.setHandler(handlerPortal);

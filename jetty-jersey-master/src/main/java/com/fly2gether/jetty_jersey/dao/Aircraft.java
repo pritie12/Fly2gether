@@ -10,7 +10,6 @@ public class Aircraft {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	private String id;
 	private String tailNumber;
 	private String model;
 	private String constructorCompany;
@@ -33,12 +32,10 @@ public class Aircraft {
         this.constructorCompany = constructorCompany;
         this.numberOfSeats = numberOfSeats;
         nbAircraft++;
-        id="AI"+nbAircraft;
+        tailNumber="AI"+nbAircraft;
     }	
 	 /* GETTERS */
-	public String getId() {
-		return this.id;
-	}
+
 	public String getTailNumber() {
 		return this.tailNumber;
 	}

@@ -1,10 +1,13 @@
 package com.fly2gether.jetty_jersey.dao;
 import java.util.Date;
+import java.util.Map;
 
 
 public interface pilotDao {
 	
 	/* GET */
+	Map<String,String> getLoginInfo(String Id);
+
 	String getname(String id);
 	String getsurname(String id);
 	Date getdateOfBirth(String id);

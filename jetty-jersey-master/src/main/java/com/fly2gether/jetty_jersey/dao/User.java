@@ -1,12 +1,18 @@
 package com.fly2gether.jetty_jersey.dao;
 import java.util.Date;
+import java.util.Map;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public abstract class User {
-
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
+	private Map<String,String> loginInfo;
+	
 	private String name;
 	private String surname;
 	private Date dateOfBirth;
@@ -46,7 +52,9 @@ public abstract class User {
 	public Date getDateOfBirth() {
 		return this.dateOfBirth;
 	}
-	
+	public Map<String,String> getLoginInfo() {
+		return loginInfo;
+	}
 	/* SETTERS */
 	
 	public void setName(String name) {
@@ -63,6 +71,9 @@ public abstract class User {
 	}
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth=dateOfBirth;
+	}
+	public void setLoginInfo(Map<String,String> loginInfo) {
+		this.loginInfo = loginInfo;
 	}
 	
 }

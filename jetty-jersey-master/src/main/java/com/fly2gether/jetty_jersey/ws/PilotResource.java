@@ -1,6 +1,7 @@
 package com.fly2gether.jetty_jersey.ws;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -153,6 +154,11 @@ public class PilotResource implements pilotDao{
 			}
 			pm.close();
 		}
+	}
+
+	public Map<String, String> getLoginInfo(String Id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 	}

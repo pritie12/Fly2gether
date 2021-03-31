@@ -1,6 +1,7 @@
 package com.fly2gether.jetty_jersey.ws;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -41,6 +42,18 @@ public class PassengerResource implements passengerDao {
 		for(Passenger p:passengers) {
 			if(p.getPassengerId().equals(id)) {
 				return p;
+			}
+		}
+		return null;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getLoginInfo")
+	public Map<String, String> getLoginInfo(String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p.getLoginInfo();
 			}
 		}
 		return null;
@@ -117,7 +130,10 @@ public class PassengerResource implements passengerDao {
 		}
 		return null;
 	}
-
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addPassenger")
 	public void addPassenger(Passenger passenger) {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();

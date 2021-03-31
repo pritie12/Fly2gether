@@ -66,7 +66,7 @@ public class ReservationResource implements reservationDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/getFlight")
-	public List<Reservation> getReservations(@PathParam("passenger_id")String passenger_id) {
+	public List<String> getReservations(@PathParam("passenger_id")String passenger_id) {
 		for(Passenger p:Database.getTotalPassengers()) {
 			if(p.getPassengerId().equals(passenger_id)){
 				return p.getPassengerBookingList();

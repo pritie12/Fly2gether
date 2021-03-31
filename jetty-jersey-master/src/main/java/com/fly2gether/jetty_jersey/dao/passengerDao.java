@@ -8,12 +8,12 @@ public interface passengerDao {
 
 	/* GET */
 	Map<String,String> getLoginInfo(String Id);
-	String getname(String id);
-	String getsurname(String id);
-	Date getdateOfBirth(String id);
-	String getemail(String id);
-	String getphoneNumber(String id);
-	List<Reservation> getpassengerBookingList(String id);
+	String getname(String passenger_id);
+	String getsurname(String passenger_id);
+	Date getdateOfBirth(String passenger_id);
+	String getemail(String passenger_id);
+	String getphoneNumber(String passenger_id);
+	List<String> getpassengerBookingList(String passenger_id);
 	
 	/* POST */
 	/* no post requests here */

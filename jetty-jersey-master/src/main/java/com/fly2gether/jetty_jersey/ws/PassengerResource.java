@@ -122,7 +122,7 @@ public class PassengerResource implements passengerDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerReservations")
-	public List<Reservation> getpassengerBookingList(@PathParam("id")String id) {
+	public List<String> getpassengerBookingList(@PathParam("id")String id) {
 		for(Passenger p:passengers) {
 			if(p.getPassengerId().equals(id)) {
 				return p.getPassengerBookingList();
@@ -149,6 +149,7 @@ public class PassengerResource implements passengerDao {
 				tx.rollback();
 			}
 			pm.close();
+			pmf.close();
 		}
 		
 	}
@@ -159,9 +160,27 @@ public class PassengerResource implements passengerDao {
 	}
 
 	public void removeReservation(String passenger_id, String resa_id) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("removeEvent");
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Example");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			
+			Passenger p = pm.getObjectById(Passenger.class, passenger_id);
+			if(p. getPassengerBookingList().contains(resa_id)) {
+				p.getPassengerBookingList().remove(resa_id);
+			}
+			
+			tx.commit();
+		} finally {
+			if (tx.isActive()) tx.rollback();
+			pm.close();
+			pmf.close();
+		}
 	}
+		
+	
 	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)

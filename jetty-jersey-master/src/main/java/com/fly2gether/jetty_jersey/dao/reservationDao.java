@@ -8,7 +8,7 @@ public interface reservationDao {
 	int getdesiredSeats(String resa_id);
 	Flight getFlight(String resa_id);
 	//get all the reservations of a certain passenger
-	List<Reservation> getReservations(String passenger_id);
+	List<String> getReservations(String passenger_id); // ID of reservations
 	
 	
 	

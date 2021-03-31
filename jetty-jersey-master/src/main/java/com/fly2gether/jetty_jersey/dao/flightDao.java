@@ -11,7 +11,7 @@ public interface flightDao {
 	public Pilot getPilot(String id);	
 	public Aircraft getAircraft(String id);
 	public int getPrice(String id);
-	public List<Passenger> getPassengers(String id);
+	public List<String> getPassengers(String id);
 	public int getAvailableSeats(String id);	
 	public String getAppointmentDescription(String id);	
 	public Date getdepartureDate(String id);
@@ -39,6 +39,6 @@ public interface flightDao {
 	
 	/* DELETE */
 	public void deleteFlight(String id);
-	public void removePassenger(String passenger_id);
+	public void removePassenger(String passenger_id,String flight_id);
 	
 }

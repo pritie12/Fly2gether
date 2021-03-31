@@ -160,8 +160,8 @@ public class PassengerResource implements passengerDao {
 	}
 
 	public void removeReservation(String passenger_id, String resa_id) {
-		System.out.println("removeEvent");
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Example");
+		
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -178,6 +178,7 @@ public class PassengerResource implements passengerDao {
 			pm.close();
 			pmf.close();
 		}
+		System.out.println("Reservation removed");
 	}
 		
 	

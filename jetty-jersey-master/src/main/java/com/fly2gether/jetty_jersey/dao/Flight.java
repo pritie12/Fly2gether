@@ -27,7 +27,7 @@ public class Flight {
 	 private Duration flightDuration;
 	 private int availablesSeats;
 	 private int price; 
-	 private List<Passenger> passengersList;
+	 private List<String> passengersList;
 	 private Pilot pilot;
 	 private Aircraft aircraft;
 	 
@@ -45,7 +45,7 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=0;
 		 this.price=0;
-		 this.passengersList=new ArrayList<Passenger>();
+		 this.passengersList=new ArrayList<String>();
 		 this.pilot= new Pilot();
 		 this.aircraft=new Aircraft();
 		 nbFlights ++;
@@ -66,7 +66,7 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=aircraft.getNumberOfSeats();
 		 this.price=price;
-		 this.passengersList=new ArrayList<Passenger>();
+		 this.passengersList=new ArrayList<String>();
 		 nbFlights ++;
 		 id="FL"+nbFlights;
 	 }
@@ -108,7 +108,7 @@ public class Flight {
 	 public int getAvailableSeats() {
 		 return this.availablesSeats;
 	 }
-	 public List<Passenger> getPassengersList(){
+	 public List<String> getPassengersList(){
 		 return this.passengersList;
 	 }
 	 public Duration getFlightDuration() {
@@ -153,7 +153,7 @@ public class Flight {
 	 public void setAvailableSeats(int availableSeats) {
 		 this.availablesSeats=availableSeats;
 	 }
-	 public void setPassengersList(List<Passenger> passengersList){
+	 public void setPassengersList(List<String> passengersList){
 		 this.passengersList=passengersList;
 	 }
 	 public void setFlightDuration(Duration flightDuration) {

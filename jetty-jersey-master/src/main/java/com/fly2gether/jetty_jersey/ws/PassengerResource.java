@@ -18,57 +18,41 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.*;
-import com.fly2gether.jetty_jersey.database.Database;
 
 
 
 @Path("/Passenger")
 public class PassengerResource implements passengerDao {
 	
-	List<Passenger> passengers=Database.getTotalPassengers();
+
 	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getPassengers")
 	public List<Passenger> getPassengers() {
-		return passengers;
+		return DAO.getPassengerDao().getPassengers();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassenger")
 	public Passenger getPassenger(@PathParam("id")String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p;
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getPassenger(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getLoginInfo")
 	public Map<String, String> getLoginInfo(String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p.getLoginInfo();
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getLoginInfo(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerName")
 	public String getname(@PathParam("id")String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p.getName();
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getname(id);
 	}
 
 	
@@ -76,117 +60,68 @@ public class PassengerResource implements passengerDao {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerSurname")
 	public String getsurname(@PathParam("id")String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p.getSurname();
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getsurname(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerDateofBirth")
 	public Date getdateOfBirth(@PathParam("id")String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p.getDateOfBirth();
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getdateOfBirth(id);
+
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerEmail")
 	public String getemail(@PathParam("id")String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p.getEmail();
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getemail(id);
+
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerPhoneNumber")
 	public String getphoneNumber(@PathParam("id")String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p.getPhoneNumber();
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getphoneNumber(id);
+
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerReservations")
 	public List<String> getpassengerBookingList(@PathParam("id")String id) {
-		for(Passenger p:passengers) {
-			if(p.getPassengerId().equals(id)) {
-				return p.getPassengerBookingList();
-			}
-		}
-		return null;
+		return DAO.getPassengerDao().getpassengerBookingList(id);
+
 	}
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPassenger")
 	public void addPassenger(Passenger passenger) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			passengers.add(passenger);
-			pm.makePersistent(passenger);
+		DAO.getPassengerDao().addPassenger(passenger);		
+	}
 
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-			pmf.close();
-		}
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{passenger_id}/{resa_id}/addPassenger")
+	public void addReservation(@PathParam("passenger_id")String passenger_id,@PathParam("resa_id") String resa_id) {
+		DAO.getPassengerDao().addReservation(passenger_id,resa_id);	
 		
 	}
 
-	public void addReservation(String passenger_id, String resa_id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void removeReservation(String passenger_id, String resa_id) {
-		
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			
-			Passenger p = pm.getObjectById(Passenger.class, passenger_id);
-			if(p. getPassengerBookingList().contains(resa_id)) {
-				p.getPassengerBookingList().remove(resa_id);
-			}
-			
-			tx.commit();
-		} finally {
-			if (tx.isActive()) tx.rollback();
-			pm.close();
-			pmf.close();
-		}
-		System.out.println("Reservation removed");
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{passenger_id}/{resa_id}/removeReservation")
+	public void removeReservation(@PathParam("passenger_id")String passenger_id,@PathParam("resa_id") String resa_id) {
+		DAO.getPassengerDao().removeReservation(passenger_id, resa_id);
 	}
 		
 	
 	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/DeletePassenger")
+	@Path("/{id}/DeletePassenger")
 	public void deletePassenger(@PathParam("id")String id) {
-		System.out.println("Passenger deleted");
+		DAO.getPassengerDao().deletePassenger(id);
 	}
 }

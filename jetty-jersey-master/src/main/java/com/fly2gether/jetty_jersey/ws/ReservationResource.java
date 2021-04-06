@@ -2,82 +2,89 @@ package com.fly2gether.jetty_jersey.ws;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.fly2gether.jetty_jersey.dao.DAO;
 import com.fly2gether.jetty_jersey.dao.Flight;
 import com.fly2gether.jetty_jersey.dao.Passenger;
 import com.fly2gether.jetty_jersey.dao.Reservation;
 import com.fly2gether.jetty_jersey.dao.reservationDao;
-import com.fly2gether.jetty_jersey.database.Database;
+
 
 public class ReservationResource implements reservationDao {
 
-	List<Reservation> reservations=new Database("test").getTotalReservations();
 
-		
-	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getbookingUser")
+	@Path("/getReservations")
 	public List<Reservation> getReservations(){
-		return reservations;
+		return DAO.getReservationDao().getReservations();
 	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getbookingUser")
 	public Passenger getbookingUser(@PathParam("Resa_ID")String resa_id) {
-		for(Reservation r:reservations) {
-			if(r.getReservationId().equals(resa_id)) {
-				return r.getBookingUser();
-			}
-		}
-		return null;
+		return DAO.getReservationDao().getbookingUser(resa_id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getdesiredSeats")
 	public int getdesiredSeats(@PathParam("Resa_ID")String resa_id) {
-		for(Reservation r:reservations) {
-			if(r.getReservationId().equals(resa_id)) {
-				return r.getDesiredSeats();
-			}
-		}
-		return 0;
+		return DAO.getReservationDao().getdesiredSeats(resa_id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getFlight")
 	public Flight getFlight(@PathParam("Resa_ID")String resa_id) {
-		for(Reservation r:reservations) {
-			if(r.getReservationId().equals(resa_id)) {
-				return r.getFlight();
-			}
-		}
-		return null;
+		return DAO.getReservationDao().getFlight(resa_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/getFlight")
 	public List<String> getReservations(@PathParam("passenger_id")String passenger_id) {
-		for(Passenger p:Database.getTotalPassengers()) {
-			if(p.getPassengerId().equals(passenger_id)){
-				return p.getPassengerBookingList();
-			}
-		}
-		return null;
+		return DAO.getReservationDao().getReservations(passenger_id);
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{reservation_id}/getReservation")
+	public Reservation getReservation(String reservation_id) {	
+		return DAO.getReservationDao().getReservation(reservation_id);
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{reservation_id}/getReservation")
+	public void changeNumberOfSeats(int seats,@PathParam("reservation_id")String reservation_id) {
+		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);
+		
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/addReservation")
+	public void addReservation(Reservation reservation) {
+		DAO.getReservationDao().addReservation(reservation);
 	}
 
-	public void changeNumberOfSeats(int seats) {
-		// TODO Auto-generated method stub
-		
+
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/deleteReservation")
+	public void deleteReservation(String id) {
+		DAO.getReservationDao().deleteReservation(id);		
 	}
 
 }

@@ -52,7 +52,7 @@ public class AircraftResource implements aircraftDao{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFleet")
 	public List<Aircraft> getFleet() {		
-		return aircrafts;
+		return DAO.getAircraftDao().getFleet();
 	}
 	
 	@GET
@@ -94,22 +94,17 @@ public class AircraftResource implements aircraftDao{
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/addAircraft")
 	public void addAircraft(Aircraft aircraft) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			aircrafts.add(aircraft);
-			pm.makePersistent(aircraft);
+		DAO.getAircraftDao().addAircraft(aircraft);
+	}
 
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{TailNumber}/deleteAircraft")
+	public void deleteAircraft(String TailNumber) {
+		DAO.getAircraftDao().deleteAircraft(TailNumber);
+		
 	}
 	
 }

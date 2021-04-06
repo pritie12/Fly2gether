@@ -243,21 +243,7 @@ public class FlightResource implements flightDao {
 	}
 
 	public void addFlight(Flight flight) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			flights.add(flight);
-			pm.makePersistent(flight);
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		
+		DAO.getFlightDao().addFlight(flight);	
 	}
 
 	public void addPassenger(String passenger_id, String flight_id) {
@@ -269,27 +255,12 @@ public class FlightResource implements flightDao {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void removePassenger(String passenger_id, String flight_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			
-			Flight f = pm.getObjectById(Flight.class, flight_id);
-			if(f.getPassengersList().contains(passenger_id)) {
-				f.getPassengersList().remove(passenger_id);
-			}
-			
-			tx.commit();
-		} finally {
-			if (tx.isActive()) tx.rollback();
-			pm.close();
-			pmf.close();
-		}
-		System.out.println("Passenger removed from this flight");
-		
+	
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{passenger_id}/{resa_id}/getFlightsBySeats")
+	public void removePassenger(@PathParam("passenger_id")String passenger_id, @PathParam("flight_id")String flight_id) {
+		DAO.getFlightDao().removePassenger(passenger_id, flight_id);
 	}
 
 

@@ -24,143 +24,88 @@ import com.fly2gether.jetty_jersey.database.Database;
 @Path("/Pilote")
 public class PilotResource implements pilotDao{
 	
-	//List<Pilot> pilots=Database.getToTalPilots();
-	List<Pilot> pilots=new Database("test").getToTalPilots();
+	
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getPilots")
 	public List<Pilot> getPilots() {
-		return pilots;
+		return DAO.getPilotDao().getPilots();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilot")
 	public Pilot getPilot(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p;
-			}
-		}
-		return null;
+		return DAO.getPilotDao().getPilot(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getLoginInfo")	
+	public Map<String, String> getLoginInfo(String id) {
+		return DAO.getPilotDao().getLoginInfo(id);
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotName")
 	public String getname(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getName();
-			}
-		}
-		return null;
+		return DAO.getPilotDao().getname(id);
 	}
-
 
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotSurname")
 	public String getsurname(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getSurname();
-			}
-		}
-		return null;
+		return DAO.getPilotDao().getsurname(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotDateofBirth")
 	public Date getdateOfBirth(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getDateOfBirth();
-			}
-		}
-		return null;
+		return DAO.getPilotDao().getdateOfBirth(id);
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotEmail")
 	public String getemail(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getEmail();
-			}
-		}
-		return null;
+		return DAO.getPilotDao().getemail(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotPhoneNumber")
 	public String getphoneNumber(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getPhoneNumber();
-			}
-		}
-		return null;
+		return DAO.getPilotDao().getphoneNumber(id);
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getPilotFlyingHours")
 	public int getFlyingHours(String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getFlyingHours();
-			}
-		}
-		return 0;
+		return DAO.getPilotDao().getFlyingHours(id);
 	}
 	
-	
-
-	
-	@DELETE 
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/deletePilot")
-	public void deletePilot(String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				pilots.remove(p);
-				System.out.println("Pilot deleted");
-			}
-		}
-		System.out.println("Pilot not found");
-	}
-
 
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
 	public void addPilot(Pilot pilot) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			pilots.add(pilot);
-			pm.makePersistent(pilot);
-
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
+		DAO.getPilotDao().addPilot(pilot);
 	}
 
-	public Map<String, String> getLoginInfo(String Id) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@DELETE 
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/deletePilot")
+	public void deletePilot(String id) {
+		DAO.getPilotDao().deletePilot(id);
 	}
-		
-	}
+	
+}
 
 

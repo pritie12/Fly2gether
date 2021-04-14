@@ -237,6 +237,18 @@ public class FlightResource implements flightDao {
 		}
 		return flights;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getFlights%DepartureAirport%ArrivalAirport%Date")
+	public List<Flight> getFlights(@PathParam("Date")Date DepartureTime, @PathParam("DepartureAirport")String DepartureAirport,@PathParam("ArrivalAirport")String ArrivalAirport) {
+		List<Flight> fli=new ArrayList<Flight>();
+		for(Flight f:flights) {
+				if(f.getDepartureDate().equals(DepartureTime)&&f.getDepartureAirport().contains(DepartureAirport))
+					fli.add(f);
+		}
+		return flights;
+	}
 
 	public void addFlight() {
 		// TODO Auto-generated method stub

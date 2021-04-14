@@ -1,6 +1,33 @@
 
 /*find a flight*/
 
+.searchBarre{
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    height: 8vh;
+    font-size: large;
+}
+
+.searchInput{
+    border:none;
+    font-size: large;
+    height: 98%;
+    width: 22%;
+    border-radius: 5px;
+}
+
+#searchButton{
+    float: right;
+    height: 100%;
+    width: 8vh;
+    border-radius: 5px;
+    font-size: 17px;
+    border: 2px solid #73a9c9ff;
+    background-color: #73a9c9ff;
+    cursor: pointer;
+    content: \f002;
+  
+}
 
 
 .fligth_div1{
@@ -23,13 +50,18 @@
     display: inline-block;
 }
 
-.flight_short_view{
+#flight_short_view{
    /* border: 5px solid red;*/
     background-color:white;
     padding: 0.5% 5% 0.5%;
     margin: 5px;
     border-radius: 10px;
 }
+#flight_short_view:hover{
+    /* border: 5px solid red;*/
+     background-color:rgb(255, 237, 73);
+  
+ }
 
 .result2{
     /*border: 5px solid red;*/
@@ -107,22 +139,43 @@ a:link, a:visited {
 /*page content*/
 
 .page_content{
-    margin: 10vh;
+    margin: 15vh 15%;
 }
 
 
 
 
 /*welcoming page*/
+
+.mainBody{
+    background-color: #ffffff;
+}
+
 .welcomming_page{
-    
-    padding:10% ;
-    /*border: 3px solid #73AD21;*/
-    margin: 0 auto;
+ /*   width:20%;
+    height: 100%;
+    */
+   /* background-image: url("http://localhost:8080/media/travel.png");
+    background-repeat: no-repeat;
+    background-size:100% ;*/
+    /*padding:15% ;*/
+    background-color: #ffffff;
+   /* border: 3px solid #73AD21;*/
+    margin: 0 15% 0 15%;
     
 }
 
-#buttonA{
+.main_band{
+    background-image: url("http://localhost:8080/media/travel.png");
+    background-repeat: no-repeat;
+    background-size:100% ;
+    margin-top: 10vh;
+    height: 35vh;
+    background-position: center top;
+    background-size: cover;
+}
+
+#buttonA,#getFlightList{
     border: 2px solid #73a9c9ff;
     background-color: #73a9c9ff;
     border-radius: 5px;

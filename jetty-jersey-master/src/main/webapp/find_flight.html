@@ -4,15 +4,16 @@
 		<link rel="stylesheet" href="stylesheet.css" />
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
 	</head>
-	<body>
+	<body onload="fligth_list_display()">
 
 		<script id="templateShortFlightView" type="text/template">
 		
-			<div class="flight_short_view">
+			<div id="flight_short_view">
 					<div class="fligth_div1">
-					 <p>Departure: <%=departureAirport%></p>
-					 <p>Arrival:<%=arrivalAirport%> </p>
+					 <p><i class="fas fa-plane-departure"></i>Departure: <%=departureAirport%></p>
+					 <p><i class="fas fa-plane-arrival"></i>Arrival:<%=arrivalAirport%> </p>
 					</div>
 					<div class="fligth_div3">
 					<p>Aircraft: <%=flightAircraft.model%></p>
@@ -22,6 +23,7 @@
 					<p><%=price%>price/seats</p>
 					<p><%=availableSeats%>seats available</p>
 					</div>
+				<!----	<button id=<%=availableSeats%> > choose this flight</button> ---->
 					
 				</div>
 		</script>
@@ -50,17 +52,27 @@
 
 
 		<div class="page_content">
-		<div class="welcomming_page">
+		<div>
 			<div><h1>Liste des vols disponibles</h1></div>
-		
+			<div class="searchBarre">
+				<input type="text" class="searchInput" placeholder="Departure" id="inputDep">
+				<input type="text" class="searchInput" placeholder="Arrival" id="inputArr">
+				<input type="date" class="searchInput" placeholder="Date" id="inputDate">
+				<input type="number" class="searchInput" placeholder="Num passengers" id="inputNum">
+				<button id="searchButton"></button>
+				</div>
 			<button id="buttonD"><h3>Let's fly!</h3></button>
 			<button id="getFlightList"><h3>get flight</h3></button>
+			<i class="fas fa-search" id="searchIcon">qqq</i>
 			
 				
 			<div id="result">result list: </div>
 			
 				
 				<div id="result2">
+				
+				</div>
+				<div id="result3">
 				
 				</div>
 				

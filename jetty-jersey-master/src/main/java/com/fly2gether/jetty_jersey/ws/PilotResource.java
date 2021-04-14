@@ -137,8 +137,17 @@ public class PilotResource implements pilotDao{
 		System.out.println(" pilot");
 		pilots.add(data);
 		System.out.println(" pilot add");
-		
+
 	}
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addPilot2")
+	public String addPilot2() {
+		Pilot p= new Pilot();
+		return p.getPilotId();
+	}
+	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")

@@ -63,6 +63,19 @@ function fligth_list_display(list){
 	$("#result2").append(html);
 }
 
+function fligth_list_display2(list){
+	var t = _.template($('#templateShortFlightView').html());
+	var html="";
+	$("#result3").html("");
+	list.forEach(f => {
+		html=html+ t(f);
+
+		
+	});
+
+	$("#result3").append(html);
+}
+
 
 
 
@@ -84,12 +97,21 @@ $(function(){
 
 	$("#buttonD").click(function(){
 		getServerData("ws/Flight/getFlightsByDeparture",callDone);
+
 	});
 
 	$("#getFlightList").click(function(){
+		$("#result").append($("#inputArr").val() + " " + $("#inputDep").val() + " "+$("#inputDate").val() + " "+$("#inputNum").val() + " ");
+		
 		getServerData("ws/Flight/getFlightsByDeparture",fligth_list_display);
 	});
+	
 
+	$("#searchButton").click(function(){
+		$("#result").append($("#inputArr").val() + " " + $("#inputDep").val() + " "+$("#inputDate").val() + " "+$("#inputNum").val() + " ");
+		getServerData("ws/Flight/getFlightsByDeparture",fligth_list_display);
+	});
+	
 	
 
 

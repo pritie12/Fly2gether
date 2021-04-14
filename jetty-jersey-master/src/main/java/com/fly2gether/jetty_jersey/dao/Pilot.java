@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Pilot extends User{
 	private String pilot_id;
-	private static int nbPilots=0;// permit to give an uniqui id for each pilots
+	private static int nbPilots=0;// permit to give an unique id for each pilots
 	private int flyingHours;
 	
 	/* CONSTRUCTORS */

@@ -381,21 +381,60 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getFlightDuration();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Flight> getFlights(int minPrice, int maxPrice) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Flight> flights=null;
+		List<Flight> detached = new ArrayList<Flight>();
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("int minPrice,maxPrice");
+			q.setFilter("price < maxPrice && price > minPrice");
+			q.setUnique(true);
+
+			flights = (List<Flight>) q.execute();
+			detached = (List<Flight>) pm.detachCopyAll(flights);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return detached;
 	}
 
-	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<Flight> getFlights(Date DepartureDate, String DepartureAirport) {
+		List<Flight> search_result = null;
+		List<Flight> detached = new ArrayList<Flight>();
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q=pm.newQuery(Flight.class);
+			q.declareParameters("org.joda.time.Date DepartureDate,String DepartureAirport");
+			q.setFilter(" DepartureDate.isAfter(departureDate) && departureAirport == DepartureAirport && availablesSeats != 0 ");
+			q.setUnique(true);
+			search_result = (List<Flight>) q.execute();
+			detached = (List<Flight>) pm.detachCopyAll(search_result);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+			pmf.close();
+		}
+		
+		return detached;
 	}
 
-	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport, Date ArrivalTime,
-			String ArrivalAirport) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@SuppressWarnings("unchecked")
 	public List<Flight> getFlights(int availableSeats) {

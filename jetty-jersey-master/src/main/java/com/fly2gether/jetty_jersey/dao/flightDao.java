@@ -25,9 +25,7 @@ public interface flightDao {
 	//filter the flights by price
 	public List<Flight> getFlights(int minPrice,int maxPrice);
 	//one way trip
-	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport);	
-	//round-trip
-	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport,Date ArrivalTime, String ArrivalAirport);	
+	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport);		
 	//display flights that still have the number of seats desired 
 	public List<Flight> getFlights(int availableSeats);
 	

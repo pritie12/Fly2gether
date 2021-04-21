@@ -97,8 +97,25 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 	public List<String> getReservations(String passenger_id) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		List<String> passengers_reservations=null;
+		List<String> detached=null;
+		try {
+			tx.begin();
+			
+			Passenger p = pm.getObjectById(Passenger.class, passenger_id);
+			passengers_reservations=p.getPassengerBookingList();
+
+			detached = (List<String>) pm.detachCopy(passengers_reservations);		
+			tx.commit();
+		} finally {
+			if (tx.isActive()) tx.rollback();
+			pm.close();
+			pmf.close();
+		}
+		return detached;
 	}
 
 	public void changeNumberOfSeats(int seats,String reservation_id) {

@@ -27,8 +27,11 @@ public class Flight {
 	 private Duration flightDuration;
 	 private int availablesSeats;
 	 private int price; 
+	 @Persistent
 	 private List<String> passengersList;
+	 @Persistent
 	 private Pilot pilot;
+	 @Persistent
 	 private Aircraft aircraft;
 	 
 	 private static int nbFlights=0;// permit to give an unique id
@@ -112,7 +115,7 @@ public class Flight {
 		 return this.passengersList;
 	 }
 	 public Duration getFlightDuration() {
-		 //return Duration.between(this.departureTime,this.arrivalTime);
+		 //return Duration.between(this.departureTime,this.arrivalTime); not possible for now because of jet lag
 		 return this.flightDuration;
 	 }
 	 

@@ -66,10 +66,9 @@ public class ReservationResource implements reservationDao {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{reservation_id}/getReservation")
+	@Path("/{reservation_id}/changeNumberOfSeats")
 	public void changeNumberOfSeats(int seats,@PathParam("reservation_id")String reservation_id) {
-		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);
-		
+		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);		
 	}
 	
 	@PUT

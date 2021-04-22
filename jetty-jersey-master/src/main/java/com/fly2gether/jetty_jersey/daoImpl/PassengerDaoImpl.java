@@ -12,13 +12,16 @@ import javax.jdo.Transaction;
 
 import com.fly2gether.jetty_jersey.dao.*;
 public class PassengerDaoImpl implements passengerDao{
-	
 
+	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Passenger");
+	
+	public PassengerDaoImpl(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}
 	@SuppressWarnings("unchecked")
 	public List<Passenger> getPassengers(){
 		List<Passenger> passengers=null;
 		List<Passenger> detached = new ArrayList<Passenger>();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -40,7 +43,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 	
 	public Passenger getPassenger(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -67,7 +69,6 @@ public class PassengerDaoImpl implements passengerDao{
 		return detached;
 	}
 	public Map<String, String> getLoginInfo(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -95,7 +96,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public String getname(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -123,7 +123,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public String getsurname(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -151,7 +150,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public Date getdateOfBirth(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -179,7 +177,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public String getemail(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -207,7 +204,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public String getphoneNumber(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -235,7 +231,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public List<String> getpassengerBookingList(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -263,7 +258,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public void addPassenger(Passenger passenger) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -281,7 +275,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public void addReservation(String passenger_id, String resa_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -303,7 +296,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public void removeReservation(String passenger_id, String resa_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -325,7 +317,6 @@ public class PassengerDaoImpl implements passengerDao{
 	}
 
 	public void deletePassenger(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p=null;

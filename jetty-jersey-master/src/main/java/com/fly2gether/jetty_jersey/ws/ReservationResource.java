@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -64,20 +65,19 @@ public class ReservationResource implements reservationDao {
 		return DAO.getReservationDao().getReservation(reservation_id);
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{reservation_id}/changeNumberOfSeats")
 	public void changeNumberOfSeats(int seats,@PathParam("reservation_id")String reservation_id) {
 		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);		
 	}
 	
 	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addReservation")
 	public void addReservation(Reservation reservation) {
 		DAO.getReservationDao().addReservation(reservation);
 	}
-
 
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)

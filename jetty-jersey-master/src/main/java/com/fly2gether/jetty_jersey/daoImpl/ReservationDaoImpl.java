@@ -12,8 +12,13 @@ import com.fly2gether.jetty_jersey.dao.*;
 
 public class ReservationDaoImpl implements reservationDao{
 
+	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Reservation");
+	
+	public ReservationDaoImpl(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}	
+
 	public Passenger getbookingUser(String reservation_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -41,7 +46,6 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 	public int getdesiredSeats(String reservation_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -69,7 +73,6 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 	public Flight getFlight(String reservation_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -97,7 +100,6 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 	public List<String> getReservations(String passenger_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		List<String> passengers_reservations=null;
@@ -119,7 +121,6 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 	public void changeNumberOfSeats(int seats,String reservation_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -137,7 +138,6 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 	
 	public void addReservation(Reservation reservation) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -156,7 +156,6 @@ public class ReservationDaoImpl implements reservationDao{
 	public List<Reservation> getReservations() {
 		List<Reservation> reservations=null;
 		List<Reservation> detached = new ArrayList<Reservation>();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -177,7 +176,6 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 	public Reservation getReservation(String reservation_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -205,7 +203,6 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 	public void deleteReservation(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r=null;

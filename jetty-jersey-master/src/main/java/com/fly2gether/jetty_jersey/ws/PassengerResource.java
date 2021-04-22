@@ -3,10 +3,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -110,7 +107,7 @@ public class PassengerResource implements passengerDao {
 	}
 
 	@DELETE
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/{resa_id}/removeReservation")
 	public void removeReservation(@PathParam("passenger_id")String passenger_id,@PathParam("resa_id") String resa_id) {
 		DAO.getPassengerDao().removeReservation(passenger_id, resa_id);

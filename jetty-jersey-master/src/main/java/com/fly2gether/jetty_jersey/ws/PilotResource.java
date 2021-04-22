@@ -3,10 +3,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,9 +20,7 @@ import com.fly2gether.jetty_jersey.database.Database;
 @Path("/Pilote")
 public class PilotResource implements pilotDao{
 	
-	
-	
-	
+		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getPilots")

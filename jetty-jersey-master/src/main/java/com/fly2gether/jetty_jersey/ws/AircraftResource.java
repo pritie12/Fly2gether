@@ -2,10 +2,7 @@ package com.fly2gether.jetty_jersey.ws;
 
 import java.util.List;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,26 +23,12 @@ public class AircraftResource implements aircraftDao{
 	List<Aircraft> aircrafts=Database.getFleet();
 	
 
-
-	
-	@DELETE 
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/deleteAircraft")
-	public void deleteAircraft(Aircraft aircraft) {
-		System.out.println("Aircraft deleted");
-	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraft")
 	public Aircraft getAircraft( @PathParam("TailNumber")String TailNumber) {
-		System.out.println("getAircraft");
-		for(Aircraft a:aircrafts) {
-			if(a.getTailNumber().equals(TailNumber)) {
-				return a;
-				}
-		}
-		return null;
+		return DAO.getAircraftDao().getAircraft(TailNumber);
 	}
 	
 	@GET
@@ -59,41 +42,26 @@ public class AircraftResource implements aircraftDao{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraftModel")
 	public String getModel(@PathParam("TailNumber")String TailNumber) {
-		 for(Aircraft a:aircrafts) {
-			 if(a.getTailNumber().equals(TailNumber)) {
-				 return a.getModel();
-			}
-		 }
-		return null;
+		return DAO.getAircraftDao().getModel(TailNumber);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraftCompany")
 	public String getCompany(@PathParam("TailNumber")String TailNumber) {
-		 for(Aircraft a:aircrafts) {
-			 if(a.getTailNumber().equals(TailNumber)) {
-				 return a.getConstructorCompany();
-			}
-		 }
-		return null;
+		return DAO.getAircraftDao().getCompany(TailNumber);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraftNumberOfSeats")
 	public int getNumberOfSeats(@PathParam("TailNumber")String TailNumber) {
-		 for(Aircraft a:aircrafts) {
-			 if(a.getTailNumber().equals(TailNumber)) {
-				 return a.getNumberOfSeats();
-			}
-		 }
-		return 0;
+		return DAO.getAircraftDao().getNumberOfSeats(TailNumber);
 	}
 	
 	
 	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addAircraft")
 	public void addAircraft(Aircraft aircraft) {
 		DAO.getAircraftDao().addAircraft(aircraft);
@@ -103,8 +71,7 @@ public class AircraftResource implements aircraftDao{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/deleteAircraft")
 	public void deleteAircraft(String TailNumber) {
-		DAO.getAircraftDao().deleteAircraft(TailNumber);
-		
+		DAO.getAircraftDao().deleteAircraft(TailNumber);		
 	}
 	
 }

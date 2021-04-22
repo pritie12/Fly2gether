@@ -16,9 +16,15 @@ import com.fly2gether.jetty_jersey.dao.*;
 
 
 public class FlightDaoImpl implements flightDao {
+	
+	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Flight");
+	
+	public FlightDaoImpl(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}
 
 	public Pilot getPilot(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -46,7 +52,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public Aircraft getAircraft(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -74,7 +80,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public int getPrice(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -102,7 +108,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public List<String> getPassengers(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -130,7 +136,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public int getAvailableSeats(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -158,7 +164,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public String getAppointmentDescription(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -186,7 +192,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public Date getdepartureDate(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -214,7 +220,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public LocalDateTime getdepartureTime(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -242,7 +248,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public String getdepartureAirport(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -270,7 +276,6 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public Date getarrivalDate(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -298,7 +303,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public LocalDateTime getarrivalTime(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -326,7 +331,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public String getarrivalAirport(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -354,7 +359,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public Duration getFlightDuration(String identifier) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -385,7 +390,7 @@ public class FlightDaoImpl implements flightDao {
 	public List<Flight> getFlights(int minPrice, int maxPrice) {
 		List<Flight> flights=null;
 		List<Flight> detached = new ArrayList<Flight>();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -412,7 +417,6 @@ public class FlightDaoImpl implements flightDao {
 	public List<Flight> getFlights(Date DepartureDate, String DepartureAirport) {
 		List<Flight> search_result = null;
 		List<Flight> detached = new ArrayList<Flight>();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -440,7 +444,7 @@ public class FlightDaoImpl implements flightDao {
 	public List<Flight> getFlights(int availableSeats) {
 		List<Flight> flights=null;
 		List<Flight> detached = new ArrayList<Flight>();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -464,7 +468,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public void addFlight(Flight flight) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -482,7 +486,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public void addPassenger(String passenger_id, String flight_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -505,7 +509,7 @@ public class FlightDaoImpl implements flightDao {
 		
 
 	public void deleteFlight(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -525,7 +529,6 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 	public void removePassenger(String passenger_id, String flight_id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {

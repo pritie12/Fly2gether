@@ -13,13 +13,16 @@ import com.fly2gether.jetty_jersey.dao.*;
 
 public class AircraftDaoImpl implements aircraftDao{
 
-
+	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Aircraft");
+	
+	public AircraftDaoImpl(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Aircraft> getFleet() {	
 		List<Aircraft> aircrafts=null;
 		List<Aircraft> detached = new ArrayList<Aircraft>();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -44,7 +47,6 @@ public class AircraftDaoImpl implements aircraftDao{
 	
 	
 	public String getModel(String TailNumber) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -73,7 +75,6 @@ public class AircraftDaoImpl implements aircraftDao{
 	
 	
 	public String getCompany(String TailNumber) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -101,7 +102,6 @@ public class AircraftDaoImpl implements aircraftDao{
 	}
 
 	public int getNumberOfSeats(String TailNumber) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -129,7 +129,6 @@ public class AircraftDaoImpl implements aircraftDao{
 	}
 
 	public void addAircraft(Aircraft aircraft) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -148,7 +147,6 @@ public class AircraftDaoImpl implements aircraftDao{
 
 
 	public void deleteAircraft(String TailNumber) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
@@ -170,7 +168,6 @@ public class AircraftDaoImpl implements aircraftDao{
 
 
 	public Aircraft getAircraft(String TailNumber) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;

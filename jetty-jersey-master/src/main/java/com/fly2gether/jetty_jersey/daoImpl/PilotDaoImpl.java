@@ -12,9 +12,14 @@ import javax.jdo.Transaction;
 
 import com.fly2gether.jetty_jersey.dao.*;
 public class PilotDaoImpl implements pilotDao {
+	
+	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Pilot");
+	
+	public PilotDaoImpl(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}	
 
 	public Map<String, String> getLoginInfo(String Id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -40,7 +45,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public String getname(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -66,7 +70,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public String getsurname(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -92,7 +95,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public Date getdateOfBirth(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -118,7 +120,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public String getemail(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -144,7 +145,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public String getphoneNumber(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -170,7 +170,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public int getFlyingHours(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -196,7 +195,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public void addPilot(Pilot pilot) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -216,7 +214,6 @@ public class PilotDaoImpl implements pilotDao {
 	public List<Pilot> getPilots() {
 		List<Pilot> pilots=null;
 		List<Pilot> detached = new ArrayList<Pilot>();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -237,7 +234,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public void deletePilot(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p=null;
@@ -258,7 +254,6 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	public Pilot getPilot(String id) {
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Tutorial");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;

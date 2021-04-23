@@ -88,7 +88,7 @@ $(function(){
 	$("#submit").click(function(){
 		if(document.getElementById("is_pil").checked==true){
 			var data = get_form_data_pilot();
-			putServerData("ws/Pilote/addPilot1",data,test2);
+			putServerData("ws/Pilote/addPilot",data,test2);
 		}
 		else{
 			var data = get_form_data_passenger();

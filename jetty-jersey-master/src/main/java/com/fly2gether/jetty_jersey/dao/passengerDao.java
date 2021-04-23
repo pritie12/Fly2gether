@@ -1,25 +1,31 @@
 package com.fly2gether.jetty_jersey.dao;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface passengerDao {
 	
 
 	/* GET */
-	String getname(String id);
-	String getsurname(String id);
-	Date getdateOfBirth(String id);
-	String getemail(String id);
-	String getphoneNumber(String id);
-	List<Reservation> getpassengerBookingList(String id);
+	public List<Passenger> getPassengers();
+	public Passenger getPassenger(String id);
+	public Map<String,String> getLoginInfo(String Id);
+	public String getname(String passenger_id);
+	public String getsurname(String passenger_id);
+	public Date getdateOfBirth(String passenger_id);
+	public String getemail(String passenger_id);
+	public String getphoneNumber(String passenger_id);
+	public List<String> getpassengerBookingList(String passenger_id);
 	
 	/* POST */
 	/* no post requests here */
 	
 	/* PUT */
-	void addPassenger();
-	void addReservation(String passenger_id,String resa_id);
+	public void addPassenger(Passenger passenger);
+	public void addReservation(String passenger_id,String resa_id);
 	
 	/* DELETE*/ 
-	void removeReservation(String passenger_id,String resa_id);
+	public void removeReservation(String passenger_id,String resa_id);
+	public void deletePassenger(String id);
+
 }

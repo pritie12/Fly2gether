@@ -1,7 +1,9 @@
 package com.fly2gether.jetty_jersey.database;
 import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 
 import com.fly2gether.jetty_jersey.dao.Aircraft;
@@ -30,6 +32,7 @@ public class Database {
 		totalPassengers=new ArrayList<Passenger>();
 		totalPilots=new ArrayList<Pilot>();
 	}
+	@SuppressWarnings("deprecation")
 	public Database(String test) {
 		fleet=new ArrayList<Aircraft>();
 		flightList=new ArrayList<Flight>();
@@ -45,10 +48,9 @@ public class Database {
 		
 		fleet.add(aircraft1);
 		totalPassengers.add(passenger1);
-		totalPilots.add(pilot1);
+	totalPilots.add(pilot1);
 		totalPilots.add(pilot2);
-		flightList.add(flight1);
-		flightList.add(flight2);
+	flightList.add(flight1);
 		
 	}
 	

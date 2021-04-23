@@ -5,11 +5,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 
-
+@PersistenceCapable
 public class Flight {
 	
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
 	 private String id;	
 	 private String appointmentDescription;	
 	 private Date departureDate;
@@ -21,8 +27,11 @@ public class Flight {
 	 private Duration flightDuration;
 	 private int availablesSeats;
 	 private int price; 
-	 private List<Passenger> passengersList;
+	 @Persistent
+	 private List<String> passengersList;
+	 @Persistent
 	 private Pilot pilot;
+	 @Persistent
 	 private Aircraft aircraft;
 	 
 	 private static int nbFlights=0;// permit to give an unique id
@@ -39,7 +48,7 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=0;
 		 this.price=0;
-		 this.passengersList=new ArrayList<Passenger>();
+		 this.passengersList=new ArrayList<String>();
 		 this.pilot= new Pilot();
 		 this.aircraft=new Aircraft();
 		 nbFlights ++;
@@ -60,7 +69,7 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=aircraft.getNumberOfSeats();
 		 this.price=price;
-		 this.passengersList=new ArrayList<Passenger>();
+		 this.passengersList=new ArrayList<String>();
 		 nbFlights ++;
 		 id="FL"+nbFlights;
 	 }
@@ -102,11 +111,11 @@ public class Flight {
 	 public int getAvailableSeats() {
 		 return this.availablesSeats;
 	 }
-	 public List<Passenger> getPassengersList(){
+	 public List<String> getPassengersList(){
 		 return this.passengersList;
 	 }
 	 public Duration getFlightDuration() {
-		 //return Duration.between(this.departureTime,this.arrivalTime);
+		 //return Duration.between(this.departureTime,this.arrivalTime); not possible for now because of jet lag
 		 return this.flightDuration;
 	 }
 	 
@@ -147,7 +156,7 @@ public class Flight {
 	 public void setAvailableSeats(int availableSeats) {
 		 this.availablesSeats=availableSeats;
 	 }
-	 public void setPassengersList(List<Passenger> passengersList){
+	 public void setPassengersList(List<String> passengersList){
 		 this.passengersList=passengersList;
 	 }
 	 public void setFlightDuration(Duration flightDuration) {

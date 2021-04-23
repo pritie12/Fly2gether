@@ -2,7 +2,13 @@ package com.fly2gether.jetty_jersey.dao;
 
 import java.util.Date;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
 public class Pilot extends User{
+	@PrimaryKey
+	 @Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
 	private String pilot_id;
 	private static int nbPilots=0;// permit to give an unique id for each pilots
 	private int flyingHours;

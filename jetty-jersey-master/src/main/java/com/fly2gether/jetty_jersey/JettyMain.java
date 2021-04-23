@@ -13,9 +13,11 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
-import com.fly2gether.jetty_jersey.database.Database;
+
 
 public class JettyMain {
+	
+	
 	
 
 	public static void main(String[] args) throws Exception {

@@ -32,7 +32,7 @@ function pilotedata(pilote){
 	var templateExample = _.template($('#templateExample').html());
 	var nameHtml = templateExample( {"attribute":pilote.name	} );
 
-	$("#name").append(nameHtml);
+	$("#result").append(nameHtml);
 	$("#surname").append( templateExample( {"attribute":pilote.surname	} ) );
 
 }
@@ -68,12 +68,20 @@ function fligth_list_display2(list){
 	var html="";
 	$("#result3").html("");
 	list.forEach(f => {
-		html=html+ t(f);
-
-		
+		html=html+ t(f);		
 	});
 
 	$("#result3").append(html);
+}
+
+function processSearchInput(s){
+	/*$("#result").append($("#inputArr").val() + " " + $("#inputDep").val() + " "+$("#inputDate").val() + " "+$("#inputNum").val() + " ");*/
+
+	if (s==""){
+		return "xxx";
+	}
+	return s;
+
 }
 
 
@@ -81,6 +89,13 @@ function fligth_list_display2(list){
 
 
 $(function(){
+	$("#buttonHome").click(function(){
+		window.location.href='find_flight.html';
+		$("#result").append("hello from home");
+		getServerData("ws/Flight/getFlightsByDeparture",fligth_list_display);
+
+	});
+
 	$("#button").click(function(){
 		getServerData("ws/example/aircraft",callDone);
 	});
@@ -108,12 +123,15 @@ $(function(){
 	
 
 	$("#searchButton").click(function(){
-		$("#result").append($("#inputArr").val() + " " + $("#inputDep").val() + " "+$("#inputDate").val() + " "+$("#inputNum").val() + " ");
-		getServerData("ws/Flight/getFlightsByDeparture",fligth_list_display);
+		processSearchInput();
+		var arrival =processSearchInput( $("#inputArr").val());
+		var departur =processSearchInput( $("#inputDep").val() );
+		var date =processSearchInput( $("#inputDate").val() );
+		var seats =processSearchInput( $("#inputNum").val() );
+		var url = "ws/Flight/getFlights/" + departur+"/" + arrival+"/"+date;
+		console.log(url);
+		getServerData(url,fligth_list_display);
+		/*getServerData("ws/Flight/getFlights%departureAirport%arrivalAirport%date" ,fligth_list_display);*/
 	});
 	
-	
-
-
-
 });

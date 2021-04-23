@@ -39,7 +39,8 @@ public class PilotResource implements pilotDao{
 				return p;
 			}
 		}
-		return new Pilot("RayanFail","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
+		Date d= new Date();
+		return new Pilot("RayanFail","Gosling","rayan@mai;.fr","07XXX",d,200);
 	}
 	
 	@GET
@@ -136,7 +137,7 @@ public class PilotResource implements pilotDao{
 	public void addPilot(Pilot data) {
 		System.out.println(" pilot");
 		pilots.add(data);
-		System.out.println(" pilot add");
+		System.out.println(" pilot add:"+ data.getPilotId()+ " " + data.getDateOfBirth());
 
 	}
 	

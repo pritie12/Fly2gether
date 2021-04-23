@@ -240,14 +240,29 @@ public class FlightResource implements flightDao {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getFlights%DepartureAirport%ArrivalAirport%Date")
-	public List<Flight> getFlights(@PathParam("Date")Date DepartureTime, @PathParam("DepartureAirport")String DepartureAirport,@PathParam("ArrivalAirport")String ArrivalAirport) {
+	@Path("/getFlights/{departure}/{arrival}/{date}")
+	public List<Flight> getFlights(@PathParam("{departure}")String departureAirport,@PathParam("{arrival}")String arrivalAirport, @PathParam("{date}")Date departureTime) {
 		List<Flight> fli=new ArrayList<Flight>();
+		
+		String dep=  departureAirport;
+		String arr=  arrivalAirport;
+		System.out.println(dep);
+		if(dep==null && arr==null && departureTime==null )
+			return this.flights;
+		if(dep==null) {
+			dep="";
+		}
+		if(arr==null) {
+			arr="";
+		}
+		System.out.println("res " + dep);
+		
+		
 		for(Flight f:flights) {
-				if(f.getDepartureDate().equals(DepartureTime)&&f.getDepartureAirport().contains(DepartureAirport))
+				if(f.getDepartureDate().equals(departureTime)&&f.getDepartureAirport().contains(dep) &&f.getArrivalAirport().contains(arr))
 					fli.add(f);
 		}
-		return flights;
+		return fli;
 	}
 
 	public void addFlight() {

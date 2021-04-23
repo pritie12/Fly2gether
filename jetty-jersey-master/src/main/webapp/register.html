@@ -1,18 +1,12 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
  <!DOCTYPE html>
 <html>
 	<head>
-		
 		<link rel="stylesheet" href="register.css" />
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
-
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 
@@ -41,106 +35,123 @@
 			</div>
 		</nav>
 		
+
 		<div class="container">
-			<div class="row main">
-				<div class="panel-heading">
-	               <div class="panel-title text-center">
-	               		<h1 class="title">Regiter </h1>
-	               		<hr />
-	               	</div>
-	            </div> 
-				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#">
+			
+			
+			<div class="login-content">
+				<div class="form" >
+					<img src="media/avatar.svg">
+					<h2 class="title">Welcome</h2>
+					   <div class="input-div one">
+						  <div class="i">
+								  <i class="fas fa-user"></i>
+						  </div>
+						  <div class="div">
+								  <h5>Name</h5>
+								  <input type="text" class="input" id="name">
+						  </div>
+					   </div>
+					   <div class="input-div one">
+						<div class="i">
+								<i class="fas fa-user"></i>
+						</div>
+						<div class="div">
+								<h5>Surname</h5>
+								<input type="text" class="input" id="surname">
+						</div>
+					 </div>
+
+					 <div class="input-div one">
+						<div class="i">
+								<i class="fas fa-user"></i>
+						</div>
+						<div class="div">
+								<h5>Email</h5>
+								<input type="text" class="input" id="mail">
+						</div>
+					 </div>
+
+					 <div class="input-div pass">
+						<div class="i"> 
+							 <i class="fas fa-lock"></i>
+						</div>
+						<div class="div">
+							 <h5>Password</h5>
+							 <input type="password" class="input">
+						   </div>
+					  </div>
+
+					 <div class="input-div one">
+						<div class="i">
+							<i class="far fa-calendar"></i>
+						</div>
+						<div class="div">
+								<h5>Date of Birth</h5>
+								<input type="date" class="input" id="date">
+						</div>
+					 </div>
+
+					 <div class="input-div one">
+						<div class="i">
+								<i class="fas fa-phone"></i>
+						</div>
+						<div class="div">
+								<h5>Phone number</h5>
+								<input type="text" class="input" id="phone">
+						</div>
+					 </div>
+
+					 <div class="input_usr_type" >
+						<h5>You are a :</h5>
+						<div >
+							<div>
+
+								<input type="radio" name="choice" value="pilot" id="is_pil" onclick="show_div()"> Pilot
+							</div>
+							<div>
+    							<input type="radio" checked=true name="choice" value="passenger" id="is_pass" onclick="hide_div()"> Passenger
+							</div>
+						</div>
+					 </div>
+
+					 <div class="input-div one" id="div_pilot">
 						
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Your Name</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
-								</div>
-							</div>
+						<div class="div">
+								<h5>Flying hours</h5>
+								<input type="number" class="input" id="fly">
 						</div>
+					 </div>
 
-						<div class="form-group">
-							<label for="surname" class="cols-sm-2 control-label">Your Surname</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="surname" id="surnname"  placeholder="Enter your Surname"/>
-								</div>
-							</div>
-						</div>
-						
-
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Your Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
-								</div>
-							</div>
-						</div>
-
-						
-
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button" id="registerButton">Register</button>
-						</div>
-						<div class="login-register">
-				            <a href="login.html">Login</a>
-				         </div>
-					</form>
-				</div>
+					   
+					<a href="login.html">All ready have an account?</a>
+					<button id="submit" value="Register">Submit</button>
+					<input type="submit" class="btn" value="Register">
+					</div>
 			</div>
-		</div>
-	<!--
-		<div class="page_content">
-		<div class="register_page">
-			
-			<label for="name">Name: </label><br>
-  			<input type="text" id="name" name="name"><br>
-			<label for="surname">Surname: </label><br>
-  			<input type="text" id="surname"><br>
-			<label for="email">Mail: </label><br>
-  			<input type="email" id="mail" ><br>
-			<label for="date">Date of Birth: </label><br>
-  			<input type="date" id="date" ><br>
-			<label for="phone">Phone Number: </label><br>
-  			<input type="text" id="phone" ><br>
-			  <label for="fly">
-				  flying hours: </label><br>
-  			<input type="number" id="fly" ><br>
 
-  			<button id="submit">Submit</button>
-			<button id="testform">test</button>
-			<p id="result">result1 </p>
+
 		
+				
+			<!--	<label for="mail">Mail: </label><br>
+				<input type="text" id="mail" ><br>
+				<label for="date">Date of Birth: </label><br>
+				<input type="date" id="date" ><br>
+				<label for="phone">Phone Number: </label><br>
+				<input type="text" id="phone" ><br>
+				<label for="fly">
+					flying hours: </label><br>
+				<input type="number" id="fly" ><br>
+
+				<button id="submit">Submit</button>
+				<button id="testform">test</button>
+				<p id="result">result1 </p>
+			-->
+				
+			</div>
 			
 		</div>
-		</div>
-		-->	
+		
 		
 	    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>

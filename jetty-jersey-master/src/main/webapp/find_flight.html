@@ -5,6 +5,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body onload="fligth_list_display()">
 
@@ -23,7 +24,7 @@
 					<p><%=price%>price/seats</p>
 					<p><%=availableSeats%>seats available</p>
 					</div>
-				<!----	<button id=<%=availableSeats%> > choose this flight</button> ---->
+					<button id=choose  onclick= "window.location.href='http://localhost:8080/flight_res.html';" > choose this flight</button> 
 					
 				</div>
 		</script>
@@ -59,9 +60,10 @@
 				<input type="text" class="searchInput" placeholder="Arrival" id="inputArr">
 				<input type="date" class="searchInput" placeholder="Date" id="inputDate">
 				<input type="number" class="searchInput" placeholder="Num passengers" id="inputNum">
-				<button id="searchButton"></button>
+				<button id="searchButton"><i class="fas fa-search" id="searchIcon"></i></button>
 				</div>
 			<button id="buttonD"><h3>Let's fly!</h3></button>
+			<button id="buttonB"><h3>Pilot!</h3></button>
 			<button id="getFlightList"><h3>get flight</h3></button>
 			<i class="fas fa-search" id="searchIcon">qqq</i>
 			

@@ -1,17 +1,11 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
  <!DOCTYPE html>
 <html>
 	<head>
 		<link rel="stylesheet" href="stylesheet.css" />
-		<link rel="stylesheet" href="register.css" />
-		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="stylesheet" href="login.css" />
 		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
-
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
 	</head>
 	<body>
@@ -42,53 +36,35 @@
 		</nav>
 		
 		<div class="container">
-			<div class="row main">
-				<div class="panel-heading">
-	               <div class="panel-title text-center">
-	               		<h1 class="title">Login</h1>
-	               		<hr />
-	               	</div>
-	            </div> 
-				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#">
-						
-						
-						
-
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Your Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
-								</div>
-							</div>
-						</div>
-
-						
-
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-								</div>
-							</div>
-						</div>
-
-						
-
-						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button" id="registerButton">Login</button>
-						</div>
-						<div class="login-register">
-				            <a href="register.html">Register</a>
-				         </div>
-					</form>
-				</div>
+			<div class="img">
+				<img src="media/undraw_adventure_4hum.svg">
 			</div>
-		</div>
+			<div class="login-content">
+				<form action="index.html">
+					<img src="media/avatar.svg">
+					<h2 class="title">Welcome</h2>
+					   <div class="input-div one">
+						  <div class="i">
+								  <i class="fas fa-user"></i>
+						  </div>
+						  <div class="div">
+								  <h5>Email</h5>
+								  <input type="text" class="input">
+						  </div>
+					   </div>
+					   <div class="input-div pass">
+						  <div class="i"> 
+							   <i class="fas fa-lock"></i>
+						  </div>
+						  <div class="div">
+							   <h5>Password</h5>
+							   <input type="password" class="input">
+					   </div>
+					</div>
+					<a href="register.html">Not registered?</a>
+					<input type="submit" class="btn" value="Login">
+				</form>
+			</div>
 	<!--
 		<div class="page_content">
 		<div class="register_page">

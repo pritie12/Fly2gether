@@ -6,6 +6,7 @@ function getServerData(url, success){
     }).done(success);
 }
 function putServerData(url, data, success) {
+    
     $.ajax({
         type: 'PUT',
         contentType: "application/json",

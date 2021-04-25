@@ -20,5 +20,5 @@ public interface aircraftDao {
 	public void addAircraft(Aircraft aircraft);
 	
 	/* DELETE */
-	public void deleteAircraft(String TailNumber);
+	public void deleteAircraft(int TailNumber);
 }

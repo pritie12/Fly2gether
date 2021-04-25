@@ -13,7 +13,7 @@ import com.fly2gether.jetty_jersey.dao.*;
 
 public class AircraftDaoImpl implements aircraftDao{
 
-	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Aircraft");
+	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Fly2gether");
 	
 	public AircraftDaoImpl(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
@@ -38,7 +38,7 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
+
 		}
 		return detached;
 		
@@ -68,7 +68,6 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getModel();
 	}
@@ -96,7 +95,6 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getConstructorCompany();
 	}
@@ -123,7 +121,7 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
+
 		}
 		return detached.getNumberOfSeats();
 	}
@@ -140,19 +138,24 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}		
 	}
 
 
 
-	public void deleteAircraft(String TailNumber) {
+	public void deleteAircraft(int TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
 		try {
 			tx.begin();
-			a = pm.getObjectById(Aircraft.class, TailNumber);
+			//a = pm.getObjectById(Aircraft.class, TailNumber);
+			Query q = pm.newQuery(Aircraft.class);
+			q.declareParameters("int TailNumber");
+			q.setFilter("TailNumber == id");
+			q.setUnique(true);
+			
+			a = (Aircraft) q.execute(TailNumber);
             pm.deletePersistent(a);
 			tx.commit();
 		} finally {
@@ -160,7 +163,6 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}		
 		
 	}
@@ -189,7 +191,7 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
+
 		}
 		return detached;
 	}	

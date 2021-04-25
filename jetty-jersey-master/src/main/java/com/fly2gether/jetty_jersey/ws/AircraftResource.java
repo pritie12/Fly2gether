@@ -70,7 +70,7 @@ public class AircraftResource implements aircraftDao{
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/deleteAircraft")
-	public void deleteAircraft(String TailNumber) {
+	public void deleteAircraft(int TailNumber) {
 		DAO.getAircraftDao().deleteAircraft(TailNumber);		
 	}
 	

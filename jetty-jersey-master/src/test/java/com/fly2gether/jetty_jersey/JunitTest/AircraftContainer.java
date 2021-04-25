@@ -3,14 +3,14 @@ package com.fly2gether.jetty_jersey.JunitTest;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-
 import com.fly2gether.jetty_jersey.dao.Aircraft;
 
+@PersistenceCapable
 public class AircraftContainer {
 
 	@PrimaryKey
@@ -37,7 +37,7 @@ public class AircraftContainer {
 		return fleet;
 	}
 
-	public void setFleet(List<Aircraft> fleet) {
+	public void setActions(List<Aircraft> fleet) {
 		this.fleet = fleet;
 	}
 

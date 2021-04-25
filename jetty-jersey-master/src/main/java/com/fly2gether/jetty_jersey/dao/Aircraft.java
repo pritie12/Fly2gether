@@ -8,35 +8,35 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 public class Aircraft {
 	
-	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	private String tailNumber;
+	//@PrimaryKey
+	//@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
+	protected int tailNumber ;
+	
 	private String model;
 	private String constructorCompany;
 	private int numberOfSeats;
 	
-	private static int nbAircraft=0;// permit to give an unique id
+	//private static int nbAircraft=0;// permit to give an unique id
 	
 	/* CONSTRUCTORS */
 	public Aircraft (){
-        this.tailNumber = "";
+        this.tailNumber = 5;
         this.model = "";
         this.constructorCompany = "";
         this.numberOfSeats = 0;
-        nbAircraft++;
-       // id="AI"+nbAircraft;
-        
+        //nbAircraft++;
+       // id="AI"+nbAircraft;     
     }
 	public Aircraft (String model, String constructorCompany,int numberOfSeats){
         this.model = model;
         this.constructorCompany = constructorCompany;
         this.numberOfSeats = numberOfSeats;
-        nbAircraft++;
-        tailNumber="AI"+nbAircraft;
+        //nbAircraft++;
+       // tailNumber="AI"+nbAircraft;
     }	
 	 /* GETTERS */
 
-	public String getTailNumber() {
+	public int getTailNumber() {
 		return this.tailNumber;
 	}
 	public String getModel() {
@@ -50,8 +50,8 @@ public class Aircraft {
 	}
 	
 	/* SETTERS */
-	public void setTailNumber(String tailNumber) {
-		this.tailNumber=tailNumber;
+	public void setTailNumber(int id) {
+		this.tailNumber=id;
 	}
 	public void setModel(String model) {
 		this.model=model;

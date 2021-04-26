@@ -8,19 +8,20 @@ public interface flightDao {
 	
 	/* GET */
 
-	public Pilot getPilot(String id);	
-	public Aircraft getAircraft(String id);
-	public int getPrice(String id);
-	public List<String> getPassengers(String id);
-	public int getAvailableSeats(String id);	
-	public String getAppointmentDescription(String id);	
-	public Date getdepartureDate(String id);
-	public LocalDateTime getdepartureTime(String id);
-	public String getdepartureAirport(String id);	
-	public Date getarrivalDate(String id);
-	public LocalDateTime getarrivalTime(String id);
-	public String getarrivalAirport(String id);
-	public Duration getFlightDuration(String id);
+	public Pilot getPilot(int id);	
+	public Aircraft getAircraft(int id);
+	public int getPrice(int id);
+	public List<Integer> getPassengers(int id);
+	public int getAvailableSeats(int id);	
+	public String getAppointmentDescription(int id);	
+	public Date getdepartureDate(int id);
+	public LocalDateTime getdepartureTime(int id);
+	public String getdepartureAirport(int id);	
+	public Date getarrivalDate(int id);
+	public LocalDateTime getarrivalTime(int id);
+	public String getarrivalAirport(int id);
+	public Duration getFlightDuration(int id);
+	public List<Flight> getFlights();
 	
 	//filter the flights by price
 	public List<Flight> getFlights(int minPrice,int maxPrice);
@@ -32,11 +33,11 @@ public interface flightDao {
 	
 	/* PUT */
 	public void addFlight(Flight flight);
-	public void addPassenger(String passenger_id, String flight_id);
+	public void addPassenger(int passenger_id, int flight_id);
 	
 	
 	/* DELETE */
-	public void deleteFlight(String id);
-	public void removePassenger(String passenger_id,String flight_id);
+	public void deleteFlight(int id);
+	public void removePassenger(int passenger_id,int flight_id);
 	
 }

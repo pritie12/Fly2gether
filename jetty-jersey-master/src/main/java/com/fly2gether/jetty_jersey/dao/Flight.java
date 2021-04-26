@@ -16,7 +16,7 @@ public class Flight {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	 private String id;	
+	 private int id;	
 	 private String appointmentDescription;	
 	 private Date departureDate;
 	 private LocalDateTime departureTime;
@@ -28,7 +28,7 @@ public class Flight {
 	 private int availablesSeats;
 	 private int price; 
 	 @Persistent
-	 private List<String> passengersList;
+	 private List<Integer> passengersList;
 	 @Persistent
 	 private Pilot pilot;
 	 @Persistent
@@ -48,11 +48,11 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=0;
 		 this.price=0;
-		 this.passengersList=new ArrayList<String>();
+		 this.passengersList=new ArrayList<Integer>();
 		 this.pilot= new Pilot();
 		 this.aircraft=new Aircraft();
 		 nbFlights ++;
-		 id="FL"+nbFlights;
+		 id=nbFlights;
 	 }
 	 
 	 public Flight(Date departureDate,LocalDateTime departureTime,String departureAirport,Date arrivalDate, LocalDateTime arrivalTime ,
@@ -69,13 +69,13 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=aircraft.getNumberOfSeats();
 		 this.price=price;
-		 this.passengersList=new ArrayList<String>();
+		 this.passengersList=new ArrayList<Integer>();
 		 nbFlights ++;
-		 id="FL"+nbFlights;
+		 id=nbFlights;
 	 }
 	
 	 /* GETTERS */
-	 public String getId() {
+	 public int getId() {
 		 return this.id;
 	 }
 	 public String getAppointmentDescription() {
@@ -111,7 +111,7 @@ public class Flight {
 	 public int getAvailableSeats() {
 		 return this.availablesSeats;
 	 }
-	 public List<String> getPassengersList(){
+	 public List<Integer> getPassengersList(){
 		 return this.passengersList;
 	 }
 	 public Duration getFlightDuration() {
@@ -120,7 +120,7 @@ public class Flight {
 	 }
 	 
 	 /* SETTERS */
-	 public void setId(String id) {
+	 public void setId(int id) {
 		 this.id=id;
 	 }
 	 public void setAppointmentDescription(String appointmentDescription) {
@@ -156,7 +156,7 @@ public class Flight {
 	 public void setAvailableSeats(int availableSeats) {
 		 this.availablesSeats=availableSeats;
 	 }
-	 public void setPassengersList(List<String> passengersList){
+	 public void setPassengersList(List<Integer> passengersList){
 		 this.passengersList=passengersList;
 	 }
 	 public void setFlightDuration(Duration flightDuration) {

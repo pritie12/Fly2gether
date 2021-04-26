@@ -27,7 +27,7 @@ public class AircraftResource implements aircraftDao{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraft")
-	public Aircraft getAircraft( @PathParam("TailNumber")String TailNumber) {
+	public Aircraft getAircraft( @PathParam("TailNumber")int TailNumber) {
 		return DAO.getAircraftDao().getAircraft(TailNumber);
 	}
 	
@@ -41,21 +41,21 @@ public class AircraftResource implements aircraftDao{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraftModel")
-	public String getModel(@PathParam("TailNumber")String TailNumber) {
+	public String getModel(@PathParam("TailNumber")int TailNumber) {
 		return DAO.getAircraftDao().getModel(TailNumber);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraftCompany")
-	public String getCompany(@PathParam("TailNumber")String TailNumber) {
+	public String getCompany(@PathParam("TailNumber")int TailNumber) {
 		return DAO.getAircraftDao().getCompany(TailNumber);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/getAircraftNumberOfSeats")
-	public int getNumberOfSeats(@PathParam("TailNumber")String TailNumber) {
+	public int getNumberOfSeats(@PathParam("TailNumber")int TailNumber) {
 		return DAO.getAircraftDao().getNumberOfSeats(TailNumber);
 	}
 	

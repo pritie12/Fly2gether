@@ -34,21 +34,21 @@ public class PassengerResource implements passengerDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassenger")
-	public Passenger getPassenger(@PathParam("id")String id) {
+	public Passenger getPassenger(@PathParam("id")int id) {
 		return DAO.getPassengerDao().getPassenger(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getLoginInfo")
-	public Map<String, String> getLoginInfo(String id) {
+	public Map<String, String> getLoginInfo(int id) {
 		return DAO.getPassengerDao().getLoginInfo(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerName")
-	public String getname(@PathParam("id")String id) {
+	public String getname(@PathParam("id")int id) {
 		return DAO.getPassengerDao().getname(id);
 	}
 
@@ -56,21 +56,21 @@ public class PassengerResource implements passengerDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerSurname")
-	public String getsurname(@PathParam("id")String id) {
+	public String getsurname(@PathParam("id")int id) {
 		return DAO.getPassengerDao().getsurname(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerDateofBirth")
-	public Date getdateOfBirth(@PathParam("id")String id) {
+	public Date getdateOfBirth(@PathParam("id")int id) {
 		return DAO.getPassengerDao().getdateOfBirth(id);
 
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerEmail")
-	public String getemail(@PathParam("id")String id) {
+	public String getemail(@PathParam("id")int id) {
 		return DAO.getPassengerDao().getemail(id);
 
 	}
@@ -78,7 +78,7 @@ public class PassengerResource implements passengerDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerPhoneNumber")
-	public String getphoneNumber(@PathParam("id")String id) {
+	public String getphoneNumber(@PathParam("id")int id) {
 		return DAO.getPassengerDao().getphoneNumber(id);
 
 	}
@@ -86,7 +86,7 @@ public class PassengerResource implements passengerDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerReservations")
-	public List<String> getpassengerBookingList(@PathParam("id")String id) {
+	public List<Integer> getpassengerBookingList(@PathParam("id")int id) {
 		return DAO.getPassengerDao().getpassengerBookingList(id);
 
 	}
@@ -101,7 +101,7 @@ public class PassengerResource implements passengerDao {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/{resa_id}/addPassenger")
-	public void addReservation(@PathParam("passenger_id")String passenger_id,@PathParam("resa_id") String resa_id) {
+	public void addReservation(@PathParam("passenger_id")int passenger_id,@PathParam("resa_id") int resa_id) {
 		DAO.getPassengerDao().addReservation(passenger_id,resa_id);	
 		
 	}
@@ -109,7 +109,7 @@ public class PassengerResource implements passengerDao {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/{resa_id}/removeReservation")
-	public void removeReservation(@PathParam("passenger_id")String passenger_id,@PathParam("resa_id") String resa_id) {
+	public void removeReservation(@PathParam("passenger_id")int passenger_id,@PathParam("resa_id") int resa_id) {
 		DAO.getPassengerDao().removeReservation(passenger_id, resa_id);
 	}
 		
@@ -118,7 +118,7 @@ public class PassengerResource implements passengerDao {
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/DeletePassenger")
-	public void deletePassenger(@PathParam("id")String id) {
+	public void deletePassenger(@PathParam("id")int id) {
 		DAO.getPassengerDao().deletePassenger(id);
 	}
 }

@@ -31,20 +31,20 @@ public class PilotResource implements pilotDao{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilot")
-	public Pilot getPilot(@PathParam("id")String id) {
+	public Pilot getPilot(@PathParam("id")int id) {
 		return DAO.getPilotDao().getPilot(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getLoginInfo")	
-	public Map<String, String> getLoginInfo(String id) {
+	public Map<String, String> getLoginInfo(int id) {
 		return DAO.getPilotDao().getLoginInfo(id);
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotName")
-	public String getname(@PathParam("id")String id) {
+	public String getname(@PathParam("id")int id) {
 		return DAO.getPilotDao().getname(id);
 	}
 
@@ -52,49 +52,39 @@ public class PilotResource implements pilotDao{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotSurname")
-	public String getsurname(@PathParam("id")String id) {
+	public String getsurname(@PathParam("id")int id) {
 		return DAO.getPilotDao().getsurname(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotDateofBirth")
-	public Date getdateOfBirth(@PathParam("id")String id) {
+	public Date getdateOfBirth(@PathParam("id")int id) {
 		return DAO.getPilotDao().getdateOfBirth(id);
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotEmail")
-	public String getemail(@PathParam("id")String id) {
+	public String getemail(@PathParam("id")int id) {
 		return DAO.getPilotDao().getemail(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotPhoneNumber")
-	public String getphoneNumber(@PathParam("id")String id) {
+	public String getphoneNumber(@PathParam("id")int id) {
 		return DAO.getPilotDao().getphoneNumber(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotFlyingHours")
-	public int getFlyingHours(String id) {
+	public int getFlyingHours(int id) {
 		return DAO.getPilotDao().getFlyingHours(id);
 	}
 	
 
 
-	
-	
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addPilot2")
-	public String addPilot2() {
-		Pilot p= new Pilot();
-		return p.getPilotId();
-	}
-	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
@@ -107,7 +97,7 @@ public class PilotResource implements pilotDao{
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/deletePilot")
-	public void deletePilot(String id) {
+	public void deletePilot(int id) {
 		DAO.getPilotDao().deletePilot(id);
 	}
 	

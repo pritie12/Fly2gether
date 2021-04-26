@@ -46,7 +46,7 @@ public class AircraftDaoImpl implements aircraftDao{
 	
 	
 	
-	public String getModel(String TailNumber) {
+	public String getModel(int TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -55,7 +55,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("String TailNumber");
+			q.declareParameters("int TailNumber");
 			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			
@@ -73,7 +73,7 @@ public class AircraftDaoImpl implements aircraftDao{
 	}
 	
 	
-	public String getCompany(String TailNumber) {
+	public String getCompany(int TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -82,7 +82,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("String TailNumber");
+			q.declareParameters("int TailNumber");
 			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			
@@ -99,7 +99,7 @@ public class AircraftDaoImpl implements aircraftDao{
 		return detached.getConstructorCompany();
 	}
 
-	public int getNumberOfSeats(String TailNumber) {
+	public int getNumberOfSeats(int TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -108,7 +108,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("String TailNumber");
+			q.declareParameters("int TailNumber");
 			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			
@@ -149,13 +149,8 @@ public class AircraftDaoImpl implements aircraftDao{
 		Aircraft a=null;
 		try {
 			tx.begin();
-			//a = pm.getObjectById(Aircraft.class, TailNumber);
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int TailNumber");
-			q.setFilter("TailNumber == id");
-			q.setUnique(true);
-			
-			a = (Aircraft) q.execute(TailNumber);
+			a = pm.getObjectById(Aircraft.class, TailNumber);
+
             pm.deletePersistent(a);
 			tx.commit();
 		} finally {
@@ -163,13 +158,14 @@ public class AircraftDaoImpl implements aircraftDao{
 				tx.rollback();
 			}
 			pm.close();
-		}		
+		}
+		System.out.println("Aircraft deleted from database");
 		
 	}
 
 
 
-	public Aircraft getAircraft(String TailNumber) {
+	public Aircraft getAircraft(int TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -178,7 +174,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("String TailNumber");
+			q.declareParameters("int TailNumber");
 			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			

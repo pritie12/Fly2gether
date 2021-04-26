@@ -13,13 +13,13 @@ import javax.jdo.Transaction;
 import com.fly2gether.jetty_jersey.dao.*;
 public class PilotDaoImpl implements pilotDao {
 	
-	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Pilot");
+	PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Fly2gether");
 	
 	public PilotDaoImpl(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
 	}	
 
-	public Map<String, String> getLoginInfo(String Id) {
+	public Map<String, String> getLoginInfo(int Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -28,7 +28,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String Id");
+			q.declareParameters("int Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(Id);
@@ -44,7 +44,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getLoginInfo();
 	}
 
-	public String getname(String id) {
+	public String getname(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -53,7 +53,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String Id");
+			q.declareParameters("int Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -64,12 +64,11 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getName();
 	}
 
-	public String getsurname(String id) {
+	public String getsurname(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -78,7 +77,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String Id");
+			q.declareParameters("int Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -89,12 +88,11 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getSurname();
 	}
 
-	public Date getdateOfBirth(String id) {
+	public Date getdateOfBirth(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -103,7 +101,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String Id");
+			q.declareParameters("int Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -114,12 +112,11 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getDateOfBirth();
 	}
 
-	public String getemail(String id) {
+	public String getemail(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -128,7 +125,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String Id");
+			q.declareParameters("int Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -139,12 +136,11 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getEmail();
 	}
 
-	public String getphoneNumber(String id) {
+	public String getphoneNumber(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -153,7 +149,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String Id");
+			q.declareParameters("int Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -164,12 +160,11 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getPhoneNumber();
 	}
 
-	public int getFlyingHours(String id) {
+	public int getFlyingHours(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -178,7 +173,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String Id");
+			q.declareParameters("int Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -189,7 +184,6 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached.getFlyingHours();
 	}
@@ -228,12 +222,11 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached;
 	}
 
-	public void deletePilot(String id) {
+	public void deletePilot(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p=null;
@@ -247,13 +240,12 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		System.out.println("Pilot deleted from database");
 		
 	}
 
-	public Pilot getPilot(String id) {
+	public Pilot getPilot(int id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -262,7 +254,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("String id");
+			q.declareParameters("int id");
 			q.setFilter("id == pilot_id");
 			q.setUnique(true);
 			
@@ -275,7 +267,6 @@ public class PilotDaoImpl implements pilotDao {
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		return detached;
 	}

@@ -33,42 +33,42 @@ public class ReservationResource implements reservationDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getbookingUser")
-	public Passenger getbookingUser(@PathParam("Resa_ID")String resa_id) {
+	public Passenger getbookingUser(@PathParam("Resa_ID")int resa_id) {
 		return DAO.getReservationDao().getbookingUser(resa_id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getdesiredSeats")
-	public int getdesiredSeats(@PathParam("Resa_ID")String resa_id) {
+	public int getdesiredSeats(@PathParam("Resa_ID")int resa_id) {
 		return DAO.getReservationDao().getdesiredSeats(resa_id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getFlight")
-	public Flight getFlight(@PathParam("Resa_ID")String resa_id) {
+	public Flight getFlight(@PathParam("Resa_ID")int resa_id) {
 		return DAO.getReservationDao().getFlight(resa_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/getFlight")
-	public List<String> getReservations(@PathParam("passenger_id")String passenger_id) {
+	public List<Integer> getReservations(@PathParam("passenger_id")int passenger_id) {
 		return DAO.getReservationDao().getReservations(passenger_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{reservation_id}/getReservation")
-	public Reservation getReservation(String reservation_id) {	
+	public Reservation getReservation(int reservation_id) {	
 		return DAO.getReservationDao().getReservation(reservation_id);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{reservation_id}/changeNumberOfSeats")
-	public void changeNumberOfSeats(int seats,@PathParam("reservation_id")String reservation_id) {
+	public void changeNumberOfSeats(int seats,@PathParam("reservation_id")int reservation_id) {
 		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);		
 	}
 	
@@ -82,7 +82,7 @@ public class ReservationResource implements reservationDao {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/deleteReservation")
-	public void deleteReservation(String id) {
+	public void deleteReservation(int id) {
 		DAO.getReservationDao().deleteReservation(id);		
 	}
 

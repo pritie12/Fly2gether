@@ -8,14 +8,14 @@ public interface pilotDao {
 	
 	/* GET */
 	public List<Pilot> getPilots();
-	public Pilot getPilot(String id);	
-	public Map<String,String> getLoginInfo(String Id);
-	public String getname(String id);
-	public String getsurname(String id);
-	public Date getdateOfBirth(String id);
-	public String getemail(String id);
-	public String getphoneNumber(String id);
-	public int getFlyingHours(String id);
+	public Pilot getPilot(int id);	
+	public Map<String,String> getLoginInfo(int Id);
+	public String getname(int id);
+	public String getsurname(int id);
+	public Date getdateOfBirth(int id);
+	public String getemail(int id);
+	public String getphoneNumber(int id);
+	public int getFlyingHours(int id);
 	
 	/* POST */
 	/* no post requests here */
@@ -24,7 +24,7 @@ public interface pilotDao {
 	public void addPilot(Pilot pilot);
 	
 	/* DELETE */
-	public void deletePilot(String id);
+	public void deletePilot(int id);
 
 
 }

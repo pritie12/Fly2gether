@@ -8,10 +8,10 @@ public interface aircraftDao {
 
 	/* GET */
 	public List<Aircraft> getFleet();
-	public String getModel(String TailNumber);
-	public String getCompany(String TailNumber);
-	public int getNumberOfSeats(String TailNumber);
-	public Aircraft getAircraft(String TailNumber);
+	public String getModel(int TailNumber);
+	public String getCompany(int TailNumber);
+	public int getNumberOfSeats(int TailNumber);
+	public Aircraft getAircraft(int TailNumber);
 	
 	/* POST */
 	/* no post request here */

@@ -39,7 +39,7 @@ public class Database {
 		totalPassengers=new ArrayList<Passenger>();
 		totalPilots=new ArrayList<Pilot>();
 		
-		Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10);
+		Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,1520);
 		Passenger passenger1=new Passenger("Hiba","SOUBER","hiba@mail.fr","06XXX",new Date(1999,06,12));
 		Pilot pilot1=new Pilot("Rayan","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
 		Pilot pilot2=new Pilot("Rayan2","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);

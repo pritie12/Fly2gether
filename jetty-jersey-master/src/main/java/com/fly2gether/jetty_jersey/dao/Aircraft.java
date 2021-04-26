@@ -8,9 +8,9 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 public class Aircraft {
 	
-	//@PrimaryKey
-	//@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
-	protected int tailNumber ;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
+	private int tailNumber ;
 	
 	private String model;
 	private String constructorCompany;
@@ -20,19 +20,19 @@ public class Aircraft {
 	
 	/* CONSTRUCTORS */
 	public Aircraft (){
-        this.tailNumber = 5;
+        this.tailNumber = 1478;
         this.model = "";
         this.constructorCompany = "";
         this.numberOfSeats = 0;
         //nbAircraft++;
        // id="AI"+nbAircraft;     
     }
-	public Aircraft (String model, String constructorCompany,int numberOfSeats){
+	public Aircraft (String model, String constructorCompany,int numberOfSeats,int tailNumber){
         this.model = model;
         this.constructorCompany = constructorCompany;
         this.numberOfSeats = numberOfSeats;
         //nbAircraft++;
-       // tailNumber="AI"+nbAircraft;
+        this.tailNumber=tailNumber;
     }	
 	 /* GETTERS */
 

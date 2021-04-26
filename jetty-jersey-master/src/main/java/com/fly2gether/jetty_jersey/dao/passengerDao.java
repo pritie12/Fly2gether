@@ -8,24 +8,24 @@ public interface passengerDao {
 
 	/* GET */
 	public List<Passenger> getPassengers();
-	public Passenger getPassenger(String id);
-	public Map<String,String> getLoginInfo(String Id);
-	public String getname(String passenger_id);
-	public String getsurname(String passenger_id);
-	public Date getdateOfBirth(String passenger_id);
-	public String getemail(String passenger_id);
-	public String getphoneNumber(String passenger_id);
-	public List<String> getpassengerBookingList(String passenger_id);
+	public Passenger getPassenger(int id);
+	public Map<String,String> getLoginInfo(int Id);
+	public String getname(int passenger_id);
+	public String getsurname(int passenger_id);
+	public Date getdateOfBirth(int passenger_id);
+	public String getemail(int passenger_id);
+	public String getphoneNumber(int passenger_id);
+	public List<Integer> getpassengerBookingList(int passenger_id);
 	
 	/* POST */
 	/* no post requests here */
 	
 	/* PUT */
 	public void addPassenger(Passenger passenger);
-	public void addReservation(String passenger_id,String resa_id);
+	public void addReservation(int passenger_id,int resa_id);
 	
 	/* DELETE*/ 
-	public void removeReservation(String passenger_id,String resa_id);
-	public void deletePassenger(String id);
+	public void removeReservation(int passenger_id,int resa_id);
+	public void deletePassenger(int id);
 
 }

@@ -9,14 +9,14 @@ public class Reservation {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	private String resa_id;
+	private int resa_id;
 	private Passenger bookingUser;
 	private Flight flight;
 	private int desiredSeats;
 	
 	/* CONSTRUCTORS */
 	public Reservation() {
-		this.resa_id="";
+		this.resa_id=0;
 		this.bookingUser=new Passenger();
 		this.flight=new Flight();
 		this.desiredSeats=0;
@@ -32,7 +32,7 @@ public class Reservation {
 	public Passenger getBookingUser() {
 		return this.bookingUser;
 	}
-	public String getReservationId() {
+	public int getReservationId() {
 		return this.resa_id;
 	}
 	public Flight getFlight() {
@@ -46,7 +46,7 @@ public class Reservation {
 	public void setBookingUser(Passenger bookingUser) {
 		this.bookingUser=bookingUser;
 	}
-	public void setReservationId(String resa_id) {
+	public void setReservationId(int resa_id) {
 		this.resa_id=resa_id;
 	}
 	public void setFlight(Flight flight) {

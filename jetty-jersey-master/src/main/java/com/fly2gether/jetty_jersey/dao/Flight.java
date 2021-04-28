@@ -34,7 +34,6 @@ public class Flight {
 	 @Persistent
 	 private Aircraft aircraft;
 	 
-	 private static int nbFlights=0;// permit to give an unique id
 	 
 	 /* Constructors */
 	 public Flight() {
@@ -51,12 +50,11 @@ public class Flight {
 		 this.passengersList=new ArrayList<Integer>();
 		 this.pilot= new Pilot();
 		 this.aircraft=new Aircraft();
-		 nbFlights ++;
-		 id=nbFlights;
+
 	 }
 	 
 	 public Flight(Date departureDate,LocalDateTime departureTime,String departureAirport,Date arrivalDate, LocalDateTime arrivalTime ,
-			 String arrivalAirport,int price, Pilot pilot, Aircraft aircraft) {
+			 String arrivalAirport,int availablesSeats, int price, Pilot pilot, Aircraft aircraft) {
 		 this.appointmentDescription="";
 		 this.departureDate=departureDate;
 		 this.departureAirport=departureAirport;
@@ -67,11 +65,10 @@ public class Flight {
 		 this.pilot= pilot;
 		 this.aircraft=aircraft;
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
-		 this.availablesSeats=aircraft.getNumberOfSeats();
+		 this.availablesSeats=availablesSeats;
 		 this.price=price;
 		 this.passengersList=new ArrayList<Integer>();
-		 nbFlights ++;
-		 id=nbFlights;
+
 	 }
 	
 	 /* GETTERS */

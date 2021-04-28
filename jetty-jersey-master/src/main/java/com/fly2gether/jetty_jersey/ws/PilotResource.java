@@ -1,7 +1,6 @@
 package com.fly2gether.jetty_jersey.ws;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -14,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.*;
-import com.fly2gether.jetty_jersey.database.Database;
+
 
 
 @Path("/Pilote")
@@ -35,12 +34,7 @@ public class PilotResource implements pilotDao{
 		return DAO.getPilotDao().getPilot(id);
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}/getLoginInfo")	
-	public Map<String, String> getLoginInfo(int id) {
-		return DAO.getPilotDao().getLoginInfo(id);
-	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotName")
@@ -79,7 +73,7 @@ public class PilotResource implements pilotDao{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotFlyingHours")
-	public int getFlyingHours(int id) {
+	public int getFlyingHours(@PathParam("id")int id) {
 		return DAO.getPilotDao().getFlyingHours(id);
 	}
 	
@@ -99,6 +93,35 @@ public class PilotResource implements pilotDao{
 	@Path("/{id}/deletePilot")
 	public void deletePilot(int id) {
 		DAO.getPilotDao().deletePilot(id);
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{username}/PilotLogin")
+	public Pilot Login(@PathParam("username")String username, String password) {
+		return DAO.getPilotDao().Login(username,password);
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getPilot")
+	public Pilot getPilot(String Username) {
+		return DAO.getPilotDao().getPilot(Username);
+	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/modifyPilotUsername")
+	public void modifyUsername(@PathParam("id")int id, String Username) {
+		DAO.getPilotDao().modifyUsername(id,Username);
+		
+	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/modifyPilotPwd")
+	public void modifyPwd(@PathParam("id")int id, String Pwd) {
+		DAO.getPilotDao().modifyPwd(id,Pwd);	
 	}
 	
 }

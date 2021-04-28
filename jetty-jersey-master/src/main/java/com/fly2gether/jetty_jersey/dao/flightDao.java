@@ -25,11 +25,20 @@ public interface flightDao {
 	
 	//filter the flights by price
 	public List<Flight> getFlights(int minPrice,int maxPrice);
-	//one way trip
-	public List<Flight> getFlights(Date DepartureTime, String DepartureAirport);		
-	//display flights that still have the number of seats desired 
-	public List<Flight> getFlights(int availableSeats);
+	//public List<Flight> getFlights(LocalDateTime DepartureMin,LocalDateTime DepartureMax, String DepartureAirport);	
+	public List<Flight> getFlights(int Seats);	
 	
+	/* POST */
+	public void setPilot(int id,Pilot Pilot);	
+	public void setAircraft(int id,Aircraft Aircraft);
+	public void setPrice(int id,int Price);
+	public void setPassengers(int id,List<Integer> Passengers);
+	public void setAvailableSeats(int id, int AvailableSeats);	
+	public void setAppointmentDescription(int id,String AppointmentDescription);	
+	public void setdepartureDate(int id,Date DepartureDate);	
+	public void setarrivalDate(int id,Date ArrivalDate);
+	public void setFlightDuration(int id,Duration FlightDuration);
+	//public void modifyFlight(int id, LocalDateTime DepartureTime,String DepartureAirport, LocalDateTime ArrivalTime,String ArrivalAirport);
 	
 	/* PUT */
 	public void addFlight(Flight flight);

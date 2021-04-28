@@ -12,16 +12,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import com.fly2gether.jetty_jersey.dao.*;
-import com.fly2gether.jetty_jersey.database.Database;
-
 
 
 @Path("/Aircraft")
 public class AircraftResource implements aircraftDao{
-	List<Aircraft> aircrafts=Database.getFleet();
-	
 
 	
 	@GET
@@ -72,6 +67,28 @@ public class AircraftResource implements aircraftDao{
 	@Path("/{TailNumber}/deleteAircraft")
 	public void deleteAircraft(int TailNumber) {
 		DAO.getAircraftDao().deleteAircraft(TailNumber);		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{TailNumber}/setModel")
+	public void setModel(@PathParam("TailNumber")int TailNumber, String Model) {
+		DAO.getAircraftDao().setModel(TailNumber,Model);
+		
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{TailNumber}/setCompany")
+	public void setCompany(@PathParam("TailNumber")int TailNumber, String Company) {
+		DAO.getAircraftDao().setCompany(TailNumber,Company);
+		
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{TailNumber}/setNumberOfSeats")
+	public void setNumberOfSeats(@PathParam("TailNumber")int TailNumber, int NumberOfSeats) {
+		DAO.getAircraftDao().setNumberOfSeats(TailNumber,NumberOfSeats);	
 	}
 	
 }

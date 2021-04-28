@@ -24,6 +24,7 @@ import com.fly2gether.jetty_jersey.daoImpl.PilotDaoImpl;
 
 public class FlightImplTest {
 	
+	@SuppressWarnings({ "unused", "deprecation" })
 	@Test
 	public void test() {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Fly2gether");
@@ -34,17 +35,21 @@ public class FlightImplTest {
 		
 		Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,1520);
 		Passenger passenger1=new Passenger("Hiba","SOUBER","hiba@mail.fr","06XXX",new Date(1999,06,12));
-		Pilot pilot1=new Pilot("Rayan","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
-		Pilot pilot2=new Pilot("Rayan2","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
-		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",20,pilot1,aircraft1);
-		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 2",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",50,pilot1,aircraft1);
-		aircraftDao.addAircraft(aircraft1);
-		passengerDao.addPassenger(passenger1);
-		//pilotDao.addPilot(pilot1);
-		//pilotDao.addPilot(pilot2);
+		Pilot pilot1=new Pilot("Rayan","Gosling","rayan@mail.fr","07XXX",new Date(1980,03,16),200);
+		Pilot pilot2=new Pilot("Harry","Potter","rayan@mail.fr","07XXX",new Date(1980,03,16),200);
+		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",20,37,pilot1,aircraft1);		
+		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",30,48,pilot1,aircraft1);		
+		Flight flight3 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,18,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",40,59,pilot1,aircraft1);
+		Flight flight4 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,15,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",40,59,pilot1,aircraft1);
 		flightDao.addFlight(flight1);
 		flightDao.addFlight(flight2);
-		Assert.assertEquals(2, flightDao.getFlights().size());
+		flightDao.addFlight(flight3);
+		flightDao.addFlight(flight4);
+		Assert.assertEquals(4, flightDao.getFlights().size());
+
+		Assert.assertEquals(1,  flightDao.getFlights(30).size());
+		Assert.assertEquals(2,  flightDao.getFlights(LocalDateTime.of(2021,04,16,13,0,0),LocalDateTime.of(2021,04,16,23,0,0),"Aerodrome 1").size());
+		Assert.assertEquals(2,  flightDao.getFlights(30,50).size());
 
 	}
 }

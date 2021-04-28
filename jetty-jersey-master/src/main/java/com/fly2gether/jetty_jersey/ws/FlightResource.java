@@ -17,8 +17,6 @@ import javax.ws.rs.core.MediaType;
 
 
 import com.fly2gether.jetty_jersey.dao.*;
-import com.fly2gether.jetty_jersey.database.Database;
-
 
 
 @Path("/Flight")
@@ -125,18 +123,11 @@ public class FlightResource implements flightDao {
 		return DAO.getFlightDao().getFlights(maxprice,minprice);	
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getFlightsByDeparture")
-	public List<Flight> getFlights(@PathParam("DepartureTime")Date DepartureTime, @PathParam("DepartureAirport")String DepartureAirport) {
-		return DAO.getFlightDao().getFlights(DepartureTime,DepartureAirport);
-	}
-
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightsBySeats")
-	public List<Flight> getFlights(@PathParam("seats")int seats) {
+	public List<Flight> getFlights(int seats) {
 		return DAO.getFlightDao().getFlights(seats);
 	}
 
@@ -167,5 +158,88 @@ public class FlightResource implements flightDao {
 	public void removePassenger(@PathParam("passenger_id")int passenger_id, @PathParam("flight_id")int flight_id) {
 		DAO.getFlightDao().removePassenger(passenger_id, flight_id);
 	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setPilot")
+	public void setPilot(@PathParam("id")int id, Pilot Pilot) {
+		DAO.getFlightDao().setPilot(id,Pilot);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setAircraft")
+	public void setAircraft(@PathParam("id")int id, Aircraft Aircraft) {
+		DAO.getFlightDao().setAircraft(id,Aircraft);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setPrice")
+	public void setPrice(@PathParam("id")int id, int Price) {
+		DAO.getFlightDao().setPrice(id,Price);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setPassengers")
+	public void setPassengers(@PathParam("id")int id, List<Integer> Passengers) {
+		DAO.getFlightDao().setPassengers(id,Passengers);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setAvailableSeats")
+	public void setAvailableSeats(@PathParam("id")int id, int AvailableSeats) {
+		DAO.getFlightDao().setAvailableSeats(id,AvailableSeats);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setAppointmentDescription")
+	public void setAppointmentDescription(@PathParam("id")int id, String AppointmentDescription) {
+		DAO.getFlightDao().setAppointmentDescription(id,AppointmentDescription);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setdepartureDate")
+	public void setdepartureDate(@PathParam("id")int id, Date DepartureDate) {
+		DAO.getFlightDao().setdepartureDate(id,DepartureDate);
+		
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setarrivalDate")
+	public void setarrivalDate(@PathParam("id")int id, Date ArrivalDate) {
+		DAO.getFlightDao().setarrivalDate(id,ArrivalDate);
+		
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setFlightDuration")
+	public void setFlightDuration(@PathParam("id")int id, Duration FlightDuration) {
+		DAO.getFlightDao().setFlightDuration(id,FlightDuration);
+		
+	}
+
+	/*@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/modifyFlight")
+	public void modifyFlight(@PathParam("id")int id, @PathParam("DepartureTime")LocalDateTime DepartureTime, 
+			@PathParam("DepartureAirport")String DepartureAirport, @PathParam("ArrivalTime")LocalDateTime ArrivalTime,
+			@PathParam("ArrivalAirport")String ArrivalAirport) {
+		DAO.getFlightDao().modifyFlight(id,DepartureTime,DepartureAirport,ArrivalTime,ArrivalAirport);		
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getFlightsByDeparture")
+	public List<Flight> getFlights(@PathParam("DepartureMin")LocalDateTime DepartureMin,@PathParam("DepartureMax")LocalDateTime DepartureMax, @PathParam("DepartureAirport")String DepartureAirport) {
+		return DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
+	}*/
+
 
 }

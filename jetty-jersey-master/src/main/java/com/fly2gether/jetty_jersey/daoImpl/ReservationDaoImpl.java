@@ -115,7 +115,32 @@ public class ReservationDaoImpl implements reservationDao{
 		}
 		return detached;
 	}
+	public boolean getStatus(int reservation_id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Reservation r = null;
+		Reservation detached = null;
+		try {
+			tx.begin();
 
+			Query q = pm.newQuery(Reservation.class);
+			q.declareParameters("int reservation_id");
+			q.setFilter("reservation_id == resa_id");
+			q.setUnique(true);
+			
+			r = (Reservation) q.execute(reservation_id);
+			detached = (Reservation) pm.detachCopy(r);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return detached.getStatus();
+	}
+	
 	public void changeNumberOfSeats(int seats,int reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -212,6 +237,26 @@ public class ReservationDaoImpl implements reservationDao{
 			pm.close();
 		}
 		System.out.println("Reservation deleted from database");
+		
+	}
+
+
+	public void denyReservation(int reservation_id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Reservation r=null;
+		try {
+			tx.begin();
+			r = pm.getObjectById(Reservation.class, reservation_id);
+            r.setStatus(false);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		System.out.println("Reservation denied");
 		
 	}
 

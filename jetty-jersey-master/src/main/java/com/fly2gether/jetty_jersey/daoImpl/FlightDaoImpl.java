@@ -409,11 +409,10 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
-			q.declareParameters("int minPrice,maxPrice");
+			q.declareParameters("int minPrice,int maxPrice");
 			q.setFilter("price < maxPrice && price > minPrice");
-			q.setUnique(true);
 
-			flights = (List<Flight>) q.execute();
+			flights = (List<Flight>) q.execute(minPrice,maxPrice);
 			detached = (List<Flight>) pm.detachCopyAll(flights);
 
 			tx.commit();
@@ -423,37 +422,12 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
+		System.out.println(detached.size()+" flights found !");
 		return detached;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Flight> getFlights(Date DepartureDate, String DepartureAirport) {
-		List<Flight> search_result = null;
-		List<Flight> detached = new ArrayList<Flight>();
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			Query q=pm.newQuery(Flight.class);
-			q.declareParameters("org.joda.time.Date DepartureDate,String DepartureAirport");
-			q.setFilter(" DepartureDate.isAfter(departureDate) && departureAirport == DepartureAirport && availablesSeats != 0 ");
-			q.setUnique(true);
-			search_result = (List<Flight>) q.execute();
-			detached = (List<Flight>) pm.detachCopyAll(search_result);
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		
-		return detached;
-	}
-
-
-	@SuppressWarnings("unchecked")
-	public List<Flight> getFlights(int availableSeats) {
+	public List<Flight> getFlights(LocalDateTime DepartureMin,LocalDateTime DepartureMax, String DepartureAirport) {
 		List<Flight> flights=null;
 		List<Flight> detached = new ArrayList<Flight>();
 
@@ -462,11 +436,38 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
-			q.declareParameters("int availableSeats");
-			q.setFilter("availableSeats == availablesSeats");
-			q.setUnique(true);
 
-			flights = (List<Flight>) q.execute();
+			q.declareParameters("java.util.LocalDateTime DepartureMin, String DepartureAirport,java.util.LocalDateTime DepartureMax");
+			q.setFilter(" DepartureMax >= departureTime && DepartureMin <= departureTime && DepartureAirport==departureAirport && AvailablesSeats!=0");
+			flights = (List<Flight>) q.execute(DepartureMin,DepartureAirport,DepartureMax);
+
+			detached = (List<Flight>) pm.detachCopyAll(flights);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		System.out.println(detached.size()+" flights found !");
+		return detached;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<Flight> getFlights(int Seats) {
+		List<Flight> flights=null;
+		List<Flight> detached = new ArrayList<Flight>();
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("int Seats");
+			q.setFilter("availablesSeats > Seats");
+
+			flights = (List<Flight>) q.execute(Seats);
 			detached = (List<Flight>) pm.detachCopyAll(flights);
 
 			tx.commit();
@@ -476,6 +477,7 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
+		System.out.println(detached.size()+" flights found !");
 		return detached;
 	}
 
@@ -492,7 +494,8 @@ public class FlightDaoImpl implements flightDao {
 				tx.rollback();
 			}
 			pm.close();
-		}		
+		}
+		System.out.println("Flight n°"+flight.getId()+" added to the system");
 		
 	}
 
@@ -557,4 +560,202 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
+	public void setPilot(int id, Pilot Pilot) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setFlightPilot(Pilot);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setAircraft(int id, Aircraft Aircraft) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setFlightAircraft(Aircraft);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setPrice(int id, int Price) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setPrice(Price);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setPassengers(int id, List<Integer> Passengers) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setPassengersList(Passengers);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setAvailableSeats(int id, int AvailableSeats) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setAvailableSeats(AvailableSeats);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setAppointmentDescription(int id, String AppointmentDescription) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setAppointmentDescription(AppointmentDescription);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setdepartureDate(int id, Date DepartureDate) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setDepartureDate(DepartureDate);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	
+	public void setarrivalDate(int id, Date ArrivalDate) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setArrivalDate(ArrivalDate);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	
+
+	public void setFlightDuration(int id, Duration FlightDuration) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+            f.setFlightDuration(FlightDuration);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+
+	public void modifyFlight(int id, LocalDateTime DepartureTime, String DepartureAirport, LocalDateTime ArrivalTime,
+			String ArrivalAirport) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+			f.setDepartureAirport(DepartureAirport);
+			f.setDepartureTime(DepartureTime);
+			f.setArrivalTime(ArrivalTime);
+            f.setArrivalAirport(ArrivalAirport);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
 }
+
+

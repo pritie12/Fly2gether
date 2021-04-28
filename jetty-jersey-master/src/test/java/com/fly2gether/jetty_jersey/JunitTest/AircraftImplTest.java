@@ -47,6 +47,7 @@ public class AircraftImplTest {
         Aircraft aircraft7 =new Aircraft("LEARJET45","Boeing",28,5987);
  
 		aircraftDao.addAircraft(aircraft3);
+		System.out.println(aircraftDao.getFleet().get(1).getTailNumber());
 		aircraftDao.addAircraft(aircraft4);
 		aircraftDao.addAircraft(aircraft5);
 		aircraftDao.addAircraft(aircraft6);

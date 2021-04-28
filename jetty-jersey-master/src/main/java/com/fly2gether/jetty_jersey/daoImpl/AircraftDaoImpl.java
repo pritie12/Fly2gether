@@ -25,6 +25,7 @@ public class AircraftDaoImpl implements aircraftDao{
 		List<Aircraft> detached = new ArrayList<Aircraft>();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Aircraft.class);
@@ -190,5 +191,63 @@ public class AircraftDaoImpl implements aircraftDao{
 
 		}
 		return detached;
-	}	
+	}
+
+	public void setModel(int TailNumber, String Model) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a=null;
+		try {
+			tx.begin();
+			a = pm.getObjectById(Aircraft.class, TailNumber);
+
+            a.setModel(Model);;
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setCompany(int TailNumber, String Company) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a=null;
+		try {
+			tx.begin();
+			a = pm.getObjectById(Aircraft.class, TailNumber);
+
+            a.setConstructorCompany(Company);;
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void setNumberOfSeats(int TailNumber, int NumberOfSeats) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a=null;
+		try {
+			tx.begin();
+			a = pm.getObjectById(Aircraft.class, TailNumber);
+
+            a.setNumberOfSeats(NumberOfSeats);;
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	
 }

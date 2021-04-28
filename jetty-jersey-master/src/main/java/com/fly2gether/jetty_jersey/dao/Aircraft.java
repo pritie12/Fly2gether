@@ -16,7 +16,6 @@ public class Aircraft {
 	private String constructorCompany;
 	private int numberOfSeats;
 	
-	//private static int nbAircraft=0;// permit to give an unique id
 	
 	/* CONSTRUCTORS */
 	public Aircraft (){
@@ -24,8 +23,7 @@ public class Aircraft {
         this.model = "";
         this.constructorCompany = "";
         this.numberOfSeats = 0;
-        //nbAircraft++;
-       // id="AI"+nbAircraft;     
+      
     }
 	public Aircraft (String model, String constructorCompany,int numberOfSeats,int tailNumber){
         this.model = model;

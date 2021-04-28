@@ -1,15 +1,15 @@
 package com.fly2gether.jetty_jersey.dao;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 public interface pilotDao {
 	
 	/* GET */
 	public List<Pilot> getPilots();
+	public Pilot Login(String username, String password);
+	public Pilot getPilot(String Username);
 	public Pilot getPilot(int id);	
-	public Map<String,String> getLoginInfo(int Id);
 	public String getname(int id);
 	public String getsurname(int id);
 	public Date getdateOfBirth(int id);
@@ -18,7 +18,8 @@ public interface pilotDao {
 	public int getFlyingHours(int id);
 	
 	/* POST */
-	/* no post requests here */
+	public void modifyUsername(int id,String Username);
+	public void modifyPwd(int id,String Pwd);
 	
 	/* PUT */
 	public void addPilot(Pilot pilot);

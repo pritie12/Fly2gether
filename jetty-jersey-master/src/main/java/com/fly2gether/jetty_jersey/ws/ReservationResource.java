@@ -53,6 +53,13 @@ public class ReservationResource implements reservationDao {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{Resa_ID}/getStatus")
+	public boolean getStatus(@PathParam("Resa_ID")int resa_id) {
+		return DAO.getReservationDao().getStatus(resa_id);
+	}	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/getFlight")
 	public List<Integer> getReservations(@PathParam("passenger_id")int passenger_id) {
 		return DAO.getReservationDao().getReservations(passenger_id);
@@ -72,6 +79,12 @@ public class ReservationResource implements reservationDao {
 		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);		
 	}
 	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{reservation_id}/denyReservation")
+	public void denyReservation(@PathParam("reservation_id")int reservation_id) {
+		DAO.getReservationDao().denyReservation(reservation_id);			
+	}	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addReservation")

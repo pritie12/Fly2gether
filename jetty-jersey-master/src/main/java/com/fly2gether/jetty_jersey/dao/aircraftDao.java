@@ -14,7 +14,10 @@ public interface aircraftDao {
 	public Aircraft getAircraft(int TailNumber);
 	
 	/* POST */
-	/* no post request here */
+	public void setModel(int TailNumber,String Model);
+	public void setCompany(int TailNumber, String Company);
+	public void setNumberOfSeats(int TailNumber, int NumberOfSeats);
+
 	
 	/* PUT */
 	public void addAircraft(Aircraft aircraft);

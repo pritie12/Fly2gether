@@ -2,7 +2,7 @@ package com.fly2gether.jetty_jersey.daoImpl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.NoSuchElementException;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -66,7 +66,7 @@ public class PassengerDaoImpl implements passengerDao{
 		}
 		return detached;
 	}
-	public Map<String, String> getLoginInfo(int Id) {
+	public String getUsername(int Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -89,9 +89,33 @@ public class PassengerDaoImpl implements passengerDao{
 			}
 			pm.close();
 		}
-		return detached.getLoginInfo();
+		return detached.getUsername();
 	}
+	public String getPwd(int Id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Passenger p = null;
+		Passenger detached = null;
+		try {
+			tx.begin();
 
+			Query q = pm.newQuery(Passenger.class);
+			q.declareParameters("int Id");
+			q.setFilter("Id ==  passenger_id");
+			q.setUnique(true);
+			
+			p = (Passenger) q.execute(Id);
+			detached = (Passenger) pm.detachCopy(p);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return detached.getPwd();
+	}
 	public String getname(int Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -254,6 +278,10 @@ public class PassengerDaoImpl implements passengerDao{
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
+			Query q = pm.newQuery(Passenger.class);
+			q.declareParameters("String Username");
+			q.setFilter("Id ==  passenger_id");
+			q.setUnique(true);			
 			pm.makePersistent(passenger);
 			tx.commit();
 		} finally {
@@ -286,7 +314,7 @@ public class PassengerDaoImpl implements passengerDao{
 		
 	}
 
-	public void removeReservation(int passenger_id, int resa_id) {
+	public void cancelReservation(int passenger_id, int resa_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -303,7 +331,7 @@ public class PassengerDaoImpl implements passengerDao{
 			pm.close();
 			pmf.close();
 		}
-		System.out.println("Reservation removed");
+		System.out.println("Reservation canceled");
 		
 	}
 
@@ -327,6 +355,74 @@ public class PassengerDaoImpl implements passengerDao{
 		
 	}
 
+	public Passenger Login(String username, String password) {
+		Passenger passenger=getPassenger(username);
+		if(passenger==null) {
+			System.out.println("Username not found");
+			return null;
+		}
+		if(passenger.getPwd().equals(password)) {
+			return passenger;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Passenger getPassenger(String username) {
+        List<Passenger> result;
+        Passenger passenger;
+
+        PersistenceManager pm = pmf.getPersistenceManager();
+
+        Query q = pm.newQuery(Passenger.class, "username.equals(\"" + username + "\")");
+
+        result = (List<Passenger>) q.execute();
+        try {
+            passenger = (Passenger) result.iterator().next();
+        } catch (NoSuchElementException | IndexOutOfBoundsException e) {
+            return null;
+
+        }
+        q.close(result);
+
+        return passenger;
+	}
+
+	public void modifyUsername(int id, String Username) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Passenger p=null;
+		try {
+			tx.begin();
+			p = pm.getObjectById(Passenger.class, id);
+
+            p.setUsername(Username);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+
+	public void modifyPwd(int id, String Pwd) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Passenger p=null;
+		try {
+			tx.begin();
+			p = pm.getObjectById(Passenger.class, id);
+            p.setPwd(Pwd);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}		
+	}
 
 
 }

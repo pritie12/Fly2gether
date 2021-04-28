@@ -13,6 +13,7 @@ public class Reservation {
 	private Passenger bookingUser;
 	private Flight flight;
 	private int desiredSeats;
+	private boolean status;
 	
 	/* CONSTRUCTORS */
 	public Reservation() {
@@ -20,12 +21,14 @@ public class Reservation {
 		this.bookingUser=new Passenger();
 		this.flight=new Flight();
 		this.desiredSeats=0;
+		this.status=true;
 				
 	}
 	public Reservation(Passenger bookingUser, Flight flight, int desiredSeats) {
 		this.bookingUser=bookingUser;
 		this.flight=flight;
 		this.desiredSeats=desiredSeats;
+		this.setStatus(true);
 	}
 	
 	/* GETTERS */
@@ -41,7 +44,9 @@ public class Reservation {
 	public int getDesiredSeats() {
 		return this.desiredSeats;
 	}
-	
+	public boolean getStatus() {
+		return this.status;
+	}	
 	/* SETTERS */
 	public void setBookingUser(Passenger bookingUser) {
 		this.bookingUser=bookingUser;
@@ -54,5 +59,9 @@ public class Reservation {
 	}
 	public void setDesiredSeats(int desiredSeats) {
 		this.desiredSeats=desiredSeats;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

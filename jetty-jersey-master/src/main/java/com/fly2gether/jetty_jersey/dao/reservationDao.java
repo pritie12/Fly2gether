@@ -9,6 +9,7 @@ public interface reservationDao {
 	public Passenger getbookingUser(int reservation_id);
 	public int getdesiredSeats(int reservation_id);
 	public Flight getFlight(int reservation_id);
+	public boolean getStatus(int reservation_id);
 	//get all the reservations of a certain passenger
 	public List<Integer> getReservations(int passenger_id); // ID of reservations
 	
@@ -16,6 +17,7 @@ public interface reservationDao {
 	
 	/* POST */
 	public void changeNumberOfSeats(int seats,int reservation_id);
+	public void denyReservation(int reservation_id);
 	
 	/* PUT */
 	public void addReservation(Reservation reservation);

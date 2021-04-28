@@ -1,38 +1,40 @@
 package com.fly2gether.jetty_jersey.dao;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
+@PersistenceCapable
 public class Aircraft {
 	
-	private String id;
-	private String tailNumber;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
+	private int tailNumber ;
+	
 	private String model;
 	private String constructorCompany;
 	private int numberOfSeats;
 	
-	private static int nbAircraft=0;// permit to give an unique id
 	
 	/* CONSTRUCTORS */
 	public Aircraft (){
-        this.tailNumber = "";
+        this.tailNumber = 1478;
         this.model = "";
         this.constructorCompany = "";
         this.numberOfSeats = 0;
-        nbAircraft++;
-        id="AI"+nbAircraft;
-        
+      
     }
-	public Aircraft (String model, String constructorCompany,int numberOfSeats){
+	public Aircraft (String model, String constructorCompany,int numberOfSeats,int tailNumber){
         this.model = model;
         this.constructorCompany = constructorCompany;
         this.numberOfSeats = numberOfSeats;
-        nbAircraft++;
-        id="AI"+nbAircraft;
+        //nbAircraft++;
+        this.tailNumber=tailNumber;
     }	
 	 /* GETTERS */
-	public String getId() {
-		return this.id;
-	}
-	public String getTailNumber() {
+
+	public int getTailNumber() {
 		return this.tailNumber;
 	}
 	public String getModel() {
@@ -46,8 +48,8 @@ public class Aircraft {
 	}
 	
 	/* SETTERS */
-	public void setTailNumber(String tailNumber) {
-		this.tailNumber=tailNumber;
+	public void setTailNumber(int id) {
+		this.tailNumber=id;
 	}
 	public void setModel(String model) {
 		this.model=model;

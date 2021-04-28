@@ -1,7 +1,7 @@
 package com.fly2gether.jetty_jersey.ws;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,271 +17,229 @@ import javax.ws.rs.core.MediaType;
 
 
 import com.fly2gether.jetty_jersey.dao.*;
-import com.fly2gether.jetty_jersey.database.Database;
-
 
 
 @Path("/Flight")
 public class FlightResource implements flightDao {
-	List<Flight> flights=Database.db.getFlightList();
-	
-
 
 	
-	@DELETE 
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/flight5")
-	public void deleteflight(Flight flight) {
-		System.out.println("Flight deleted");
-	}
-
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightPilot")
-	public Pilot getPilot(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getFlightPilot();
-			}
-		}
-		return null;	
+	public Pilot getPilot(@PathParam("id")int id) {
+		return DAO.getFlightDao().getPilot(id);		
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightAircraft")
-	public Aircraft getAircraft(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getFlightAircraft();
-			}
-		}
-		return null;	
+	public Aircraft getAircraft(@PathParam("id")int id) {
+		return DAO.getFlightDao().getAircraft(id);	
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightPrice")
-	public int getPrice(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getPrice();
-			}
-		}
-		return 0;	
+	public int getPrice(@PathParam("id")int id) {
+		return DAO.getFlightDao().getPrice(id);		
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightPassengers")
-	public List<Passenger> getPassengers(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getPassengersList();
-			}
-		}
-		return null;	
+	public List<Integer> getPassengers(@PathParam("id")int id) {
+		return DAO.getFlightDao().getPassengers(id);		
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightAvailableSeats")
-	public int getAvailableSeats(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getAvailableSeats();
-			}
-		}
-		return 0;	
+	public int getAvailableSeats(@PathParam("id")int id) {
+		return DAO.getFlightDao().getAvailableSeats(id);		
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightAppointmentDescription")
-	public String getAppointmentDescription(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getAppointmentDescription();
-			}
-		}
-		return null;
+	public String getAppointmentDescription(@PathParam("id")int id) {
+		return DAO.getFlightDao().getAppointmentDescription(id);	
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightDepartureDate")
-	public Date getdepartureDate(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getDepartureDate();
-			}
-		}
-		return null;
+	public Date getdepartureDate(@PathParam("id")int id) {
+		return DAO.getFlightDao().getdepartureDate(id);	
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightDepartureTime")
-	public LocalDateTime getdepartureTime(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getDepartureTime();
-			}
-		}
-		return null;
+	public LocalDateTime getdepartureTime(@PathParam("id")int id) {
+		return DAO.getFlightDao().getdepartureTime(id);	
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightDepartureAirport")
-	public String getdepartureAirport(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getDepartureAirport();
-			}
-		}
-		return null;
+	public String getdepartureAirport(@PathParam("id")int id) {
+		return DAO.getFlightDao().getdepartureAirport(id);	
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightArrivalDate")
-	public Date getarrivalDate(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getArrivalDate();
-			}
-		}
-		return null;
+	public Date getarrivalDate(@PathParam("id")int id) {
+		return DAO.getFlightDao().getarrivalDate(id);	
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightArrivalTime")
-	public LocalDateTime getarrivalTime(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getArrivalTime();
-			}
-		}
-		return null;
+	public LocalDateTime getarrivalTime(@PathParam("id")int id) {
+		return DAO.getFlightDao().getarrivalTime(id);	
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightArrivalAirport")
-	public String getarrivalAirport(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getDepartureAirport();
-			}
-		}
-		return null;
+	public String getarrivalAirport(@PathParam("id")int id) {
+		return DAO.getFlightDao().getarrivalAirport(id);	
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightDuration")
-	public Duration getFlightDuration(@PathParam("id")String id) {
-		for (Flight f:flights) {
-			if(f.getId().equals(id)) {
-				return f.getFlightDuration();
-			}
-		}
-		return null;
+	public Duration getFlightDuration(@PathParam("id")int id) {
+		return DAO.getFlightDao().getFlightDuration(id);	
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getFlights")
+	public List<Flight> getFlights() {
+		return DAO.getFlightDao().getFlights();	
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightsByPrice")
 	public List<Flight> getFlights(@PathParam("maxprice")int maxprice,@PathParam("minprice")int minprice) {
-		List<Flight> fli=new ArrayList<Flight>();
-		for(Flight f:flights) {
-				if(f.getPrice()>=minprice&&f.getPrice()<=maxprice)
-					fli.add(f);
-		}
-		return flights;
+		return DAO.getFlightDao().getFlights(maxprice,minprice);	
+	}
+	
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getFlightsBySeats")
+	public List<Flight> getFlights(int seats) {
+		return DAO.getFlightDao().getFlights(seats);
+	}
+
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addFlight")
+	public void addFlight(Flight flight) {
+		DAO.getFlightDao().addFlight(flight);	
+	}
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{flight_id}/{passenger_id}/addFlight")
+	public void addPassenger(@PathParam("passenger_id")int passenger_id,@PathParam("flight_id") int flight_id) {
+		DAO.getFlightDao().addPassenger(passenger_id,flight_id);
+		
+	}
+
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{flight_id}/deleteFlight")
+	public void deleteFlight(@PathParam("flight_id")int flight_id) {
+		DAO.getFlightDao().deleteFlight(flight_id);		
+	}
+	
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{passenger_id}/{resa_id}/getFlightsBySeats")
+	public void removePassenger(@PathParam("passenger_id")int passenger_id, @PathParam("flight_id")int flight_id) {
+		DAO.getFlightDao().removePassenger(passenger_id, flight_id);
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setPilot")
+	public void setPilot(@PathParam("id")int id, Pilot Pilot) {
+		DAO.getFlightDao().setPilot(id,Pilot);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setAircraft")
+	public void setAircraft(@PathParam("id")int id, Aircraft Aircraft) {
+		DAO.getFlightDao().setAircraft(id,Aircraft);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setPrice")
+	public void setPrice(@PathParam("id")int id, int Price) {
+		DAO.getFlightDao().setPrice(id,Price);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setPassengers")
+	public void setPassengers(@PathParam("id")int id, List<Integer> Passengers) {
+		DAO.getFlightDao().setPassengers(id,Passengers);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setAvailableSeats")
+	public void setAvailableSeats(@PathParam("id")int id, int AvailableSeats) {
+		DAO.getFlightDao().setAvailableSeats(id,AvailableSeats);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setAppointmentDescription")
+	public void setAppointmentDescription(@PathParam("id")int id, String AppointmentDescription) {
+		DAO.getFlightDao().setAppointmentDescription(id,AppointmentDescription);
+		
+	}
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setdepartureDate")
+	public void setdepartureDate(@PathParam("id")int id, Date DepartureDate) {
+		DAO.getFlightDao().setdepartureDate(id,DepartureDate);
+		
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setarrivalDate")
+	public void setarrivalDate(@PathParam("id")int id, Date ArrivalDate) {
+		DAO.getFlightDao().setarrivalDate(id,ArrivalDate);
+		
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setFlightDuration")
+	public void setFlightDuration(@PathParam("id")int id, Duration FlightDuration) {
+		DAO.getFlightDao().setFlightDuration(id,FlightDuration);
+		
+	}
+
+	/*@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/modifyFlight")
+	public void modifyFlight(@PathParam("id")int id, @PathParam("DepartureTime")LocalDateTime DepartureTime, 
+			@PathParam("DepartureAirport")String DepartureAirport, @PathParam("ArrivalTime")LocalDateTime ArrivalTime,
+			@PathParam("ArrivalAirport")String ArrivalAirport) {
+		DAO.getFlightDao().modifyFlight(id,DepartureTime,DepartureAirport,ArrivalTime,ArrivalAirport);		
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightsByDeparture")
-	public List<Flight> getFlights(@PathParam("DepartureTime")Date DepartureTime, @PathParam("DepartureAirport")String DepartureAirport) {
-		List<Flight> fli=new ArrayList<Flight>();
-		for(Flight f:flights) {
-				if(f.getDepartureDate().equals(DepartureTime)&&f.getDepartureAirport().equals(DepartureAirport))
-					fli.add(f);
-		}
-		return flights;
-	}
+	public List<Flight> getFlights(@PathParam("DepartureMin")LocalDateTime DepartureMin,@PathParam("DepartureMax")LocalDateTime DepartureMax, @PathParam("DepartureAirport")String DepartureAirport) {
+		return DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
+	}*/
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getFlightsByDepartureArrival")
-	public List<Flight> getFlights(@PathParam("DepartureTime")Date DepartureTime, @PathParam("DepartureAirport")String DepartureAirport,
-			@PathParam("ArrivalTime")Date ArrivalTime, @PathParam("ArrivalAirport")String ArrivalAirport) {
-		List<Flight> fli=new ArrayList<Flight>();
-		for(Flight f:flights) {
-				if(f.getDepartureDate().equals(DepartureTime)&&f.getDepartureAirport().equals(DepartureAirport)
-						&&f.getArrivalDate().equals(ArrivalTime)&&f.getArrivalAirport().equals(ArrivalAirport))
-					fli.add(f);
-		}
-		return fli;
-	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getFlightsBySeats")
-	public List<Flight> getFlights(@PathParam("seats")int seats) {
-		List<Flight> fli=new ArrayList<Flight>();
-		for(Flight f:flights) {
-			if(f.getAvailableSeats()>=seats) {
-				fli.add(f);
-			}
-		}
-		return flights;
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getFlights/{departure}/{arrival}/{date}")
-	public List<Flight> getFlights(@PathParam("{departure}")String departureAirport,@PathParam("{arrival}")String arrivalAirport, @PathParam("{date}")Date departureTime) {
-		List<Flight> fli=new ArrayList<Flight>();
-		
-		String dep=  departureAirport;
-		String arr=  arrivalAirport;
-		System.out.println(dep);
-		if(dep==null && arr==null && departureTime==null )
-			return this.flights;
-		if(dep==null) {
-			dep="";
-		}
-		if(arr==null) {
-			arr="";
-		}
-		System.out.println("res " + dep);
-		
-		
-		for(Flight f:flights) {
-				if(f.getDepartureDate().equals(departureTime)&&f.getDepartureAirport().contains(dep) &&f.getArrivalAirport().contains(arr))
-					fli.add(f);
-		}
-		return fli;
-	}
-
-	public void addFlight() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addPassenger(String passenger_id, String flight_id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void deleteFlight(String id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void removePassenger(String passenger_id) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -4,19 +4,25 @@ import java.util.List;
 public interface reservationDao {
 
 	/* GET */
-	Passenger getbookingUser(String resa_id);
-	int getdesiredSeats(String resa_id);
-	Flight getFlight(String resa_id);
+	public List<Reservation> getReservations();
+	public Reservation getReservation(int reservation_id);
+	public Passenger getbookingUser(int reservation_id);
+	public int getdesiredSeats(int reservation_id);
+	public Flight getFlight(int reservation_id);
+	public boolean getStatus(int reservation_id);
 	//get all the reservations of a certain passenger
-	List<Reservation> getReservations(String passenger_id);
+	public List<Integer> getReservations(int passenger_id); // ID of reservations
 	
 	
 	
 	/* POST */
-	void changeNumberOfSeats(int seats);
+	public void changeNumberOfSeats(int seats,int reservation_id);
+	public void denyReservation(int reservation_id);
 	
 	/* PUT */
+	public void addReservation(Reservation reservation);
 	
 	/* DELETE */
+	public void deleteReservation(int id);
 
 }

@@ -1,52 +1,67 @@
 package com.fly2gether.jetty_jersey.dao;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
-
+@PersistenceCapable
 public class Reservation {
 	
-	private String resa_id;
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
+	private int resa_id;
 	private Passenger bookingUser;
 	private Flight flight;
 	private int desiredSeats;
+	private boolean status;
 	
 	/* CONSTRUCTORS */
 	public Reservation() {
-		this.resa_id="";
+		this.resa_id=0;
 		this.bookingUser=new Passenger();
 		this.flight=new Flight();
 		this.desiredSeats=0;
+		this.status=true;
 				
 	}
 	public Reservation(Passenger bookingUser, Flight flight, int desiredSeats) {
 		this.bookingUser=bookingUser;
 		this.flight=flight;
 		this.desiredSeats=desiredSeats;
+		this.setStatus(true);
 	}
 	
 	/* GETTERS */
-	Passenger getBookingUser() {
+	public Passenger getBookingUser() {
 		return this.bookingUser;
 	}
-	String getReservationId() {
+	public int getReservationId() {
 		return this.resa_id;
 	}
-	Flight getFlight() {
+	public Flight getFlight() {
 		return this.flight;
 	}
-	int getDesiredSeats() {
+	public int getDesiredSeats() {
 		return this.desiredSeats;
 	}
-	
+	public boolean getStatus() {
+		return this.status;
+	}	
 	/* SETTERS */
-	void setBookingUser(Passenger bookingUser) {
+	public void setBookingUser(Passenger bookingUser) {
 		this.bookingUser=bookingUser;
 	}
-	void setReservationId(String resa_id) {
+	public void setReservationId(int resa_id) {
 		this.resa_id=resa_id;
 	}
-	void setFlight(Flight flight) {
+	public void setFlight(Flight flight) {
 		this.flight=flight;
 	}
-	void setDesiredSeats(int desiredSeats) {
+	public void setDesiredSeats(int desiredSeats) {
 		this.desiredSeats=desiredSeats;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

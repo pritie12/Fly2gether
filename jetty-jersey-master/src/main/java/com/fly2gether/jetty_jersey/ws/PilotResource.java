@@ -13,148 +13,117 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.*;
-import com.fly2gether.jetty_jersey.database.Database;
+
 
 
 @Path("/Pilote")
 public class PilotResource implements pilotDao{
 	
-	//List<Pilot> pilots=Database.getToTalPilots();
-	List<Pilot> pilots=Database.db.getToTalPilots();
-	
-	
+		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getPilots")
 	public List<Pilot> getPilots() {
-		return pilots;
+		return DAO.getPilotDao().getPilots();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}")
-	public Pilot getPilot(@PathParam("{id}")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p;
-			}
-		}
-		Date d= new Date();
-		return new Pilot("RayanFail","Gosling","rayan@mai;.fr","07XXX",d,200);
+	@Path("/{id}/getPilot")
+	public Pilot getPilot(@PathParam("id")int id) {
+		return DAO.getPilotDao().getPilot(id);
 	}
 	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotName")
-	public String getname(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getName();
-			}
-		}
-		return null;
+	public String getname(@PathParam("id")int id) {
+		return DAO.getPilotDao().getname(id);
 	}
-
 
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotSurname")
-	public String getsurname(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getSurname();
-			}
-		}
-		return null;
+	public String getsurname(@PathParam("id")int id) {
+		return DAO.getPilotDao().getsurname(id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotDateofBirth")
-	public Date getdateOfBirth(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getDateOfBirth();
-			}
-		}
-		return null;
+	public Date getdateOfBirth(@PathParam("id")int id) {
+		return DAO.getPilotDao().getdateOfBirth(id);
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotEmail")
-	public String getemail(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getEmail();
-			}
-		}
-		return null;
+	public String getemail(@PathParam("id")int id) {
+		return DAO.getPilotDao().getemail(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPilotPhoneNumber")
-	public String getphoneNumber(@PathParam("id")String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getPhoneNumber();
-			}
-		}
-		return null;
+	public String getphoneNumber(@PathParam("id")int id) {
+		return DAO.getPilotDao().getphoneNumber(id);
 	}
 	
-	public int getFlyingHours(String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				return p.getFlyingHours();
-			}
-		}
-		return 0;
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getPilotFlyingHours")
+	public int getFlyingHours(@PathParam("id")int id) {
+		return DAO.getPilotDao().getFlyingHours(id);
 	}
 	
-	
+
+
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addPilot")
+	public void addPilot(Pilot pilot) {
+		Pilot p = new Pilot ();
+		DAO.getPilotDao().addPilot(p);
+	}
 
 	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/deletePilot")
-	public void deletePilot(String id) {
-		for(Pilot p:pilots) {
-			if(p.getPilotId().equals(id)) {
-				pilots.remove(p);
-				System.out.println("Pilot deleted");
-			}
-		}
-		System.out.println("Pilot not found");
-	}
-
-
-
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addPilot1")
-	public void addPilot(Pilot data) {
-		System.out.println(" pilot");
-		pilots.add(data);
-		System.out.println(" pilot add:"+ data.getPilotId()+ " " + data.getDateOfBirth());
-
+	@Path("/{id}/deletePilot")
+	public void deletePilot(int id) {
+		DAO.getPilotDao().deletePilot(id);
 	}
 	
-	@PUT
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addPilot2")
-	public String addPilot2() {
-		Pilot p= new Pilot();
-		return p.getPilotId();
-	}
-	
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addPilot")
-	public void addPilot() {
-		// TODO Auto-generated method stub
-		System.out.println(" nor here");
+	@Path("/{username}/PilotLogin")
+	public Pilot Login(@PathParam("username")String username, String password) {
+		return DAO.getPilotDao().Login(username,password);
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getPilot")
+	public Pilot getPilot(String Username) {
+		return DAO.getPilotDao().getPilot(Username);
+	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/modifyPilotUsername")
+	public void modifyUsername(@PathParam("id")int id, String Username) {
+		DAO.getPilotDao().modifyUsername(id,Username);
+		
+	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/modifyPilotPwd")
+	public void modifyPwd(@PathParam("id")int id, String Pwd) {
+		DAO.getPilotDao().modifyPwd(id,Pwd);	
+	}
+	
 }
+
+

@@ -5,18 +5,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
 
 
-@PersistenceCapable
+
 public class Flight {
 	
-	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	 private int id;	
+	 private String id;	
 	 private String appointmentDescription;	
 	 private Date departureDate;
 	 private LocalDateTime departureTime;
@@ -27,13 +21,11 @@ public class Flight {
 	 private Duration flightDuration;
 	 private int availablesSeats;
 	 private int price; 
-	 @Persistent
-	 private List<Integer> passengersList;
-	 @Persistent
+	 private List<Passenger> passengersList;
 	 private Pilot pilot;
-	 @Persistent
 	 private Aircraft aircraft;
 	 
+	 private static int nbFlights=0;// permit to give an unique id
 	 
 	 /* Constructors */
 	 public Flight() {
@@ -47,14 +39,15 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=0;
 		 this.price=0;
-		 this.passengersList=new ArrayList<Integer>();
+		 this.passengersList=new ArrayList<Passenger>();
 		 this.pilot= new Pilot();
 		 this.aircraft=new Aircraft();
-
+		 nbFlights ++;
+		 id="FL"+nbFlights;
 	 }
 	 
 	 public Flight(Date departureDate,LocalDateTime departureTime,String departureAirport,Date arrivalDate, LocalDateTime arrivalTime ,
-			 String arrivalAirport,int availablesSeats, int price, Pilot pilot, Aircraft aircraft) {
+			 String arrivalAirport,int price, Pilot pilot, Aircraft aircraft) {
 		 this.appointmentDescription="";
 		 this.departureDate=departureDate;
 		 this.departureAirport=departureAirport;
@@ -65,14 +58,15 @@ public class Flight {
 		 this.pilot= pilot;
 		 this.aircraft=aircraft;
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
-		 this.availablesSeats=availablesSeats;
+		 this.availablesSeats=aircraft.getNumberOfSeats();
 		 this.price=price;
-		 this.passengersList=new ArrayList<Integer>();
-
+		 this.passengersList=new ArrayList<Passenger>();
+		 nbFlights ++;
+		 id="FL"+nbFlights;
 	 }
 	
 	 /* GETTERS */
-	 public int getId() {
+	 public String getId() {
 		 return this.id;
 	 }
 	 public String getAppointmentDescription() {
@@ -108,16 +102,16 @@ public class Flight {
 	 public int getAvailableSeats() {
 		 return this.availablesSeats;
 	 }
-	 public List<Integer> getPassengersList(){
+	 public List<Passenger> getPassengersList(){
 		 return this.passengersList;
 	 }
 	 public Duration getFlightDuration() {
-		 //return Duration.between(this.departureTime,this.arrivalTime); not possible for now because of jet lag
+		 //return Duration.between(this.departureTime,this.arrivalTime);
 		 return this.flightDuration;
 	 }
 	 
 	 /* SETTERS */
-	 public void setId(int id) {
+	 public void setId(String id) {
 		 this.id=id;
 	 }
 	 public void setAppointmentDescription(String appointmentDescription) {
@@ -153,7 +147,7 @@ public class Flight {
 	 public void setAvailableSeats(int availableSeats) {
 		 this.availablesSeats=availableSeats;
 	 }
-	 public void setPassengersList(List<Integer> passengersList){
+	 public void setPassengersList(List<Passenger> passengersList){
 		 this.passengersList=passengersList;
 	 }
 	 public void setFlightDuration(Duration flightDuration) {

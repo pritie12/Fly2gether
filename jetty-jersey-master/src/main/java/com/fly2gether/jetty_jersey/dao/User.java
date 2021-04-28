@@ -1,13 +1,8 @@
 package com.fly2gether.jetty_jersey.dao;
 import java.util.Date;
 
-
-
 public abstract class User {
 
-	private String username;
-	private String pwd;
-	
 	private String name;
 	private String surname;
 	private Date dateOfBirth;
@@ -21,8 +16,6 @@ public abstract class User {
 		this.email="";
 		this.phoneNumber="";
 		this.dateOfBirth=new Date();
-		this.username="";
-		this.pwd="";
 	}
 	public User(String name, String surname, String email, String phoneNumber, Date DOfBirth) {
 		this.name=name;
@@ -49,12 +42,7 @@ public abstract class User {
 	public Date getDateOfBirth() {
 		return this.dateOfBirth;
 	}
-	public String getUsername() {
-		return this.username;
-	}
-	public String getPwd() {
-		return this.pwd;
-	}
+	
 	/* SETTERS */
 	
 	public void setName(String name) {
@@ -71,12 +59,6 @@ public abstract class User {
 	}
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth=dateOfBirth;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
 	}
 	
 }

@@ -2,8 +2,6 @@ package com.fly2gether.jetty_jersey.ws;
 import java.util.Date;
 import java.util.List;
 
-
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,140 +13,128 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.*;
+import com.fly2gether.jetty_jersey.database.Database;
 
 
 
 @Path("/Passenger")
 public class PassengerResource implements passengerDao {
 	
+	List<Passenger> passengers=Database.getTotalPassengers();
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getPassengers")
 	public List<Passenger> getPassengers() {
-		return DAO.getPassengerDao().getPassengers();
+		return passengers;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassenger")
-	public Passenger getPassenger(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getPassenger(id);
+	public Passenger getPassenger(@PathParam("id")String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p;
+			}
+		}
+		return null;
 	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}/getPassengerUsername")
-	public String getUsername(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getUsername(id);
-	}
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}/getPassengerPwd")
-	public String getPwd(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getPwd(id);
-	}	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerName")
-	public String getname(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getname(id);
+	public String getname(@PathParam("id")String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p.getName();
+			}
+		}
+		return null;
 	}
 
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerSurname")
-	public String getsurname(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getsurname(id);
+	public String getsurname(@PathParam("id")String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p.getSurname();
+			}
+		}
+		return null;
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerDateofBirth")
-	public Date getdateOfBirth(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getdateOfBirth(id);
-
+	public Date getdateOfBirth(@PathParam("id")String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p.getDateOfBirth();
+			}
+		}
+		return null;
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerEmail")
-	public String getemail(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getemail(id);
-
+	public String getemail(@PathParam("id")String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p.getEmail();
+			}
+		}
+		return null;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerPhoneNumber")
-	public String getphoneNumber(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getphoneNumber(id);
-
+	public String getphoneNumber(@PathParam("id")String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p.getPhoneNumber();
+			}
+		}
+		return null;
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getPassengerReservations")
-	public List<Integer> getpassengerBookingList(@PathParam("id")int id) {
-		return DAO.getPassengerDao().getpassengerBookingList(id);
-
+	public List<Reservation> getpassengerBookingList(@PathParam("id")String id) {
+		for(Passenger p:passengers) {
+			if(p.getPassengerId().equals(id)) {
+				return p.getPassengerBookingList();
+			}
+		}
+		return null;
 	}
-	@GET 
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPassenger")
-	public Passenger getPassenger(String Username) {
-		return DAO.getPassengerDao().getPassenger(Username);
-	}
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{username}/PassengerLogin")
-	public Passenger Login(@PathParam("username")String username, String password) {
-		return DAO.getPassengerDao().Login(username,password);
-	}
-
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addPassenger")
-	public void addPassenger(Passenger passenger) {
-		DAO.getPassengerDao().addPassenger(passenger);		
-	}
-
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{passenger_id}/{resa_id}/addPassenger")
-	public void addReservation(@PathParam("passenger_id")int passenger_id,@PathParam("resa_id") int resa_id) {
-		DAO.getPassengerDao().addReservation(passenger_id,resa_id);	
+	
+	
+	
+	public void addPassenger() {
+		// TODO Auto-generated method stub
 		
 	}
 
-	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{passenger_id}/{resa_id}/removeReservation")
-	public void cancelReservation(@PathParam("passenger_id")int passenger_id,@PathParam("resa_id") int resa_id) {
-		DAO.getPassengerDao().cancelReservation(passenger_id, resa_id);
+	public void addReservation(String passenger_id, String resa_id) {
+		// TODO Auto-generated method stub
+		
 	}
-			
+
+	public void removeReservation(String passenger_id, String resa_id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}/DeletePassenger")
-	public void deletePassenger(@PathParam("id")int id) {
-		DAO.getPassengerDao().deletePassenger(id);
+	@Path("/DeletePassenger")
+	public void deletePassenger(@PathParam("id")String id) {
+		System.out.println("Passenger deleted");
 	}
-
-
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}/modifyPassengerPwd")
-	public void modifyPwd(@PathParam("id")int id, String Pwd) {
-		DAO.getPassengerDao().modifyPwd(id,Pwd);		
-	}
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{id}/modifyPassengerUsername")
-	public void modifyUsername(@PathParam("id")int id, String Username) {
-		DAO.getPassengerDao().modifyUsername(id,Username);
-		
-	}	
-
 }

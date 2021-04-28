@@ -1,27 +1,22 @@
 package com.fly2gether.jetty_jersey.dao;
 
-import java.util.List;
+
 
 public interface aircraftDao {
 	
 
 
 	/* GET */
-	public List<Aircraft> getFleet();
-	public String getModel(int TailNumber);
-	public String getCompany(int TailNumber);
-	public int getNumberOfSeats(int TailNumber);
-	public Aircraft getAircraft(int TailNumber);
+	public String getModel(String TailNumber);
+	public String getCompany(String TailNumber);
+	public int getNumberOfSeats(String TailNumber);
 	
 	/* POST */
-	public void setModel(int TailNumber,String Model);
-	public void setCompany(int TailNumber, String Company);
-	public void setNumberOfSeats(int TailNumber, int NumberOfSeats);
-
+	/* no post request here */
 	
 	/* PUT */
-	public void addAircraft(Aircraft aircraft);
+	void addAircraft();
 	
 	/* DELETE */
-	public void deleteAircraft(int TailNumber);
+	/* no delete request here */
 }

@@ -82,9 +82,11 @@ public class PilotResource implements pilotDao{
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
-	public void addPilot(Pilot pilot) {
-		Pilot p = new Pilot ();
-		DAO.getPilotDao().addPilot(p);
+	public void addPilot(Pilot p) {
+		
+		Pilot pilot = new Pilot(p.getName(),p.getSurname(),p.getEmail(),p.getPhoneNumber(),p.getDateOfBirth(),p.getFlyingHours());
+		System.out.println(pilot.getName());
+		DAO.getPilotDao().addPilot(pilot);
 	}
 
 	

@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,6 +19,10 @@ import javax.ws.rs.core.MediaType;
 
 
 import com.fly2gether.jetty_jersey.dao.*;
+import com.fly2gether.jetty_jersey.daoImpl.AircraftDaoImpl;
+import com.fly2gether.jetty_jersey.daoImpl.FlightDaoImpl;
+import com.fly2gether.jetty_jersey.daoImpl.PassengerDaoImpl;
+import com.fly2gether.jetty_jersey.daoImpl.PilotDaoImpl;
 
 
 @Path("/Flight")
@@ -133,10 +139,40 @@ public class FlightResource implements flightDao {
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addFlightTest")
+	public void addFlightTest(Flight flight) {
+		
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("Fly2gether");
+		flightDao flightDao = new FlightDaoImpl(pmf);
+		aircraftDao aircraftDao=new AircraftDaoImpl(pmf);
+		pilotDao pilotDao=new PilotDaoImpl(pmf);
+		passengerDao passengerDao=new PassengerDaoImpl(pmf);
+		
+		Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,1520);
+		Passenger passenger1=new Passenger("Hiba","SOUBER","hiba@mail.fr","06XXX",new Date(1999,06,12));
+		Pilot pilot1=new Pilot("Rayan","Gosling","rayan@mail.fr","07XXX",new Date(1980,03,16),200);
+		Pilot pilot2=new Pilot("Harry","Potter","rayan@mail.fr","07XXX",new Date(1980,03,16),200);
+		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",20,37,pilot1,aircraft1);		
+		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",30,48,pilot1,aircraft1);		
+		Flight flight3 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,18,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",40,59,pilot1,aircraft1);
+		Flight flight4 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,15,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",40,59,pilot1,aircraft1);
+		flightDao.addFlight(flight1);
+		flightDao.addFlight(flight2);
+		flightDao.addFlight(flight3);
+		flightDao.addFlight(flight4);
+		
+		//DAO.getFlightDao().addFlight(flight);	
+	}
+	
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addFlight")
 	public void addFlight(Flight flight) {
-		DAO.getFlightDao().addFlight(flight);	
+		DAO.getFlightDao().addFlight(flight);
 	}
+	
+	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{flight_id}/{passenger_id}/addFlight")

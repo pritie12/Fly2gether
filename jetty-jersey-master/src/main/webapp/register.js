@@ -39,7 +39,9 @@ function get_form_data_pilot(){
 	var d = new Date($("#date").val());
 	/*var data='{ "name": "R", "surname": "Gosling","dateOfBirth": 60282914400000,"email": "rayan@mai;.fr","phoneNumber": "07XXX","flyingHours": 200, "pilotId": "" }';*/
 	
-	var data= '{ "name":"' + $("#name").val()+
+	var data= '{ "username": "' +  $("#username").val() +
+	' ","pwd": "' +$("#pwd").val()+
+	'",	"name":"' + $("#name").val()+
 	'","surname":"' +	$("#surname").val()+
 	 '","dateOfBirth":"'+$("#date").val()+
 	 '","email":"'+ $("#mail").val()+

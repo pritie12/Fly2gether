@@ -111,14 +111,14 @@ $(function(){
 	});
 
 	$("#buttonD").click(function(){
-		getServerData("ws/Flight/getFlightsByDeparture",callDone);
+		getServerData("ws/Flight/getFlightsBySeats",callDone);
 
 	});
 
 	$("#getFlightList").click(function(){
 		$("#result").append($("#inputArr").val() + " " + $("#inputDep").val() + " "+$("#inputDate").val() + " "+$("#inputNum").val() + " ");
 		
-		getServerData("ws/Flight/getFlightsByDeparture",fligth_list_display);
+		getServerData("ws/Flight/getFlightsBySeats",fligth_list_display);
 	});
 	
 
@@ -130,7 +130,7 @@ $(function(){
 		var seats =processSearchInput( $("#inputNum").val() );
 		var url = "ws/Flight/getFlights/" + departur+"/" + arrival+"/"+date;
 		console.log(url);
-		getServerData(url,fligth_list_display);
+		getServerData("/ws/Flight/getFlights",fligth_list_display);
 		/*getServerData("ws/Flight/getFlights%departureAirport%arrivalAirport%date" ,fligth_list_display);*/
 	});
 	

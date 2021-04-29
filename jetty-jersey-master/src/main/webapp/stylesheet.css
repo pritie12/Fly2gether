@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 /*find a flight*/
 
 .searchBarre{
@@ -127,7 +134,7 @@
 
 body{
     font-family: 'Reem Kufi', sans-serif;
-    background-color: #e7d0bc;
+    background-color: #f0f0f0ff;
     margin: 0%;
 }
 
@@ -189,3 +196,135 @@ a:link, a:visited {
 
 
 
+/*propose flight*/
+
+.divTitle{
+    background-color: #38d3d3;
+    
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+
+.divProp > h5{
+    font-size: 20px;
+    color: #38d3d3;
+    border-bottom: 2px solid #38d3d3;
+    margin-bottom: 0em;
+    margin-top: 0%;
+}
+
+h6{
+    font-size: 15px;
+    margin-block-start: 0em;
+    margin-block-end:0em;
+}
+.inputs{
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    margin: 1em 10% 5%;
+}
+
+.inputs > div > input{
+    border-radius: 10px;
+    background-color:  #38d3d32f;
+    border: none;
+    height: 2em;
+    padding-left: 1em;
+}
+.proposeForm{
+    background-color: rgb(255, 255, 255);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-top: none;
+}
+
+
+.btnSubmit{
+    
+	display: block;
+	width: 50%;
+	height: 50px;
+	border-radius: 25px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #32b9be, #32b9be, #32b9be);
+	background-size: 200%;
+	font-size: 1.2rem;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+	margin: 1rem 25%;
+	cursor: pointer;
+	transition: .5s;
+}
+.btnSubmit:hover{
+	background-position: right;
+}
+
+
+/*switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 26px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }

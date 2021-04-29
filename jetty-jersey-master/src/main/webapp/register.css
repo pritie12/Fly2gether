@@ -233,7 +233,7 @@ a:hover{
 	color: #38c9d3;
 }
 
-.btn{
+.btnSubmit{
 	display: block;
 	width: 100%;
 	height: 50px;
@@ -250,8 +250,12 @@ a:hover{
 	cursor: pointer;
 	transition: .5s;
 }
-.btn:hover{
+.btnSubmit:hover{
 	background-position: right;
+}
+
+#div_pilot{
+	display: none;
 }
 
 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="stylesheet.css" />
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
+	</head>
+	<body onload="fligth_list_display()">
+
+		<script id="templatePiloteFlightView" type="text/template">
+		
+			
+		</script>
+        <script id="templatePassengerFlightView" type="text/template">
+		
+			
+		</script>
+		<script id="templateExample" type="text/template">
+		
+			<div>
+				<%= attribute %>
+			</div>
+		</script>
+		
+		<nav class="navBarre">
+			
+			<div class="nav_links">
+				<ul class="nav_ul" >
+				<li class="nav_li"><a href="login.html">Log in / Register</a></li>
+				<li class="nav_li"><a href="propose_flight.html">Propose a flight</a></li>
+				<li class="nav_li"><a href="find_flight.html">Find a flight</a></li>
+					
+					
+				</ul>
+			</div>
+			<div class="nav_title">
+				<a href="home.html"><h1>Fly2gether<h1></a>
+			</div>
+		</nav>
+
+
+		<div class="page_content">
+            
+            <div class="divTitle">
+               <h1> Propose a flight</h1>
+            </div>
+            <div class="proposeForm">
+                <div class="divProp" >
+                    <h5>Departure</h5>
+                    <div class="inputs">
+                        <div>
+                            <h6>Airport</h6>
+                            <input type="text" id="airportDeparture">
+                        </div>
+
+                        <div>
+                            <h6>Date</h6>
+                            <input type="date" id="dateDeparture" >
+                        </div>
+                        
+                        <div>
+                            <h6>Time</h6>
+                            <input type="time" id="datetimeDeparture" >
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="divProp" >
+                    <h5>Arrival</h5>
+                
+                    <div class="inputs">
+                        <div>
+                            <h6>Airport
+                                <!--<label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>-->
+                            </h6> 
+                            
+                            <input type="text" id="airportArrival">
+                        </div>
+
+                        <div>
+                            <h6>Date</h6>
+                            <input type="date" id="dateArrival" >
+                        </div>
+                        
+                        <div>
+                            <h6>Time</h6>
+                            <input type="time" id="datetimeArrival" >
+                        </div>
+                        
+                    </div>
+                
+                </div>
+                <div class="divProp" >
+                    <h5>Aircraft</h5>
+                    <div class="inputs">
+                        <div>
+                            <h6>Model</h6>
+                            <input type="text" id="aircraftModel">
+                        </div>
+
+                        <div>
+                            <h6>Constructor</h6>
+                            <input type="text" id="aircraftConstructor" >
+                        </div>
+                        
+                        <div>
+                            <h6>Seats</h6>
+                            <input type="number" id="seats" >
+                        </div>
+                        
+                    </div>
+                    
+                
+                </div>
+                <button id="submit" class="btnSubmit" value="Register">Submit</button>
+            </div>
+           
+		</div>
+		
+	    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	    <script type="text/javascript" src="webService.js"></script>
+		<script type="text/javascript" src="home.js"></script>
+	</body>
+</html>

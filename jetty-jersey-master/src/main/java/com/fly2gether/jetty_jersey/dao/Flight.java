@@ -19,9 +19,11 @@ public class Flight {
 	 private int id;	
 	 private String appointmentDescription;	
 	 private Date departureDate;
+	 @Persistent
 	 private LocalDateTime departureTime;
 	 private String departureAirport;	
 	 private Date arrivalDate;
+	 @Persistent
 	 private LocalDateTime arrivalTime;
 	 private String arrivalAirport;	
 	 private Duration flightDuration;

@@ -25,7 +25,7 @@ public interface flightDao {
 	
 	//filter the flights by price
 	public List<Flight> getFlights(int minPrice,int maxPrice);
-	//public List<Flight> getFlights(LocalDateTime DepartureMin,LocalDateTime DepartureMax, String DepartureAirport);	
+	public List<Flight> getFlights(String DepartureMin,String DepartureMax, String DepartureAirport);	
 	public List<Flight> getFlights(int Seats);	
 	
 	/* POST */
@@ -38,7 +38,7 @@ public interface flightDao {
 	public void setdepartureDate(int id,Date DepartureDate);	
 	public void setarrivalDate(int id,Date ArrivalDate);
 	public void setFlightDuration(int id,Duration FlightDuration);
-	//public void modifyFlight(int id, LocalDateTime DepartureTime,String DepartureAirport, LocalDateTime ArrivalTime,String ArrivalAirport);
+	public void modifyFlight(int id, String DepartureTime,String DepartureAirport, String ArrivalTime,String ArrivalAirport);
 	
 	/* PUT */
 	public void addFlight(Flight flight);

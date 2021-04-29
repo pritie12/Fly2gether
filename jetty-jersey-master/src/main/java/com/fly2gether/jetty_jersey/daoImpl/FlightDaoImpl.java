@@ -2,9 +2,11 @@ package com.fly2gether.jetty_jersey.daoImpl;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -422,24 +424,28 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
-		System.out.println(detached.size()+" flights found !");
+		System.out.println(detached.size()+" flights found ranging between "+maxPrice+" and "+minPrice+" !");
 		return detached;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Flight> getFlights(LocalDateTime DepartureMin,LocalDateTime DepartureMax, String DepartureAirport) {
+	@SuppressWarnings({ "unchecked" })
+	public List<Flight> getFlights(String DepartureMin,String DepartureMax, String DepartureAirport) {
 		List<Flight> flights=null;
 		List<Flight> detached = new ArrayList<Flight>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+        LocalDateTime dMin = LocalDateTime.parse(DepartureMin,formatter);
+        LocalDateTime dMax = LocalDateTime.parse(DepartureMax,formatter);
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
+            flights= (List<Flight>) q.execute();
 
-			q.declareParameters("java.util.LocalDateTime DepartureMin, String DepartureAirport,java.util.LocalDateTime DepartureMax");
-			q.setFilter(" DepartureMax >= departureTime && DepartureMin <= departureTime && DepartureAirport==departureAirport && AvailablesSeats!=0");
-			flights = (List<Flight>) q.execute(DepartureMin,DepartureAirport,DepartureMax);
+            flights=(List<Flight>) flights.stream().filter(f->f.getDepartureAirport().toUpperCase().equals(DepartureAirport.toUpperCase()))
+            		.filter(f->f.getDepartureTime().isAfter(dMin)).filter(f->f.getDepartureTime().isBefore(dMax))
+            		.filter(f->f.getAvailableSeats()!=0).collect(Collectors.toList());
 
 			detached = (List<Flight>) pm.detachCopyAll(flights);
 			tx.commit();
@@ -477,7 +483,7 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
-		System.out.println(detached.size()+" flights found !");
+		System.out.println(detached.size()+" flights found with "+Seats+" seats!");
 		return detached;
 	}
 
@@ -734,17 +740,22 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 
-	public void modifyFlight(int id, LocalDateTime DepartureTime, String DepartureAirport, LocalDateTime ArrivalTime,
+	public void modifyFlight(int id, String DepartureTime, String DepartureAirport, String ArrivalTime,
 			String ArrivalAirport) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+        LocalDateTime DTime= LocalDateTime.parse(DepartureTime,formatter);
+        LocalDateTime ATime = LocalDateTime.parse(ArrivalTime,formatter);
+
 		Flight f=null;
 		try {
 			tx.begin();
 			f = pm.getObjectById(Flight.class, id);
 			f.setDepartureAirport(DepartureAirport);
-			f.setDepartureTime(DepartureTime);
-			f.setArrivalTime(ArrivalTime);
+			
+			f.setDepartureTime(DTime);
+			f.setArrivalTime(ATime);
             f.setArrivalAirport(ArrivalAirport);
 			tx.commit();
 		} finally {

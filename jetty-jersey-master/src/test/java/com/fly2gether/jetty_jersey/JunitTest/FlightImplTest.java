@@ -36,7 +36,7 @@ public class FlightImplTest {
 		Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,1520);
 		Passenger passenger1=new Passenger("Hiba","SOUBER","hiba@mail.fr","06XXX",new Date(1999,06,12));
 		Pilot pilot1=new Pilot("Rayan","Gosling","rayan@mail.fr","07XXX",new Date(1980,03,16),200);
-		Pilot pilot2=new Pilot("Harry","Potter","rayan@mail.fr","07XXX",new Date(1980,03,16),200);
+		Pilot pilot2=new Pilot("Harry","Potter","potter@mail.fr","07XXX",new Date(1988,12,16),200);
 		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",20,37,pilot1,aircraft1);		
 		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",30,48,pilot1,aircraft1);		
 		Flight flight3 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,18,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",40,59,pilot1,aircraft1);
@@ -47,8 +47,8 @@ public class FlightImplTest {
 		flightDao.addFlight(flight4);
 		Assert.assertEquals(4, flightDao.getFlights().size());
 
-		Assert.assertEquals(1,  flightDao.getFlights(30).size());
-		Assert.assertEquals(2,  flightDao.getFlights(LocalDateTime.of(2021,04,16,13,0,0),LocalDateTime.of(2021,04,16,23,0,0),"Aerodrome 1").size());
+		Assert.assertEquals(2,  flightDao.getFlights(30).size());
+		Assert.assertEquals(2,  flightDao.getFlights("2021-04-16 13:30","2021-04-16 23:30","Aerodrome 1").size());
 		Assert.assertEquals(2,  flightDao.getFlights(30,50).size());
 
 	}

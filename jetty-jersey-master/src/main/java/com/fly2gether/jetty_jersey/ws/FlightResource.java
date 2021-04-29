@@ -1,7 +1,6 @@
 package com.fly2gether.jetty_jersey.ws;
 import java.time.Duration;
 import java.time.LocalDateTime;
-
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +19,7 @@ import com.fly2gether.jetty_jersey.dao.*;
 
 
 @Path("/Flight")
-public class FlightResource implements flightDao {
+public class FlightResource  implements flightDao {
 
 	
 
@@ -127,7 +126,7 @@ public class FlightResource implements flightDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightsBySeats")
-	public List<Flight> getFlights(int seats) {
+	public List<Flight> getFlights(@PathParam("seats")int seats) {
 		return DAO.getFlightDao().getFlights(seats);
 	}
 
@@ -225,21 +224,21 @@ public class FlightResource implements flightDao {
 		
 	}
 
-	/*@POST
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyFlight")
-	public void modifyFlight(@PathParam("id")int id, @PathParam("DepartureTime")LocalDateTime DepartureTime, 
-			@PathParam("DepartureAirport")String DepartureAirport, @PathParam("ArrivalTime")LocalDateTime ArrivalTime,
+	public void modifyFlight(@PathParam("id")int id, @PathParam("DepartureTime")String DepartureTime, 
+			@PathParam("DepartureAirport")String DepartureAirport, @PathParam("ArrivalTime")String ArrivalTime,
 			@PathParam("ArrivalAirport")String ArrivalAirport) {
+		
 		DAO.getFlightDao().modifyFlight(id,DepartureTime,DepartureAirport,ArrivalTime,ArrivalAirport);		
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightsByDeparture")
-	public List<Flight> getFlights(@PathParam("DepartureMin")LocalDateTime DepartureMin,@PathParam("DepartureMax")LocalDateTime DepartureMax, @PathParam("DepartureAirport")String DepartureAirport) {
+	public List<Flight> getFlights(@PathParam("DepartureMin")String DepartureMin,@PathParam("DepartureMax")String DepartureMax, @PathParam("DepartureAirport")String DepartureAirport) {
 		return DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
-	}*/
-
+	}
 
 }

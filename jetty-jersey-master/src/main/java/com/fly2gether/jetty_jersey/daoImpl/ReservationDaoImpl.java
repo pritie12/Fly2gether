@@ -163,6 +163,7 @@ public class ReservationDaoImpl implements reservationDao{
 		try {
 			tx.begin();
 			pm.makePersistent(reservation);
+			//reservation.getFlight().getAvailableSeats()=reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats();
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

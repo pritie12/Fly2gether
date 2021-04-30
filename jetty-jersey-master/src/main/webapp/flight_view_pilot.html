@@ -22,6 +22,35 @@
 				<%= attribute %>
 			</div>
 		</script>
+
+        <script id="templateValidate" type="text/template">
+		
+			<div class="pendingT_div">
+                <div>
+				    <%= name %> <%= surname %>
+                </div>
+                <div>
+				    <%= seats %> passengers
+                </div>
+			</div>
+		</script>
+
+        <script id="templatePending" type="text/template">
+		
+			<div class="pendingT_div">
+                <div>
+				    <%= name %> <%= surname %>
+                </div>
+                <div>
+				    <%= seats %> passengers
+                </div>
+                <div  class="pendingT_buttons" >
+                    <button id="approuve_reservation"> <i class="fas fa-user-plus fa-2x"></i></button>
+                    <button id="refuse_resa"><i class="fas fa-user-times fa-2x"></i></button>
+                </div>
+
+			</div>
+		</script>
 		
 		<nav class="navBarre">
 			
@@ -41,9 +70,9 @@
 
 
 		<div class="page_content">
-			<div class ="divTitle"><h1>Reservation</h1></div>
+			<div class ="divTitle"><h1>Flight view</h1></div>
 
-			<h5 class="h5_res">Flight view</h5>
+			
 
 			<div id="flight_long_view"> 
 				<div class="flightL_div1">
@@ -105,17 +134,41 @@
 
 				</div>
 
-				<div class="flightL_div_pilot">
-					<i class="fas fa-user-astronaut fa-2x"></i>
-					<span class="flightL_pilotName"> </span>
-					<span class="flightL_pilotSurname"> </span>
-					<span class="flightL_pilotfly">Flying hours </span>
-
-				</div>
+				
 
 				<h5 class="h5_res">Passengers informations</h5>
+				<div class = "flight_passengerList">
+                   <h6>Pending <i class="fas fa-user-clock"></i> </h6> 
+                   <div id="pendingList">
+                    <div class="pendingT_div">
+                        <div>
+                            Pritie SOUGOUMAR
+                        </div>
+                        <div>
+                             4 passengers
+                        </div>
+                        <div  class="pendingT_buttons" >
+                            <button id="approuve_reservation"> <i class="fas fa-user-plus fa-2x"></i></button>
+                            <button id="refuse_resa"><i class="fas fa-user-times fa-2x"></i></button>
+                        </div>
+        
+                    </div>
+                   </div>
+                    <h6>Validate <i class="fas fa-user-check"></i></h6>
+                    <div id="validateList">
+                        <div class="pendingT_div">
+                            <div>
+                                Pritie SOUGOUMAR
+                            </div>
+                            <div>
+                                4 passengers
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
 				
-				<button id="bookingBtn" class="btnSubmit" value="Register">Book</button>
 			</div>
 			
 

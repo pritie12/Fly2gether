@@ -5,24 +5,24 @@ public interface reservationDao {
 
 	/* GET */
 	public List<Reservation> getReservations();
-	public Reservation getReservation(int reservation_id);
-	public Passenger getbookingUser(int reservation_id);
-	public int getdesiredSeats(int reservation_id);
-	public Flight getFlight(int reservation_id);
-	public boolean getStatus(int reservation_id);
+	public Reservation getReservation(Long reservation_id);
+	public Long getbookingUser(Long reservation_id);
+	public int getdesiredSeats(Long reservation_id);
+	public Long getFlight(Long reservation_id);
+	public boolean getStatus(Long reservation_id);
 	//get all the reservations of a certain passenger
-	public List<Integer> getReservations(int passenger_id); // ID of reservations
+	public List<Long> getReservations(Long passenger_id); // ID of reservations
 	
 	
 	
 	/* POST */
-	public void changeNumberOfSeats(int seats,int reservation_id);
-	public void denyReservation(int reservation_id);
+	public void changeNumberOfSeats(int seats,Long reservation_id);
+	public void denyReservation(Long reservation_id);
 	
 	/* PUT */
 	public void addReservation(Reservation reservation);
 	
 	/* DELETE */
-	public void deleteReservation(int id);
+	public void deleteReservation(Long id);
 
 }

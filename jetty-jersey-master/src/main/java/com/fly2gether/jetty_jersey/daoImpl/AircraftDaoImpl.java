@@ -47,7 +47,7 @@ public class AircraftDaoImpl implements aircraftDao{
 	
 	
 	
-	public String getModel(int TailNumber) {
+	public String getModel(Long TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -74,7 +74,7 @@ public class AircraftDaoImpl implements aircraftDao{
 	}
 	
 	
-	public String getCompany(int TailNumber) {
+	public String getCompany(Long TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -100,7 +100,7 @@ public class AircraftDaoImpl implements aircraftDao{
 		return detached.getConstructorCompany();
 	}
 
-	public int getNumberOfSeats(int TailNumber) {
+	public int getNumberOfSeats(Long TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -130,6 +130,7 @@ public class AircraftDaoImpl implements aircraftDao{
 	public void addAircraft(Aircraft aircraft) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			pm.makePersistent(aircraft);
@@ -144,13 +145,19 @@ public class AircraftDaoImpl implements aircraftDao{
 
 
 
-	public void deleteAircraft(int TailNumber) {
+	public void deleteAircraft(Long TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
 		try {
 			tx.begin();
-			a = pm.getObjectById(Aircraft.class, TailNumber);
+			//a = pm.getObjectById(Aircraft.class, TailNumber);
+			Query q = pm.newQuery(Aircraft.class);
+			q.declareParameters("Long TailNumber");
+			q.setFilter("TailNumber == tailNumber");
+			q.setUnique(true);
+			
+			a = (Aircraft) q.execute(TailNumber);
 
             pm.deletePersistent(a);
 			tx.commit();
@@ -166,7 +173,7 @@ public class AircraftDaoImpl implements aircraftDao{
 
 
 
-	public Aircraft getAircraft(int TailNumber) {
+	public Aircraft getAircraft(Long TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -193,7 +200,7 @@ public class AircraftDaoImpl implements aircraftDao{
 		return detached;
 	}
 
-	public void setModel(int TailNumber, String Model) {
+	public void setModel(Long TailNumber, String Model) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
@@ -212,7 +219,7 @@ public class AircraftDaoImpl implements aircraftDao{
 		
 	}
 
-	public void setCompany(int TailNumber, String Company) {
+	public void setCompany(Long TailNumber, String Company) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
@@ -231,7 +238,7 @@ public class AircraftDaoImpl implements aircraftDao{
 		
 	}
 
-	public void setNumberOfSeats(int TailNumber, int NumberOfSeats) {
+	public void setNumberOfSeats(Long TailNumber, int NumberOfSeats) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;

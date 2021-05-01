@@ -9,23 +9,23 @@ public interface pilotDao {
 	public List<Pilot> getPilots();
 	public Pilot Login(String username, String password);
 	public Pilot getPilot(String Username);
-	public Pilot getPilot(int id);	
-	public String getname(int id);
-	public String getsurname(int id);
-	public Date getdateOfBirth(int id);
-	public String getemail(int id);
-	public String getphoneNumber(int id);
-	public int getFlyingHours(int id);
+	public Pilot getPilot(Long id);	
+	public String getname(Long id);
+	public String getsurname(Long id);
+	public Date getdateOfBirth(Long id);
+	public String getemail(Long id);
+	public String getphoneNumber(Long id);
+	public int getFlyingHours(Long id);
 	
 	/* POST */
-	public void modifyUsername(int id,String Username);
-	public void modifyPwd(int id,String Pwd);
+	public void modifyUsername(Long id,String Username);
+	public void modifyPwd(Long id,String Pwd);
 	
 	/* PUT */
 	public void addPilot(Pilot pilot);
 	
 	/* DELETE */
-	public void deletePilot(int id);
+	public void deletePilot(Long id);
 
 
 }

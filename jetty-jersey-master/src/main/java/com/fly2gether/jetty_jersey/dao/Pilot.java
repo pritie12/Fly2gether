@@ -11,7 +11,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class Pilot extends User{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	private int pilot_id;
+	private Long pilot_id;
 
 	private int flyingHours;
 	
@@ -19,17 +19,17 @@ public class Pilot extends User{
 	public Pilot() {
 		super();
 		this.flyingHours=0;
-		pilot_id=0;
+		pilot_id=(long) 0;
 	}
 	
 	public Pilot(String name, String surname, String email, String phoneNumber, Date DOfBirth, int flyingHours) {
 		super(name,surname,email,phoneNumber,DOfBirth);
 		this.flyingHours=flyingHours;
-		pilot_id=0;
+		pilot_id=(long) 0;
 	}
 	
 	/* GETTERS */
-	public int getPilotId() {
+	public Long getPilotId() {
 		return this.pilot_id;
 	}
 	public int getFlyingHours() {
@@ -37,10 +37,13 @@ public class Pilot extends User{
 	}
 	
 	/* SETTERS */
-	public void setPilotId(int pilot_id) {
+	public void setPilotId(Long pilot_id) {
 		this.pilot_id=pilot_id;
 	}
 	public void setFlyingHours(int flyingHours) {
 		this.flyingHours=flyingHours;
+	}
+	public void display() {
+		System.out.println("Pilot  "+this.getName()+" "+this.getSurname());
 	}
 }

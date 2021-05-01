@@ -18,7 +18,7 @@ public class ReservationDaoImpl implements reservationDao{
 		this.pmf = pmf;
 	}	
 
-	public Passenger getbookingUser(int reservation_id) {
+	public Long getbookingUser(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -27,7 +27,7 @@ public class ReservationDaoImpl implements reservationDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Reservation.class);
-			q.declareParameters("int reservation_id");
+			q.declareParameters("Long reservation_id");
 			q.setFilter("reservation_id == resa_id");
 			q.setUnique(true);
 			
@@ -44,7 +44,7 @@ public class ReservationDaoImpl implements reservationDao{
 		return detached.getBookingUser();
 	}
 
-	public int getdesiredSeats(int reservation_id) {
+	public int getdesiredSeats(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -53,7 +53,7 @@ public class ReservationDaoImpl implements reservationDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Reservation.class);
-			q.declareParameters("int reservation_id");
+			q.declareParameters("Long reservation_id");
 			q.setFilter("reservation_id == resa_id");
 			q.setUnique(true);
 			
@@ -70,7 +70,7 @@ public class ReservationDaoImpl implements reservationDao{
 		return detached.getDesiredSeats();
 	}
 
-	public Flight getFlight(int reservation_id) {
+	public Long getFlight(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -79,7 +79,7 @@ public class ReservationDaoImpl implements reservationDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Reservation.class);
-			q.declareParameters("int reservation_id");
+			q.declareParameters("Long reservation_id");
 			q.setFilter("reservation_id == resa_id");
 			q.setUnique(true);
 			
@@ -96,18 +96,18 @@ public class ReservationDaoImpl implements reservationDao{
 		return detached.getFlight();
 	}
 
-	public List<Integer> getReservations(int passenger_id) {
+	public List<Long> getReservations(Long passenger_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-		List<Integer> passengers_reservations=null;
-		List<Integer> detached=null;
+		List<Long> passengers_reservations=null;
+		List<Long> detached=null;
 		try {
 			tx.begin();
 			
 			Passenger p = pm.getObjectById(Passenger.class, passenger_id);
 			passengers_reservations=p.getPassengerBookingList();
 
-			detached = (List<Integer>) pm.detachCopy(passengers_reservations);		
+			detached = (List<Long>) pm.detachCopy(passengers_reservations);		
 			tx.commit();
 		} finally {
 			if (tx.isActive()) tx.rollback();
@@ -115,7 +115,7 @@ public class ReservationDaoImpl implements reservationDao{
 		}
 		return detached;
 	}
-	public boolean getStatus(int reservation_id) {
+	public boolean getStatus(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -124,7 +124,7 @@ public class ReservationDaoImpl implements reservationDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Reservation.class);
-			q.declareParameters("int reservation_id");
+			q.declareParameters("Long reservation_id");
 			q.setFilter("reservation_id == resa_id");
 			q.setUnique(true);
 			
@@ -141,7 +141,7 @@ public class ReservationDaoImpl implements reservationDao{
 		return detached.getStatus();
 	}
 	
-	public void changeNumberOfSeats(int seats,int reservation_id) {
+	public void changeNumberOfSeats(int seats,Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -160,16 +160,18 @@ public class ReservationDaoImpl implements reservationDao{
 	public void addReservation(Reservation reservation) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
+			//reservation.getFlight().setAvailableSeats((reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats()));
 			pm.makePersistent(reservation);
-			//reservation.getFlight().getAvailableSeats()=reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats();
 			tx.commit();
+			//System.out.println("Flight for "+reservation.getBookingUser().getName()+" "+reservation.getBookingUser().getSurname()+" booked");
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
 			}
-			pm.close();
+			pm.close();		
 		}		
 	}
 
@@ -181,7 +183,7 @@ public class ReservationDaoImpl implements reservationDao{
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			Query q = pm.newQuery(Aircraft.class);
+			Query q = pm.newQuery(Reservation.class);
 
 			reservations = (List<Reservation>) q.execute();
 			detached = (List<Reservation>) pm.detachCopyAll(reservations);
@@ -196,7 +198,7 @@ public class ReservationDaoImpl implements reservationDao{
 		return detached;
 	}
 
-	public Reservation getReservation(int reservation_id) {
+	public Reservation getReservation(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -205,7 +207,7 @@ public class ReservationDaoImpl implements reservationDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Reservation.class);
-			q.declareParameters("int reservation_id");
+			q.declareParameters("Long reservation_id");
 			q.setFilter("reservation_id == resa_id");
 			q.setUnique(true);
 			
@@ -222,7 +224,7 @@ public class ReservationDaoImpl implements reservationDao{
 		return detached;
 	}
 
-	public void deleteReservation(int id) {
+	public void deleteReservation(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r=null;
@@ -242,7 +244,7 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 
 
-	public void denyReservation(int reservation_id) {
+	public void denyReservation(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r=null;
@@ -257,8 +259,7 @@ public class ReservationDaoImpl implements reservationDao{
 			}
 			pm.close();
 		}
-		System.out.println("Reservation denied");
-		
+		System.out.println("Reservation denied");	
 	}
 
 }

@@ -8,19 +8,19 @@ public interface flightDao {
 	
 	/* GET */
 
-	public Pilot getPilot(int id);	
-	public Aircraft getAircraft(int id);
-	public int getPrice(int id);
-	public List<Integer> getPassengers(int id);
-	public int getAvailableSeats(int id);	
-	public String getAppointmentDescription(int id);	
-	public Date getdepartureDate(int id);
-	public LocalDateTime getdepartureTime(int id);
-	public String getdepartureAirport(int id);	
-	public Date getarrivalDate(int id);
-	public LocalDateTime getarrivalTime(int id);
-	public String getarrivalAirport(int id);
-	public Duration getFlightDuration(int id);
+	public Long getPilot(Long id);	
+	public Long getAircraft(Long id);
+	public int getPrice(Long id);
+	public List<Long> getPassengers(Long id);
+	public int getAvailableSeats(Long id);	
+	public String getAppointmentDescription(Long id);	
+	public Date getdepartureDate(Long id);
+	public LocalDateTime getdepartureTime(Long id);
+	public String getdepartureAirport(Long id);	
+	public Date getarrivalDate(Long id);
+	public LocalDateTime getarrivalTime(Long id);
+	public String getarrivalAirport(Long id);
+	public Duration getFlightDuration(Long id);
 	public List<Flight> getFlights();
 	
 	//filter the flights by price
@@ -29,24 +29,24 @@ public interface flightDao {
 	public List<Flight> getFlights(int Seats);	
 	
 	/* POST */
-	public void setPilot(int id,Pilot Pilot);	
-	public void setAircraft(int id,Aircraft Aircraft);
-	public void setPrice(int id,int Price);
-	public void setPassengers(int id,List<Integer> Passengers);
-	public void setAvailableSeats(int id, int AvailableSeats);	
-	public void setAppointmentDescription(int id,String AppointmentDescription);	
-	public void setdepartureDate(int id,Date DepartureDate);	
-	public void setarrivalDate(int id,Date ArrivalDate);
-	public void setFlightDuration(int id,Duration FlightDuration);
-	public void modifyFlight(int id, String DepartureTime,String DepartureAirport, String ArrivalTime,String ArrivalAirport);
+	public void setPilot(Long id,Long Pilot);	
+	public void setAircraft(Long id,Long Aircraft);
+	public void setPrice(Long id,int Price);
+	public void setPassengers(Long id,List<Long> Passengers);
+	public void setAvailableSeats(Long id, int AvailableSeats);	
+	public void setAppointmentDescription(Long id,String AppointmentDescription);	
+	public void setdepartureDate(Long id,Date DepartureDate);	
+	public void setarrivalDate(Long id,Date ArrivalDate);
+	public void setFlightDuration(Long id,Duration FlightDuration);
+	public void modifyFlight(Long id, String DepartureTime,String DepartureAirport, String ArrivalTime,String ArrivalAirport);
 	
 	/* PUT */
 	public void addFlight(Flight flight);
-	public void addPassenger(int passenger_id, int flight_id);
+	public void addPassenger(Long passenger_id, Long flight_id);
 	
 	
 	/* DELETE */
-	public void deleteFlight(int id);
-	public void removePassenger(int passenger_id,int flight_id);
+	public void deleteFlight(Long id);
+	public void removePassenger(Long passenger_id,Long flight_id);
 	
 }

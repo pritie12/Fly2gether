@@ -13,8 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.DAO;
-import com.fly2gether.jetty_jersey.dao.Flight;
-import com.fly2gether.jetty_jersey.dao.Passenger;
 import com.fly2gether.jetty_jersey.dao.Reservation;
 import com.fly2gether.jetty_jersey.dao.reservationDao;
 
@@ -33,56 +31,56 @@ public class ReservationResource implements reservationDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getbookingUser")
-	public Passenger getbookingUser(@PathParam("Resa_ID")int resa_id) {
+	public Long getbookingUser(@PathParam("Resa_ID")Long resa_id) {
 		return DAO.getReservationDao().getbookingUser(resa_id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getdesiredSeats")
-	public int getdesiredSeats(@PathParam("Resa_ID")int resa_id) {
+	public int getdesiredSeats(@PathParam("Resa_ID")Long resa_id) {
 		return DAO.getReservationDao().getdesiredSeats(resa_id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getFlight")
-	public Flight getFlight(@PathParam("Resa_ID")int resa_id) {
+	public Long getFlight(@PathParam("Resa_ID")Long resa_id) {
 		return DAO.getReservationDao().getFlight(resa_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{Resa_ID}/getStatus")
-	public boolean getStatus(@PathParam("Resa_ID")int resa_id) {
+	public boolean getStatus(@PathParam("Resa_ID")Long resa_id) {
 		return DAO.getReservationDao().getStatus(resa_id);
 	}	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{passenger_id}/getFlight")
-	public List<Integer> getReservations(@PathParam("passenger_id")int passenger_id) {
+	public List<Long> getReservations(@PathParam("passenger_id")Long passenger_id) {
 		return DAO.getReservationDao().getReservations(passenger_id);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{reservation_id}/getReservation")
-	public Reservation getReservation(int reservation_id) {	
+	public Reservation getReservation(Long reservation_id) {	
 		return DAO.getReservationDao().getReservation(reservation_id);
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{reservation_id}/changeNumberOfSeats")
-	public void changeNumberOfSeats(int seats,@PathParam("reservation_id")int reservation_id) {
+	public void changeNumberOfSeats(int seats,@PathParam("reservation_id")Long reservation_id) {
 		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);		
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{reservation_id}/denyReservation")
-	public void denyReservation(@PathParam("reservation_id")int reservation_id) {
+	public void denyReservation(@PathParam("reservation_id")Long reservation_id) {
 		DAO.getReservationDao().denyReservation(reservation_id);			
 	}	
 	@PUT
@@ -95,7 +93,7 @@ public class ReservationResource implements reservationDao {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/deleteReservation")
-	public void deleteReservation(int id) {
+	public void deleteReservation(Long id) {
 		DAO.getReservationDao().deleteReservation(id);		
 	}
 

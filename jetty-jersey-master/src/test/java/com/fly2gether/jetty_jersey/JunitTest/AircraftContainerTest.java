@@ -24,11 +24,11 @@ public class AircraftContainerTest {
 		{
 			PersistenceManager pm = pmf.getPersistenceManager();
 			
-			Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,5482);
-            Aircraft aircraft2 =new Aircraft("LEARJET45","Boeing",28,5987);
-            Aircraft aircraft3 =new Aircraft("LEARJET70","Boeing",50,1582);
-            Aircraft aircraft4 =new Aircraft("FLYFLY58","Airbus",100,1334);
-            Aircraft aircraft5 =new Aircraft("MARSUPILAMI12","Lockheed Martin",70,1423);
+			Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,(long) 5482);
+            Aircraft aircraft2 =new Aircraft("LEARJET45","Boeing",28,(long) 5987);
+            Aircraft aircraft3 =new Aircraft("LEARJET70","Boeing",50,(long) 1582);
+            Aircraft aircraft4 =new Aircraft("FLYFLY58","Airbus",100,(long) 1334);
+            Aircraft aircraft5 =new Aircraft("MARSUPILAMI12","Lockheed Martin",70,(long) 1423);
 
 			AircraftContainer container = new AircraftContainer();
 			container.getFleet().add(aircraft1);
@@ -37,11 +37,7 @@ public class AircraftContainerTest {
 			container.getFleet().add(aircraft4);
 			container.getFleet().add(aircraft5);
 			
-			System.out.println(container.getFleet().get(0).getModel());
-			System.out.println(container.getFleet().get(0));
-			System.out.println(container.getFleet().get(1).getConstructorCompany());
-			System.out.println(container.getFleet().get(2).getTailNumber());
-			System.out.println(container.getFleet().get(3).getTailNumber());
+			container.getFleet().get(0).display();
 			container = pm.makePersistent(container);
 			containerId = container.getId();
 			pm.close();

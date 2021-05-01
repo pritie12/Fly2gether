@@ -9,36 +9,38 @@ public class Reservation {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	private int resa_id;
-	private Passenger bookingUser;
-	private Flight flight;
+	private Long resa_id;
+	@Persistent
+	private Long bookingUser;
+	@Persistent
+	private Long flight;
 	private int desiredSeats;
 	private boolean status;
 	
 	/* CONSTRUCTORS */
 	public Reservation() {
-		this.resa_id=0;
-		this.bookingUser=new Passenger();
-		this.flight=new Flight();
+		this.resa_id=(long) 0;
+		this.bookingUser=(long) 0;
+		this.flight=(long) 0;
 		this.desiredSeats=0;
 		this.status=true;
 				
 	}
-	public Reservation(Passenger bookingUser, Flight flight, int desiredSeats) {
-		this.bookingUser=bookingUser;
+	public Reservation(Long passenger1, Long flight, int desiredSeats) {
+		this.bookingUser=passenger1;
 		this.flight=flight;
 		this.desiredSeats=desiredSeats;
 		this.setStatus(true);
 	}
 	
 	/* GETTERS */
-	public Passenger getBookingUser() {
+	public Long getBookingUser() {
 		return this.bookingUser;
 	}
-	public int getReservationId() {
+	public Long getReservationId() {
 		return this.resa_id;
 	}
-	public Flight getFlight() {
+	public Long getFlight() {
 		return this.flight;
 	}
 	public int getDesiredSeats() {
@@ -46,15 +48,16 @@ public class Reservation {
 	}
 	public boolean getStatus() {
 		return this.status;
-	}	
+	}
+	
 	/* SETTERS */
-	public void setBookingUser(Passenger bookingUser) {
+	public void setBookingUser(Long bookingUser) {
 		this.bookingUser=bookingUser;
 	}
-	public void setReservationId(int resa_id) {
+	public void setReservationId(Long resa_id) {
 		this.resa_id=resa_id;
 	}
-	public void setFlight(Flight flight) {
+	public void setFlight(Long flight) {
 		this.flight=flight;
 	}
 	public void setDesiredSeats(int desiredSeats) {
@@ -63,5 +66,8 @@ public class Reservation {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	public void display() {
+		System.out.println("Reservation made by passenger n° "+this.getBookingUser()+" in flight n°"+this.flight+" for "+this.desiredSeats+" seats");
 	}
 }

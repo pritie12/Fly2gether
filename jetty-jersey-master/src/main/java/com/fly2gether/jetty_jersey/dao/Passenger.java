@@ -15,8 +15,8 @@ public class Passenger extends User {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	private int passenger_id;
-	private List<Integer> passengerBookingList; // Id of reservations
+	private Long passenger_id;
+	private List<Long> passengerBookingList; // Id of reservations
 	
 
 	
@@ -24,29 +24,32 @@ public class Passenger extends User {
 	public Passenger() {
 		super();
 
-		this.passenger_id=0;
-		this.passengerBookingList=new ArrayList<Integer>();
+		this.passenger_id=(long) 0;
+		this.passengerBookingList=new ArrayList<Long>();
 	}
 	
 	public Passenger(String name, String surname, String email, String phoneNumber, Date DOfBirth) {
 		super(name,surname,email,phoneNumber,DOfBirth);
 
-		this.passenger_id=0;
+		this.passenger_id=(long) 0;
 	}
 	
 	/* GETTERS */
-	public int getPassengerId() {
+	public Long getPassengerId() {
 		return this.passenger_id;
 	}
-	public List<Integer> getPassengerBookingList(){
+	public List<Long> getPassengerBookingList(){
 		return this.passengerBookingList;
 	}
 	
 	/* SETTERS */
-	public void setPassengerId(int passenger_id) {
+	public void setPassengerId(Long passenger_id) {
 		this.passenger_id=passenger_id;
 	}
-	public void setPassengerBookingList(List<Integer> passengerBookingList){
+	public void setPassengerBookingList(List<Long> passengerBookingList){
 		this.passengerBookingList=passengerBookingList;
+	}
+	public void display() {
+		System.out.println("Passenger  "+this.getName()+" "+this.getSurname());
 	}
 }

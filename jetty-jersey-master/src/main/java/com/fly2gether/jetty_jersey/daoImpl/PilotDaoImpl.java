@@ -19,7 +19,7 @@ public class PilotDaoImpl implements pilotDao {
 		this.pmf = pmf;
 	}	
 
-	public String getUsername(int Id) {
+	public String getUsername(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -28,7 +28,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(Id);
@@ -43,7 +43,7 @@ public class PilotDaoImpl implements pilotDao {
 		}
 		return detached.getUsername();
 	}
-	public String getPwd(int Id) {
+	public String getPwd(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -52,7 +52,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(Id);
@@ -68,7 +68,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getPwd();
 	}
 
-	public String getname(int id) {
+	public String getname(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -77,7 +77,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -92,7 +92,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getName();
 	}
 
-	public String getsurname(int id) {
+	public String getsurname(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -101,7 +101,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -116,7 +116,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getSurname();
 	}
 
-	public Date getdateOfBirth(int id) {
+	public Date getdateOfBirth(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -125,7 +125,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -140,7 +140,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getDateOfBirth();
 	}
 
-	public String getemail(int id) {
+	public String getemail(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -149,7 +149,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -164,7 +164,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getEmail();
 	}
 
-	public String getphoneNumber(int id) {
+	public String getphoneNumber(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -173,7 +173,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -188,7 +188,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getPhoneNumber();
 	}
 
-	public int getFlyingHours(int id) {
+	public int getFlyingHours(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -197,7 +197,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  pilot_id");
 			q.setUnique(true);			
 			p = (Pilot) q.execute(id);
@@ -215,6 +215,7 @@ public class PilotDaoImpl implements pilotDao {
 	public void addPilot(Pilot pilot) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			pm.makePersistent(pilot);
@@ -250,7 +251,7 @@ public class PilotDaoImpl implements pilotDao {
 		return detached;
 	}
 
-	public void deletePilot(int id) {
+	public void deletePilot(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p=null;
@@ -265,11 +266,10 @@ public class PilotDaoImpl implements pilotDao {
 			}
 			pm.close();
 		}
-		System.out.println("Pilot deleted from database");
-		
+		System.out.println("Pilot deleted from database");		
 	}
 
-	public Pilot getPilot(int id) {
+	public Pilot getPilot(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p = null;
@@ -278,7 +278,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Pilot.class);
-			q.declareParameters("int id");
+			q.declareParameters("Long id");
 			q.setFilter("id == pilot_id");
 			q.setUnique(true);
 			
@@ -297,7 +297,7 @@ public class PilotDaoImpl implements pilotDao {
 
 
 
-	public void modifyUsername(int id, String Username) {
+	public void modifyUsername(Long id, String Username) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p=null;
@@ -316,7 +316,7 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 
-	public void modifyPwd(int id, String Pwd) {
+	public void modifyPwd(Long id, String Pwd) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Pilot p=null;

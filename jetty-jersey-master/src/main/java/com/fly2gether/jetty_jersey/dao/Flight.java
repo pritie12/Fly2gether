@@ -16,23 +16,26 @@ public class Flight {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
-	 private int id;	
+	 private Long id;
+	
 	 private String appointmentDescription;	
 	 private Date departureDate;
+	 @Persistent
 	 private LocalDateTime departureTime;
 	 private String departureAirport;	
 	 private Date arrivalDate;
+	 @Persistent
 	 private LocalDateTime arrivalTime;
 	 private String arrivalAirport;	
 	 private Duration flightDuration;
 	 private int availablesSeats;
 	 private int price; 
 	 @Persistent
-	 private List<Integer> passengersList;
+	 private List<Long> passengersList;
 	 @Persistent
-	 private Pilot pilot;
+	 private Long id_pilot;
 	 @Persistent
-	 private Aircraft aircraft;
+	 private Long aircraft_tailnumber;
 	 
 	 
 	 /* Constructors */
@@ -47,14 +50,14 @@ public class Flight {
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=0;
 		 this.price=0;
-		 this.passengersList=new ArrayList<Integer>();
-		 this.pilot= new Pilot();
-		 this.aircraft=new Aircraft();
+		 this.passengersList=new ArrayList<Long>();
+		 this.id_pilot= (long) 0;
+		 this.aircraft_tailnumber=(long) 0;
 
 	 }
 	 
 	 public Flight(Date departureDate,LocalDateTime departureTime,String departureAirport,Date arrivalDate, LocalDateTime arrivalTime ,
-			 String arrivalAirport,int availablesSeats, int price, Pilot pilot, Aircraft aircraft) {
+			 String arrivalAirport,int availablesSeats, int price, Long pilot, Long aircraft) {
 		 this.appointmentDescription="";
 		 this.departureDate=departureDate;
 		 this.departureAirport=departureAirport;
@@ -62,17 +65,17 @@ public class Flight {
 		 this.arrivalDate=arrivalDate;
 		 this.arrivalAirport="";
 		 this.arrivalTime=arrivalTime;
-		 this.pilot= pilot;
-		 this.aircraft=aircraft;
+		 this.id_pilot= pilot;
+		 this.aircraft_tailnumber=aircraft;
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=availablesSeats;
 		 this.price=price;
-		 this.passengersList=new ArrayList<Integer>();
+		 this.passengersList=new ArrayList<Long>();
 
 	 }
 	
 	 /* GETTERS */
-	 public int getId() {
+	 public Long getId() {
 		 return this.id;
 	 }
 	 public String getAppointmentDescription() {
@@ -96,11 +99,11 @@ public class Flight {
 	 public LocalDateTime getArrivalTime() {
 		 return this.arrivalTime;
 	 }
-	 public Pilot getFlightPilot() {
-		 return this.pilot;
+	 public Long getFlightPilot() {
+		 return this.id_pilot;
 	 }
-	 public Aircraft getFlightAircraft() {
-		 return this.aircraft;
+	 public Long getFlightAircraft() {
+		 return this.aircraft_tailnumber;
 	 }
 	 public int getPrice() {
 		 return this.price;
@@ -108,7 +111,7 @@ public class Flight {
 	 public int getAvailableSeats() {
 		 return this.availablesSeats;
 	 }
-	 public List<Integer> getPassengersList(){
+	 public List<Long> getPassengersList(){
 		 return this.passengersList;
 	 }
 	 public Duration getFlightDuration() {
@@ -117,7 +120,7 @@ public class Flight {
 	 }
 	 
 	 /* SETTERS */
-	 public void setId(int id) {
+	 public void setId(Long id) {
 		 this.id=id;
 	 }
 	 public void setAppointmentDescription(String appointmentDescription) {
@@ -141,11 +144,11 @@ public class Flight {
 	 public void setArrivalTime(LocalDateTime arrivalTime) {
 		 this.arrivalTime=arrivalTime;
 	 }
-	 public void setFlightPilot(Pilot pilot) {
-		 this.pilot=pilot;
+	 public void setFlightPilot(Long pilot) {
+		 this.id_pilot=pilot;
 	 }
-	 public void setFlightAircraft(Aircraft aircraft) {
-		 this.aircraft=aircraft;
+	 public void setFlightAircraft(Long aircraft) {
+		 this.aircraft_tailnumber=aircraft;
 	 }
 	 public void setPrice(int price) {
 		 this.price=price;
@@ -153,11 +156,13 @@ public class Flight {
 	 public void setAvailableSeats(int availableSeats) {
 		 this.availablesSeats=availableSeats;
 	 }
-	 public void setPassengersList(List<Integer> passengersList){
+	 public void setPassengersList(List<Long> passengersList){
 		 this.passengersList=passengersList;
 	 }
 	 public void setFlightDuration(Duration flightDuration) {
 		 this.flightDuration=flightDuration;
 	 }
-	
+		public void display() {
+			System.out.println("Departure from: "+this.departureAirport+" at: "+this.departureTime+" with "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber);
+		}	
 }

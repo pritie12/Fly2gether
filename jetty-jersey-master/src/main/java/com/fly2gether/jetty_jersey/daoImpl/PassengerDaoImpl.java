@@ -41,7 +41,7 @@ public class PassengerDaoImpl implements passengerDao{
 		return detached;
 	}
 	
-	public Passenger getPassenger(int id) {
+	public Passenger getPassenger(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -66,7 +66,7 @@ public class PassengerDaoImpl implements passengerDao{
 		}
 		return detached;
 	}
-	public String getUsername(int Id) {
+	public String getUsername(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -75,7 +75,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -91,7 +91,7 @@ public class PassengerDaoImpl implements passengerDao{
 		}
 		return detached.getUsername();
 	}
-	public String getPwd(int Id) {
+	public String getPwd(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -100,7 +100,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -116,7 +116,7 @@ public class PassengerDaoImpl implements passengerDao{
 		}
 		return detached.getPwd();
 	}
-	public String getname(int Id) {
+	public String getname(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -125,7 +125,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -142,7 +142,7 @@ public class PassengerDaoImpl implements passengerDao{
 		return detached.getName();
 	}
 
-	public String getsurname(int Id) {
+	public String getsurname(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -151,7 +151,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -168,7 +168,7 @@ public class PassengerDaoImpl implements passengerDao{
 		return detached.getSurname();
 	}
 
-	public Date getdateOfBirth(int Id) {
+	public Date getdateOfBirth(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -177,7 +177,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -194,7 +194,7 @@ public class PassengerDaoImpl implements passengerDao{
 		return detached.getDateOfBirth();
 	}
 
-	public String getemail(int Id) {
+	public String getemail(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -203,7 +203,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -221,7 +221,7 @@ public class PassengerDaoImpl implements passengerDao{
 		return detached.getEmail();
 	}
 
-	public String getphoneNumber(int Id) {
+	public String getphoneNumber(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -230,7 +230,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -247,7 +247,7 @@ public class PassengerDaoImpl implements passengerDao{
 		return detached.getPhoneNumber();
 	}
 
-	public List<Integer> getpassengerBookingList(int Id) {
+	public List<Long> getpassengerBookingList(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p = null;
@@ -256,7 +256,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("int Id");
+			q.declareParameters("Long Id");
 			q.setFilter("Id ==  passenger_id");
 			q.setUnique(true);
 			
@@ -276,6 +276,7 @@ public class PassengerDaoImpl implements passengerDao{
 	public void addPassenger(Passenger passenger) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Passenger.class);
@@ -294,9 +295,10 @@ public class PassengerDaoImpl implements passengerDao{
 		
 	}
 
-	public void addReservation(int passenger_id, int resa_id) {
+	public void addReservation(Long passenger_id, Long resa_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			
@@ -314,7 +316,7 @@ public class PassengerDaoImpl implements passengerDao{
 		
 	}
 
-	public void cancelReservation(int passenger_id, int resa_id) {
+	public void cancelReservation(Long passenger_id, Long resa_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -335,7 +337,7 @@ public class PassengerDaoImpl implements passengerDao{
 		
 	}
 
-	public void deletePassenger(int id) {
+	public void deletePassenger(Long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p=null;
@@ -388,7 +390,7 @@ public class PassengerDaoImpl implements passengerDao{
         return passenger;
 	}
 
-	public void modifyUsername(int id, String Username) {
+	public void modifyUsername(Long id, String Username) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p=null;
@@ -407,7 +409,7 @@ public class PassengerDaoImpl implements passengerDao{
 		
 	}
 
-	public void modifyPwd(int id, String Pwd) {
+	public void modifyPwd(Long id, String Pwd) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Passenger p=null;

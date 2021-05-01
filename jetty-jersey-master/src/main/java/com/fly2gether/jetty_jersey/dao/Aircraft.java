@@ -10,7 +10,7 @@ public class Aircraft {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
-	private int tailNumber ;
+	private Long tailNumber ;
 	
 	private String model;
 	private String constructorCompany;
@@ -19,13 +19,13 @@ public class Aircraft {
 	
 	/* CONSTRUCTORS */
 	public Aircraft (){
-        this.tailNumber = 1478;
+        this.tailNumber = (long) 0;
         this.model = "";
         this.constructorCompany = "";
         this.numberOfSeats = 0;
       
     }
-	public Aircraft (String model, String constructorCompany,int numberOfSeats,int tailNumber){
+	public Aircraft (String model, String constructorCompany,int numberOfSeats,Long tailNumber){
         this.model = model;
         this.constructorCompany = constructorCompany;
         this.numberOfSeats = numberOfSeats;
@@ -34,7 +34,7 @@ public class Aircraft {
     }	
 	 /* GETTERS */
 
-	public int getTailNumber() {
+	public Long getTailNumber() {
 		return this.tailNumber;
 	}
 	public String getModel() {
@@ -48,7 +48,7 @@ public class Aircraft {
 	}
 	
 	/* SETTERS */
-	public void setTailNumber(int id) {
+	public void setTailNumber(Long id) {
 		this.tailNumber=id;
 	}
 	public void setModel(String model) {
@@ -59,6 +59,9 @@ public class Aircraft {
 	}
 	public void setNumberOfSeats(int numberOfSeats) {
 		this.numberOfSeats=numberOfSeats;
+	}
+	public void display() {
+		System.out.println("Model: "+this.model+",Company: "+this.constructorCompany+", Seats: "+this.numberOfSeats+", TailNumber: "+this.tailNumber);
 	}
 	
 }

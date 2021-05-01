@@ -23,7 +23,6 @@ public class AircraftImplTest {
 		Assert.assertEquals(0, aircraftDao.getFleet().size());
 
 		Aircraft aircraft1 = new Aircraft();
-		aircraft1.setTailNumber(123);
 		System.out.println(aircraft1.getTailNumber());
 		aircraft1.setModel("MARSUPILAMI11");
 		aircraft1.setNumberOfSeats(30);
@@ -32,19 +31,20 @@ public class AircraftImplTest {
 		
 		Aircraft aircraft2 = new Aircraft();
 
-		aircraft2.setTailNumber(265);
+		aircraft2.setTailNumber((long) 265);
 		aircraft2.setModel("PHOENIX89");
 		aircraft2.setConstructorCompany("Airbus");
-		aircraft2.setNumberOfSeats(60);		
+		aircraft2.setNumberOfSeats(60);
+		aircraft2.display();
 		aircraftDao.addAircraft(aircraft2);
 		// test add
 		Assert.assertEquals(2, aircraftDao.getFleet().size());
 
-        Aircraft aircraft3 =new Aircraft("LEARJET70","Boeing",50,1582);
-        Aircraft aircraft4 =new Aircraft("FLYFLY58","Airbus",100,1334);
-        Aircraft aircraft5 =new Aircraft("MARSUPILAMI12","Lockheed Martin",70,1423);
-		Aircraft aircraft6 =new Aircraft("LEARJET40","Boeing",10,5482);
-        Aircraft aircraft7 =new Aircraft("LEARJET45","Boeing",28,5987);
+        Aircraft aircraft3 =new Aircraft("LEARJET70","Boeing",50,(long) 1582);
+        Aircraft aircraft4 =new Aircraft("FLYFLY58","Airbus",100,(long) 1334);
+        Aircraft aircraft5 =new Aircraft("MARSUPILAMI12","Lockheed Martin",70,(long) 1423);
+		Aircraft aircraft6 =new Aircraft("LEARJET40","Boeing",10,(long) 5482);
+        Aircraft aircraft7 =new Aircraft("LEARJET45","Boeing",28,(long) 5987);
  
 		aircraftDao.addAircraft(aircraft3);
 		System.out.println(aircraftDao.getFleet().get(1).getTailNumber());
@@ -55,19 +55,15 @@ public class AircraftImplTest {
 		
 		aircraftDao.deleteAircraft(aircraftDao.getFleet().get(0).getTailNumber());
 		
-		System.out.println(aircraftDao.getFleet().get(0).getTailNumber());	
-		System.out.println(aircraftDao.getFleet().get(1).getTailNumber());	
-		System.out.println(aircraftDao.getFleet().get(2).getTailNumber());	
-		System.out.println(aircraftDao.getFleet().get(3).getTailNumber());	
-		System.out.println(aircraftDao.getFleet().get(4).getTailNumber());	
-		System.out.println(aircraftDao.getFleet().get(5).getTailNumber());	
+		aircraftDao.getFleet().get(0).display();	
+		aircraftDao.getFleet().get(1).display();	
+		aircraftDao.getFleet().get(2).display();	
 		
 		// test add + delete 
 		Assert.assertEquals(6, aircraftDao.getFleet().size());
 		// test get
-		Assert.assertEquals("PHOENIX89", aircraftDao.getModel(1));
-		Assert.assertEquals("LEARJET40", aircraftDao.getModel(5));
-		
+		Assert.assertEquals("PHOENIX89", aircraftDao.getModel((long) 1));
+		Assert.assertEquals("LEARJET40", aircraftDao.getModel((long) 5));
 		DAO.getAircraftDao().getFleet();
 		
 	}

@@ -8,20 +8,20 @@ public interface aircraftDao {
 
 	/* GET */
 	public List<Aircraft> getFleet();
-	public String getModel(int TailNumber);
-	public String getCompany(int TailNumber);
-	public int getNumberOfSeats(int TailNumber);
-	public Aircraft getAircraft(int TailNumber);
+	public String getModel(Long TailNumber);
+	public String getCompany(Long TailNumber);
+	public int getNumberOfSeats(Long TailNumber);
+	public Aircraft getAircraft(Long TailNumber);
 	
 	/* POST */
-	public void setModel(int TailNumber,String Model);
-	public void setCompany(int TailNumber, String Company);
-	public void setNumberOfSeats(int TailNumber, int NumberOfSeats);
+	public void setModel(Long TailNumber,String Model);
+	public void setCompany(Long TailNumber, String Company);
+	public void setNumberOfSeats(Long TailNumber, int NumberOfSeats);
 
 	
 	/* PUT */
 	public void addAircraft(Aircraft aircraft);
 	
 	/* DELETE */
-	public void deleteAircraft(int TailNumber);
+	public void deleteAircraft(Long TailNumber);
 }

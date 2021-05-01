@@ -2,9 +2,11 @@ package com.fly2gether.jetty_jersey.daoImpl;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -29,6 +31,8 @@ public class FlightDaoImpl implements flightDao {
 		List<Flight> detached = new ArrayList<Flight>();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
+		
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
@@ -45,7 +49,7 @@ public class FlightDaoImpl implements flightDao {
 		}
 		return detached;
 	}
-	public Pilot getPilot(int identifier) {
+	public Long getPilot(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -55,7 +59,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -73,7 +77,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getFlightPilot();
 	}
 
-	public Aircraft getAircraft(int identifier) {
+	public Long getAircraft(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -83,7 +87,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -101,7 +105,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getFlightAircraft();
 	}
 
-	public int getPrice(int identifier) {
+	public int getPrice(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -111,7 +115,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -129,7 +133,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getPrice();
 	}
 
-	public List<Integer> getPassengers(int identifier) {
+	public List<Long> getPassengers(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -139,7 +143,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -157,7 +161,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getPassengersList();
 	}
 
-	public int getAvailableSeats(int identifier) {
+	public int getAvailableSeats(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -167,7 +171,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -184,7 +188,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getAvailableSeats();
 	}
 
-	public String getAppointmentDescription(int identifier) {
+	public String getAppointmentDescription(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -194,7 +198,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -211,7 +215,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getAppointmentDescription();
 	}
 
-	public Date getdepartureDate(int identifier) {
+	public Date getdepartureDate(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -221,7 +225,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -238,7 +242,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getDepartureDate();
 	}
 
-	public LocalDateTime getdepartureTime(int identifier) {
+	public LocalDateTime getdepartureTime(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -248,7 +252,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -265,7 +269,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getDepartureTime();
 	}
 
-	public String getdepartureAirport(int identifier) {
+	public String getdepartureAirport(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -275,7 +279,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -292,7 +296,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getDepartureAirport();
 	}
 
-	public Date getarrivalDate(int identifier) {
+	public Date getarrivalDate(Long identifier) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f = null;
@@ -301,7 +305,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -318,7 +322,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getArrivalDate();
 	}
 
-	public LocalDateTime getarrivalTime(int identifier) {
+	public LocalDateTime getarrivalTime(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -328,7 +332,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -345,7 +349,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getArrivalTime();
 	}
 
-	public String getarrivalAirport(int identifier) {
+	public String getarrivalAirport(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -355,7 +359,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -372,7 +376,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getArrivalAirport();
 	}
 
-	public Duration getFlightDuration(int identifier) {
+	public Duration getFlightDuration(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -382,7 +386,7 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int identifier");
+			q.declareParameters("Long identifier");
 			q.setFilter("identifier == id");
 			q.setUnique(true);
 			
@@ -422,24 +426,28 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
-		System.out.println(detached.size()+" flights found !");
+		System.out.println(detached.size()+" flights found ranging between "+maxPrice+" and "+minPrice+" !");
 		return detached;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Flight> getFlights(LocalDateTime DepartureMin,LocalDateTime DepartureMax, String DepartureAirport) {
+	@SuppressWarnings({ "unchecked" })
+	public List<Flight> getFlights(String DepartureMin,String DepartureMax, String DepartureAirport) {
 		List<Flight> flights=null;
 		List<Flight> detached = new ArrayList<Flight>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+        LocalDateTime dMin = LocalDateTime.parse(DepartureMin,formatter);
+        LocalDateTime dMax = LocalDateTime.parse(DepartureMax,formatter);
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
+            flights= (List<Flight>) q.execute();
 
-			q.declareParameters("java.util.LocalDateTime DepartureMin, String DepartureAirport,java.util.LocalDateTime DepartureMax");
-			q.setFilter(" DepartureMax >= departureTime && DepartureMin <= departureTime && DepartureAirport==departureAirport && AvailablesSeats!=0");
-			flights = (List<Flight>) q.execute(DepartureMin,DepartureAirport,DepartureMax);
+            flights=(List<Flight>) flights.stream().filter(f->f.getDepartureAirport().toUpperCase().equals(DepartureAirport.toUpperCase()))
+            		.filter(f->f.getDepartureTime().isAfter(dMin)).filter(f->f.getDepartureTime().isBefore(dMax))
+            		.filter(f->f.getAvailableSeats()!=0).collect(Collectors.toList());
 
 			detached = (List<Flight>) pm.detachCopyAll(flights);
 			tx.commit();
@@ -477,7 +485,7 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
-		System.out.println(detached.size()+" flights found !");
+		System.out.println(detached.size()+" flights found with "+Seats+" seats!");
 		return detached;
 	}
 
@@ -485,6 +493,7 @@ public class FlightDaoImpl implements flightDao {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			pm.makePersistent(flight);
@@ -499,10 +508,11 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void addPassenger(int passenger_id, int flight_id) {
+	public void addPassenger(Long passenger_id, Long flight_id) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			
@@ -521,7 +531,7 @@ public class FlightDaoImpl implements flightDao {
 	}
 		
 
-	public void deleteFlight(int id) {
+	public void deleteFlight(Long id) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -540,7 +550,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void removePassenger(int passenger_id, int flight_id) {
+	public void removePassenger(Long passenger_id, Long flight_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -560,7 +570,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void setPilot(int id, Pilot Pilot) {
+	public void setPilot(Long id, Long Pilot) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -579,7 +589,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void setAircraft(int id, Aircraft Aircraft) {
+	public void setAircraft(Long id, Long Aircraft) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -598,7 +608,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void setPrice(int id, int Price) {
+	public void setPrice(Long id, int Price) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -617,7 +627,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void setPassengers(int id, List<Integer> Passengers) {
+	public void setPassengers(Long id, List<Long> Passengers) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -636,7 +646,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void setAvailableSeats(int id, int AvailableSeats) {
+	public void setAvailableSeats(Long id, int AvailableSeats) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -655,7 +665,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void setAppointmentDescription(int id, String AppointmentDescription) {
+	public void setAppointmentDescription(Long id, String AppointmentDescription) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -674,7 +684,7 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
-	public void setdepartureDate(int id, Date DepartureDate) {
+	public void setdepartureDate(Long id, Date DepartureDate) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -689,12 +699,10 @@ public class FlightDaoImpl implements flightDao {
 				tx.rollback();
 			}
 			pm.close();
-		}
-		
+		}		
 	}
-
 	
-	public void setarrivalDate(int id, Date ArrivalDate) {
+	public void setarrivalDate(Long id, Date ArrivalDate) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -715,7 +723,7 @@ public class FlightDaoImpl implements flightDao {
 
 	
 
-	public void setFlightDuration(int id, Duration FlightDuration) {
+	public void setFlightDuration(Long id, Duration FlightDuration) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -734,17 +742,22 @@ public class FlightDaoImpl implements flightDao {
 	}
 
 
-	public void modifyFlight(int id, LocalDateTime DepartureTime, String DepartureAirport, LocalDateTime ArrivalTime,
+	public void modifyFlight(Long id, String DepartureTime, String DepartureAirport, String ArrivalTime,
 			String ArrivalAirport) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+        LocalDateTime DTime= LocalDateTime.parse(DepartureTime,formatter);
+        LocalDateTime ATime = LocalDateTime.parse(ArrivalTime,formatter);
+
 		Flight f=null;
 		try {
 			tx.begin();
 			f = pm.getObjectById(Flight.class, id);
 			f.setDepartureAirport(DepartureAirport);
-			f.setDepartureTime(DepartureTime);
-			f.setArrivalTime(ArrivalTime);
+			
+			f.setDepartureTime(DTime);
+			f.setArrivalTime(ATime);
             f.setArrivalAirport(ArrivalAirport);
 			tx.commit();
 		} finally {

@@ -10,6 +10,26 @@
 	<body onload="nav_load()">
 
 		<script id="templateShortFlightView" type="text/template">
+
+			<div class="fligth_div1">
+				<p><i class="fas fa-plane-departure"></i> Departure: <%=departureAirport%></p>
+				<p><i class="fas fa-plane-arrival"></i> Arrival: <%=arrivalAirport%></p>
+			   </div>
+			   <div class="fligth_div3">
+				   <p><%=price%> $ /seats</p>
+				   <p><%=availableSeats%> seats available</p>
+			   </div>
+			   <div class="fligth_div2">
+			   <p><i class="fas fa-user-clock"></i> <%=pending%>   </p>
+			   <p><i class="fas fa-user-check"></i> <%=approuved%> </p>
+
+			   
+			   </div>
+
+			   <div class="fligth_div4">
+					<%=buttonC%>
+				   <button id ="choose"> view <i class="fas fa-chevron-right"></i></button>
+			   </div>
 		
 			<div id="flight_short_view">
 					<div class="fligth_div1">
@@ -53,14 +73,19 @@
 				 <p><i class="fas fa-plane-arrival"></i> Arrival:</p>
 				</div>
 				<div class="fligth_div3">
-				<p> Aircraft:</p>
-				<p> Pilot </p>
+					<p>30$ /seats</p>
+					<p>5 seats available</p>
 				</div>
 				<div class="fligth_div2">
-				<p>30$ /seats</p>
-				<p>5 seats available</p>
+				<p><i class="fas fa-user-clock"></i> 3   </p>
+				<p><i class="fas fa-user-check"></i> 5 </p>
 				
 				</div>
+
+				<div class="fligth_div4">
+					<button id ="choose"> view <i class="fas fa-chevron-right"></i></button>
+				</div>
+
 				
 				
 				

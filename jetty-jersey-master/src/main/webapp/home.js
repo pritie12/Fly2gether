@@ -108,14 +108,15 @@ function chooseFly(id) {
 
 
 function fligth_view_display(){
+	nav_load();
 	console.log("hello ");
-	var html="let's start";
 	var cook = getCookie("flightId");
 	console.log(cook);
 	if(cook==""){
 		console.log("no flight selected");
 		location.replace("find_flight.html");
 	}
+
 	var url= "ws/Flight/getFlightPrice?id="+ cook
 
 	url= "ws/Flight/{id}/getFlightPrice?id="+ cook
@@ -175,8 +176,10 @@ function fligth_view_display(){
 
 
 
-	$("#flight_long_view").append(html);
+//	$("#flight_long_view").append("ok");
 }
+
+function
 
 
 
@@ -237,8 +240,15 @@ $(function(){
 		/*getServerData("ws/Flight/getFlights%departureAirport%arrivalAirport%date" ,fligth_list_display);*/
 	});
 
+	$("#flight_short_view").hover(function(){
+		$("#choose").css("display", "block");
+    }, function(){
+    $("#choose").css("display", "none");
+	});
+
 /*	$("#flight_long_view").onload(function (){
 		console.log("hello ");
 	});*/
 
 });
+//background-color: #ffffff;

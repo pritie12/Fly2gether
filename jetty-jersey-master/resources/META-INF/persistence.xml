@@ -5,6 +5,7 @@
 
     <!-- Test configuration -->
     <persistence-unit name="Example">
+    	<class>com.fly2gether.jetty_jersey.dao.Pilot</class>
         <class>com.fly2gether.jetty_jersey.dao.Aircraft</class>
         <class>com.fly2gether.jetty_jersey.dao.Flight</class>
         <class>com.fly2gether.jetty_jersey.dao.Passenger</class>

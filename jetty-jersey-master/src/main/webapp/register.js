@@ -82,21 +82,61 @@ function show_div(){
 	x.style.display = "block";
 }
 
+function set_usrId_cookie(id){
+	var c = "usrId="+ id;
+	document.cookie = c ;
+}
+
 
 $(function(){
 	$("#testform").click(function(){
 		test();
 	});
+	/*submit register */
 	$("#submit").click(function(){
+		var usr_type=null;
 		if(document.getElementById("is_pil").checked==true){
 			var data = get_form_data_pilot();
 			putServerData("ws/Pilote/addPilot",data,test2);
+			usr_type="pilot";
 		}
 		else{
 			var data = get_form_data_passenger();
 			putServerData("ws/Passenger/addPassenger",data,test2);
+			usr_type = "passenger";
 		}
 
+		var c = "usrType="+ usr_type;
+		document.cookie = c ;
+		set_usrId_cookie(1); // pour tester
+		window.history.go(-1);
 		
+	});
+
+	$("btnLogin").click(function(){
+		var pwd = $("login_pwd").val();
+		var username = $("login_usr").val();
+		var id =null;
+		var usr_type=null;
+		if(document.getElementById("is_pil").checked==true){
+			
+			var url = "ws/Pilote/username/PilotLogin?username="+username + "&pwd="+pwd;
+			/*	getServerData(url,set_usrId_cookie); */
+			usr_type="pilot";
+		}
+		else{
+			var url = "ws/Passenger/username/PassengerLogin?username="+username + "&pwd="+pwd;
+			/*getServerData(url,set_usrId_cookie);*/
+			
+			usr_type = "passenger";
+		}
+
+		/* dans le cas ou ca marche pas? */
+
+		var c = "usrType="+ usr_type;
+		document.cookie = c ;
+		set_usrId_cookie(1); // pour tester
+		window.history.go(-1);
+
 	});
 });

@@ -104,21 +104,6 @@ function chooseFly(id) {
 	location.replace("flight_res.html");
 }
 
-function getCookie(cname) {
-	var name = cname + "=";
-	var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(';');
-	for(var i = 0; i <ca.length; i++) {
-	  var c = ca[i];
-	  while (c.charAt(0) == ' ') {
-		c = c.substring(1);
-	  }
-	  if (c.indexOf(name) == 0) {
-		return c.substring(name.length, c.length);
-	  }
-	}
-	return "";
-  }
 
 
 
@@ -197,6 +182,7 @@ function fligth_view_display(){
 
 
 
+
 $(function(){
 	$("#buttonHome").click(function(){
 		window.location.href='find_flight.html';
@@ -206,10 +192,18 @@ $(function(){
 	});
 
 	$("#button").click(function(){
-		getServerData("ws/example/aircraft",callDone);
+		//getServerData("ws/example/aircraft",callDone);
+		var c = getCookie("usrId");
+		if(c==""){
+			c="null"
+		}
+		$("#result").append(c);
 	});
 	$("#buttonA").click(function(){
-		getServerData("ws/Pilote",callDone);
+		$("#result").append("hhhh");
+		//getServerData("ws/Pilote",callDone);
+		var c = getCookie("usrId");
+		$("#result").append("hello");
 	});
 
 	$("#buttonB").click(function(){
@@ -243,15 +237,8 @@ $(function(){
 		/*getServerData("ws/Flight/getFlights%departureAirport%arrivalAirport%date" ,fligth_list_display);*/
 	});
 
-	$("#choose").click(function(){
-		$("#result").append("hello from home");
-		var c =this.parentNode.firstChild;
-		console.log("hello "+c.val());
-		
-	});
-
-	$("#flight_long_view").onload(function (){
+/*	$("#flight_long_view").onload(function (){
 		console.log("hello ");
-	});
+	});*/
 
 });

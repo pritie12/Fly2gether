@@ -7,7 +7,7 @@
 		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-	<body >
+	<body onload="nav_load()">
 
 		<script id="templateShortFlightView" type="text/template">
 		
@@ -37,40 +37,35 @@
 			</div>
 		</script>
 		
-		<nav class="navBarre">
+		<nav  class="navBarre" id="navBarre">
 			
-			<div class="nav_links">
-				<ul class="nav_ul" >
-				<li class="nav_li"><a href="login.html">Log in / Register</a></li>
-				<li class="nav_li"><a href="propose_flight.html">Propose a flight</a></li>
-				<li class="nav_li"><a href="find_flight.html">Find a flight</a></li>
-					
-					
-				</ul>
-			</div>
-			<div class="nav_title">
-				<a href="home.html"><h1>Fly2gether<h1></a>
-			</div>
+			
 		</nav>
 
 
 		<div class="page_content">
 		<div>
-			<div><h1>Liste des vols disponibles</h1></div>
-			<div class="searchBarre">
-				<input type="text" class="searchInput" placeholder="Departure" id="inputDep">
-				<input type="text" class="searchInput" placeholder="Arrival" id="inputArr">
-				<input type="date" class="searchInput" placeholder="Date" id="inputDate">
-				<input type="number" class="searchInput" placeholder="Num passengers" id="inputNum">
-				<button id="searchButton"><i class="fas fa-search" id="searchIcon"></i></button>
-				</div>
-			<button id="buttonD"><h3>Let's fly!</h3></button>
-			<button id="buttonB"><h3>Pilot!</h3></button>
-			<button id="getFlightList"><h3>get flight</h3></button>
-			<i class="fas fa-search" id="searchIcon">qqq</i>
+			<div><h1>Vos vols plannifiés</h1></div>
 			
+			<div id="flight_short_view">
+				<div class="fligth_div1">
+				 <p><i class="fas fa-plane-departure"></i> Departure:</p>
+				 <p><i class="fas fa-plane-arrival"></i> Arrival:</p>
+				</div>
+				<div class="fligth_div3">
+				<p> Aircraft:</p>
+				<p> Pilot </p>
+				</div>
+				<div class="fligth_div2">
+				<p>30$ /seats</p>
+				<p>5 seats available</p>
 				
-			<div id="result">result list: </div>
+				</div>
+				
+				
+				
+			</div>
+			
 			
 				
 				<div id="result2">
@@ -80,7 +75,7 @@
 				
 				</div>
 				
-			</div>
+			
 			
 		</div>
 		</div>

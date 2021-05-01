@@ -4,8 +4,10 @@
 		<link rel="stylesheet" href="stylesheet.css" />
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
+
 	</head>
-	<body class="mainBody">
+	<body class="mainBody" onload="nav_load()">
 
 		<script id="templateExample" type="text/template">
 		
@@ -14,8 +16,12 @@
 			</div>
 		</script>
 		
-		<nav class="navBarre">
+		<nav class="navBarre" id ="navBarre" >
 			
+			<!--
+			<div class="nav_title">
+				<a href="home.html"><h1>Fly2gether<h1></a>
+			</div>
 			<div class="nav_links">
 				<ul class="nav_ul" >
 				<li class="nav_li"><a href="login.html">Log in / Register</a></li>
@@ -25,9 +31,7 @@
 					
 				</ul>
 			</div>
-			<div class="nav_title">
-				<a href="home.html"><h1>Fly2gether<h1></a>
-			</div>
+-->
 		</nav>
 		
 		
@@ -38,8 +42,14 @@
 		
 			
 				<button id="buttonHome"><h3>Let's fly!</h3></button>
+				<button id="button">Test cookie null</button>
+				
 				<!--<a href="find_flight.html"></a>-->
-		</center>
+			</center>
+
+			<div id="result"> result:
+
+			</div>
 		<!--	<button id="buttonB"><h3>First Pilot </h3></button>
 			<button id="buttonC"><h3>Hello button </h3></button>	
 			<button id="buttonD"><h3>Next </h3></button>			

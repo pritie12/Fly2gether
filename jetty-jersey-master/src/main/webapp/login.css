@@ -1,52 +1,4 @@
 
-/*barre de navigation*/
-
-.navBarre{
-
-    background-color: #ffffff;
-    position: fixed;
-    top: 0;
-    width: 90%;
-    height: 10vh;
-    margin: 0%;
-    padding: 0 5% 0; /*top | right=left | botonm*/
-    
-
-   
-}
-
-.nav_title{
-    height:100%;
-    width: 20%;
-  /*  margin: 10%;*/
-    display: inline-block;
-    float: left;
-    vertical-align: middle;
-    color: #ebc04c;
-}
-
-.nav_links{
-    height:100%;
-    float: right;
-    display: inline-block;
-    width: 75%;
-    margin-top:0;
-  
-}
-
-.nav_ul{
-    height:100%;
-    margin:1em;
-
-}
-.nav_li{
-    height:100%;
-    display: inline;
-     float: right;
-    margin-left: 10%;
-    vertical-align: middle;
-}
-
 
 
 
@@ -67,7 +19,7 @@ a:link, a:visited {
 /*page content*/
 .container{
 	margin-top: 15vh;
-    width: 100%;
+    width: 90%;
  /*   height: 85vh;*/
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -93,8 +45,9 @@ a:link, a:visited {
 	width: 500px;
 }
 
-form{
-	width: 360px;
+.form{
+	width: 100%;
+	padding-right: 15%;
 }
 
 .login-content img{
@@ -260,7 +213,7 @@ a:hover{
 }
 
 @media screen and (max-width: 1000px){
-	form{
+	.form{
 		width: 290px;
 	}
 
@@ -291,3 +244,5 @@ a:hover{
 		justify-content: center;
 	}
 }
+
+/* var oldURL = document.referrer;*/

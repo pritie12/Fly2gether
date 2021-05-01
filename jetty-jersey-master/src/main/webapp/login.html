@@ -8,7 +8,7 @@
 		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
 
 	</head>
-	<body>
+	<body onload="nav_load()">
 
 		<script id="templateExample" type="text/template">
 		
@@ -19,8 +19,8 @@
 		
 		
 		
-		<nav class="navBarre">
-			
+		<nav class="navBarre" id="navBarre">
+			<!--
 			<div class="nav_links">
 				<ul class="nav_ul" >
 				<li class="nav_li"><a href="login.html">Log in / Register</a></li>
@@ -33,6 +33,7 @@
 			<div class="nav_title">
 				<a href="home.html"><h1>Fly2gether<h1></a>
 			</div>
+			-->
 		</nav>
 		
 		<div class="container">
@@ -40,7 +41,7 @@
 				<img src="media/undraw_adventure_4hum.svg">
 			</div>
 			<div class="login-content">
-				<form action="index.html">
+				<div class="form" >
 					<img src="media/avatar.svg">
 					<h2 class="title">Welcome</h2>
 					   <div class="input-div one">
@@ -49,7 +50,7 @@
 						  </div>
 						  <div class="div">
 								  <h5>Email</h5>
-								  <input type="text" class="input">
+								  <input type="text" class="input" id="login_usr">
 						  </div>
 					   </div>
 					   <div class="input-div pass">
@@ -58,12 +59,25 @@
 						  </div>
 						  <div class="div">
 							   <h5>Password</h5>
-							   <input type="password" class="input">
+							   <input type="password" class="input" id="login_pwd">
 					   </div>
 					</div>
+					<div class="input_usr_type" >
+						<h5>You are a :</h5>
+						<div >
+							<div>
+
+								<input type="radio" name="choice" value="pilot" id="is_pil" onclick="show_div()"> Pilot
+							</div>
+							<div>
+    							<input type="radio" checked=true name="choice" value="passenger" id="is_pass" onclick="hide_div()"> Passenger
+							</div>
+						</div>
+					 </div>
 					<a href="register.html">Not registered?</a>
-					<input type="submit" class="btn" value="Login">
-				</form>
+					
+					<button id="btnLogin" class="btn">Login</button>
+				</div>
 			</div>
 	<!--
 		<div class="page_content">

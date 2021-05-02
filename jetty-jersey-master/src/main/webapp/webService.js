@@ -53,17 +53,21 @@ function getCookie(cname) {
   
 function nav_load(){
 	var c = getCookie("usrType");
-	var account='			<li class="nav_li"><a href="profil.html"><i class="far fa-user-circle fa-3x"></i></a></li>';
+	var account='			<div class="nav_li" id ="dropdown" ><a href="profil.html" id="account">Account</a>'+
+				' <div class="dropdown-content" id="dropdown-content" >'+
+				'<a href="profil.html" class ="nav_drop">Profil</a>'+
+				'<a  class ="nav_drop" onclick="logout_fun()">Logout</a>'+
+ 	' </div> </div>';
 	var lists ="";
 	
 	if(c=="pilot"){
-		lists= '			<li class="nav_li"><a href="flight_list_pilot.html">My Flights</a></li>'
+		lists= '			<div class="nav_li"><a href="flight_list_pilot.html">My Flights</a></div>'
 
 	}else if( c=="passenger"){
-		lists ='			<li class="nav_li"><a href="login.html">My Reservations</a></li>'
+		lists ='			<div class="nav_li"><a href="login.html">My Reservations</a></div>'
 
 	}else{
-		account = '			<li class="nav_li"><a href="login.html">Log in / Register</a></li>'
+		account = '			<div class="nav_li" id=""><a href="login.html">Log in / Register</a></div>'
 	}
 	
 	
@@ -75,9 +79,10 @@ function nav_load(){
 	'		<div class="nav_links">'+
 	'			<ul class="nav_ul" >'+
 				account +
-	'			<li class="nav_li"><a href="propose_flight.html">Propose a flight</a></li>'+
-	'			<li class="nav_li"><a href="find_flight.html">Find a flight</a></li>'+
-				lists+		
+				lists+	
+	'			<div class="nav_li"><a href="propose_flight.html">Propose a flight</a></div>'+
+	'			<div class="nav_li"><a href="find_flight.html">Find a flight</a></div>'+
+					
 				
 	'			</ul>'+
 	'		</div> '
@@ -86,3 +91,14 @@ function nav_load(){
 	$("#navBarre").append(html);
 	
 }
+
+function logout_fun(){
+	document.cookie = "usrId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+	document.cookie = "usrType=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+	location.replace("home.html");
+
+}
+
+
+
+

@@ -179,7 +179,11 @@ function fligth_view_display(){
 //	$("#flight_long_view").append("ok");
 }
 
-function
+
+function pilot_flight_list_load(){
+	
+	fligth_view_display();
+}
 
 
 
@@ -245,6 +249,13 @@ $(function(){
     }, function(){
     $("#choose").css("display", "none");
 	});
+
+	$("#dropdown").hover(function(){
+		$("#dropdown-content").css("display", "block");
+	}, function(){
+	$("#dropdown-content").css("display", "none");
+	});
+
 
 /*	$("#flight_long_view").onload(function (){
 		console.log("hello ");

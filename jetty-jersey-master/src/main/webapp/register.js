@@ -113,7 +113,7 @@ $(function(){
 		
 	});
 
-	$("btnLogin").click(function(){
+	$("#btnLogin").click(function(){
 		var pwd = $("login_pwd").val();
 		var username = $("login_usr").val();
 		var id =null;

@@ -11,13 +11,21 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class Passenger extends User {
+public class Passenger  {
 	
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
+	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	private Long passenger_id;
-	private List<Long> passengerBookingList; // Id of reservations
 	
+	private List<Long> passengerBookingList; // Id of reservations
+	private String username;
+	private String pwd;
+	
+	private String name;
+	private String surname;
+	private Date dateOfBirth;
+	private String email;
+	private String phoneNumber;	
 
 	
 	/* CONSTRUCTORS */
@@ -29,8 +37,11 @@ public class Passenger extends User {
 	}
 	
 	public Passenger(String name, String surname, String email, String phoneNumber, Date DOfBirth) {
-		super(name,surname,email,phoneNumber,DOfBirth);
-
+		this.name=name;
+		this.surname=surname;
+		this.setEmail(email);
+		this.setPhoneNumber(phoneNumber);
+		this.setDateOfBirth(DOfBirth);
 		this.passenger_id=(long) 0;
 	}
 	
@@ -41,7 +52,27 @@ public class Passenger extends User {
 	public List<Long> getPassengerBookingList(){
 		return this.passengerBookingList;
 	}
-	
+	public String getUsername() {
+		return username;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getSurname() {
+		return surname;
+	}
 	/* SETTERS */
 	public void setPassengerId(Long passenger_id) {
 		this.passenger_id=passenger_id;
@@ -49,7 +80,35 @@ public class Passenger extends User {
 	public void setPassengerBookingList(List<Long> passengerBookingList){
 		this.passengerBookingList=passengerBookingList;
 	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	
+	/* DISPLAY */
 	public void display() {
 		System.out.println("Passenger  "+this.getName()+" "+this.getSurname());
 	}
+
 }

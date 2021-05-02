@@ -226,7 +226,6 @@ public class PilotDaoImpl implements pilotDao {
 			}
 			pm.close();
 		}
-		System.out.println("Pilot added to database");
 	}
 
 	@SuppressWarnings("unchecked")

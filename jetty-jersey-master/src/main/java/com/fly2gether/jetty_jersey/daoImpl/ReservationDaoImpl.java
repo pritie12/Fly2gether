@@ -160,9 +160,12 @@ public class ReservationDaoImpl implements reservationDao{
 	public void addReservation(Reservation reservation) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		Flight f=null;
 		tx.setRetainValues(true);
 		try {
 			tx.begin();
+			f = pm.getObjectById(Flight.class, reservation.getFlight());
+			f.setAvailableSeats((f.getAvailableSeats()-reservation.getDesiredSeats()));
 			//reservation.getFlight().setAvailableSeats((reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats()));
 			pm.makePersistent(reservation);
 			tx.commit();

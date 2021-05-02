@@ -22,14 +22,12 @@ public class Aircraft {
         this.tailNumber = (long) 0;
         this.model = "";
         this.constructorCompany = "";
-        this.numberOfSeats = 0;
-      
+        this.numberOfSeats = 0;     
     }
 	public Aircraft (String model, String constructorCompany,int numberOfSeats,Long tailNumber){
         this.model = model;
         this.constructorCompany = constructorCompany;
         this.numberOfSeats = numberOfSeats;
-        //nbAircraft++;
         this.tailNumber=tailNumber;
     }	
 	 /* GETTERS */
@@ -60,6 +58,7 @@ public class Aircraft {
 	public void setNumberOfSeats(int numberOfSeats) {
 		this.numberOfSeats=numberOfSeats;
 	}
+	/* DISPLAY */
 	public void display() {
 		System.out.println("Model: "+this.model+",Company: "+this.constructorCompany+", Seats: "+this.numberOfSeats+", TailNumber: "+this.tailNumber);
 	}

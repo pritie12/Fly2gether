@@ -1,8 +1,8 @@
 package com.fly2gether.jetty_jersey.database;
-import java.time.LocalDateTime;
+
 //import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+
 //import java.util.Date;
 import java.util.List;
 
@@ -32,14 +32,14 @@ public class Database {
 		totalPassengers=new ArrayList<Passenger>();
 		totalPilots=new ArrayList<Pilot>();
 	}
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	public Database(String test) {
 		fleet=new ArrayList<Aircraft>();
 		flightList=new ArrayList<Flight>();
 		totalPassengers=new ArrayList<Passenger>();
 		totalPilots=new ArrayList<Pilot>();
 		
-		Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,1520);
+		/*Aircraft aircraft1 =new Aircraft("LEARJET40","Boeing",10,1520);
 		Passenger passenger1=new Passenger("Hiba","SOUBER","hiba@mail.fr","06XXX",new Date(1999,06,12));
 		Pilot pilot1=new Pilot("Rayan","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
 		Pilot pilot2=new Pilot("Rayan2","Gosling","rayan@mai;.fr","07XXX",new Date(1980,03,16),200);
@@ -50,7 +50,7 @@ public class Database {
 		totalPassengers.add(passenger1);
 	totalPilots.add(pilot1);
 		totalPilots.add(pilot2);
-	//flightList.add(flight1);
+	//flightList.add(flight1);*/
 		
 	}
 	

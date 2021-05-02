@@ -8,7 +8,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class Reservation {
 	
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
+	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	private Long resa_id;
 	@Persistent
 	private Long bookingUser;
@@ -67,6 +67,7 @@ public class Reservation {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	/* DISPLAY */
 	public void display() {
 		System.out.println("Reservation made by passenger n° "+this.getBookingUser()+" in flight n°"+this.flight+" for "+this.desiredSeats+" seats");
 	}

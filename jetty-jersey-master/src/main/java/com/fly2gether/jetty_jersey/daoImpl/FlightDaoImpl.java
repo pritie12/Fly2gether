@@ -53,6 +53,7 @@ public class FlightDaoImpl implements flightDao {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		Flight f = null;
 		Flight detached = null;
 		try {
@@ -74,7 +75,7 @@ public class FlightDaoImpl implements flightDao {
 			pm.close();
 
 		}
-		return detached.getFlightPilot();
+		return detached.getFlightPilotId();
 	}
 
 	public Long getAircraft(Long identifier) {
@@ -410,6 +411,7 @@ public class FlightDaoImpl implements flightDao {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
@@ -440,6 +442,7 @@ public class FlightDaoImpl implements flightDao {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
@@ -469,6 +472,7 @@ public class FlightDaoImpl implements flightDao {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
@@ -497,6 +501,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 			pm.makePersistent(flight);
+			flight.display();
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -504,7 +509,6 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
-		System.out.println("Flight n°"+flight.getId()+" added to the system");
 		
 	}
 

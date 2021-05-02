@@ -15,7 +15,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class Flight {
 	
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.NATIVE)
+	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	 private Long id;
 	
 	 private String appointmentDescription;	
@@ -99,7 +99,7 @@ public class Flight {
 	 public LocalDateTime getArrivalTime() {
 		 return this.arrivalTime;
 	 }
-	 public Long getFlightPilot() {
+	 public Long getFlightPilotId() {
 		 return this.id_pilot;
 	 }
 	 public Long getFlightAircraft() {
@@ -144,11 +144,11 @@ public class Flight {
 	 public void setArrivalTime(LocalDateTime arrivalTime) {
 		 this.arrivalTime=arrivalTime;
 	 }
-	 public void setFlightPilot(Long pilot) {
-		 this.id_pilot=pilot;
+	 public void setFlightPilot(Long id_pilot) {
+		 this.id_pilot=id_pilot;
 	 }
-	 public void setFlightAircraft(Long aircraft) {
-		 this.aircraft_tailnumber=aircraft;
+	 public void setFlightAircraft(Long aircraft_tailnumber) {
+		 this.aircraft_tailnumber=aircraft_tailnumber;
 	 }
 	 public void setPrice(int price) {
 		 this.price=price;
@@ -162,7 +162,9 @@ public class Flight {
 	 public void setFlightDuration(Duration flightDuration) {
 		 this.flightDuration=flightDuration;
 	 }
-		public void display() {
-			System.out.println("Departure from: "+this.departureAirport+" at: "+this.departureTime+" with "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber);
-		}	
+	 
+	/* DISPLAY */
+	public void display() {
+		System.out.println("Departure from: "+this.departureAirport+" at: "+this.departureTime+" with "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber);
+	}	
 }

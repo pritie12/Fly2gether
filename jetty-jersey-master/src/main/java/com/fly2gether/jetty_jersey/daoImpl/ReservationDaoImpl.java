@@ -148,7 +148,10 @@ public class ReservationDaoImpl implements reservationDao{
 			tx.begin();
 			
 			Reservation r = pm.getObjectById(Reservation.class, reservation_id);
-			r.setDesiredSeats(seats);		
+			int oldseats=r.getDesiredSeats();
+			r.setDesiredSeats(seats);	
+			Flight f = pm.getObjectById(Flight.class, r.getFlight());
+			f.setAvailableSeats((f.getAvailableSeats()-(r.getDesiredSeats()-oldseats)));
 			tx.commit();
 		} finally {
 			if (tx.isActive()) tx.rollback();
@@ -227,25 +230,6 @@ public class ReservationDaoImpl implements reservationDao{
 		return detached;
 	}
 
-	public void deleteReservation(Long id) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		Reservation r=null;
-		try {
-			tx.begin();
-			r = pm.getObjectById(Reservation.class, id);
-            pm.deletePersistent(r);
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		System.out.println("Reservation deleted from database");
-		
-	}
-
 
 	public void denyReservation(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -254,7 +238,7 @@ public class ReservationDaoImpl implements reservationDao{
 		try {
 			tx.begin();
 			r = pm.getObjectById(Reservation.class, reservation_id);
-            r.setStatus(false);
+            pm.deletePersistent(r);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

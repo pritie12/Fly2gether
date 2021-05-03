@@ -106,14 +106,21 @@ public class PassengerResource implements passengerDao {
 	@Path("/PassengerLogin")
 	public Passenger Login(@QueryParam("username")String username,@QueryParam("password") String password) {
 		System.out.println("usr: "+username+" pwd: "+ password );
-		return DAO.getPassengerDao().Login(username,password);
+		if(DAO.getPassengerDao().getPassenger(username)!=null) {
+			System.out.println("Logged in successfully");
+			return DAO.getPassengerDao().Login(username,password);
+		}
+		return null;
+	
 	}
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPassenger")
 	public void addPassenger(Passenger passenger) {
+		String mail=passenger.getEmail();
 		DAO.getPassengerDao().addPassenger(passenger);		
+		new Email(mail,"Welcome to Fly2gether","Dear passenger,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
 	}
 
 	@PUT
@@ -135,6 +142,8 @@ public class PassengerResource implements passengerDao {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/DeletePassenger")
 	public void deletePassenger(@PathParam("id")Long id) {
+		String mail=DAO.getPassengerDao().getPassenger(id).getEmail();	
+		new Email(mail,"Account deletion","Dear passenger,\nYour account will shortly be deleted from our database, we hope that this is not the end of our collaboration. Please let us know if something in our website inconvenienced you.\nBest regards,\nFly2gether Team");
 		DAO.getPassengerDao().deletePassenger(id);
 	}
 

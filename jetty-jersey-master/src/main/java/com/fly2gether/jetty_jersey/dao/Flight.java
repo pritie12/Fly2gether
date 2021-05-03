@@ -2,6 +2,7 @@ package com.fly2gether.jetty_jersey.dao;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,12 +20,14 @@ public class Flight {
 	 private Long id;
 	
 	 private String appointmentDescription;	
+	 @Persistent(defaultFetchGroup = "true")
 	 private Date departureDate;
-	 @Persistent
+	 @Persistent(defaultFetchGroup = "true")
 	 private LocalDateTime departureTime;
 	 private String departureAirport;	
+	 @Persistent(defaultFetchGroup = "true")
 	 private Date arrivalDate;
-	 @Persistent
+	 @Persistent(defaultFetchGroup = "true")
 	 private LocalDateTime arrivalTime;
 	 private String arrivalAirport;	
 	 private Duration flightDuration;
@@ -43,10 +46,13 @@ public class Flight {
 		 this.appointmentDescription="";
 		 this.departureDate=new Date();
 		 this.departureAirport="";
-		 this.departureTime=LocalDateTime.now();
+		 this.departureTime=LocalDateTime.of(1999, 
+                 Month.MARCH, 29, 19, 30, 40);
 		 this.arrivalDate=new Date();
 		 this.arrivalAirport="";
-		 this.arrivalTime=LocalDateTime.now();
+		 this.arrivalTime=LocalDateTime.of(1999, 
+                 Month.MARCH, 10, 9, 30, 40);
+		 
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=0;
 		 this.price=0;
@@ -71,7 +77,6 @@ public class Flight {
 		 this.availablesSeats=availablesSeats;
 		 this.price=price;
 		 this.passengersList=new ArrayList<Long>();
-
 	 }
 	
 	 /* GETTERS */
@@ -165,6 +170,6 @@ public class Flight {
 	 
 	/* DISPLAY */
 	public void display() {
-		System.out.println("Departure from: "+this.departureAirport+" at: "+this.departureTime+" with "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber+",nb of passengers: "+this.passengersList.size());
+		System.out.println("Departure from: "+this.departureAirport+" to: "+this.arrivalAirport+" at: "+this.departureTime+" with pilot: "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber+", number of passengers: "+this.passengersList.size());
 	}	
 }

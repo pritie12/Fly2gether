@@ -96,11 +96,11 @@ public class PilotResource implements pilotDao{
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
-	public void addPilot(Pilot p) {
-		
-		//Pilot pilot = new Pilot(p.getName(),p.getSurname(),p.getEmail(),p.getPhoneNumber(),p.getDateOfBirth(),p.getFlyingHours());
-		System.out.println(p.getName());
-		DAO.getPilotDao().addPilot(p);
+	public void addPilot(Pilot pilot) {
+		String mail=pilot.getEmail();
+		DAO.getPilotDao().addPilot(pilot);
+		new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
+
 	}
 
 	
@@ -108,6 +108,8 @@ public class PilotResource implements pilotDao{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/deletePilot")
 	public void deletePilot(@PathParam("id")Long id) {
+		String mail=DAO.getPilotDao().getPilot(id).getEmail();
+		new Email(mail,"Welcome to Fly2gether", "Dear pilot,\nYour account will shortly be deleted from our database, we hope that this is not the end of our collaboration. Please let us know if something in our website inconvenienced you.\nBest regards,\nFly2gether Team");
 		DAO.getPilotDao().deletePilot(id);
 	}
 	
@@ -116,7 +118,11 @@ public class PilotResource implements pilotDao{
 	@Path("/PilotLogin")
 	public Pilot Login(@QueryParam("username")String username,@QueryParam("pwd") String password) {
 		System.out.println(username + " " + password );
+		if(DAO.getPilotDao().getPilot(username)!=null) {
+			System.out.println("Logged in successfully");
 		return DAO.getPilotDao().Login(username,password);
+		}
+		return null;
 	}
 	
 	

@@ -434,7 +434,6 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 			pm.makePersistent(flight);
-			flight.display();
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -459,9 +458,7 @@ public class FlightDaoImpl implements flightDao {
 			if(f.getPassengersList().contains(passenger_id)==false) {
 				f.getPassengersList().add(passenger_id);
 			}
-			System.out.println(f.getPassengersList().size());
 			pm.makePersistent(f);
-
 			tx.commit();
 		} finally {
 			if (tx.isActive()) tx.rollback();

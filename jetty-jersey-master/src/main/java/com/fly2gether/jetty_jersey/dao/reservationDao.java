@@ -17,12 +17,11 @@ public interface reservationDao {
 	
 	/* POST */
 	public void changeNumberOfSeats(int seats,Long reservation_id);
-	public void denyReservation(Long reservation_id);
 	
 	/* PUT */
 	public void addReservation(Reservation reservation);
 	
 	/* DELETE */
-	public void deleteReservation(Long id);
+	public void denyReservation(Long id);
 
 }

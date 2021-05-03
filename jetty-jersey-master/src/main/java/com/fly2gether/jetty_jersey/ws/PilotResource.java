@@ -83,8 +83,10 @@ public class PilotResource implements pilotDao{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
 	public void addPilot(Pilot pilot) {
-		Pilot p = new Pilot ();
-		DAO.getPilotDao().addPilot(p);
+		String mail=pilot.getEmail();
+		DAO.getPilotDao().addPilot(pilot);
+		new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
+
 	}
 
 	
@@ -92,6 +94,8 @@ public class PilotResource implements pilotDao{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/deletePilot")
 	public void deletePilot(@PathParam("id")Long id) {
+		String mail=DAO.getPilotDao().getPilot(id).getEmail();
+		new Email(mail,"Welcome to Fly2gether", "Dear pilot,\nYour account will shortly be deleted from our database, we hope that this is not the end of our collaboration. Please let us know if something in our website inconvenienced you.\nBest regards,\nFly2gether Team");
 		DAO.getPilotDao().deletePilot(id);
 	}
 	
@@ -99,7 +103,11 @@ public class PilotResource implements pilotDao{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{username}/PilotLogin")
 	public Pilot Login(@PathParam("username")String username,@PathParam("password") String password) {
+		if(DAO.getPilotDao().getPilot(username)!=null) {
+			System.out.println("Logged in successfully");
 		return DAO.getPilotDao().Login(username,password);
+		}
+		return null;
 	}
 
 	@GET

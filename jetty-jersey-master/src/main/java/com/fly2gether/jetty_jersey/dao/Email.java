@@ -45,7 +45,7 @@ public class Email {
 		props.put("mail.smtp.auth", true);
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "25");
+		props.put("mail.smtp.port", "8080");
 		props.put("mail.smtp.host", "smtp.gmail.com");
 
 		Session session = Session.getInstance(props,

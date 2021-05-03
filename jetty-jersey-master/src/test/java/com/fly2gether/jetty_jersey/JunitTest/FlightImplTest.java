@@ -138,6 +138,7 @@ public class FlightImplTest {
 		passengerDao.addReservation((long)0,(long) 3);
 		passengerDao.addReservation((long)0,(long) 4);
 		passengerDao.getPassengers().get(0).display();
+		
 		Assert.assertEquals(3, passengerDao.getpassengerBookingList(passenger1.getPassengerId()).size());
 		
 		//test modify flight

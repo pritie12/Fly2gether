@@ -12,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.*;
@@ -102,8 +103,9 @@ public class PassengerResource implements passengerDao {
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{username}/PassengerLogin")
-	public Passenger Login(@PathParam("username")String username,@PathParam("password") String password) {
+	@Path("/PassengerLogin")
+	public Passenger Login(@QueryParam("username")String username,@QueryParam("password") String password) {
+		System.out.println("usr: "+username+" pwd: "+ password );
 		return DAO.getPassengerDao().Login(username,password);
 	}
 

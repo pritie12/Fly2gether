@@ -224,12 +224,10 @@ $(function(){
 	});
 
 	$("#button").click(function(){
-		//getServerData("ws/example/aircraft",callDone);
-		var c = getCookie("usrId");
-		if(c==""){
-			c="null"
-		}
-		$("#result").append(c);
+
+		var url ="/ws/Passenger/PassengerLogin/?username=vincent&password=123";
+		getServerData(url,callDone);
+
 	});
 	$("#buttonA").click(function(){
 		$("#result").append("hhhh");

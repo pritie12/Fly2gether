@@ -169,6 +169,12 @@ public class FlightResource  implements flightDao {
 		pilotDao.addPilot(pilot2);
 		pilotDao.addPilot(pilot3);
 		
+		passengerDao.addPassenger(passenger5);
+		passengerDao.addPassenger(passenger4);
+		passengerDao.addPassenger(passenger3);
+		passengerDao.addPassenger(passenger2);
+		passengerDao.addPassenger(passenger1);
+
 		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",150,37,pilot1.getPilotId(),aircraft1.getTailNumber());	
 		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",30,48,pilot2.getPilotId(),aircraft2.getTailNumber());		
 		Flight flight3 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,18,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",150,59,pilot3.getPilotId(),aircraft1.getTailNumber());
@@ -179,9 +185,16 @@ public class FlightResource  implements flightDao {
 		flightDao.addFlight(flight3);
 		flightDao.addFlight(flight4);
 		
+		flightDao.addPassenger((long)0, (long) 0);
+        flightDao.addPassenger((long)1, (long) 0);
+        flightDao.addPassenger((long)2, (long) 0);
+        flightDao.addPassenger((long)3, (long) 0);
+		
 		Reservation resa1=new Reservation(passenger1.getPassengerId(),flight1.getId(),3);
 		Reservation resa2=new Reservation(passenger4.getPassengerId(),flight1.getId(),2);
 		Reservation resa3=new Reservation(passenger5.getPassengerId(),flight1.getId(),5);
+		
+		System.out.println("passenger id:" + passenger1.getPassengerId());
 		
 		reservationDao.addReservation(resa1);
 		reservationDao.addReservation(resa2);

@@ -323,6 +323,7 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 			p = pm.getObjectById(Pilot.class, id);
             p.setPwd(Pwd);
+            pm.makePersistent(p);
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

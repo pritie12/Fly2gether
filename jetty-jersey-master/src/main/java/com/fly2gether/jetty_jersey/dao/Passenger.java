@@ -16,7 +16,7 @@ public class Passenger  {
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	private Long passenger_id;
-	
+	@Persistent(defaultFetchGroup = "true")	
 	private List<Long> passengerBookingList; // Id of reservations
 	private String username;
 	private String pwd;

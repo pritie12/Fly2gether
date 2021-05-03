@@ -97,13 +97,13 @@ public class PassengerResource implements passengerDao {
 	@GET 
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getPassenger")
-	public Passenger getPassenger(String Username) {
+	public Passenger getPassenger(@PathParam("Username")String Username) {
 		return DAO.getPassengerDao().getPassenger(Username);
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{username}/PassengerLogin")
-	public Passenger Login(@PathParam("username")String username, String password) {
+	public Passenger Login(@PathParam("username")String username,@PathParam("password") String password) {
 		return DAO.getPassengerDao().Login(username,password);
 	}
 
@@ -140,13 +140,13 @@ public class PassengerResource implements passengerDao {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyPassengerPwd")
-	public void modifyPwd(@PathParam("id")Long id, String Pwd) {
+	public void modifyPwd(@PathParam("id")Long id,@PathParam("Pwd") String Pwd) {
 		DAO.getPassengerDao().modifyPwd(id,Pwd);		
 	}
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyPassengerUsername")
-	public void modifyUsername(@PathParam("id")Long id, String Username) {
+	public void modifyUsername(@PathParam("id")Long id,@PathParam("Username") String Username) {
 		DAO.getPassengerDao().modifyUsername(id,Username);
 		
 	}	

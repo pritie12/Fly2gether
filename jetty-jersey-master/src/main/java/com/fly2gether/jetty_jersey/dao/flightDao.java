@@ -11,7 +11,7 @@ public interface flightDao {
 	public Long getPilot(Long id);	
 	public Long getAircraft(Long id);
 	public int getPrice(Long id);
-	public List<Long> getPassengers(Long id);
+	public List<Long> getPassengersList(Long id);
 	public int getAvailableSeats(Long id);	
 	public String getAppointmentDescription(Long id);	
 	public Date getdepartureDate(Long id);

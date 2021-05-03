@@ -65,13 +65,13 @@ public class AircraftResource implements aircraftDao{
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/deleteAircraft")
-	public void deleteAircraft(Long TailNumber) {
+	public void deleteAircraft(@PathParam("TailNumber")Long TailNumber) {
 		DAO.getAircraftDao().deleteAircraft(TailNumber);		
 	}
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/setModel")
-	public void setModel(@PathParam("TailNumber")Long TailNumber, String Model) {
+	public void setModel(@PathParam("TailNumber")Long TailNumber,@PathParam("Model") String Model) {
 		DAO.getAircraftDao().setModel(TailNumber,Model);
 		
 	}
@@ -79,7 +79,7 @@ public class AircraftResource implements aircraftDao{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/setCompany")
-	public void setCompany(@PathParam("TailNumber")Long TailNumber, String Company) {
+	public void setCompany(@PathParam("TailNumber")Long TailNumber,@PathParam("Company") String Company) {
 		DAO.getAircraftDao().setCompany(TailNumber,Company);
 		
 	}
@@ -87,7 +87,7 @@ public class AircraftResource implements aircraftDao{
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{TailNumber}/setNumberOfSeats")
-	public void setNumberOfSeats(@PathParam("TailNumber")Long TailNumber, int NumberOfSeats) {
+	public void setNumberOfSeats(@PathParam("TailNumber")Long TailNumber,@PathParam("NumberOf") int NumberOfSeats) {
 		DAO.getAircraftDao().setNumberOfSeats(TailNumber,NumberOfSeats);	
 	}
 	

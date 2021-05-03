@@ -106,8 +106,7 @@ public class Pilot {
 	
 	/* DISPLAY */
 	public void display() {
-		System.out.println("Pilot  "+this.name+" "+this.surname+", id° :"+this.pilot_id);
+		System.out.println("Pilot  "+this.name+" "+this.surname+", id° :"+this.pilot_id+" username: "+this.username+" pwd: "+this.pwd);
 	}
-
 
 }

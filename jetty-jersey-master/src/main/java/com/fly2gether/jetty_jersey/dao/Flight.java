@@ -30,7 +30,7 @@ public class Flight {
 	 private Duration flightDuration;
 	 private int availablesSeats;
 	 private int price; 
-	 @Persistent
+	 @Persistent(defaultFetchGroup = "true")
 	 private List<Long> passengersList;
 	 @Persistent
 	 private Long id_pilot;
@@ -165,6 +165,6 @@ public class Flight {
 	 
 	/* DISPLAY */
 	public void display() {
-		System.out.println("Departure from: "+this.departureAirport+" at: "+this.departureTime+" with "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber);
+		System.out.println("Departure from: "+this.departureAirport+" at: "+this.departureTime+" with "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber+",nb of passengers: "+this.passengersList.size());
 	}	
 }

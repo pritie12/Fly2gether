@@ -107,7 +107,7 @@ public class PilotResource implements pilotDao{
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/deletePilot")
-	public void deletePilot(Long id) {
+	public void deletePilot(@PathParam("id")Long id) {
 		DAO.getPilotDao().deletePilot(id);
 	}
 	
@@ -131,7 +131,7 @@ public class PilotResource implements pilotDao{
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyPilotUsername")
-	public void modifyUsername(@PathParam("id")Long id, String Username) {
+	public void modifyUsername(@PathParam("id")Long id,@PathParam("Username") String Username) {
 		DAO.getPilotDao().modifyUsername(id,Username);
 		
 	}
@@ -139,7 +139,7 @@ public class PilotResource implements pilotDao{
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyPilotPwd")
-	public void modifyPwd(@PathParam("id")Long id, String Pwd) {
+	public void modifyPwd(@PathParam("id")Long id,@PathParam("Pwd") String Pwd) {
 		DAO.getPilotDao().modifyPwd(id,Pwd);	
 	}
 	

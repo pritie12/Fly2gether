@@ -59,12 +59,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -87,12 +82,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -115,12 +105,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -134,7 +119,7 @@ public class FlightDaoImpl implements flightDao {
 		return detached.getPrice();
 	}
 
-	public List<Long> getPassengers(Long identifier) {
+	public List<Long> getPassengersList(Long identifier) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -143,13 +128,9 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
+
 
 			tx.commit();
 		} finally {
@@ -171,12 +152,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -198,12 +174,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -224,13 +195,7 @@ public class FlightDaoImpl implements flightDao {
 		Flight detached = null;
 		try {
 			tx.begin();
-
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -252,12 +217,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -279,12 +239,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -304,15 +259,8 @@ public class FlightDaoImpl implements flightDao {
 		Flight detached = null;
 		try {
 			tx.begin();
-
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
-
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -332,12 +280,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -359,12 +302,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -386,12 +324,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long identifier");
-			q.setFilter("identifier == id");
-			q.setUnique(true);
-			
-			f = (Flight) q.execute(identifier);
+			f = pm.getObjectById(Flight.class, identifier);
 			detached = (Flight) pm.detachCopy(f);
 
 			tx.commit();
@@ -512,19 +445,23 @@ public class FlightDaoImpl implements flightDao {
 		
 	}
 
+
 	public void addPassenger(Long passenger_id, Long flight_id) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		Flight f =null;
 		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			
-			Flight f = pm.getObjectById(Flight.class, flight_id);
-			if(f.getPassengersList().contains(passenger_id)) {
+			f = pm.getObjectById(Flight.class, flight_id);
+			if(f.getPassengersList().contains(passenger_id)==false) {
 				f.getPassengersList().add(passenger_id);
 			}
-			
+			System.out.println(f.getPassengersList().size());
+			pm.makePersistent(f);
+
 			tx.commit();
 		} finally {
 			if (tx.isActive()) tx.rollback();
@@ -537,6 +474,7 @@ public class FlightDaoImpl implements flightDao {
 
 	public void deleteFlight(Long id) {
 
+		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;

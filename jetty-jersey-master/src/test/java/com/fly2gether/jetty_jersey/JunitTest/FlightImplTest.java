@@ -57,16 +57,43 @@ public class FlightImplTest {
 		pilotDao.addPilot(pilot2);
 		pilotDao.addPilot(pilot3);
 		
+		pilotDao.modifyPwd((long) 0,"apple");
+		pilotDao.modifyUsername((long) 0,"banana");
+		
+		pilotDao.getPilots().get(0).display();
+		
+		// test login
+		Pilot p= pilotDao.Login("banana","apple");
+		Assert.assertEquals("Rayan", p.getName());
+		
+		passengerDao.addPassenger(passenger1);
+		passengerDao.addPassenger(passenger2);
+		passengerDao.addPassenger(passenger3);
+		passengerDao.addPassenger(passenger4);
+		passengerDao.addPassenger(passenger5);
+		
 		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",150,37,pilot1.getPilotId(),aircraft1.getTailNumber());	
-		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",30,48,pilot2.getPilotId(),aircraft2.getTailNumber());		
-		Flight flight3 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,18,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",150,59,pilot3.getPilotId(),aircraft1.getTailNumber());
-		Flight flight4 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,15,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Aerodrom2",30,59,pilot1.getPilotId(),aircraft1.getTailNumber());
+		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom3",30,48,pilot2.getPilotId(),aircraft2.getTailNumber());		
+		Flight flight3 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,18,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Marseille",150,59,pilot3.getPilotId(),aircraft1.getTailNumber());
+		Flight flight4 = new Flight(new Date(2021,04,16),LocalDateTime.of(2021,04,16,15,20,0), "Aerodrome 1",new Date(2021,04,16),LocalDateTime.of(2021,04,16,20,50,0),"Casa",30,59,pilot1.getPilotId(),aircraft1.getTailNumber());
 
 		flightDao.addFlight(flight1);	
 		flightDao.addFlight(flight2);
 		flightDao.addFlight(flight3);
 		flightDao.addFlight(flight4);
+
+		flightDao.addPassenger((long)0, (long) 0);
+		flightDao.addPassenger((long)1, (long) 0);
+		flightDao.addPassenger((long)2, (long) 0);
+		flightDao.addPassenger((long)3, (long) 0);
 		
+		flightDao.getFlights().get(0).display();
+
+		flightDao.addPassenger((long)4, (long)1);
+		
+		Assert.assertEquals(4, flightDao.getPassengersList((long) 0).size());
+		Assert.assertEquals(37, flightDao.getPrice((long) 0));
+		Assert.assertEquals(150, flightDao.getAvailableSeats((long) 0));
 		Reservation resa1=new Reservation(passenger1.getPassengerId(),flight1.getId(),3);
 		Reservation resa2=new Reservation(passenger4.getPassengerId(),flight1.getId(),2);
 		Reservation resa3=new Reservation(passenger5.getPassengerId(),flight1.getId(),5);

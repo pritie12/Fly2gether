@@ -39,8 +39,9 @@ function get_form_data_pilot(){
 	var d = new Date($("#date").val());
 	/*var data='{ "name": "R", "surname": "Gosling","dateOfBirth": 60282914400000,"email": "rayan@mai;.fr","phoneNumber": "07XXX","flyingHours": 200, "pilotId": "" }';*/
 	
-	var data= '{ "username": "' +  $("#username").val() +
-	' ","pwd": "' +$("#pwd").val()+
+	var data= '{ "passengerBookingList": {} '+
+	'"username": "' +  $("#username").val() +
+	'","pwd": "' +$("#pwd").val()+
 	'",	"name":"' + $("#name").val()+
 	'","surname":"' +	$("#surname").val()+
 	 '","dateOfBirth":"'+$("#date").val()+
@@ -59,12 +60,14 @@ function get_form_data_passenger(){
 	var d = new Date($("#date").val());
 	/*var data='{ "name": "R", "surname": "Gosling","dateOfBirth": 60282914400000,"email": "rayan@mai;.fr","phoneNumber": "07XXX","flyingHours": 200, "pilotId": "" }';*/
 	
-	var data= '{ "name":"' + $("#name").val()+
+	var data= '{ "username": "' +  $("#username").val() +
+	'","pwd": "' +$("#pwd").val()+
+	'",	"name":"' + $("#name").val()+
 	'","surname":"' +	$("#surname").val()+
 	 '","dateOfBirth":"'+$("#date").val()+
 	 '","email":"'+ $("#mail").val()+
 	 ' ","phoneNumber":"'+ $("#phone").val() +
-	  '	} ';
+	  '	"} ';
 
 	
 	console.log(JSON.stringify(data))
@@ -108,8 +111,11 @@ $(function(){
 
 		var c = "usrType="+ usr_type;
 		document.cookie = c ;
-		set_usrId_cookie(1); // pour tester
-		window.history.go(-1);
+		var url = "/ws/Pilote/PilotLogin?username=" + $("#username").val() +"&pwd="+$("#pwd").val();
+		console.log(url);
+		//getServerData(url,set_usrId_cookie)
+		set_usrId_cookie(2); // pour tester
+		window.history.go(-2);
 		
 	});
 

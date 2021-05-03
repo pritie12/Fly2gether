@@ -1,5 +1,21 @@
 
+
+function display_getServerData(url, div_id){
+    $.ajax({
+        dataType: "json",
+        url: url
+    }).done(function(div_id,data){
+		$(div_id).append(data);
+	} );
+}
 function getServerData(url, success){
+    $.ajax({
+        dataType: "json",
+        url: url
+    }).done(success);
+}
+
+function returnServerData(url, success){
     $.ajax({
         dataType: "json",
         url: url

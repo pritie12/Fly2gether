@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.*;
@@ -97,9 +98,9 @@ public class PilotResource implements pilotDao{
 	@Path("/addPilot")
 	public void addPilot(Pilot p) {
 		
-		Pilot pilot = new Pilot(p.getName(),p.getSurname(),p.getEmail(),p.getPhoneNumber(),p.getDateOfBirth(),p.getFlyingHours());
-		System.out.println(pilot.getName());
-		DAO.getPilotDao().addPilot(pilot);
+		//Pilot pilot = new Pilot(p.getName(),p.getSurname(),p.getEmail(),p.getPhoneNumber(),p.getDateOfBirth(),p.getFlyingHours());
+		System.out.println(p.getName());
+		DAO.getPilotDao().addPilot(p);
 	}
 
 	
@@ -112,16 +113,19 @@ public class PilotResource implements pilotDao{
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/username/PilotLogin")
-	public Pilot Login(@PathParam("username")String username,@PathParam("pwd") String password) {
+	@Path("/PilotLogin")
+	public Pilot Login(@QueryParam("username")String username,@QueryParam("pwd") String password) {
+		System.out.println(username + " " + password );
 		return DAO.getPilotDao().Login(username,password);
 	}
+	
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPilot")
-	public Pilot getPilot(String Username) {
-		return DAO.getPilotDao().getPilot(Username);
+	@Path("/getPilot/{usrName}")
+	public Pilot getPilot(@PathParam("usrName")String username) {
+		return DAO.getPilotDao().getPilot(username);
 	}
 
 	@POST

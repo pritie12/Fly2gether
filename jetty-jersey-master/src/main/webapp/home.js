@@ -50,24 +50,35 @@ function callDone(result){
 	$("#result").append(html);
 }
 
-
+var sur="";
+var name ="" ;
 function fligth_list_display(list){
 	var t = _.template($('#templateShortFlightView').html());
 	var html="";
 	var count=0;
 	$("#result2").html("");
 	list.forEach(f => {
+		var pilotId = f.flightPilotId;
+		var url ="/ws/Pilote/"+pilotId+ "/getPilotName";
+		//getServerData(url,display_div("#hello",));
+		display_getServerData(url, "#result2");
+		url ="/ws/Pilote/"+pilotId+ "/getPilotNSurname";
+		//getServerData(url,getPilotnSurname());
+		var sur=getCookie("pSname");
+		var name = getCookie("pName");
 		html= t({
 			"departureAirport":f.departureAirport,
 			"arrivalAirport":f.arrivalAirport,
 			"aircraftModel":f.flightAircraft.model,
-			"pilotName": f.flightPilot.name,
-			"pilotSurname": f.flightPilot.surname,
+			"pilotName": pilotId,
+			"pilotSurname":pilotId ,
 			"price":f.price,
 			"availableSeats":f.availableSeats,
 			"id":'<input type="hidden" value=' + f.id + ' id=flightId  > ',
 			"buttonC":' <button id=\"choose\" onClick="chooseFly('+f.id +' )\"  > choose this flight</button>'
 		});
+		document.cookie = "pName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
+		document.cookie = "pSname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ";
 		$("#result2").append(html);
 		count++;
 		
@@ -75,6 +86,20 @@ function fligth_list_display(list){
 
 	
 }
+
+function display_div(div, data){
+	$("#result").append(" div"+div + "data " + data);
+}
+
+function getPilotnName(d){
+	var name =d ;
+	$("#result").append("/ hello "+d);
+}
+function getPilotnSurname(d){
+	var sur=d;
+
+}
+
 
 function fligth_list_display2(list){
 	var t = _.template($('#templateShortFlightView').html());
@@ -181,7 +206,7 @@ function fligth_view_display(){
 
 
 function pilot_flight_list_load(){
-	
+
 	fligth_view_display();
 }
 

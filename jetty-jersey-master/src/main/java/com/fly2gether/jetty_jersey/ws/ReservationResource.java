@@ -78,26 +78,26 @@ public class ReservationResource implements reservationDao {
 		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);		
 	}
 	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{reservation_id}/denyReservation")
-	public void denyReservation(@PathParam("reservation_id")Long reservation_id) {
-		Long bookingUser=DAO.getReservationDao().getReservation(reservation_id).getBookingUser();
-		new Email(DAO.getPassengerDao().getPassenger(bookingUser).getEmail(),"Reservation denied","Hello,\nWe are sorry to inform you that your reservation has been denied.\nContact us on this address if you have any complaints.\n\nBest regards,\nFly2gether Team");
-		DAO.getReservationDao().denyReservation(reservation_id);			
-	}	
+	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addReservation")
 	public void addReservation(Reservation reservation) {
+		Long bookingUser=reservation.getBookingUser();
+		String departure=DAO.getFlightDao().getdepartureAirport(reservation.getFlight());
+		new Email(DAO.getPassengerDao().getPassenger(bookingUser)
+				.getEmail(),"Reservation accepted","Hello,\nYour reservation for the flight departing from "+departure+" has been accepted.\n\nBest regards,\nFly2gether Team");
 		DAO.getReservationDao().addReservation(reservation);
 	}
 
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/deleteReservation")
-	public void deleteReservation(Long id) {
-		DAO.getReservationDao().deleteReservation(id);		
+	public void denyReservation(@PathParam("id")Long id) {
+		Long bookingUser=DAO.getReservationDao().getReservation(id).getBookingUser();
+		new Email(DAO.getPassengerDao().getPassenger(bookingUser)
+				.getEmail(),"Reservation denied","Hello,\nWe are sorry to inform you that your reservation has been denied.\nContact us on this address if you have any complaints.\n\nBest regards,\nFly2gether Team");
+		DAO.getReservationDao().denyReservation(id);		
 	}
 
 }

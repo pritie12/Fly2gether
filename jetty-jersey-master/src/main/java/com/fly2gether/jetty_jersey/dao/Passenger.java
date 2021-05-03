@@ -16,8 +16,10 @@ public class Passenger  {
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
 	private Long passenger_id;
+	
 	@Persistent(defaultFetchGroup = "true")	
 	private List<Long> passengerBookingList; // Id of reservations
+	
 	private String username;
 	private String pwd;
 	
@@ -30,7 +32,7 @@ public class Passenger  {
 	
 	/* CONSTRUCTORS */
 	public Passenger() {
-		super();
+
 
 		this.passenger_id=(long) 0;
 		this.passengerBookingList=new ArrayList<Long>();
@@ -43,6 +45,7 @@ public class Passenger  {
 		this.setPhoneNumber(phoneNumber);
 		this.setDateOfBirth(DOfBirth);
 		this.passenger_id=(long) 0;
+		this.passengerBookingList=new ArrayList<Long>();
 	}
 	
 	/* GETTERS */
@@ -108,7 +111,7 @@ public class Passenger  {
 	
 	/* DISPLAY */
 	public void display() {
-		System.out.println("Passenger  "+this.getName()+" "+this.getSurname());
+		System.out.println("Passenger  "+this.getName()+" "+this.getSurname()+" with "+this.passengerBookingList.size()+" reservations");
 	}
 
 }

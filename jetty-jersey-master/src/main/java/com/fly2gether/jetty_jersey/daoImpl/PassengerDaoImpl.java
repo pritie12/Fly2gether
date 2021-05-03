@@ -99,12 +99,7 @@ public class PassengerDaoImpl implements passengerDao{
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("Long Id");
-			q.setFilter("Id ==  passenger_id");
-			q.setUnique(true);
-			
-			p = (Passenger) q.execute(Id);
+			p = pm.getObjectById(Passenger.class, Id);
 			detached = (Passenger) pm.detachCopy(p);
 
 			tx.commit();
@@ -255,14 +250,8 @@ public class PassengerDaoImpl implements passengerDao{
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("Long Id");
-			q.setFilter("Id ==  passenger_id");
-			q.setUnique(true);
-			
-			p = (Passenger) q.execute(Id);
+			p = pm.getObjectById(Passenger.class, Id);
 			detached = (Passenger) pm.detachCopy(p);
-
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -303,7 +292,7 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 			
 			Passenger p = pm.getObjectById(Passenger.class, passenger_id);
-			if(p. getPassengerBookingList().contains(resa_id)) {
+			if(p. getPassengerBookingList().contains(resa_id)==false) {
 				p.getPassengerBookingList().add(resa_id);
 			}
 			
@@ -351,7 +340,6 @@ public class PassengerDaoImpl implements passengerDao{
 				tx.rollback();
 			}
 			pm.close();
-			pmf.close();
 		}
 		System.out.println("Passenger deleted from database");
 		

@@ -152,7 +152,7 @@ public class FlightImplTest {
 		}
 
 		//Assert.assertEquals(5,  flightDao.getFlights("2021-04-16 13:30","2021-04-16 23:30","Aerodrome 1").size());
-		Assert.assertEquals(2,  flightDao.SearchFlight(20,40,50,"2021-04-16 13:30","2021-04-16 23:30","Aerodrome 1").size());
+		Assert.assertEquals(1,  flightDao.SearchFlight(20,40,50,"2021-04-16 13:30","2021-04-16 23:30","Aerodrome 1").size());
 		//Assert.assertEquals(2,  flightDao.getFlights(30,50).size());
 		Assert.assertEquals(5, reservationDao.getReservations().size());
 		//Assert.assertEquals((150-(3+5+2)), flightDao.getFlights().get(0).getAvailableSeats());

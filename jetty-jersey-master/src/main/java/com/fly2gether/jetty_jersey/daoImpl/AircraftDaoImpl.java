@@ -47,7 +47,7 @@ public class AircraftDaoImpl implements aircraftDao{
 	
 	
 	
-	public String getModel(Long TailNumber) {
+	public String getModel(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -56,11 +56,11 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int TailNumber");
-			q.setFilter("TailNumber == tailNumber");
+			q.declareParameters("int Id");
+			q.setFilter("Id == aircraft_id");
 			q.setUnique(true);
 			
-			a = (Aircraft) q.execute(TailNumber);
+			a = (Aircraft) q.execute(Id);
 			detached = (Aircraft) pm.detachCopy(a);
 
 			tx.commit();
@@ -74,7 +74,7 @@ public class AircraftDaoImpl implements aircraftDao{
 	}
 	
 	
-	public String getCompany(Long TailNumber) {
+	public String getCompany(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -83,11 +83,11 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int TailNumber");
-			q.setFilter("TailNumber == tailNumber");
+			q.declareParameters("int Id");
+			q.setFilter("Id == aircraft_id");
 			q.setUnique(true);
 			
-			a = (Aircraft) q.execute(TailNumber);
+			a = (Aircraft) q.execute(Id);
 			detached = (Aircraft) pm.detachCopy(a);
 
 			tx.commit();
@@ -100,7 +100,7 @@ public class AircraftDaoImpl implements aircraftDao{
 		return detached.getConstructorCompany();
 	}
 
-	public int getNumberOfSeats(Long TailNumber) {
+	public int getNumberOfSeats(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -109,11 +109,11 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int TailNumber");
-			q.setFilter("TailNumber == tailNumber");
+			q.declareParameters("int Id");
+			q.setFilter("Id == aircraft_id");
 			q.setUnique(true);
 			
-			a = (Aircraft) q.execute(TailNumber);
+			a = (Aircraft) q.execute(Id);
 			detached = (Aircraft) pm.detachCopy(a);
 
 			tx.commit();
@@ -125,6 +125,33 @@ public class AircraftDaoImpl implements aircraftDao{
 
 		}
 		return detached.getNumberOfSeats();
+	}
+	
+	public long getAircraftId(Long tailNum) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a = null;
+		Aircraft detached = null;
+		try {
+			tx.begin();
+
+			Query q = pm.newQuery(Aircraft.class);
+			q.declareParameters("int tailNum");
+			q.setFilter("tailNum == tailNumber");
+			q.setUnique(true);
+			
+			a = (Aircraft) q.execute(tailNum);
+			detached = (Aircraft) pm.detachCopy(a);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+
+		}
+		return detached.getID();
 	}
 
 	public void addAircraft(Aircraft aircraft) {
@@ -145,19 +172,19 @@ public class AircraftDaoImpl implements aircraftDao{
 
 
 
-	public void deleteAircraft(Long TailNumber) {
+	public void deleteAircraft(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
 		try {
 			tx.begin();
-			//a = pm.getObjectById(Aircraft.class, TailNumber);
+			//a = pm.getObjectById(Aircraft.class, Id);
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long TailNumber");
-			q.setFilter("TailNumber == tailNumber");
+			q.declareParameters("Long Id");
+			q.setFilter("Id == aircraft_id");
 			q.setUnique(true);
 			
-			a = (Aircraft) q.execute(TailNumber);
+			a = (Aircraft) q.execute(Id);
 
             pm.deletePersistent(a);
 			tx.commit();
@@ -173,7 +200,7 @@ public class AircraftDaoImpl implements aircraftDao{
 
 
 
-	public Aircraft getAircraft(Long TailNumber) {
+	public Aircraft getAircraft(Long Id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a = null;
@@ -182,11 +209,11 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long TailNumber");
-			q.setFilter("TailNumber == tailNumber");
+			q.declareParameters("Long Id");
+			q.setFilter("Id == aircraft_id");
 			q.setUnique(true);
 			
-			a = (Aircraft) q.execute(TailNumber);
+			a = (Aircraft) q.execute(Id);
 			detached = (Aircraft) pm.detachCopy(a);
 
 			tx.commit();
@@ -200,13 +227,13 @@ public class AircraftDaoImpl implements aircraftDao{
 		return detached;
 	}
 
-	public void setModel(Long TailNumber, String Model) {
+	public void setModel(Long Id, String Model) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
 		try {
 			tx.begin();
-			a = pm.getObjectById(Aircraft.class, TailNumber);
+			a = pm.getObjectById(Aircraft.class, Id);
 
             a.setModel(Model);;
 			tx.commit();
@@ -219,13 +246,13 @@ public class AircraftDaoImpl implements aircraftDao{
 		
 	}
 
-	public void setCompany(Long TailNumber, String Company) {
+	public void setCompany(Long Id, String Company) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
 		try {
 			tx.begin();
-			a = pm.getObjectById(Aircraft.class, TailNumber);
+			a = pm.getObjectById(Aircraft.class, Id);
 
             a.setConstructorCompany(Company);;
 			tx.commit();
@@ -238,13 +265,13 @@ public class AircraftDaoImpl implements aircraftDao{
 		
 	}
 
-	public void setNumberOfSeats(Long TailNumber, int NumberOfSeats) {
+	public void setNumberOfSeats(Long Id, int NumberOfSeats) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
 		try {
 			tx.begin();
-			a = pm.getObjectById(Aircraft.class, TailNumber);
+			a = pm.getObjectById(Aircraft.class, Id);
 
             a.setNumberOfSeats(NumberOfSeats);;
 			tx.commit();

@@ -306,9 +306,9 @@ public class FlightResource  implements flightDao {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyFlight")
-	public void modifyFlight(@PathParam("id")Long id, @PathParam("DepartureTime")String DepartureTime, 
-			@PathParam("DepartureAirport")String DepartureAirport, @PathParam("ArrivalTime")String ArrivalTime,
-			@PathParam("ArrivalAirport")String ArrivalAirport) {
+	public void modifyFlight(@QueryParam("id")Long id, @QueryParam("DepartureTime")String DepartureTime, 
+			@QueryParam("DepartureAirport")String DepartureAirport, @QueryParam("ArrivalTime")String ArrivalTime,
+			@QueryParam("ArrivalAirport")String ArrivalAirport) {
 		
 		DAO.getFlightDao().modifyFlight(id,DepartureTime,DepartureAirport,ArrivalTime,ArrivalAirport);		
 	}

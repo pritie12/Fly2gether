@@ -37,6 +37,8 @@
                 <div class="divProp" >
                     <h5>Departure</h5>
                     <div class="inputs">
+                                         
+
                         <div>
                             <h6>Airport</h6>
                             <input type="text" id="airportDeparture">
@@ -49,7 +51,7 @@
                         
                         <div>
                             <h6>Time</h6>
-                            <input type="time" id="datetimeDeparture" >
+                            <input type="datetime-local" id="datetimeDeparture" >
                         </div>
                         
                     </div>
@@ -76,7 +78,7 @@
                         
                         <div>
                             <h6>Time</h6>
-                            <input type="time" id="datetimeArrival" >
+                            <input type="datetime-local" id="datetimeArrival" >
                         </div>
                         
                     </div>
@@ -96,15 +98,42 @@
                         </div>
                         
                         <div>
-                            <h6>Seats</h6>
-                            <input type="number" id="seats" >
+                            <h6>TailNumber</h6>
+                            <input type="number" id="tailNumber" >
+                            <input type="hidden" id="aircraftID" value=0 >
+
                         </div>
                         
                     </div>
                     
                 
                 </div>
-                <button id="submit" class="btnSubmit" value="Register">Submit</button>
+
+                <div class="divProp">
+                    <h5>Details</h5>
+                    <div class="inputs">
+                       
+                        <div>
+                            <h6>Apointement details</h6>
+                            <input type="text" id="apointement">
+                        </div>
+                        <div>
+                            <h6>Price</h6>
+                            <input type="number" id="newFlightPrice">       
+                        </div>
+                        <div>
+                            <h6>Seats</h6>
+                            <input type="number" id="newFligthSeats" >
+                        </div>
+                    </div>
+                </div>
+                <div >
+                   Your are not logged : 
+                   <u><a href="register.html">Register</a></u> 
+                    or 
+                    <u><a href="Login.html">Login</a></u>
+                </div>
+                <button id="submitNewFlight" class="btnSubmit" >Submit</button>
             </div>
            
 		</div>

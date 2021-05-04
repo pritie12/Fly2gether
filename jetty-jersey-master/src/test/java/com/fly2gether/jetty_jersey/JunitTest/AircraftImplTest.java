@@ -23,7 +23,7 @@ public class AircraftImplTest {
 		Assert.assertEquals(0, aircraftDao.getFleet().size());
 
 		Aircraft aircraft1 = new Aircraft();
-		System.out.println(aircraft1.getTailNumber());
+		System.out.println(aircraft1.getID());
 		aircraft1.setModel("MARSUPILAMI11");
 		aircraft1.setNumberOfSeats(30);
 
@@ -47,13 +47,13 @@ public class AircraftImplTest {
         Aircraft aircraft7 =new Aircraft("LEARJET45","Boeing",28,(long) 5987);
  
 		aircraftDao.addAircraft(aircraft3);
-		System.out.println(aircraftDao.getFleet().get(1).getTailNumber());
+		System.out.println(aircraftDao.getFleet().get(1).getID());
 		aircraftDao.addAircraft(aircraft4);
 		aircraftDao.addAircraft(aircraft5);
 		aircraftDao.addAircraft(aircraft6);
 		aircraftDao.addAircraft(aircraft7);
 		
-		aircraftDao.deleteAircraft(aircraftDao.getFleet().get(0).getTailNumber());
+		aircraftDao.deleteAircraft(aircraftDao.getFleet().get(0).getID());
 		
 		aircraftDao.getFleet().get(0).display();	
 		aircraftDao.getFleet().get(1).display();	

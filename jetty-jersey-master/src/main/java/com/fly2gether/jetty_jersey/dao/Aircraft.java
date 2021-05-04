@@ -10,6 +10,8 @@ public class Aircraft {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.NATIVE)
+	private Long aircraft_id;
+	
 	private Long tailNumber ;
 	
 	private String model;
@@ -32,6 +34,9 @@ public class Aircraft {
     }	
 	 /* GETTERS */
 
+	public Long getID() {
+		return this.aircraft_id;
+	}
 	public Long getTailNumber() {
 		return this.tailNumber;
 	}

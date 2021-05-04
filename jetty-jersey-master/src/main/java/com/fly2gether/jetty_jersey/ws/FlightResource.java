@@ -174,6 +174,9 @@ public class FlightResource  implements flightDao {
 		passengerDao.addPassenger(passenger3);
 		passengerDao.addPassenger(passenger2);
 		passengerDao.addPassenger(passenger1);
+		
+		aircraftDao.addAircraft(aircraft2);
+		aircraftDao.addAircraft(aircraft1);
 
 		Flight flight1 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",150,37,pilot1.getPilotId(),aircraft1.getTailNumber());	
 		Flight flight2 = new Flight(new Date(2021,03,16),LocalDateTime.of(2021,03,16,18,20,0), "Aerodrome 1",new Date(2021,03,16),LocalDateTime.of(2021,03,16,20,50,0),"Aerodrom2",30,48,pilot2.getPilotId(),aircraft2.getTailNumber());		

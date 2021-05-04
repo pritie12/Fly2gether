@@ -91,8 +91,11 @@ function show_div(){
 }
 
 function set_usrId_cookie(id){
-	var c = "usrId="+ id.passenger_id;
-	document.cookie = c ;
+
+	var c1 = "usrId="+ id.passengerId;
+	var c2 = "usr="+id;
+	document.cookie = c1 ;
+	document.cookie = c2 ;
 }
 
 
@@ -126,7 +129,7 @@ $(function(){
 			set_usrId_cookie(2); // pour tester
 			//window.history.go(-2);
 		}catch (error) {
-			console.error(error);
+			console.log(error);
 		}
 		
 
@@ -142,12 +145,13 @@ $(function(){
 		if(document.getElementById("is_pil").checked==true){
 			
 			var url = "ws/Pilote/username/PilotLogin?username="+username + "&pwd="+pwd;
+			
 			/*	getServerData(url,set_usrId_cookie); */
 			usr_type="pilot";
 		}
 		else{
-			var url = "ws/Passenger/username/PassengerLogin?username="+username + "&pwd="+pwd;
-			/*getServerData(url,set_usrId_cookie);*/
+			var url = "ws/Passenger/PassengerLogin/?username="+username+"&password="+pwd;
+			getServerData(url,set_usrId_cookie);
 			
 			usr_type = "passenger";
 		}

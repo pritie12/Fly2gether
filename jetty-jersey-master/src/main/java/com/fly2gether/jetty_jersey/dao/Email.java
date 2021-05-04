@@ -11,8 +11,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Email {
-	private  String username="fly2gether@gmail.com";
-	private  String pwd="marsupilami";
+	private  String username="pritie.test2020@gmail.com";
+	private  String pwd="pri120699";
 	private  String sender=username;
 	private  String recipient;
 	private  String subject;
@@ -41,12 +41,11 @@ public class Email {
 	public void sendMail() {
 
 		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.auth", true);
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "8080");
-		props.put("mail.smtp.host", "smtp.gmail.com");
+	
+		props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {

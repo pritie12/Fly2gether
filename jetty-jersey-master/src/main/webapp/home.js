@@ -227,6 +227,10 @@ $(function(){
 
 		var url ="/ws/Passenger/PassengerLogin/?username=vincent&password=123";
 		getServerData(url,callDone);
+		getServerData(url,function(data){
+			var s ="hello"+ data.passengerId;
+			callDone(s);
+		});
 
 	});
 	$("#buttonA").click(function(){

@@ -120,12 +120,15 @@ public class FlightImplTest {
 		Reservation resa3=new Reservation(passenger5.getPassengerId(),flight1.getId(),5);
 		Reservation resa4=new Reservation(passenger1.getPassengerId(),flight2.getId(),5);
 		Reservation resa5=new Reservation(passenger1.getPassengerId(),flight2.getId(),5);	
+		Reservation resa6=new Reservation(passenger1.getPassengerId(),flight2.getId(),200);	
 		
 		// test add reservation
 		reservationDao.addReservation(resa1);
 		reservationDao.addReservation(resa2);
 		reservationDao.addReservation(resa3);
-		reservationDao.addReservation(resa4);		
+		reservationDao.addReservation(resa4);	
+		reservationDao.addReservation(resa6);	
+		
 		
 		Assert.assertEquals(4, flightDao.getFlights().size());
 		Assert.assertEquals(2,  flightDao.getFlights(30).size());

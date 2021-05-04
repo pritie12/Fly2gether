@@ -2,6 +2,7 @@ package com.fly2gether.jetty_jersey.ws;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -85,8 +86,13 @@ public class ReservationResource implements reservationDao {
 	public void addReservation(Reservation reservation) {
 		Long bookingUser=reservation.getBookingUser();
 		String departure=DAO.getFlightDao().getdepartureAirport(reservation.getFlight());
-		new Email(DAO.getPassengerDao().getPassenger(bookingUser)
-				.getEmail(),"Reservation accepted","Hello,\nYour reservation for the flight departing from "+departure+" has been accepted.\n\nBest regards,\nFly2gether Team");
+		try {
+			new Email(DAO.getPassengerDao().getPassenger(bookingUser)
+					.getEmail(),"Reservation accepted","Hello,\nYour reservation for the flight departing from "+departure+" has been accepted.\n\nBest regards,\nFly2gether Team");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		DAO.getReservationDao().addReservation(reservation);
 	}
 
@@ -95,8 +101,13 @@ public class ReservationResource implements reservationDao {
 	@Path("/{id}/deleteReservation")
 	public void denyReservation(@PathParam("id")Long id) {
 		Long bookingUser=DAO.getReservationDao().getReservation(id).getBookingUser();
-		new Email(DAO.getPassengerDao().getPassenger(bookingUser)
-				.getEmail(),"Reservation denied","Hello,\nWe are sorry to inform you that your reservation has been denied.\nContact us on this address if you have any complaints.\n\nBest regards,\nFly2gether Team");
+		try {
+			new Email(DAO.getPassengerDao().getPassenger(bookingUser)
+					.getEmail(),"Reservation denied","Hello,\nWe are sorry to inform you that your reservation has been denied.\nContact us on this address if you have any complaints.\n\nBest regards,\nFly2gether Team");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		DAO.getReservationDao().denyReservation(id);		
 	}
 

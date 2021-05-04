@@ -151,8 +151,12 @@ public class ReservationDaoImpl implements reservationDao{
 			int oldseats=r.getDesiredSeats();
 			r.setDesiredSeats(seats);	
 			Flight f = pm.getObjectById(Flight.class, r.getFlight());
-			f.setAvailableSeats((f.getAvailableSeats()-(r.getDesiredSeats()-oldseats)));
-			tx.commit();
+			if(f.getAvailableSeats()>=seats) {
+				f.setAvailableSeats((f.getAvailableSeats()-(r.getDesiredSeats()-oldseats)));
+				tx.commit();}
+			else {
+				System.out.println("Only "+f.getAvailableSeats()+" seats left");
+			}
 		} finally {
 			if (tx.isActive()) tx.rollback();
 			pm.close();
@@ -161,6 +165,7 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 	
 	public void addReservation(Reservation reservation) {
+		int seats=reservation.getDesiredSeats();
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Flight f=null;
@@ -168,11 +173,14 @@ public class ReservationDaoImpl implements reservationDao{
 		try {
 			tx.begin();
 			f = pm.getObjectById(Flight.class, reservation.getFlight());
-			f.setAvailableSeats((f.getAvailableSeats()-reservation.getDesiredSeats()));
-			//reservation.getFlight().setAvailableSeats((reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats()));
-			pm.makePersistent(reservation);
-			tx.commit();
-			//System.out.println("Flight for "+reservation.getBookingUser().getName()+" "+reservation.getBookingUser().getSurname()+" booked");
+			if(f.getAvailableSeats()>=seats) {
+				f.setAvailableSeats((f.getAvailableSeats()-reservation.getDesiredSeats()));
+				//reservation.getFlight().setAvailableSeats((reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats()));
+				pm.makePersistent(reservation);
+				tx.commit();}
+			else {
+				System.out.println("Only "+f.getAvailableSeats()+" seats left in this flight");
+			}
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();

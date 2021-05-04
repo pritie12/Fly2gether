@@ -1,5 +1,6 @@
 package com.fly2gether.jetty_jersey.dao;
 
+import java.net.Authenticator;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -10,9 +11,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
 public class Email {
-	private  String username="fly2gether@gmail.com";
-	private  String pwd="marsupilami";
+	private  String username="ufly_eidd@outlook.com";
+	private  String pwd="choco0234xx";
 	private  String sender=username;
 	private  String recipient;
 	private  String subject;
@@ -32,48 +34,50 @@ public class Email {
 	public String getContent() {
 		return content;
 	}
-	public Email(String recipient, String subject, String content) {
+	public Email(String recipient, String subject, String content) throws MessagingException {
 		this.recipient=recipient;
 		this.subject=subject;
 		this.content=content;
-		sendMail();
+		//sendMail();
 	}
-	public void sendMail() {
+	public static void mailSender(String message, String subject,String adressee) {
+        Properties props = new Properties();
+        props.put("mail.smtp.user", "FlightShare@outlook.com");
+        props.put("mail.smtp.host", "smtp-mail.outlook.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.starttls.enable","true");
+        props.put("mail.smtp.auth", "true");
+        //props.put("mail.smtp.socketFactory.port", "587");
+        //props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        //props.put("mail.smtp.socketFactory.fallback", "true");
 
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.auth", true);
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "8080");
-		props.put("mail.smtp.host", "smtp.gmail.com");
+        try
+        {
+        javax.mail.Authenticator auth = new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("FlightShare@outlook.com", "ShareFlight123");
+            }
+          };
 
-		Session session = Session.getInstance(props,
-				new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, pwd);
-			}
-		});
+        Session session = Session.getInstance(props, auth);
 
-		try {
+        MimeMessage msg = new MimeMessage(session);
+        msg.setText(message);
+        msg.setSubject(subject);
+        msg.setFrom(new InternetAddress("FlightShare@outlook.com"));
+        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(adressee));
+        Transport.send(msg);
 
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(sender));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(recipient));
-			message.setSubject(subject);
-			message.setText(content);
+        }catch (MessagingException mex) {
+           mex.printStackTrace();
+        }
+    }
 
-			Transport.send(message);
 
-			System.out.println("Email sent successfully!");
-
-		} catch (MessagingException e) {
-
-			throw new RuntimeException(e);
-
-		}
-
+	
+	public static void main(String [] args) throws MessagingException { 
+		String test="Eidd gang";
+		mailSender(test,"tesst","hiba.souber.hs@gmail.com");
 	}
 
 

@@ -28,7 +28,7 @@ public interface flightDao {
 	public List<Flight> getFlights(int minPrice,int maxPrice);
 	public List<Flight> getFlights(String DepartureMin,String DepartureMax, String DepartureAirport);	
 	public List<Flight> getFlights(int Seats);	
-	public List<Flight> SearchFlight(int seats,int maxprice,int minprice,String DepartureMin,String DepartureMax, String DepartureAirport);
+	public List<Flight> SearchFlight(int seats,String DepartureMin,String DepartureMax, String DepartureAirport);
 	
 	/* POST */
 	public void setPilot(Long id,Long Pilot);	

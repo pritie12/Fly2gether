@@ -358,7 +358,6 @@ public class PilotDaoImpl implements pilotDao {
         try {
             pilot = (Pilot) result.iterator().next();
         } catch (NoSuchElementException | IndexOutOfBoundsException e) {
-        	System.out.println("user not found");
             return null;
         }
         q.close(result);

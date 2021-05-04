@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.fly2gether.jetty_jersey.dao.DAO;
 import com.fly2gether.jetty_jersey.dao.Email;
+import com.fly2gether.jetty_jersey.dao.Pilot;
 import com.fly2gether.jetty_jersey.dao.Reservation;
 import com.fly2gether.jetty_jersey.dao.reservationDao;
 
@@ -54,7 +55,7 @@ public class ReservationResource implements reservationDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{resa_id}/getStatus")
-	public boolean getStatus(@PathParam("resa_id")Long resa_id) {
+	public String getStatus(@PathParam("resa_id")Long resa_id) {
 		return DAO.getReservationDao().getStatus(resa_id);
 	}	
 	
@@ -78,19 +79,36 @@ public class ReservationResource implements reservationDao {
 	public void changeNumberOfSeats(@PathParam("seats")int seats,@PathParam("reservation_id")Long reservation_id) {
 		DAO.getReservationDao().changeNumberOfSeats(seats,reservation_id);		
 	}
-	
-	
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addReservation")
-	public void addReservation(Reservation reservation) {
+
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/acceptReservation")
+	public void acceptReservation(@PathParam("id")Long id) {
+		Reservation reservation=DAO.getReservationDao().getReservation(id);
 		Long bookingUser=reservation.getBookingUser();
 		String departure=DAO.getFlightDao().getdepartureAirport(reservation.getFlight());
 		try {
 			new Email(DAO.getPassengerDao().getPassenger(bookingUser)
 					.getEmail(),"Reservation accepted","Hello,\nYour reservation for the flight departing from "+departure+" has been accepted.\n\nBest regards,\nFly2gether Team");
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DAO.getReservationDao().acceptReservation(id);
+		
+	}	
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/addReservation")
+	public void addReservation(Reservation reservation) {
+		Long f_id=reservation.getFlight();
+		Long p_id= DAO.getFlightDao().getFlight(f_id).getFlightPilotId();
+		Pilot p=DAO.getPilotDao().getPilot(p_id);
+		String departure=DAO.getFlightDao().getdepartureAirport(reservation.getFlight());
+		try {
+			new Email(p.getEmail(),"Reservation waiting for approval","Hello,\nA reservation for the flight departing from "+departure+" is pending in your personnal account, waiting for your approval or denial.\n\nBest regards,\nFly2gether Team");
+		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 		DAO.getReservationDao().addReservation(reservation);
@@ -105,7 +123,6 @@ public class ReservationResource implements reservationDao {
 			new Email(DAO.getPassengerDao().getPassenger(bookingUser)
 					.getEmail(),"Reservation denied","Hello,\nWe are sorry to inform you that your reservation has been denied.\nContact us on this address if you have any complaints.\n\nBest regards,\nFly2gether Team");
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		DAO.getReservationDao().denyReservation(id);		

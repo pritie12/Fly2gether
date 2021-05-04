@@ -399,6 +399,39 @@ public class FlightDaoImpl implements flightDao {
 
 
 	@SuppressWarnings("unchecked")
+	public List<Flight> SearchFlight(int seats, int maxprice, int minprice, String DepartureMin, String DepartureMax,
+			String DepartureAirport) {
+		List<Flight> flights=null;
+		List<Flight> detached = new ArrayList<Flight>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+        LocalDateTime dMin = LocalDateTime.parse(DepartureMin,formatter);
+        LocalDateTime dMax = LocalDateTime.parse(DepartureMax,formatter);
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
+		try {
+			tx.begin();
+			Query q = pm.newQuery(Flight.class);
+            flights= (List<Flight>) q.execute();
+
+            flights=(List<Flight>) flights.stream().filter(f->f.getDepartureAirport().toUpperCase().equals(DepartureAirport.toUpperCase()))
+            		.filter(f->f.getDepartureTime().isAfter(dMin)).filter(f->f.getDepartureTime().isBefore(dMax))
+            		.filter(f->f.getAvailableSeats()!=0).filter(f->f.getPrice()<=maxprice).filter(f->f.getPrice()>=minprice)
+            		.filter(f->f.getAvailableSeats()>=seats).collect(Collectors.toList());
+
+			detached = (List<Flight>) pm.detachCopyAll(flights);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		System.out.println(detached.size()+" flights found !");
+		return detached;
+	}
+	@SuppressWarnings("unchecked")
 	public List<Flight> getFlights(int Seats) {
 		List<Flight> flights=null;
 		List<Flight> detached = new ArrayList<Flight>();
@@ -707,6 +740,31 @@ public class FlightDaoImpl implements flightDao {
 		}
 		
 	}
+
+
+	public Flight getFlight(Long id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f = null;
+		Flight detached = null;
+		try {
+			tx.begin();
+
+			f=pm.getObjectById(Flight.class,id);
+			detached = (Flight) pm.detachCopy(f);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+
+		}
+		return detached;
+	}
+
+
 
 }
 

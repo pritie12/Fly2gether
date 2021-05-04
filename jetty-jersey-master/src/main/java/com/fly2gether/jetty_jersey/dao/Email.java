@@ -1,6 +1,5 @@
 package com.fly2gether.jetty_jersey.dao;
 
-import java.net.Authenticator;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -13,9 +12,9 @@ import javax.mail.internet.MimeMessage;
 
 
 public class Email {
-	private  String username="ufly_eidd@outlook.com";
-	private  String pwd="choco0234xx";
-	private  String sender=username;
+	private static  String username="fly2getherEIDD@outlook.com";
+	private static  String pwd="Christophedenis1";
+	private static  String sender=username;
 	private  String recipient;
 	private  String subject;
 	private  String content;
@@ -38,46 +37,62 @@ public class Email {
 		this.recipient=recipient;
 		this.subject=subject;
 		this.content=content;
-		//sendMail();
+		sendMail();
 	}
-	public static void mailSender(String message, String subject,String adressee) {
+	public  void sendMail() {
         Properties props = new Properties();
-        props.put("mail.smtp.user", "FlightShare@outlook.com");
+        props.put("mail.smtp.user", sender);
         props.put("mail.smtp.host", "smtp-mail.outlook.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.starttls.enable","true");
         props.put("mail.smtp.auth", "true");
-        //props.put("mail.smtp.socketFactory.port", "587");
-        //props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        //props.put("mail.smtp.socketFactory.fallback", "true");
+
 
         try
         {
         javax.mail.Authenticator auth = new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("FlightShare@outlook.com", "ShareFlight123");
+                return new PasswordAuthentication(sender, pwd);
             }
           };
 
         Session session = Session.getInstance(props, auth);
 
         MimeMessage msg = new MimeMessage(session);
-        msg.setText(message);
+        msg.setText(content);
         msg.setSubject(subject);
-        msg.setFrom(new InternetAddress("FlightShare@outlook.com"));
-        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(adressee));
+        msg.setFrom(new InternetAddress(sender));
+        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
         Transport.send(msg);
+        System.out.println("Message sent successfully");
 
         }catch (MessagingException mex) {
            mex.printStackTrace();
         }
     }
-
-
 	
 	public static void main(String [] args) throws MessagingException { 
-		String test="Eidd gang";
-		mailSender(test,"tesst","hiba.souber.hs@gmail.com");
+		String test="I was angry with my friend; \r\n"
+				+ "I told my wrath, my wrath did end.\r\n"
+				+ "I was angry with my foe: \r\n"
+				+ "I told it not, my wrath did grow. \r\n"
+				+ "\r\n"
+				+ "And I waterd it in fears,\r\n"
+				+ "Night & morning with my tears: \r\n"
+				+ "And I sunned it with smiles,\r\n"
+				+ "And with soft deceitful wiles. \r\n"
+				+ "\r\n"
+				+ "And it grew both day and night. \r\n"
+				+ "Till it bore an apple bright. \r\n"
+				+ "And my foe beheld it shine,\r\n"
+				+ "And he knew that it was mine. \r\n"
+				+ "\r\n"
+				+ "And into my garden stole, \r\n"
+				+ "When the night had veild the pole; \r\n"
+				+ "In the morning glad I see; \r\n"
+				+ "My foe outstretched beneath the tree.\r\n"
+				+ "\r\n";
+		new Email("hiba.souber.hs@gmail.com","A Poison Tree by William Blake",test);
 	}
 
 

@@ -93,7 +93,7 @@ public class FlightDaoImpl implements flightDao {
 			pm.close();
 
 		}
-		return detached.getFlightAircraft();
+		return detached.getFlightAircraftTailnumber();
 	}
 
 	public int getPrice(Long identifier) {

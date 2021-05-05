@@ -151,7 +151,7 @@ public class FlightResource  implements flightDao {
 				.collect(Collectors.toList());
 		return finalSearch;*/
 		return DAO.getFlightDao().SearchFlight(seats,maxprice,minprice,DepartureMin,DepartureMax,DepartureAirport);
-	}
+	} 
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)

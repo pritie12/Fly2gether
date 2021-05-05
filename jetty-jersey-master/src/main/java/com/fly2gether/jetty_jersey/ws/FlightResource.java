@@ -137,6 +137,14 @@ public class FlightResource  implements flightDao {
 	public List<Flight> getFlights(@QueryParam("seats")int seats) {
 		return DAO.getFlightDao().getFlights(seats);
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getLastFlightId")
+	public Long getLastFlightId() {
+		List<Flight> list =getFlights();
+		return  list.get(list.size()-1).getId();
+	}
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
@@ -240,14 +248,14 @@ public class FlightResource  implements flightDao {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/setPilot")
-	public void setPilot(@PathParam("id")Long id,@PathParam("Pilot") Long Pilot) {
+	public void setPilot(@PathParam("id")Long id,@QueryParam("Pilot") Long Pilot) {
 		DAO.getFlightDao().setPilot(id,Pilot);
 		
 	}
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/setAircraft")
-	public void setAircraft(@PathParam("id")Long id,@PathParam("Aircraft") Long Aircraft) {
+	public void setAircraft(@PathParam("id")Long id,@QueryParam("Aircraft") Long Aircraft) {
 		DAO.getFlightDao().setAircraft(id,Aircraft);
 		
 	}
@@ -286,12 +294,28 @@ public class FlightResource  implements flightDao {
 		DAO.getFlightDao().setdepartureDate(id,DepartureDate);
 		
 	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setdepartureTime")
+	public void setdepartureTime(@PathParam("id")Long id, @QueryParam(value = "time")String DepartureTime) {
+		DAO.getFlightDao().setdepartureTime(id,DepartureTime);
+		
+	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/setarrivalDate")
 	public void setarrivalDate(@PathParam("id")Long id, Date ArrivalDate) {
 		DAO.getFlightDao().setarrivalDate(id,ArrivalDate);
+		
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{id}/setarrivalTime")
+	public void setarrivalTime(@PathParam("id")Long id, @QueryParam(value = "time") String arrivalTime) {
+		DAO.getFlightDao().setdepartureTime(id,arrivalTime);
 		
 	}
 
@@ -306,7 +330,7 @@ public class FlightResource  implements flightDao {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyFlight")
-	public void modifyFlight(@QueryParam("id")Long id, @QueryParam("DepartureTime")String DepartureTime, 
+	public void modifyFlight(@PathParam("id")Long id, @QueryParam("DepartureTime")String DepartureTime, 
 			@QueryParam("DepartureAirport")String DepartureAirport, @QueryParam("ArrivalTime")String ArrivalTime,
 			@QueryParam("ArrivalAirport")String ArrivalAirport) {
 		
@@ -320,5 +344,7 @@ public class FlightResource  implements flightDao {
 			@QueryParam("DepartureMax")String DepartureMax, @QueryParam("DepartureAirport")String DepartureAirport) {
 		return DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
 	}
+
+	
 
 }

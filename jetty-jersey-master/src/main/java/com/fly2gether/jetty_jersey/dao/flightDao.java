@@ -36,6 +36,8 @@ public interface flightDao {
 	public void setAvailableSeats(Long id, int AvailableSeats);	
 	public void setAppointmentDescription(Long id,String AppointmentDescription);	
 	public void setdepartureDate(Long id,Date DepartureDate);	
+	public void setdepartureTime(Long id,String DepartureTime);
+	public void setarrivalTime(Long id,String ArrivalTime);
 	public void setarrivalDate(Long id,Date ArrivalDate);
 	public void setFlightDuration(Long id,Duration FlightDuration);
 	public void modifyFlight(Long id, String DepartureTime,String DepartureAirport, String ArrivalTime,String ArrivalAirport);

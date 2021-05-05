@@ -641,6 +641,24 @@ public class FlightDaoImpl implements flightDao {
 		}		
 	}
 	
+	public void setdepartureTime(Long id, String DepartureTime) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setDepartureTime(LocalDateTime.parse(DepartureTime));
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}		
+	}
+	
 	public void setarrivalDate(Long id, Date ArrivalDate) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -650,6 +668,26 @@ public class FlightDaoImpl implements flightDao {
 			f = pm.getObjectById(Flight.class, id);
 
             f.setArrivalDate(ArrivalDate);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	
+	public void setarrivalTime(Long id, String ArrivalTime) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		try {
+			tx.begin();
+			f = pm.getObjectById(Flight.class, id);
+
+            f.setArrivalTime(LocalDateTime.parse(ArrivalTime));
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

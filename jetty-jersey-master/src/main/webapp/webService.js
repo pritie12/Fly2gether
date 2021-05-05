@@ -39,7 +39,7 @@ function deleteServerData(url,success){
 	 }).done(success);
 }
 
-function postServerData(url,success){
+function postServerData(url, success){
 	$.ajax({
 		url: url,
 		type: 'POST',

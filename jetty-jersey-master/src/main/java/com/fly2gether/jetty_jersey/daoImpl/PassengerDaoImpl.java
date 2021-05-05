@@ -269,12 +269,13 @@ public class PassengerDaoImpl implements passengerDao{
 		try {
 			tx.begin();
 			String mail=passenger.getEmail();
+			String uname=passenger.getUsername();
 			for(Passenger p:getPassengers()) {
-				if(p.getEmail().equals(mail)==false) {
+				if(p.getEmail().equals(mail)==false&&p.getUsername().equals(uname)==false) {
 					pm.makePersistent(passenger);
 				}
 				else {
-					System.out.println("Email address already in use");
+					System.out.println("Email address or username already in use");
 				}
 			}
 			

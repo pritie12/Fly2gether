@@ -84,14 +84,8 @@ public class PilotResource implements pilotDao{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
 	public void addPilot(Pilot pilot) {
-		String mail=pilot.getEmail();
 		DAO.getPilotDao().addPilot(pilot);
-		try {
-			new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 
 	}
 

@@ -32,8 +32,6 @@ public class Passenger  {
 	
 	/* CONSTRUCTORS */
 	public Passenger() {
-
-
 		this.passenger_id=(long) 0;
 		this.passengerBookingList=new ArrayList<Long>();
 	}
@@ -76,6 +74,7 @@ public class Passenger  {
 	public String getSurname() {
 		return surname;
 	}
+	
 	/* SETTERS */
 	public void setPassengerId(Long passenger_id) {
 		this.passenger_id=passenger_id;

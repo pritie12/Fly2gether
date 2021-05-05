@@ -2,6 +2,7 @@ package com.fly2gether.jetty_jersey.ws;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -99,7 +100,12 @@ public class PilotResource implements pilotDao{
 	public void addPilot(Pilot pilot) {
 		//String mail=pilot.getEmail();
 		DAO.getPilotDao().addPilot(pilot);
-		//new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
+		try {
+			new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -109,7 +115,12 @@ public class PilotResource implements pilotDao{
 	@Path("/{id}/deletePilot")
 	public void deletePilot(@PathParam("id")Long id) {
 		String mail=DAO.getPilotDao().getPilot(id).getEmail();
-		new Email(mail,"Welcome to Fly2gether", "Dear pilot,\nYour account will shortly be deleted from our database, we hope that this is not the end of our collaboration. Please let us know if something in our website inconvenienced you.\nBest regards,\nFly2gether Team");
+		try {
+			new Email(mail,"Welcome to Fly2gether", "Dear pilot,\nYour account will shortly be deleted from our database, we hope that this is not the end of our collaboration. Please let us know if something in our website inconvenienced you.\nBest regards,\nFly2gether Team");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		DAO.getPilotDao().deletePilot(id);
 	}
 	

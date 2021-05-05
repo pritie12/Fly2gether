@@ -1,6 +1,7 @@
 package com.fly2gether.jetty_jersey.ws;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -146,6 +147,20 @@ public class FlightResource  implements flightDao {
 		return  list.get(list.size()-1).getId();
 	}
 
+	@SuppressWarnings("unchecked")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/SearchFlight")	
+	public List<Flight> SearchFlight(@QueryParam("seats")int seats,@QueryParam("maxprice")int maxprice,@QueryParam("minprice")int minprice,
+			@QueryParam("DepartureMin")String DepartureMin,@QueryParam("DepartureMax")String DepartureMax, @QueryParam("DepartureAirport")String DepartureAirport) {
+		List<Flight> searchBySeats=DAO.getFlightDao().getFlights(seats);
+		List<Flight> searchByPrice=DAO.getFlightDao().getFlights(minprice,maxprice);
+		List<Flight> searchByDeparture=DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
+		List<Flight> finalSearch=new ArrayList<Flight>();
+		finalSearch=(List<Flight>) searchBySeats.stream().filter(searchByPrice::contains).filter(searchByDeparture::contains);
+		return finalSearch;
+	}
+	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addFlightTest")

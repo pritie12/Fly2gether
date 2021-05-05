@@ -10,10 +10,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
 public class Email {
-	private  String username="pritie.test2020@gmail.com";
-	private  String pwd="pri120699";
-	private  String sender=username;
+	private static  String username="fly2getherEIDD@outlook.com";
+	private static  String pwd="Christophedenis1";
+	private static  String sender=username;
 	private  String recipient;
 	private  String subject;
 	private  String content;
@@ -32,47 +33,66 @@ public class Email {
 	public String getContent() {
 		return content;
 	}
-	public Email(String recipient, String subject, String content) {
+	public Email(String recipient, String subject, String content) throws MessagingException {
 		this.recipient=recipient;
 		this.subject=subject;
 		this.content=content;
 		sendMail();
 	}
-	public void sendMail() {
-
-		Properties props = new Properties();
-	
-		props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
+	public  void sendMail() {
+        Properties props = new Properties();
+        props.put("mail.smtp.user", sender);
+        props.put("mail.smtp.host", "smtp-mail.outlook.com");
         props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.starttls.enable","true");
+        props.put("mail.smtp.auth", "true");
 
-		Session session = Session.getInstance(props,
-				new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, pwd);
-			}
-		});
 
-		try {
+        try
+        {
+        javax.mail.Authenticator auth = new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(sender, pwd);
+            }
+          };
 
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(sender));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(recipient));
-			message.setSubject(subject);
-			message.setText(content);
+        Session session = Session.getInstance(props, auth);
 
-			Transport.send(message);
+        MimeMessage msg = new MimeMessage(session);
+        msg.setText(content);
+        msg.setSubject(subject);
+        msg.setFrom(new InternetAddress(sender));
+        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+        Transport.send(msg);
+        System.out.println("Message sent successfully");
 
-			System.out.println("Email sent successfully!");
-
-		} catch (MessagingException e) {
-
-			throw new RuntimeException(e);
-
-		}
-
+        }catch (MessagingException mex) {
+           mex.printStackTrace();
+        }
+    }
+	
+	public static void main(String [] args) throws MessagingException { 
+		String test="I was angry with my friend; \r\n"
+				+ "I told my wrath, my wrath did end.\r\n"
+				+ "I was angry with my foe: \r\n"
+				+ "I told it not, my wrath did grow. \r\n"
+				+ "\r\n"
+				+ "And I waterd it in fears,\r\n"
+				+ "Night & morning with my tears: \r\n"
+				+ "And I sunned it with smiles,\r\n"
+				+ "And with soft deceitful wiles. \r\n"
+				+ "\r\n"
+				+ "And it grew both day and night. \r\n"
+				+ "Till it bore an apple bright. \r\n"
+				+ "And my foe beheld it shine,\r\n"
+				+ "And he knew that it was mine. \r\n"
+				+ "\r\n"
+				+ "And into my garden stole, \r\n"
+				+ "When the night had veild the pole; \r\n"
+				+ "In the morning glad I see; \r\n"
+				+ "My foe outstretched beneath the tree.\r\n"
+				+ "\r\n";
+		new Email("hiba.souber.hs@gmail.com","A Poison Tree by William Blake",test);
 	}
 
 

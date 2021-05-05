@@ -117,7 +117,7 @@ public class PassengerResource implements passengerDao {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPassenger")
 	public void addPassenger(Passenger passenger) {
-		//String mail=passenger.getEmail();
+		String mail=passenger.getEmail();
 		DAO.getPassengerDao().addPassenger(passenger);		
 		try {
 			new Email(mail,"Welcome to Fly2gether","Dear passenger,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");

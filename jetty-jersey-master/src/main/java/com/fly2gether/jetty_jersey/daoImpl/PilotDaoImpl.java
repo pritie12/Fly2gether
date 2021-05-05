@@ -334,16 +334,16 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 
-	public Pilot Login(String username, String password) {
+	public long Login(String username, String password) {
 		Pilot pilot=getPilot(username);
 		if(pilot==null) {
 			System.out.println("Username not found");
-			return null;
+			return -1;
 		}
 		if(pilot.getPwd().equals(password)) {
-			return pilot;
+			return pilot.getPilotId();
 		}
-		return null;
+		return -1;
 	}
 
 

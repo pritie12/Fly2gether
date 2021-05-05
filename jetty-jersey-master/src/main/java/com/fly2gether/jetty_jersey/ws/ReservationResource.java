@@ -20,6 +20,7 @@ import com.fly2gether.jetty_jersey.dao.Reservation;
 import com.fly2gether.jetty_jersey.dao.reservationDao;
 
 
+@Path("/Reservation")
 public class ReservationResource implements reservationDao {
 
 
@@ -47,7 +48,7 @@ public class ReservationResource implements reservationDao {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{resa_id}/getFlight")
+	@Path("/{resa_id}/getFlightId")
 	public Long getFlight(@PathParam("resa_id")Long resa_id) {
 		return DAO.getReservationDao().getFlight(resa_id);
 	}

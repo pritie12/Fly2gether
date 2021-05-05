@@ -98,7 +98,7 @@ public class PilotResource implements pilotDao{
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPilot")
 	public void addPilot(Pilot pilot) {
-		//String mail=pilot.getEmail();
+		String mail=pilot.getEmail();
 		DAO.getPilotDao().addPilot(pilot);
 		try {
 			new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
@@ -127,13 +127,13 @@ public class PilotResource implements pilotDao{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/PilotLogin")
-	public Pilot Login(@QueryParam("username")String username,@QueryParam("pwd") String password) {
+	public long Login(@QueryParam("username")String username,@QueryParam("pwd") String password) {
 		System.out.println(username + " " + password );
 		if(DAO.getPilotDao().getPilot(username)!=null) {
 			System.out.println("Logged in successfully");
 		return DAO.getPilotDao().Login(username,password);
 		}
-		return null;
+		return -1;
 	}
 	
 	

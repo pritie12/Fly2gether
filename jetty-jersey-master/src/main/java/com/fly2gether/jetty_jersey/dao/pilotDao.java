@@ -7,7 +7,7 @@ public interface pilotDao {
 	
 	/* GET */
 	public List<Pilot> getPilots();
-	public Pilot Login(String username, String password);
+	public long Login(String username, String password);
 	public Pilot getPilot(String Username);
 	public Pilot getPilot(Long id);	
 	public String getname(Long id);

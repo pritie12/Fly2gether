@@ -130,13 +130,14 @@ public class AircraftDaoImpl implements aircraftDao{
 	public long getAircraftId(Long tailNum) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
 		Aircraft a = null;
 		Aircraft detached = null;
 		try {
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int tailNum");
+			q.declareParameters("long tailNum");
 			q.setFilter("tailNum == tailNumber");
 			q.setUnique(true);
 			

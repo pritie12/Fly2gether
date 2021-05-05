@@ -72,7 +72,7 @@
     border: none;
     background-color: #38c9d3;
     font-style: none;
-    display:none;
+    /*display:none;*/
 }
 
 #flight_short_view{
@@ -180,7 +180,7 @@
 
 
 .dropdown-content {
-  /*  display: none;*/
+    display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -211,6 +211,11 @@
   
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+
+  #nav_log{
+    display: grid;
+    grid-template-columns: 50% 50%;
   }
 
 
@@ -386,6 +391,10 @@ h6{
 .btnSubmit:hover{
 	background-position: right;
     background-color: #38d3d381;
+}
+
+#res{
+    display: none;
 }
 
 

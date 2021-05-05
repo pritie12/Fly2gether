@@ -1,31 +1,3 @@
-/*
-function getServerData(url, success){
-    $.ajax({
-        dataType: "json",
-        url: url
-    }).done(success);
-}
-function putServerData(url,success){
-	$.ajax({
-		url: url,
-		type: 'PUT',
-	 }).done(success);
-}
-
-function deleteServerData(url,success){
-	$.ajax({
-		url: url,
-		type: 'DELETE',
-	 }).done(success);
-}
-
-function postServerData(url,success){
-	$.ajax({
-		url: url,
-		type: 'POST',
-		dataType: "json",
-	 }).done(success);
-}*/
 
 function pilotedata(pilote){
 
@@ -50,28 +22,38 @@ function callDone(result){
 	$("#result").append(html);
 }
 
+function dateToString(date){
+	var res="";
+	var list = JSON.stringify(date).split(',');
+	
+	console.log(list);
+	console.log(list[1].split(':')[1]);
+
+	res = list[3].split(':')[1]+"/" + list[2].split(':')[1] +"/"+list[1].split(':')[1] + " " +list[4].split(':')[1]+":"+list[5].split(':')[1];
+	return res;
+}
+
 var sur="";
 var name ="" ;
+var airModel="";
+var airCom="jj";
 function fligth_list_display(list){
 	var t = _.template($('#templateShortFlightView').html());
 	var html="";
 	var count=0;
 	$("#result2").html("");
 	list.forEach(f => {
-		var pilotId = f.flightPilotId;
-		var url ="/ws/Pilote/"+pilotId+ "/getPilotName";
-		//getServerData(url,display_div("#hello",));
-		display_getServerData(url, "#result2");
-		url ="/ws/Pilote/"+pilotId+ "/getPilotNSurname";
-		//getServerData(url,getPilotnSurname());
 		var sur=getCookie("pSname");
 		var name = getCookie("pName");
+		var d1=f.departureTime;
+		var d2=f.arrivalTime;
+		dateToString(d1);
+
 		html= t({
 			"departureAirport":f.departureAirport,
+			"departureDate":dateToString(d1),
+			"arrivalDate":dateToString(d2),
 			"arrivalAirport":f.arrivalAirport,
-			"aircraftModel":f.flightAircraft.model,
-			"pilotName": pilotId,
-			"pilotSurname":pilotId ,
 			"price":f.price,
 			"availableSeats":f.availableSeats,
 			"id":'<input type="hidden" value=' + f.id + ' id=flightId  > ',
@@ -210,6 +192,25 @@ function pilot_flight_list_load(){
 	fligth_view_display();
 }
 
+function addResa(){
+
+	var resa = '{'+
+		'"bookingUser":'+ getCookie("usr")+ ','+
+		'"flight": '+ getCookie("flightId")+','+
+		'"desiredSeats"'+$("#newResaSeats").val() + ','+
+		'"status":"pending"'+
+	"}";
+
+
+
+
+
+
+
+
+
+}
+
 
 
 
@@ -249,17 +250,13 @@ $(function(){
 
 	$("#buttonD").click(function(){
 		getServerData("ws/Flight/getFlights",callDone);
+		getServerData("ws/Flight/getFlightse",fligth_list_display);
 
 	});
 
+	// show all flights
 	$("#getFlightList").click(function(){
-		$("#result").append($("#inputArr").val() + " " + $("#inputDep").val() + " "+$("#inputDate").val() + " "+$("#inputNum").val() + " ");
-		
-		getServerData("ws/Flight/getFlights",fligth_list_display2);
-	});
-	
-
-	$("#searchButton").click(function(){
+		$("#result").append($("#inputDep").val() + " " + $("#inputDateFrom").val() + " "+$("#inputDateTo").val() + " "+$("#inputNum").val() + " ");
 		processSearchInput();
 		var arrival =processSearchInput( $("#inputArr").val());
 		var departur =processSearchInput( $("#inputDep").val() );
@@ -268,7 +265,18 @@ $(function(){
 		var url = "ws/Flight/getFlights/" + departur+"/" + arrival+"/"+date;
 		console.log(url);
 		getServerData("/ws/Flight/getFlights",fligth_list_display);
+	});
+	
+
+	$("#searchButton").click(function(){
+		
 		/*getServerData("ws/Flight/getFlights%departureAirport%arrivalAirport%date" ,fligth_list_display);*/
+		var dateMin=$("#inputDateFrom").val().replace("T"," ");
+		var dateMax=$("#inputDateTo").val().replace("T"," ");
+		var url ="ws/Flight/getFlightsByDeparture?DepartureMin=" +dateMin +"&DepartureMax="+ dateMax+"&DepartureAirport="+$("#inputDep").val() ;
+		console.log(url);
+		getServerData(url,fligth_list_display);
+
 	});
 
 	$("#flight_short_view").hover(function(){
@@ -281,6 +289,19 @@ $(function(){
 		$("#dropdown-content").css("display", "block");
 	}, function(){
 	$("#dropdown-content").css("display", "none");
+	});
+
+	$("#bookingBtn").click(function(){
+		var usrId=getCookie("usr");
+		console.log(usrId);
+		if(usrId=="" || usrId==undefined ){
+			$("#res").css("display", "block");
+		}
+		else{
+			addResa();
+
+		}
+
 	});
 
 

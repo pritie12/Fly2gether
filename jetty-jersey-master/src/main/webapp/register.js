@@ -48,9 +48,7 @@ function get_form_data_pilot(){
 	 '","email":"'+ $("#mail").val()+
 	 ' ","phoneNumber":"'+ $("#phone").val() +
 	  '","flyingHours":'+$("#fly").val()+
-	  '	} ';
-
-	
+	  '	} ';	
 	console.log(JSON.stringify(data))
 	$("#result").append(data);
 	return data;
@@ -71,10 +69,6 @@ function get_form_data_passenger(){
 	'","phoneNumber":"'+ $("#phone").val() +
 	'", "passengerId": 0'+
 	'} ';
-
-	
-
-	
 	console.log(JSON.stringify(data));
 	console.log(JSON.stringify(data))
 	return data;
@@ -92,10 +86,8 @@ function show_div(){
 
 function set_usrId_cookie(id){
 
-	var c1 = "usrId="+ id.passengerId;
-	var c2 = "usr="+id;
+	var c1 = "usrId="+ id;
 	document.cookie = c1 ;
-	document.cookie = c2 ;
 }
 
 
@@ -125,9 +117,14 @@ $(function(){
 			document.cookie = c ;
 			
 			console.log(url);
-			getServerData(url,set_usrId_cookie)
-			set_usrId_cookie(2); // pour tester
-			//window.history.go(-2);
+			getServerData(url,function(id){
+				var c1 = "usrId="+ id;
+				document.cookie = c1 ;
+				window.history.go(-1);
+			});
+				
+			//set_usrId_cookie(2); // pour tester
+			
 		}catch (error) {
 			console.log(error);
 		}
@@ -146,13 +143,19 @@ $(function(){
 			
 			var url = "ws/Pilote/username/PilotLogin?username="+username + "&pwd="+pwd;
 			
-			/*	getServerData(url,set_usrId_cookie); */
+			getServerData(url,set_usrId_cookie); 
 			usr_type="pilot";
 		}
 		else{
 			var url = "ws/Passenger/PassengerLogin/?username="+username+"&password="+pwd;
-			getServerData(url,set_usrId_cookie);
-			
+			getServerData(url,function(data){
+				if(data==-1){
+					console.log("username or passwor incorrect")
+				}
+				else{
+				set_usrId_cookie(data);
+				}
+			});
 			usr_type = "passenger";
 		}
 
@@ -160,7 +163,7 @@ $(function(){
 
 		var c = "usrType="+ usr_type;
 		document.cookie = c ;
-		set_usrId_cookie(1); // pour tester
+		//set_usrId_cookie(1); // pour tester
 		window.history.go(-1);
 
 	});

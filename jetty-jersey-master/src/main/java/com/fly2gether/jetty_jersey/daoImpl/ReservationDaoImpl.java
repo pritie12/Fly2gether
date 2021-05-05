@@ -115,7 +115,7 @@ public class ReservationDaoImpl implements reservationDao{
 		}
 		return detached;
 	}
-	public boolean getStatus(Long reservation_id) {
+	public String getStatus(Long reservation_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Reservation r = null;
@@ -165,22 +165,16 @@ public class ReservationDaoImpl implements reservationDao{
 	}
 	
 	public void addReservation(Reservation reservation) {
-		int seats=reservation.getDesiredSeats();
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-		Flight f=null;
 		tx.setRetainValues(true);
 		try {
 			tx.begin();
-			f = pm.getObjectById(Flight.class, reservation.getFlight());
-			if(f.getAvailableSeats()>=seats) {
-				f.setAvailableSeats((f.getAvailableSeats()-reservation.getDesiredSeats()));
-				//reservation.getFlight().setAvailableSeats((reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats()));
+			
 				pm.makePersistent(reservation);
-				tx.commit();}
-			else {
-				System.out.println("Only "+f.getAvailableSeats()+" seats left in this flight");
-			}
+				tx.commit();
+
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
@@ -255,6 +249,36 @@ public class ReservationDaoImpl implements reservationDao{
 			pm.close();
 		}
 		System.out.println("Reservation denied");	
+	}
+
+	@Override
+	public void acceptReservation(Long id) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f=null;
+		Reservation r=null;
+		tx.setRetainValues(true);
+		try {
+			tx.begin();
+			r=pm.getObjectById(Reservation.class, id);
+			int seats=r.getDesiredSeats();
+			f = pm.getObjectById(Flight.class, r.getFlight());
+			if(f.getAvailableSeats()>=seats) {
+				System.out.println("Reservation accepted");
+				f.setAvailableSeats((f.getAvailableSeats()-r.getDesiredSeats()));
+				//reservation.getFlight().setAvailableSeats((reservation.getFlight().getAvailableSeats()-reservation.getDesiredSeats()));
+				pm.makePersistent(r);
+				tx.commit();}
+			else {
+				System.out.println("Only "+f.getAvailableSeats()+" seats left in this flight");
+			}
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();		
+		}				
 	}
 
 }

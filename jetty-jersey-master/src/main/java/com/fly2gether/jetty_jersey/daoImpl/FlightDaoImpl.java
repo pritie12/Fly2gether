@@ -93,7 +93,7 @@ public class FlightDaoImpl implements flightDao {
 			pm.close();
 
 		}
-		return detached.getFlightAircraft();
+		return detached.getFlightAircraftTailnumber();
 	}
 
 	public int getPrice(Long identifier) {
@@ -349,10 +349,11 @@ public class FlightDaoImpl implements flightDao {
 			tx.begin();
 			Query q = pm.newQuery(Flight.class);
 			q.declareParameters("int minPrice,int maxPrice");
-			q.setFilter("price < maxPrice && price > minPrice");
+			q.setFilter("price <= maxPrice && price >= minPrice");
 
 			flights = (List<Flight>) q.execute(minPrice,maxPrice);
 			detached = (List<Flight>) pm.detachCopyAll(flights);
+
 
 			tx.commit();
 		} finally {
@@ -361,7 +362,7 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
-		System.out.println(detached.size()+" flights found ranging between "+maxPrice+" and "+minPrice+" !");
+		System.out.println(detached.size()+" flights found ranging between "+minPrice+" and "+maxPrice+" !");
 		return detached;
 	}
 
@@ -743,6 +744,63 @@ public class FlightDaoImpl implements flightDao {
 			}
 			pm.close();
 		}
+		
+	}
+
+
+	public Flight getFlight(Long id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Flight f = null;
+		Flight detached = null;
+		try {
+			tx.begin();
+
+			f=pm.getObjectById(Flight.class,id);
+			detached = (Flight) pm.detachCopy(f);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+
+		}
+		return detached;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Flight> SearchFlight(int seats, int minprice, int maxprice, String DepartureMin, String DepartureMax,
+			String DepartureAirport) {
+		List<Flight> flights=null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+        LocalDateTime dMin = LocalDateTime.parse(DepartureMin,formatter);
+        LocalDateTime dMax = LocalDateTime.parse(DepartureMax,formatter);
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		tx.setRetainValues(true);
+		try {
+			tx.begin();
+
+			//System.out.println(flights2.get(0).getId()+" "+flights2.get(1).getId()+" by price");
+			Query q = pm.newQuery(Flight.class);
+            flights= (List<Flight>) q.execute();
+
+            flights=(List<Flight>) flights.stream().filter(f->f.getDepartureAirport().toUpperCase().equals(DepartureAirport.toUpperCase()))
+            		.filter(f->f.getDepartureTime().isAfter(dMin)).filter(f->f.getDepartureTime().isBefore(dMax))
+            		.filter(f->f.getAvailableSeats()!=0).filter(f->f.getPrice()<=maxprice).filter(f->f.getPrice()>=minprice).filter(f->f.getAvailableSeats()>=seats).collect(Collectors.toList());
+
+            tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return flights;
 		
 	}
 

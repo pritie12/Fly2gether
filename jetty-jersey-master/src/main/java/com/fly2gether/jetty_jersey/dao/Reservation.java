@@ -15,7 +15,7 @@ public class Reservation {
 	@Persistent
 	private Long flight;
 	private int desiredSeats;
-	private boolean status;
+	private String status;
 	
 	/* CONSTRUCTORS */
 	public Reservation() {
@@ -23,14 +23,14 @@ public class Reservation {
 		this.bookingUser=(long) 0;
 		this.flight=(long) 0;
 		this.desiredSeats=0;
-		this.status=true;
+		this.status="pending";
 				
 	}
 	public Reservation(Long passenger1, Long flight, int desiredSeats) {
 		this.bookingUser=passenger1;
 		this.flight=flight;
 		this.desiredSeats=desiredSeats;
-		this.setStatus(true);
+		this.setStatus("pending");
 	}
 	
 	/* GETTERS */
@@ -46,7 +46,7 @@ public class Reservation {
 	public int getDesiredSeats() {
 		return this.desiredSeats;
 	}
-	public boolean getStatus() {
+	public String getStatus() {
 		return this.status;
 	}
 	
@@ -64,11 +64,11 @@ public class Reservation {
 		this.desiredSeats=desiredSeats;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	/* DISPLAY */
 	public void display() {
-		System.out.println("Reservation made by passenger n° "+this.getBookingUser()+" in flight n°"+this.flight+" for "+this.desiredSeats+" seats");
+		System.out.println("Reservation made by passenger n° "+this.getBookingUser()+" in flight n°"+this.flight+" for "+this.desiredSeats+" seats. Status: "+this.status);
 	}
 }

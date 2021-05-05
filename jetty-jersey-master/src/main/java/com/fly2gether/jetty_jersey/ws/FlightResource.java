@@ -1,12 +1,12 @@
 package com.fly2gether.jetty_jersey.ws;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,6 +32,12 @@ public class FlightResource  implements flightDao {
 
 	
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}/getFlight")
+	public Flight getFlight(@PathParam("id")Long id) {
+		return DAO.getFlightDao().getFlight(id);	
+	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getFlightPilot")
@@ -153,13 +159,15 @@ public class FlightResource  implements flightDao {
 	@Path("/SearchFlight")	
 	public List<Flight> SearchFlight(@QueryParam("seats")int seats,@QueryParam("maxprice")int maxprice,@QueryParam("minprice")int minprice,
 			@QueryParam("DepartureMin")String DepartureMin,@QueryParam("DepartureMax")String DepartureMax, @QueryParam("DepartureAirport")String DepartureAirport) {
-		List<Flight> searchBySeats=DAO.getFlightDao().getFlights(seats);
+		/*List<Flight> searchBySeats=DAO.getFlightDao().getFlights(seats);
 		List<Flight> searchByPrice=DAO.getFlightDao().getFlights(minprice,maxprice);
 		List<Flight> searchByDeparture=DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
 		List<Flight> finalSearch=new ArrayList<Flight>();
-		finalSearch=(List<Flight>) searchBySeats.stream().filter(searchByPrice::contains).filter(searchByDeparture::contains);
-		return finalSearch;
-	}
+		finalSearch=(List<Flight>) searchBySeats.stream().filter(searchByPrice::contains).filter(searchByDeparture::contains)
+				.collect(Collectors.toList());
+		return finalSearch;*/
+		return DAO.getFlightDao().SearchFlight(seats,maxprice,minprice,DepartureMin,DepartureMax,DepartureAirport);
+	} 
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)

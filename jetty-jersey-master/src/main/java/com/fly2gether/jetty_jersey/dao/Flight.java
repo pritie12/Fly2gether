@@ -36,9 +36,9 @@ public class Flight {
 	 @Persistent(defaultFetchGroup = "true")
 	 private List<Long> passengersList;
 	 @Persistent
-	 private Long id_pilot;
+	 private Long flightPilotId;
 	 @Persistent
-	 private Long aircraft_tailnumber;
+	 private Long flightAircraftTailnumber;
 	 
 	 
 	 /* Constructors */
@@ -57,8 +57,8 @@ public class Flight {
 		 this.availablesSeats=0;
 		 this.price=0;
 		 this.passengersList=new ArrayList<Long>();
-		 this.id_pilot= (long) 0;
-		 this.aircraft_tailnumber=(long) 0;
+		 this.flightPilotId= (long) 0;
+		 this.flightAircraftTailnumber=(long) 0;
 
 	 }
 	 
@@ -71,8 +71,8 @@ public class Flight {
 		 this.arrivalDate=arrivalDate;
 		 this.arrivalAirport="";
 		 this.arrivalTime=arrivalTime;
-		 this.id_pilot= pilot;
-		 this.aircraft_tailnumber=aircraft;
+		 this.flightPilotId= pilot;
+		 this.flightAircraftTailnumber=aircraft;
 		 this.flightDuration=Duration.between(this.departureTime, this.arrivalTime);
 		 this.availablesSeats=availablesSeats;
 		 this.price=price;
@@ -105,10 +105,10 @@ public class Flight {
 		 return this.arrivalTime;
 	 }
 	 public Long getFlightPilotId() {
-		 return this.id_pilot;
+		 return this.flightPilotId;
 	 }
-	 public Long getFlightAircraft() {
-		 return this.aircraft_tailnumber;
+	 public Long getFlightAircraftTailnumber() {
+		 return this.flightAircraftTailnumber;
 	 }
 	 public int getPrice() {
 		 return this.price;
@@ -150,10 +150,10 @@ public class Flight {
 		 this.arrivalTime=arrivalTime;
 	 }
 	 public void setFlightPilot(Long id_pilot) {
-		 this.id_pilot=id_pilot;
+		 this.flightPilotId=id_pilot;
 	 }
 	 public void setFlightAircraft(Long aircraft_tailnumber) {
-		 this.aircraft_tailnumber=aircraft_tailnumber;
+		 this.flightAircraftTailnumber=aircraft_tailnumber;
 	 }
 	 public void setPrice(int price) {
 		 this.price=price;
@@ -170,6 +170,6 @@ public class Flight {
 	 
 	/* DISPLAY */
 	public void display() {
-		System.out.println("Departure from: "+this.departureAirport+" to: "+this.arrivalAirport+" at: "+this.departureTime+" with pilot: "+this.id_pilot+" and "+this.availablesSeats+" seats in aircraft: "+this.aircraft_tailnumber+", number of passengers: "+this.passengersList.size());
+		System.out.println("Departure from: "+this.departureAirport+" to: "+this.arrivalAirport+" at: "+this.departureTime+" with pilot: "+this.flightPilotId+" and "+this.availablesSeats+" seats in aircraft: "+this.flightAircraftTailnumber+", number of passengers: "+this.passengersList.size());
 	}	
 }

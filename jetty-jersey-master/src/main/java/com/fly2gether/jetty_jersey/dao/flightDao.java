@@ -25,6 +25,7 @@ public interface flightDao {
 	public Flight getFlight(Long id);
 	
 	//filter the flights 
+	public List<Reservation> getReservationsForFlight(long flight_id);
 	public List<Flight> getFlights(int minPrice,int maxPrice);
 	public List<Flight> getFlights(String DepartureMin,String DepartureMax, String DepartureAirport);	
 	public List<Flight> getFlights(int Seats);	

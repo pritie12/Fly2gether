@@ -451,6 +451,34 @@ public class FlightDaoImpl implements flightDao {
 		return detached;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	public List<Reservation> getReservationsForFlight(long flight_id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		List<Reservation> reservations = null;
+		List<Reservation> detached = null;
+		try {
+			tx.begin();
+
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("long flight_id");
+			q.setFilter("flight_id == flight");
+
+			reservations = (List<Reservation>) q.execute(flight_id);
+			detached = (List<Reservation>) pm.detachCopyAll(reservations);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+
+		}
+		return detached;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Flight> SearchFlight(int seats, int minprice, int maxprice, String DepartureMin, String DepartureMax,

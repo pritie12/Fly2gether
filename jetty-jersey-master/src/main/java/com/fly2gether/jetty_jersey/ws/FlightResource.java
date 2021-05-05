@@ -147,34 +147,22 @@ public class FlightResource  implements flightDao {
 		return DAO.getFlightDao().SearchFlight(seats,maxprice,minprice,DepartureMin,DepartureMax,DepartureAirport);
 	} 
 	
-	@PUT
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addFlight")
-	public void addFlight(Flight flight) {
-		DAO.getFlightDao().addFlight(flight);	
-	}
-	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{flight_id}/{passenger_id}/addFlight")
-	public void addPassenger(@PathParam("passenger_id")Long passenger_id,@PathParam("flight_id") Long flight_id) {
-		DAO.getFlightDao().addPassenger(passenger_id,flight_id);
-		
-	}
-
-	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{flight_id}/deleteFlight")
-	public void deleteFlight(@PathParam("flight_id")Long flight_id) {
-		DAO.getFlightDao().deleteFlight(flight_id);		
+	@Path("/getFlightsByDeparture")
+	public List<Flight> getFlights(@QueryParam("DepartureMin")String DepartureMin,
+			@QueryParam("DepartureMax")String DepartureMax, @QueryParam("DepartureAirport")String DepartureAirport) {
+		return DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
 	}
 	
-	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{passenger_id}/{resa_id}/getFlightsBySeats")
-	public void removePassenger(@PathParam("passenger_id")Long passenger_id, @PathParam("flight_id")Long flight_id) {
-		DAO.getFlightDao().removePassenger(passenger_id, flight_id);
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{flight_id}/getReservationsForFlight")
+	public List<Reservation> getReservationsForFlight(@QueryParam("flight_id")long flight_id) {
+		return DAO.getFlightDao().getReservationsForFlight(flight_id);	
 	}
-
+	
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/setPilot")
@@ -251,13 +239,34 @@ public class FlightResource  implements flightDao {
 		DAO.getFlightDao().modifyFlight(id,DepartureTime,DepartureAirport,ArrivalTime,ArrivalAirport);		
 	}
 	
-	@GET
+	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getFlightsByDeparture")
-	public List<Flight> getFlights(@QueryParam("DepartureMin")String DepartureMin,
-			@QueryParam("DepartureMax")String DepartureMax, @QueryParam("DepartureAirport")String DepartureAirport) {
-		return DAO.getFlightDao().getFlights(DepartureMin,DepartureMax,DepartureAirport);
+	@Path("/addFlight")
+	public void addFlight(Flight flight) {
+		DAO.getFlightDao().addFlight(flight);	
 	}
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{flight_id}/{passenger_id}/addFlight")
+	public void addPassenger(@PathParam("passenger_id")Long passenger_id,@PathParam("flight_id") Long flight_id) {
+		DAO.getFlightDao().addPassenger(passenger_id,flight_id);
+		
+	}
+
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{flight_id}/deleteFlight")
+	public void deleteFlight(@PathParam("flight_id")Long flight_id) {
+		DAO.getFlightDao().deleteFlight(flight_id);		
+	}
+	
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/{passenger_id}/{resa_id}/getFlightsBySeats")
+	public void removePassenger(@PathParam("passenger_id")Long passenger_id, @PathParam("flight_id")Long flight_id) {
+		DAO.getFlightDao().removePassenger(passenger_id, flight_id);
+	}
+
 
 
 }

@@ -303,8 +303,14 @@ public class PilotDaoImpl implements pilotDao {
 		try {
 			tx.begin();
 			p = pm.getObjectById(Pilot.class, id);
-
-            p.setUsername(Username);
+			for (Pilot pil:getPilots()){
+				if(pil.getUsername().equals(Username)==false) {
+		            p.setUsername(Username);
+				}
+				else {
+					System.out.println("Username already taken");
+				}			
+			}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

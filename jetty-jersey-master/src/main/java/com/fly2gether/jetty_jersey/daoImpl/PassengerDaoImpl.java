@@ -268,11 +268,16 @@ public class PassengerDaoImpl implements passengerDao{
 		tx.setRetainValues(true);
 		try {
 			tx.begin();
-			Query q = pm.newQuery(Passenger.class);
-			q.declareParameters("String Username");
-			q.setFilter("Id ==  passenger_id");
-			q.setUnique(true);			
-			pm.makePersistent(passenger);
+			String mail=passenger.getEmail();
+			for(Passenger p:getPassengers()) {
+				if(p.getEmail().equals(mail)==false) {
+					pm.makePersistent(passenger);
+				}
+				else {
+					System.out.println("Email address already in use");
+				}
+			}
+			
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -386,6 +391,15 @@ public class PassengerDaoImpl implements passengerDao{
 		try {
 			tx.begin();
 			p = pm.getObjectById(Passenger.class, id);
+			for (Passenger pass:getPassengers()){
+				if(pass.getUsername().equals(Username)==false) {
+		            p.setUsername(Username);
+				}
+				else {
+					System.out.println("Username already taken");
+				}
+				
+			}
 
             p.setUsername(Username);
 			tx.commit();

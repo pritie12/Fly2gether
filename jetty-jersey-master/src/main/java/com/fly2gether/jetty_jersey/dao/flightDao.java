@@ -22,11 +22,13 @@ public interface flightDao {
 	public String getarrivalAirport(Long id);
 	public Duration getFlightDuration(Long id);
 	public List<Flight> getFlights();
+	public Flight getFlight(Long id);
 	
-	//filter the flights by price
+	//filter the flights 
 	public List<Flight> getFlights(int minPrice,int maxPrice);
 	public List<Flight> getFlights(String DepartureMin,String DepartureMax, String DepartureAirport);	
 	public List<Flight> getFlights(int Seats);	
+	public List<Flight> SearchFlight(int seats,int maxprice,int minprice,String DepartureMin,String DepartureMax, String DepartureAirport);
 	
 	/* POST */
 	public void setPilot(Long id,Long Pilot);	

@@ -57,7 +57,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("long TailNumber");
+			q.declareParameters("Long TailNumber");
 			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			
@@ -84,7 +84,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int TailNumber");
+			q.declareParameters("Long TailNumber");
 			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			
@@ -110,7 +110,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int TailNumber");
+			q.declareParameters("Long TailNumber");
 			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			

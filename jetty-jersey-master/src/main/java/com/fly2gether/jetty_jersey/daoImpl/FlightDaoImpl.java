@@ -453,7 +453,7 @@ public class FlightDaoImpl implements flightDao {
 
 
 	@SuppressWarnings("unchecked")
-	public List<Reservation> getReservationsForFlight(long flight_id) {
+	public List<Reservation> getReservationsForFlight(Long flight_id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		List<Reservation> reservations = null;
@@ -461,8 +461,8 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Flight.class);
-			q.declareParameters("long flight_id");
+			Query q = pm.newQuery(Reservation.class);
+			q.declareParameters("Long flight_id");
 			q.setFilter("flight_id == flight");
 
 			reservations = (List<Reservation>) q.execute(flight_id);
@@ -792,6 +792,12 @@ public class FlightDaoImpl implements flightDao {
 		}
 		System.out.println("Passenger removed from this flight");
 		
+	}
+
+	@Override
+	public List<Reservation> getReservationsForFlight(long flight_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

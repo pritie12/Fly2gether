@@ -53,13 +53,12 @@ public class PassengerDaoImpl implements passengerDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int id");
+			q.declareParameters("Long id");
 			q.setFilter("id == passenger_id");
 			q.setUnique(true);
 			
 			p = (Passenger) q.execute(id);
 			detached = (Passenger) pm.detachCopy(p);
-
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -307,8 +306,7 @@ public class PassengerDaoImpl implements passengerDao{
 			String mail=passenger.getEmail();
 			String uname=passenger.getUsername();
 			for(Passenger p:getPassengers()) {
-				if(p.getEmail().equals(mail)==false&&p.getUsername().equals(uname)==false) {
-					DAO.getPassengerDao().addPassenger(passenger);		
+				if(p.getEmail().equals(mail)==false&&p.getUsername().equals(uname)==false) {	
 					try {
 						new Email(mail,"Welcome to Fly2gether","Dear passenger,\n\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
 					} catch (MessagingException e) {

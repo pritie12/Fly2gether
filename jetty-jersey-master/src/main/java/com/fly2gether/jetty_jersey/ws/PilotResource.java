@@ -95,7 +95,7 @@ public class PilotResource implements pilotDao{
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/getScheduledFlights")
-	public List<Flight> getScheduledFlights(Long id) {
+	public List<Flight> getScheduledFlights(@PathParam("id") Long id) {
 		return DAO.getPilotDao().getScheduledFlights(id);
 	}
 	

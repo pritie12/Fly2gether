@@ -214,32 +214,33 @@ public class PilotDaoImpl implements pilotDao {
 	}
 
 	@SuppressWarnings("unchecked")
+    public List<Flight> getScheduledFlights(Long id) {
+        List<Flight> flights=null;
+        List<Flight> detached = new ArrayList<Flight>();
+
+        PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        tx.setRetainValues(true);
+        try {
+            tx.begin();
+            Query q = pm.newQuery(Flight.class);
+            q.declareParameters("Long id");
+            q.setFilter("flightPilotId == id");
+
+            flights = (List<Flight>) q.execute(id);
+            detached = (List<Flight>) pm.detachCopyAll(flights);
+
+            tx.commit();
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        System.out.println(detached.size()+" flights found with pilot "+ id);
+        return detached;
+        }
 	
-	public List<Flight> getScheduledFlights(Long id) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		List<Flight> scheduledFlights=new ArrayList<Flight>();
-		List<Flight> detached = null;
-		try {
-			tx.begin();
-
-			Query q = pm.newQuery(Flight.class);
-			q.declareParameters("Long id");
-			q.setFilter("id ==  flightPilotId");
-			
-			q.setUnique(true);			
-			scheduledFlights = (List<Flight>) q.execute(id);
-			detached = (List<Flight>) pm.detachCopy(scheduledFlights);
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		return detached;
-	}
-
 	public void addPilot(Pilot pilot) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();

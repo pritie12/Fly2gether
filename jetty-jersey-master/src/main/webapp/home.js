@@ -31,7 +31,6 @@ function dateToString(date){
 	return res;
 }
 
-
 function fligth_list_display(list){
 	var t = _.template($('#templateShortFlightView').html());
 	var html="";
@@ -42,7 +41,7 @@ function fligth_list_display(list){
 		var name = getCookie("pName");
 		var d1=f.departureTime;
 		var d2=f.arrivalTime;
-		dateToString(d1);
+
 
 		html= t({
 			"departureAirport":f.departureAirport,
@@ -253,6 +252,17 @@ function addResa(){
 
 }
 
+function pilot_flight_list_load(){
+    nav_load();
+    userId=getCookie("usrId");
+    console.log("hello"+userId);
+    url ="/ws/Pilote/"+ userId+"/getScheduledFlights";
+   // url="/ws/Flight/getFlights" //test
+    getServerData(url,fligth_list_display);
+    
+
+}
+
 
 
 
@@ -348,9 +358,7 @@ $(function(){
 	});
 
 
-/*	$("#flight_long_view").onload(function (){
-		console.log("hello ");
-	});*/
+
 
 });
 //background-color: #ffffff;

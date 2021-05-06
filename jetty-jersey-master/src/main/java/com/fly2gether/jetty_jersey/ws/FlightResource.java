@@ -346,7 +346,7 @@ public class FlightResource  implements flightDao {
 		
 		DAO.getFlightDao().modifyFlight(id,DepartureTime,DepartureAirport,ArrivalTime,ArrivalAirport);		
 	}
-	
+	/*
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getFlightsByDeparture")
@@ -356,12 +356,12 @@ public class FlightResource  implements flightDao {
 		
 		return DAO.getFlightDao().getFlights(DepartureMin.replace('%', ' '),DepartureMax.replace('%', ' '),DepartureAirport);
 	}
-
+*/
 	
-	@Path("/addFlight")
+	/*@Path("/addFlight")
 	public void addFlight(Flight flight) {
 		DAO.getFlightDao().addFlight(flight);	
-	}
+	}*/
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{flight_id}/{passenger_id}/addFlight")

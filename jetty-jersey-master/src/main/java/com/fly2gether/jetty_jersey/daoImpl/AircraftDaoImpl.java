@@ -225,7 +225,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			pm.close();
 		}		
 	}
-	public Aircraft getAircraft(Long Id) {
+	/*public Aircraft getAircraft(Long Id) {
 		Query q = pm.newQuery(Aircraft.class);
 		q.declareParameters("Long Id");
 		q.setFilter("Id == aircraft_id");
@@ -233,9 +233,9 @@ public class AircraftDaoImpl implements aircraftDao{
 		
 		a = (Aircraft) q.execute(Id);
 		detached = (Aircraft) pm.detachCopy(a);
-	}
+	}*/
 
-	public void setNumberOfSeats(Long TailNumber, int NumberOfSeats) {
+	public void setNumberOfSeats(Long Id, int NumberOfSeats) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;

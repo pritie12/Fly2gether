@@ -106,16 +106,21 @@ $(function(){
 
 					
 					url = "/ws/Pilote/PilotLogin?username=" + $("#username").val() +"&pwd="+$("#pwd").val();
-					document.cookie = c ;
+					
 			
 					console.log(url);
 					getServerData(url,function(id){
-						var c1 = "usrId="+ id;
+						if(id==-1){
+							console.log("bad");
+						}else{
+							var c1 = "usrId="+ id;
 						document.cookie = c1 ;
 						usr_type="pilot";
 						var c = "usrType="+ usr_type;
 						document.cookie = c ;
 						window.history.go(-1);
+						}
+						
 					});
 
 				});
@@ -131,11 +136,15 @@ $(function(){
 			
 					console.log(url);
 					getServerData(url,function(id){
+						if(id==-1){
+							console.log("bad");
+						}else{
 						var c1 = "usrId="+ id;
 						document.cookie = c1 ;
 						var c = "usrType="+ usr_type;
 						document.cookie = c ;
 						window.history.go(-1);
+						}
 					});
 
 				});

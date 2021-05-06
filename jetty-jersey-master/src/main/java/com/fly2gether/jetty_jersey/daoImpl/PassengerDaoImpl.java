@@ -259,7 +259,7 @@ public class PassengerDaoImpl implements passengerDao{
 		}
 		return detached.getPassengerBookingList();
 	}
-	public Passenger Login(String username, String password) {
+/*	public Passenger Login(String username, String password) {
 		Passenger passenger=getPassenger(username);
 		if(passenger==null) {
 			System.out.println("Username not found");
@@ -269,7 +269,7 @@ public class PassengerDaoImpl implements passengerDao{
 			return passenger;
 		}
 		return null;
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	public Passenger getPassenger(String username) {
@@ -295,21 +295,37 @@ public class PassengerDaoImpl implements passengerDao{
 	/* PUT */ 
 	public void addPassenger(Passenger passenger) {
 		PersistenceManager pm = pmf.getPersistenceManager();
+		
 		Transaction tx = pm.currentTransaction();
 		tx.setRetainValues(true);
 		try {
 			tx.begin();
 			String mail=passenger.getEmail();
 			String uname=passenger.getUsername();
+			System.out.println(getPassengers().size());
+			if(getPassengers().size()==0 ) {
+				try {
+					System.out.println("avant new email");
+					new Email(mail,"Welcome to Fly2gether","Dear passenger,\n\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+				pm.makePersistent(passenger);
+				System.out.println("Passenger added to database");
+				
+			}
 			for(Passenger p:getPassengers()) {
+				
 				if(p.getEmail().equals(mail)==false&&p.getUsername().equals(uname)==false) {
-					DAO.getPassengerDao().addPassenger(passenger);		
+					
 					try {
+						System.out.println("avant new email");
 						new Email(mail,"Welcome to Fly2gether","Dear passenger,\n\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
 					} catch (MessagingException e) {
 						e.printStackTrace();
 					}
 					pm.makePersistent(passenger);
+					System.out.println("Passenger added to database");
 				}
 				else {
 					System.out.println("Email address or username already in use");
@@ -323,7 +339,6 @@ public class PassengerDaoImpl implements passengerDao{
 			}
 			pm.close();
 		}	
-		System.out.println("Passenger added to database");
 		
 	}
 
@@ -408,7 +423,7 @@ public class PassengerDaoImpl implements passengerDao{
 		return -1;
 	}
 
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public Passenger getPassenger(String username) {
         List<Passenger> result;
         Passenger passenger;
@@ -428,7 +443,7 @@ public class PassengerDaoImpl implements passengerDao{
         q.close(result);
 
         return passenger;
-	}
+	}*/
 
 	/* POST */
 	public void modifyUsername(Long id, String Username) {

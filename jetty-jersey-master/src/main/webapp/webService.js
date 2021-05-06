@@ -10,6 +10,7 @@ function display_getServerData(url, div_id){
 }
 function getServerData(url, success){
     $.ajax({
+		type: 'GET',
         dataType: "json",
         url: url
     }).done(success);

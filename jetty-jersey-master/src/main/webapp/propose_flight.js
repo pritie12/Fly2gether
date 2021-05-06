@@ -68,7 +68,7 @@ function addAircraft(){
 }
 
 function addNewFlight(fId){
-	var usrId=getCookie("usr");// teste
+	var usrId=getCookie("usrId");// teste
 //	var fId=$("#newFlightId").val();
 
 	 var url1= "/ws/Flight/"+fId+"/setdepartureTime?time=" + $("#datetimeDeparture").val();

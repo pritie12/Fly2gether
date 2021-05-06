@@ -102,26 +102,47 @@ $(function(){
 		try{
 			if(document.getElementById("is_pil").checked==true){
 				var data = get_form_data_pilot();
-				putServerData("ws/Pilote/addPilot",data,test2);
-				usr_type="pilot";
-				url = "/ws/Pilote/PilotLogin?username=" + $("#username").val() +"&pwd="+$("#pwd").val();
+				putServerData("ws/Pilote/addPilot",data,function(){
+
+					
+					url = "/ws/Pilote/PilotLogin?username=" + $("#username").val() +"&pwd="+$("#pwd").val();
+					document.cookie = c ;
+			
+					console.log(url);
+					getServerData(url,function(id){
+						var c1 = "usrId="+ id;
+						document.cookie = c1 ;
+						usr_type="pilot";
+						var c = "usrType="+ usr_type;
+						document.cookie = c ;
+						window.history.go(-1);
+					});
+
+				});
+				
 
 			}
 			else{
 				var data = get_form_data_passenger();
-				putServerData("ws/Passenger/addPassenger",data,test2);
-				usr_type = "passenger";
-				url = "ws/Passenger/PassengerLogin/?username="+$("#username").val()+"&password="+$("#pwd").val();
+				putServerData("ws/Passenger/addPassenger",data,function(){
+					usr_type = "passenger";
+					url = "ws/Passenger/PassengerLogin/?username="+$("#username").val()+"&password="+$("#pwd").val();
+					
+			
+					console.log(url);
+					getServerData(url,function(id){
+						var c1 = "usrId="+ id;
+						document.cookie = c1 ;
+						var c = "usrType="+ usr_type;
+						document.cookie = c ;
+						window.history.go(-1);
+					});
+
+				});
+				
 			}
 			var c = "usrType="+ usr_type;
-			document.cookie = c ;
 			
-			console.log(url);
-			getServerData(url,function(id){
-				var c1 = "usrId="+ id;
-				document.cookie = c1 ;
-				window.history.go(-1);
-			});
 				
 			//set_usrId_cookie(2); // pour tester
 			
@@ -135,36 +156,55 @@ $(function(){
 	});
 
 	$("#btnLogin").click(function(){
-		var pwd = $("login_pwd").val();
-		var username = $("login_usr").val();
+		var pwd = $("#login_pwd").val();
+		var username = $("#login_usr").val();
 		var id =null;
 		var usr_type=null;
 		if(document.getElementById("is_pil").checked==true){
 			
-			var url = "ws/Pilote/username/PilotLogin?username="+username + "&pwd="+pwd;
+			var url = "ws/Pilote/PilotLogin?username="+username + "&pwd="+pwd;
 			
-			getServerData(url,set_usrId_cookie); 
-			usr_type="pilot";
-		}
-		else{
-			var url = "ws/Passenger/PassengerLogin/?username="+username+"&password="+pwd;
 			getServerData(url,function(data){
 				if(data==-1){
 					console.log("username or passwor incorrect")
 				}
 				else{
 				set_usrId_cookie(data);
+				usr_type="pilot";
+				var c = "usrType="+ usr_type;
+				document.cookie = c ;
+				
+				
+				//set_usrId_cookie(data); // pour tester
+				window.history.go(-1);
+				}
+			}); 
+			
+		}
+		else{
+			var url = "ws/Passenger/PassengerLogin/?username="+username+"&password="+pwd;
+			console.log(url);
+			getServerData(url,function(data){
+				if(data==-1){
+					console.log("username or passwor incorrect")
+				}
+				else{
+				set_usrId_cookie(data);
+				usr_type = "passenger";
+				var c = "usrType="+ usr_type;
+				document.cookie = c ;
+				
+				
+				//set_usrId_cookie(data); // pour tester
+				window.history.go(-1);
 				}
 			});
-			usr_type = "passenger";
+			
 		}
 
 		/* dans le cas ou ca marche pas? */
 
-		var c = "usrType="+ usr_type;
-		document.cookie = c ;
-		//set_usrId_cookie(1); // pour tester
-		window.history.go(-1);
+	
 
 	});
 });

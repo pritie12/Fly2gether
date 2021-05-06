@@ -103,13 +103,13 @@ public class PassengerResource implements passengerDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/PassengerLogin")
-	public Passenger Login(@QueryParam("username")String username,@QueryParam("password") String password) {
+	public long Login(@QueryParam("username")String username,@QueryParam("password") String password) {
 		System.out.println("usr: "+username+" pwd: "+ password );
 		if(DAO.getPassengerDao().getPassenger(username)!=null) {
 			System.out.println("Logged in successfully");
 			return DAO.getPassengerDao().Login(username,password);
 		}
-		return null;
+		return -1;
 	
 	}
 

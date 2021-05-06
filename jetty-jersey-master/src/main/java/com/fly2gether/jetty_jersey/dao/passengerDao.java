@@ -7,7 +7,7 @@ public interface passengerDao {
 
 	/* GET */
 	public List<Passenger> getPassengers();
-	public Passenger Login(String username, String password);
+	public long Login(String username, String password);
 	public Passenger getPassenger(String Username);
 	public String getUsername(Long id);
 	public String getPwd(Long id);

@@ -49,12 +49,7 @@ public class PassengerDaoImpl implements passengerDao{
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int id");
-			q.setFilter("id == passenger_id");
-			q.setUnique(true);
-			
-			p = (Passenger) q.execute(id);
+			p = pm.getObjectById(Passenger.class, id);
 			detached = (Passenger) pm.detachCopy(p);
 
 			tx.commit();
@@ -345,16 +340,16 @@ public class PassengerDaoImpl implements passengerDao{
 		
 	}
 
-	public Passenger Login(String username, String password) {
+	public long Login(String username, String password) {
 		Passenger passenger=getPassenger(username);
 		if(passenger==null) {
 			System.out.println("Username not found");
-			return null;
+			return -1;
 		}
 		if(passenger.getPwd().equals(password)) {
-			return passenger;
+			return passenger.getPassengerId();
 		}
-		return null;
+		return -1;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 public class Email {
 	private static  String username="fly2getherEIDD@outlook.com";
-	private static  String pwd="Christophedenis1";
+	private static  String pwd="Fly2gether1999";
 	private static  String sender=username;
 	private  String recipient;
 	private  String subject;

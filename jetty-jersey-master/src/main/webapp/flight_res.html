@@ -6,7 +6,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
 	</head>
-	<body onload="fligth_view_display()">
+	<body onload="flight_res_load()">
 
 		<script id="templatePiloteFlightView" type="text/template">
 		
@@ -69,7 +69,7 @@
 					<div class="flightL_div2">
 						<div class="flightL_icon2"><i class="fas fa-dollar-sign fa-2x"></i></div>
 						<div>
-							<span class="flightL_price"> $</span><br>
+							<span class="flightL_price" id="flightL_price"> $</span><br> 
 							/seats 
 						</div>
 
@@ -77,7 +77,7 @@
 					<div class="flightL_div2">
 						<div class="flightL_icon2"><i class="fas fa-users fa-2x"></i></div>
 						<div>
-							<span class="flightL_seats">5 </span>
+							<span class="flightL_seats" id="availableSeats"> </span>
 							<br>
 							seats available
 						</div>
@@ -86,8 +86,8 @@
 					<div class="flightL_div2">
 						<div class="flightL_icon2"> <i class="fas fa-plane fa-2x"></i></div>
 						<div>
-							<span class="flightL_aircrafModel">8 </span><br>
-							<span class="flightL_aircrafCons">8 </span>
+							<span class="flightL_aircrafModel" id="aircrafModel"> </span><br>
+							<span class="flightL_aircrafCons" id="aircrafCons"> </span>
 						</div>
 						
 					</div>
@@ -96,9 +96,9 @@
 
 				<div class="flightL_div_pilot">
 					<i class="fas fa-user-astronaut fa-2x"></i>
-					<span class="flightL_pilotName"> </span>
-					<span class="flightL_pilotSurname"> </span>
-					<span class="flightL_pilotfly">Flying hours </span>
+					<span class="flightL_pilotName" id="pilot_name"> </span>
+					<span class="flightL_pilotSurname" id="pilot_surname"> </span>
+					<span class="flightL_pilotfly" id="flyingHours">Flying hours </span>
 
 				</div>
 
@@ -111,7 +111,7 @@
 					</div>
 				</div>
 				<div id="res">
-					Your are not logged as a Pilot : 
+					Your are not logged as a Passenger : 
 					<u><a href="register.html">Register</a></u> 
 					 or 
 					 <u><a href="Login.html">Login</a></u>

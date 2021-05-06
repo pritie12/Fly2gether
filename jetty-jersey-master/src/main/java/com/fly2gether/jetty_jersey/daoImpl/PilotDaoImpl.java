@@ -9,6 +9,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+import javax.mail.MessagingException;
 
 import com.fly2gether.jetty_jersey.dao.*;
 public class PilotDaoImpl implements pilotDao {
@@ -219,6 +220,13 @@ public class PilotDaoImpl implements pilotDao {
 		try {
 			tx.begin();
 			pm.makePersistent(pilot);
+			String mail=pilot.getEmail();
+			try {
+				new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

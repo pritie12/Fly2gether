@@ -250,7 +250,7 @@ public class FlightResource  implements flightDao {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{flight_id}/getReservationsForFlight")
-	public List<Reservation> getReservationsForFlight(@QueryParam("flight_id")long flight_id) {
+	public List<Reservation> getReservationsForFlight(@PathParam("flight_id")long flight_id) {
 		return DAO.getFlightDao().getReservationsForFlight(flight_id);	
 	}
 	

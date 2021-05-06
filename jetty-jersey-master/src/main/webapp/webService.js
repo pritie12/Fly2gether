@@ -10,7 +10,6 @@ function display_getServerData(url, div_id){
 }
 function getServerData(url, success){
     $.ajax({
-		type: 'GET',
         dataType: "json",
         url: url
     }).done(success);
@@ -78,10 +77,10 @@ function nav_load(){
 	var lists ="";
 	
 	if(c=="pilot"){
-		lists= '			<div class="nav_li"><a href="flight_list_pilot.html">My Flights</a></div>'
+		lists= '			<div class="nav_li"><a href="pilot_flight.html">My Flights</a></div>'
 
 	}else if( c=="passenger"){
-		lists ='			<div class="nav_li"><a href="login.html">My Reservations</a></div>'
+		lists ='			<div class="nav_li"><a href="passenger_resa.html">My Reservations</a></div>'
 
 	}else{
 		account = '			<div class="nav_li" id=""><a href="login.html">Log in / Register</a></div>'

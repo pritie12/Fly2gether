@@ -461,7 +461,7 @@ public class FlightDaoImpl implements flightDao {
 		try {
 			tx.begin();
 
-			Query q = pm.newQuery(Flight.class);
+			Query q = pm.newQuery(Reservation.class);
 			q.declareParameters("long flight_id");
 			q.setFilter("flight_id == flight");
 

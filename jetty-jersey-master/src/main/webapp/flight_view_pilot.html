@@ -6,7 +6,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
 		<script src="https://kit.fontawesome.com/32e0f373c2.js" crossorigin="anonymous"></script>
 	</head>
-	<body onload="pilot_flight_list_load()">
+	<body onload="pilot_flightview_load()">
 
 		<script id="templatePiloteFlightView" type="text/template">
 		
@@ -45,8 +45,8 @@
 				    <%= seats %> passengers
                 </div>
                 <div  class="pendingT_buttons" >
-                    <button id="approuve_reservation"> <i class="fas fa-user-plus fa-2x"></i></button>
-                    <button id="refuse_resa"><i class="fas fa-user-times fa-2x"></i></button>
+					<%= btnaccept %>   
+                    <%= btndenied %>  
                 </div>
 
 			</div>
@@ -98,7 +98,7 @@
 					<div class="flightL_div2">
 						<div class="flightL_icon2"><i class="fas fa-dollar-sign fa-2x"></i></div>
 						<div>
-							<span class="flightL_price"> $</span><br>
+							<span class="flightL_price" id="price"> $</span><br>
 							/seats 
 						</div>
 
@@ -106,7 +106,7 @@
 					<div class="flightL_div2">
 						<div class="flightL_icon2"><i class="fas fa-users fa-2x"></i></div>
 						<div>
-							<span class="flightL_seats">5 </span>
+							<span class="flightL_seats" id="seats"> </span>
 							<br>
 							seats available
 						</div>
@@ -115,8 +115,8 @@
 					<div class="flightL_div2">
 						<div class="flightL_icon2"> <i class="fas fa-plane fa-2x"></i></div>
 						<div>
-							<span class="flightL_aircrafModel">8 </span><br>
-							<span class="flightL_aircrafCons">8 </span>
+							<span class="flightL_aircrafModel" id="aircraftModel"> </span><br>
+							<span class="flightL_aircrafCons" id="company"> </span>
 						</div>
 						
 					</div>
@@ -130,7 +130,7 @@
                    <h6>Pending <i class="fas fa-user-clock"></i> </h6> 
                    <div id="pendingList">
                     <div class="pendingT_div">
-                        <div>
+                      <!-- <div>
                             Pritie SOUGOUMAR
                         </div>
                         <div>
@@ -139,9 +139,9 @@
                         <div  class="pendingT_buttons" >
                             <button id="approuve_reservation"> <i class="fas fa-user-plus fa-2x"></i></button>
                             <button id="refuse_resa"><i class="fas fa-user-times fa-2x"></i></button>
-                        </div>
+                        </div>--> 
         
-                    </div>
+                    </div> 
                    </div>
                     <h6>Validate <i class="fas fa-user-check"></i></h6>
                     <div id="validateList">

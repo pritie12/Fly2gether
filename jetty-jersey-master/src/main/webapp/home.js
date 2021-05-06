@@ -10,6 +10,11 @@ function pilotedata(pilote){
 }
 
 
+function pilotflightList(){
+	url = "/ws/Pilote/"+getCookie("usrId")+"/getScheduledFlights";
+	getServerData(url,fligth_list_displayPi);
+}
+
 function callDone(result){
 	var templateExample = _.template($('#templateExample').html());
 
@@ -63,6 +68,32 @@ function fligth_list_display(list){
 	
 }
 
+function fligth_list_displayPi(list){
+	var t = _.template($('#templateShortFlightViewPi').html());
+	var html="";
+	$("#result2").html("");
+	list.forEach(f => {
+		var d1=f.departureTime;
+		var d2=f.arrivalTime;
+		html= t({
+			"departureAirport":f.departureAirport,
+			"departureDate":dateToString(d1),
+			"arrivalDate":dateToString(d2),
+			"arrivalAirport":f.arrivalAirport,
+			"price":f.price,
+			"availableSeats":f.availableSeats,
+			"id":'<input type="hidden" value=' + f.id + ' id=flightId  > ',
+			"viewButton":' <button id=\"choose\" onClick="viewFlyPi('+f.id +' )\"  > view this flight</button>'
+		});
+
+		$("#result2").append(html);
+
+		
+	});
+
+	
+}
+
 function display_div(div, data){
 	$("#result").append(" div"+div + "data " + data);
 }
@@ -78,7 +109,7 @@ function getPilotnSurname(d){
 
 
 function fligth_list_display2(list){
-	var t = _.template($('#templateShortFlightView').html());
+	var t = _.template($('#templateShortFlightViewPi').html());
 	var html="";
 	$("#result3").html("");
 	list.forEach(f => {
@@ -103,6 +134,13 @@ function chooseFly(id) {
 	var c = "flightId="+ id;
 	document.cookie = c ;
 	location.replace("flight_res.html");
+}
+
+function viewFlyPi(id) {
+	console.log("hello "+ id);
+	var c = "flightId="+ id;
+	document.cookie = c ;
+	location.replace("flight_view_pilot.html");
 }
 
 function flight_res_load(){
@@ -232,24 +270,78 @@ function fligth_view_display(){
 }
 
 
-function pilot_flight_list_load(){
+function pilot_flightview_load(){
 
-	fligth_view_display();
+	nav_load();
+	console.log("hello ");
+	var cook = getCookie("flightId");
+	console.log(cook);
+	if(cook==""){
+		console.log("no flight selected");
+		location.replace("find_flight.html");
+	}
+	var url = "/ws/Flight/"+cook +"/getFlight";
+	getServerData(url,viewFlightL);
+
+	var url2 = "/ws/Flight/" +cook +"/getReservationsForFlight"
+	getServerData(url2,function(list){
+		list.forEach(r => {
+			if(r!=null && r.status=="pending"){
+				url="/ws/Pilote/" +r.bookingUser + "/getPilot";
+				getServerData(url,function(usr,seat=r.desiredSeats, id =r.reservationId){
+					var t = _.template($('#templatePending').html());
+					var html=t({
+						"name":usr.name,
+						"surname":usr.surname,
+						"seats":seat,
+						"btnaccept": '<button id="approuve_reservation" onclick="accepteResa(' +id +'") ><i class="fas fa-user-plus fa-2x"></i></button>',
+						"btndenied": '<button id="refuse_resa" onclick="dinieResa(' +id +'") > <i class="fas fa-user-times fa-2x"></i></button>',
+					});
+				
+				$("#pendingList").append(html)
+				})
+				
+			}else if(r.status=="pending"){
+				$("#validateList").append("ggg");
+			}
+		});
+		
+	});
+	
+
 }
 
-function addResa(){
 
-	var resa = '{'+
-		'"bookingUser":'+ getCookie("usrId")+ ','+
-		'"flight": '+ getCookie("flightId")+','+
-		'"desiredSeats":'+$("#newResaSeats").val() +
-	"}";
-	console.log(JSON.stringify(resa));
+function accepteResa(id){
+	url="/ws/Reservation/"+id+"/acceptReservation";
+	postServerData(url,null);
+}
 
-	putServerData("/ws/Reservation/addReservation",resa, function(){
-		console.log("resa send");
+function denieResa(id){
+	url="/ws/Reservation/"+id+"/deleteReservation";
+	postServerData(url,null);
+}
+
+function viewFlightL(f){
+	$("#app_detail").append(f.appointmentDescription);
+	$("#departure_loc").append(f.departureAirport);
+	$("#departure_date").append(dateToString(f.departureTime));
+	$("#arrival_loc").append(f.arrivalAirport);
+	$("#arrival_date").append(dateToString(f.arrivalTime));
+	$("#price").append(f.price);
+	$("#seats").append(f.availableSeats);
+
+	var url1 = "ws/Aircraft/"+f.flightAircraftTailnumber+"/getAircraft";
+	getServerData(url1, function(a){
+		console.log("aircraft "+JSON.stringify(a));
+		//$("#aircraftModel").append(a.model);
+		//$("#company").append(a.constructorCompany);
+		
 	});
 
+	
+
+	
 }
 
 function pilot_flight_list_load(){
@@ -260,6 +352,20 @@ function pilot_flight_list_load(){
    // url="/ws/Flight/getFlights" //test
     getServerData(url,fligth_list_display);
     
+
+}
+
+function addResa(){
+
+	var resa = '{'+
+		'"bookingUser":'+ getCookie("usrId")+ ','+
+		'"flight": '+ getCookie("flightId")+','+
+		'"desiredSeats":'+$("#newResaSeats").val() + 
+	"}";
+	console.log(JSON.stringify(resa));
+	putServerData("/ws/Reservation/addReservation",resa, function(){
+		console.log("resa send");
+	});
 
 }
 
@@ -297,7 +403,8 @@ $(function(){
 		getServerData("ws/Pilote/PI1",pilotedata);
 	});
 	$("#buttonC").click(function(){
-		pilotedata("hello");
+		//pilotedata("hello");
+		pilotflightList();
 	});
 
 	$("#buttonD").click(function(){
@@ -318,6 +425,13 @@ $(function(){
 		console.log(url);
 		getServerData("/ws/Flight/getFlights",fligth_list_display);
 	});
+
+	$("#getResaList").click(function(){
+		var url = "ws/Passenger/"+getCookie("usrId")+"/getPassengerReservations";
+		console.log(url);
+		getServerData(url,fligth_list_display);
+
+	});
 	
 
 	$("#searchButton").click(function(){
@@ -325,7 +439,7 @@ $(function(){
 		/*getServerData("ws/Flight/getFlights%departureAirport%arrivalAirport%date" ,fligth_list_display);*/
 		var dateMin=$("#inputDateFrom").val().replace("T"," ");
 		var dateMax=$("#inputDateTo").val().replace("T"," ");
-		var url ="ws/Flight/getFlightsByDeparture?DepartureMin=" +dateMin +"&DepartureMax="+ dateMax+"&DepartureAirport="+$("#inputDep").val() ;
+		var url ="ws/Flight/getFlightsByDeparture?DepartureMin=" +dateMin +"&DepartureMax="+ dateMax+"&DepartureAirport="+$("#inputDep").val()+"&maxprice="+$("#inputPrice").val()+"&minprice=0" ;
 		console.log(url);
 		getServerData(url,fligth_list_display);
 

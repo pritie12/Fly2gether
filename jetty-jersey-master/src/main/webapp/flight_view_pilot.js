@@ -9,9 +9,19 @@ function pilot_flight_list_load(){
    // url="/ws/Flight/getFlights" //test
     getServerData(url,fligth_list_display);
     
-
 }
 
+
+function pilot_flight_list_load(){
+    nav_load();
+    userId=getCookie("usrId");
+    console.log("hello"+userId);
+    url ="/ws/Pilote/"+ userId+"/getScheduledFlights";
+   // url="/ws/Flight/getFlights" //test
+    getServerData(url,fligth_list_display);
+    
+
+}
 
 function dateToString(date){
 	var res="";

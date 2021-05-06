@@ -19,6 +19,8 @@ public class AircraftDaoImpl implements aircraftDao{
 		this.pmf = pmf;
 	}
 	
+	/* GETTERS */
+	
 	@SuppressWarnings("unchecked")
 	public List<Aircraft> getFleet() {	
 		List<Aircraft> aircrafts=null;
@@ -41,8 +43,7 @@ public class AircraftDaoImpl implements aircraftDao{
 			pm.close();
 
 		}
-		return detached;
-		
+		return detached;		
 	}
 	
 	
@@ -56,8 +57,8 @@ public class AircraftDaoImpl implements aircraftDao{
 			tx.begin();
 
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("int Id");
-			q.setFilter("Id == aircraft_id");
+			q.declareParameters("long TailNumber");
+			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			
 			a = (Aircraft) q.execute(Id);
@@ -155,6 +156,108 @@ public class AircraftDaoImpl implements aircraftDao{
 		return detached.getID();
 	}
 
+	public Aircraft getAircraft(Long TailNumber) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a = null;
+		Aircraft detached = null;
+		try {
+			tx.begin();
+
+			Query q = pm.newQuery(Aircraft.class);
+			q.declareParameters("Long TailNumber");
+			q.setFilter("TailNumber == tailNumber");
+			q.setUnique(true);
+			
+			a = (Aircraft) q.execute(TailNumber);
+			detached = (Aircraft) pm.detachCopy(a);
+
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+
+		}
+		return detached;
+	}
+	
+	/* POST */
+
+	public void setModel(Long TailNumber, String Model) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a=null;
+		try {
+			tx.begin();
+			a = pm.getObjectById(Aircraft.class, TailNumber);
+
+            a.setModel(Model);;
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}		
+	}
+
+
+
+	
+	public void setCompany(Long TailNumber, String Company) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a=null;
+		try {
+			tx.begin();
+			a = pm.getObjectById(Aircraft.class, TailNumber);
+			
+			
+
+            a.setConstructorCompany(Company);;
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}		
+	}
+	public Aircraft getAircraft(Long Id) {
+		Query q = pm.newQuery(Aircraft.class);
+		q.declareParameters("Long Id");
+		q.setFilter("Id == aircraft_id");
+		q.setUnique(true);
+		
+		a = (Aircraft) q.execute(Id);
+		detached = (Aircraft) pm.detachCopy(a);
+	}
+
+	public void setNumberOfSeats(Long TailNumber, int NumberOfSeats) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		Aircraft a=null;
+		try {
+			tx.begin();
+			a = pm.getObjectById(Aircraft.class, Id);
+
+            a.setNumberOfSeats(NumberOfSeats);;
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}		
+	}
+
+
+
+		
+	
+	/* PUT */
 	public void addAircraft(Aircraft aircraft) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -172,20 +275,20 @@ public class AircraftDaoImpl implements aircraftDao{
 	}
 
 
-
-	public void deleteAircraft(Long Id) {
+	/* DELETE */
+	public void deleteAircraft(Long TailNumber) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		Aircraft a=null;
 		try {
 			tx.begin();
-			//a = pm.getObjectById(Aircraft.class, Id);
+			//a = pm.getObjectById(Aircraft.class, TailNumber);
 			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long Id");
-			q.setFilter("Id == aircraft_id");
+			q.declareParameters("Long TailNumber");
+			q.setFilter("TailNumber == tailNumber");
 			q.setUnique(true);
 			
-			a = (Aircraft) q.execute(Id);
+			a = (Aircraft) q.execute(TailNumber);
 
             pm.deletePersistent(a);
 			tx.commit();
@@ -195,94 +298,8 @@ public class AircraftDaoImpl implements aircraftDao{
 			}
 			pm.close();
 		}
-		System.out.println("Aircraft deleted from database");
-		
+		System.out.println("Aircraft deleted from database");		
 	}
 
-
-
-	public Aircraft getAircraft(Long Id) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		Aircraft a = null;
-		Aircraft detached = null;
-		try {
-			tx.begin();
-
-			Query q = pm.newQuery(Aircraft.class);
-			q.declareParameters("Long Id");
-			q.setFilter("Id == aircraft_id");
-			q.setUnique(true);
-			
-			a = (Aircraft) q.execute(Id);
-			detached = (Aircraft) pm.detachCopy(a);
-
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-
-		}
-		return detached;
-	}
-
-	public void setModel(Long Id, String Model) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		Aircraft a=null;
-		try {
-			tx.begin();
-			a = pm.getObjectById(Aircraft.class, Id);
-
-            a.setModel(Model);;
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		
-	}
-
-	public void setCompany(Long Id, String Company) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		Aircraft a=null;
-		try {
-			tx.begin();
-			a = pm.getObjectById(Aircraft.class, Id);
-
-            a.setConstructorCompany(Company);;
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		
-	}
-
-	public void setNumberOfSeats(Long Id, int NumberOfSeats) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		Aircraft a=null;
-		try {
-			tx.begin();
-			a = pm.getObjectById(Aircraft.class, Id);
-
-            a.setNumberOfSeats(NumberOfSeats);;
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-			pm.close();
-		}
-		
-	}
 	
 }

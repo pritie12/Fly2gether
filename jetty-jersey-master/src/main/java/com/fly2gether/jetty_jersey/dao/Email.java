@@ -10,14 +10,28 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/* CLASS THAT SENDS EMAILS, MUST HAVE A JAVAX.MAIL.JAR CONFIGURED IN THE BUILDPATH IN ORDER TO TEST */
 
 public class Email {
+	
 	private static  String username="fly2getherEIDD@outlook.com";
 	private static  String pwd="Fly2gether1999";
 	private static  String sender=username;
 	private  String recipient;
 	private  String subject;
 	private  String content;
+
+	
+	/* CONSTRUCTOR */
+	public Email(String recipient, String subject, String content) throws MessagingException {
+		this.recipient=recipient;
+		this.subject=subject;
+		this.content=content;
+		sendMail();
+	}
+	
+	
+	/* GETTERS */
 	public String getPwd() {
 		return pwd;
 	}
@@ -33,12 +47,9 @@ public class Email {
 	public String getContent() {
 		return content;
 	}
-	public Email(String recipient, String subject, String content) throws MessagingException {
-		this.recipient=recipient;
-		this.subject=subject;
-		this.content=content;
-		sendMail();
-	}
+	
+	
+	/* METHOD THAT SENDS EMAIL VIA AN OUTLOOK ADDRESS */
 	public  void sendMail() {
         Properties props = new Properties();
         props.put("mail.smtp.user", sender);
@@ -71,7 +82,8 @@ public class Email {
         }
     }
 	
-	public static void main(String [] args) throws MessagingException { 
+	/* TEST SENDMAIL */
+	/* public static void main(String [] args) throws MessagingException { 
 		String test="I was angry with my friend; \r\n"
 				+ "I told my wrath, my wrath did end.\r\n"
 				+ "I was angry with my foe: \r\n"
@@ -93,7 +105,7 @@ public class Email {
 				+ "My foe outstretched beneath the tree.\r\n"
 				+ "\r\n";
 		new Email("hiba.souber.hs@gmail.com","A Poison Tree by William Blake",test);
-	}
+	} */
 
 
 }

@@ -213,6 +213,33 @@ public class PilotDaoImpl implements pilotDao {
 		return detached.getFlyingHours();
 	}
 
+	@SuppressWarnings("unchecked")
+	
+	public List<Flight> getScheduledFlights(Long id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		List<Flight> scheduledFlights=new ArrayList<Flight>();
+		List<Flight> detached = null;
+		try {
+			tx.begin();
+
+			Query q = pm.newQuery(Flight.class);
+			q.declareParameters("Long id");
+			q.setFilter("id ==  flightPilotId");
+			
+			q.setUnique(true);			
+			scheduledFlights = (List<Flight>) q.execute(id);
+			detached = (List<Flight>) pm.detachCopy(scheduledFlights);
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return detached;
+	}
+
 	public void addPilot(Pilot pilot) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -222,9 +249,8 @@ public class PilotDaoImpl implements pilotDao {
 			pm.makePersistent(pilot);
 			String mail=pilot.getEmail();
 			try {
-				new Email(mail,"Welcome to Fly2gether","Dear pilot,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
+				new Email(mail,"Welcome to Fly2gether","Dear pilot,\n\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
 			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			tx.commit();
@@ -266,6 +292,12 @@ public class PilotDaoImpl implements pilotDao {
 			tx.begin();
 			p = pm.getObjectById(Pilot.class, id);
             pm.deletePersistent(p);
+    		String mail=DAO.getPilotDao().getPilot(id).getEmail();
+    		try {
+    			new Email(mail,"Welcome to Fly2gether", "Dear pilot,\n\nYour account will shortly be deleted from our database, we hope that this is not the end of our collaboration. Please let us know if something in our website inconvenienced you.\n\nBest regards,\nFly2gether Team");
+    		} catch (MessagingException e) {
+    			e.printStackTrace();
+    		}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -311,8 +343,14 @@ public class PilotDaoImpl implements pilotDao {
 		try {
 			tx.begin();
 			p = pm.getObjectById(Pilot.class, id);
-
-            p.setUsername(Username);
+			for (Pilot pil:getPilots()){
+				if(pil.getUsername().equals(Username)==false) {
+		            p.setUsername(Username);
+				}
+				else {
+					System.out.println("Username already taken");
+				}			
+			}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {
@@ -373,6 +411,8 @@ public class PilotDaoImpl implements pilotDao {
 
         return pilot;
 	}
+
+
 
 
 }

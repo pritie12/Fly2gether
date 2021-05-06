@@ -31,7 +31,6 @@ public class Pilot {
 	}
 	
 	public Pilot(String name, String surname, String email, String phoneNumber, Date DOfBirth, int flyingHours) {
-		//super(name,surname,email,phoneNumber,DOfBirth);
 		this.name=name;
 		this.surname=surname;
 		this.setEmail(email);

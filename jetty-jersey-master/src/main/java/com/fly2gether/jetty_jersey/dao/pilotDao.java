@@ -16,6 +16,7 @@ public interface pilotDao {
 	public String getemail(Long id);
 	public String getphoneNumber(Long id);
 	public int getFlyingHours(Long id);
+	public List<Flight> getScheduledFlights(Long id);
 	
 	/* POST */
 	public void modifyUsername(Long id,String Username);

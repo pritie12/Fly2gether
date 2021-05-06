@@ -2,7 +2,6 @@ package com.fly2gether.jetty_jersey.ws;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.MessagingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -117,14 +116,9 @@ public class PassengerResource implements passengerDao {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/addPassenger")
 	public void addPassenger(Passenger passenger) {
-		String mail=passenger.getEmail();
+
 		DAO.getPassengerDao().addPassenger(passenger);		
-		try {
-			new Email(mail,"Welcome to Fly2gether","Dear passenger,\nWelcome to our flightsharing service, we hope that your flights will be enjoyable and that you spend a quality time with us.\nBest regards,\nFly2gether Team");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 	@PUT
@@ -144,15 +138,8 @@ public class PassengerResource implements passengerDao {
 			
 	@DELETE 
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/{id}/DeletePassenger")
+	@Path("/{id}/deletePassenger")
 	public void deletePassenger(@PathParam("id")Long id) {
-		String mail=DAO.getPassengerDao().getPassenger(id).getEmail();	
-		try {
-			new Email(mail,"Account deletion","Dear passenger,\nYour account will shortly be deleted from our database, we hope that this is not the end of our collaboration. Please let us know if something in our website inconvenienced you.\nBest regards,\nFly2gether Team");
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		DAO.getPassengerDao().deletePassenger(id);
 	}
 
@@ -163,6 +150,7 @@ public class PassengerResource implements passengerDao {
 	public void modifyPwd(@PathParam("id")Long id,@PathParam("Pwd") String Pwd) {
 		DAO.getPassengerDao().modifyPwd(id,Pwd);		
 	}
+	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}/modifyPassengerUsername")

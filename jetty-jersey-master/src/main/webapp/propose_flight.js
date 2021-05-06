@@ -115,7 +115,7 @@ $(function(){
 
 		var usrId=getCookie("usrId");
 		console.log(usrId);
-		if(usrId=="" || usrId==undefined ||getCookie("usrType")!="pilot" ){
+		if(usrId=="" || usrId==undefined || getCookie("usrType")!="pilot" ){
 			$("#res").css("display", "block");
 		}
 		else{

@@ -461,8 +461,9 @@ $(function(){
 		var usrId=getCookie("usrId");
 		usrId=0 //test
 		console.log(usrId);
-		if(usrId==null || usrId==undefined ){
+		if(usrId==null || usrId==undefined ||   usrId!="passenger"){
 			$("#res").css("display", "block");
+			console.log("not passenger");
 		}
 		else{
 			addResa();
